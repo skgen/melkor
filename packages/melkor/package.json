@@ -61,7 +61,7 @@
     "dev:types": "vue-tsc --emitDeclarationOnly --noEmit false -p tsconfig.app.json",
     "build:lib": "vite build --mode lib --config vite.config.ts",
     "build:esm": "vite build --mode esm --config vite.config.ts",
-    "build": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm lib\" \"pnpm esm\"",
+    "build": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm build:lib\" \"pnpm build:esm\"",
     "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
     "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "review:eslint": "eslint . --fix",
