@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputTextModel } from '@skgn/melkor/types';
+import type { InputTextModel } from '@skgn/melkor/features';
 
 const inputTextModel = ref<InputTextModel>(createInputModel({
   value: 'Hello World',

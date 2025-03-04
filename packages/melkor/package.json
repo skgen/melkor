@@ -43,9 +43,6 @@
       "types": "./lib/features/*/*.d.ts",
       "import": "./lib/features/*/*.d.js"
     },
-    "./types": {
-      "types": "./lib/types/index.d.ts"
-    },
     "./schema.json": {
       "import": "./lib/schema.json"
     }
@@ -58,7 +55,6 @@
     "dev": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm dev:lib\" \"pnpm dev:esm\"",
     "dev:lib": "vite build --watch --mode lib-dev --config vite.config.ts",
     "dev:esm": "vite build --watch --mode esm-dev --config vite.config.ts",
-    "dev:types": "vue-tsc --emitDeclarationOnly --noEmit false -p tsconfig.app.json",
     "build:lib": "vite build --mode lib --config vite.config.ts",
     "build:esm": "vite build --mode esm --config vite.config.ts",
     "build": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm build:lib\" \"pnpm build:esm\"",

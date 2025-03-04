@@ -1,4 +1,4 @@
-import type { MelkorOptions } from '@skgn/melkor/types';
+import type { MelkorOptions } from '@skgn/melkor/features';
 import type { MelkorModuleOptions, MelkorNuxtContext, ModuleOptions } from './types';
 import { readFileSync } from 'node:fs';
 import { addPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
