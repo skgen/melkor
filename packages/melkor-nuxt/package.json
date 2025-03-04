@@ -1,0 +1,59 @@
+{
+  "name": "@skgn/melkor-nuxt",
+  "type": "module",
+  "version": "2.0.0",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "prepack": "nuxt-module-build build && pnpm generate --dest=dist",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
+    "review:typescript": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
+    "review:eslint": "eslint . --fix",
+    "review:stylelint": "stylelint 'playground/src/**/*.{css,scss,vue}' --color --fix",
+    "postinstall": "pnpm generate"
+  },
+  "dependencies": {
+    "@nuxt/kit": "catalog:",
+    "@skgn/melkor": "workspace:*",
+    "defu": "catalog:"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "catalog:",
+    "@nuxt/module-builder": "catalog:",
+    "@nuxt/schema": "catalog:",
+    "@nuxt/test-utils": "catalog:",
+    "@types/node": "catalog:",
+    "@types/shelljs": "catalog:",
+    "@types/yargs": "catalog:",
+    "esbuild": "catalog:",
+    "nuxt": "catalog:",
+    "shelljs": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-recess-order": "catalog:",
+    "stylelint-config-standard": "catalog:",
+    "stylelint-config-standard-scss": "catalog:",
+    "stylelint-config-standard-vue": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "vue-tsc": "catalog:",
+    "yargs": "catalog:"
+  }
+}

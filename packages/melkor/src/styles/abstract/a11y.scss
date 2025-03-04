@@ -1,0 +1,62 @@
+@use 'common' as common;
+
+@mixin a11y-hidden() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+@mixin expand-click-area($width: 8px, $height: 8px, $pseudo: before) {
+  position: relative;
+
+  &:#{$pseudo} {
+    @include common.pseudo;
+
+    inset: -#{$height} -#{$width} -#{$height} -#{$width};
+    cursor: pointer;
+  }
+}
+
+@mixin not-disabled() {
+  &:not([disabled], [data-is-disabled='true']) {
+    @content;
+  }
+}
+
+@mixin disabled() {
+  &[disabled],
+  &[data-is-disabled='true'] {
+    @content;
+  }
+}
+
+@mixin not-focused() {
+  &:not(:focus, [data-is-focused='true']) {
+    @content;
+  }
+}
+
+@mixin focused() {
+  &:focus,
+  &[data-is-focused='true'] {
+    @content;
+  }
+}
+
+@mixin active() {
+  &:active,
+  &[data-is-active='true'] {
+    @content;
+  }
+}
+
+@mixin not-active() {
+  &:not(&:active, &[data-is-active='true']) {
+    @content;
+  }
+}

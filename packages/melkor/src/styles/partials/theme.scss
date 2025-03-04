@@ -1,0 +1,15 @@
+@use '../abstract/theme';
+
+:root {
+  @include theme.root-theme;
+}
+
+* {
+  @include theme.light {
+    @include theme.light-theme;
+  }
+
+  @include theme.dark {
+    @include theme.dark-theme;
+  }
+}

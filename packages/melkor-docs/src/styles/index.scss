@@ -1,0 +1,6 @@
+@use '@skgen/melkor/styles/mixins' as melkor;
+
+:root {
+  --app-container-width: calc(1400px + var(--mk-size-4) * 2);
+  --app-container-padding-x: var(--mk-size-4);
+}

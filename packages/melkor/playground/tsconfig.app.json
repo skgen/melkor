@@ -1,0 +1,26 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "strict": true
+  },
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.json",
+    "src/**/*.vue",
+    "i18n/*.json"
+  ],
+  "exclude": [
+    "src/**/__tests__/*",
+    "public"
+  ]
+}

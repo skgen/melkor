@@ -1,0 +1,320 @@
+@use 'sass:math';
+@use 'sass:map';
+@use '../abstract/colors';
+
+@mixin theme($theme) {
+  &[data-theme='#{$theme}'] {
+    @content;
+  }
+}
+
+@mixin dark() {
+  @include theme('dark') {
+    @content;
+  }
+}
+
+@mixin light() {
+  @include theme('light') {
+    @content;
+  }
+}
+
+@mixin root-theme() {
+  /*
+  CSS Variables are described like this :
+  {$identifier}-{$value}-{$effect}
+  Example : --mk-input-border-size-hover
+  $identifier : --mk-input-border-color
+  $value : size
+  $effect : hover
+  */
+
+  // Primary
+  // --mk-primary-50: 255 236 229;
+  // --mk-primary-100: 255 216 204;
+  // --mk-primary-200: 255 177 153;
+  // --mk-primary-300: 255 139 102;
+  // --mk-primary-400: 255 100 51;
+  // --mk-primary-500: 255 61 0;
+  // --mk-primary-600: 204 49 0;
+  // --mk-primary-700: 153 37 0;
+  // --mk-primary-800: 102 24 0;
+  // --mk-primary-900: 51 12 0;
+  // --mk-primary-950: 25 6 0;
+
+  // Grey
+  --mk-grey-50: 231 234 238;
+  --mk-grey-100: 216 221 227;
+  --mk-grey-200: 186 194 206;
+  --mk-grey-300: 157 168 184;
+  --mk-grey-400: 127 142 163;
+  --mk-grey-500: 100 116 139;
+  --mk-grey-600: 79 91 109;
+  --mk-grey-700: 57 66 80;
+  --mk-grey-800: 36 42 50;
+  --mk-grey-900: 15 17 20;
+  --mk-grey-950: 4 5 6;
+
+  // --shade0-hsl: var(--hue) 24% 93%;
+  // --shade1-hsl: var(--hue) 26% 70%;
+  // --shade2-hsl: var(--hue) 23% 62%;
+  // --shade3-hsl: var(--hue) 19% 56%;
+  // --shade4-hsl: var(--hue) 24% 46%;
+  // --shade5-hsl: var(--hue) 25% 27%;
+  // --shade6-hsl: var(--hue) 36% 23%;
+  // --shade7-hsl: var(--hue) 35% 17%;
+  // --shade8-hsl: var(--hue) 35% 15%;
+  // --shade9-hsl: var(--hue) 42% 12%;
+  // --shade10-hsl: var(--hue) 61% 7%;
+
+  // Utils
+  // --mk-white: 255 255 255;
+  // --mk-black: 0 0 0;
+  --mk-red-hsl: 358 100% 64%;
+  --mk-blue-hsl: 205 100% 48%;
+  --mk-green-hsl: 119 64% 45%;
+  --mk-orange-hsl: 33 96% 58%;
+
+  // App
+
+  // definitions
+  --mk-font-family-base: 'Roboto Flex';
+  --mk-font-family-fallback: oxygen, -apple-system, ubuntu, sans-serif;
+  --mk-font-family: var(--mk-font-family-base), var(--mk-font-family-fallback);
+  --mk-font-size: 16px;
+  --mk-line-height: 1.1875;
+
+  // Layout
+  $m: 4px;
+
+  @for $i from 1 through 24 {
+    --mk-size-#{$i}: #{$m * $i};
+  }
+
+  // Shapes
+  --mk-border-size: 1px;
+  --mk-border-radius-size: 6px;
+  --mk-opacity-disabled: 0.4;
+
+  // Transitions
+  --mk-transition-1-duration: 128ms;
+  --mk-transition-2-duration: 256ms;
+  --mk-transition-3-duration: 512ms;
+  --mk-transition-background-duration: var(--mk-transition-2-duration);
+  --mk-transition-color-duration: var(--mk-transition-2-duration);
+  --mk-transition-opacity-duration: var(--mk-transition-2-duration);
+  --mk-transition-transform-duration: var(--mk-transition-2-duration);
+
+  // Inputs
+
+  --mk-input-border-color: var(--mk-border-color);
+  --mk-input-border-color-hover: var(--mk-border-color-hover);
+  --mk-input-border-color-active: var(--mk-border-color-active);
+  --mk-input-border-radius-size: var(--mk-border-radius-size);
+  --mk-input-border-size: var(--mk-border-size);
+  --mk-input-border-size-hover: 1.4px;
+  --mk-input-border-size-active: 2px;
+  --mk-input-text-size: 14px;
+  --mk-input-line-height: 1.2;
+  --mk-input-opacity-disabled: 0.6;
+  --mk-input-padding-x-size: var(--mk-size-3);
+  --mk-input-padding-y-size: var(--mk-size-3);
+  --mk-input-spacing-size: var(--mk-size-2);
+  --mk-input-icon-size: 20px;
+
+  // Layers
+  --mk-fullscreen-layer-order: 1000;
+  --mk-floating-layer-order: 1100;
+}
+
+@mixin light-theme() {
+  color-scheme: light;
+
+  --mk-surface-low-background-color: var(--mk-grey-50);
+  --mk-surface-background-color: var(--mk-grey-100);
+  --mk-surface-high-background-color: var(--mk-grey-200);
+  --mk-surface-border-color: var(--mk-grey-300);
+
+  // Text
+
+  --mk-text-color: var(--mk-grey-900);
+  --mk-text-soft-color: var(--mk-grey-600);
+
+  // // Tone feedback
+  // --mk-info-color: var(--c-blue);
+  // --mk-info-color-soft: rgb(var(--c-tone-blue) / 5%);
+  // --mk-success-color: var(--c-green);
+  // --mk-success-color-soft: rgb(var(--c-tone-green) / 5%);
+  // --mk-warning-color: var(--c-orange);
+  // --mk-warning-color-soft: rgb(var(--c-tone-orange) / 5%);
+  // --mk-error-color: var(--c-red);
+  // --mk-error-color-soft: rgb(var(--c-tone-red) / 5%);
+
+  --mk-border-color: var(--mk-grey-700);
+  --mk-border-color-hover: var(--mk-grey-800);
+  --mk-border-color-active: var(--mk-grey-900);
+
+  // Inputs
+
+  --mk-input-text-color: var(--mk-grey-900);
+  --mk-input-placeholder-color: var(--mk-grey-900) / 40%;
+  --mk-input-icon-color: var(--mk-grey-900);
+
+  // Input Background
+  --mk-input-background-color: var(--mk-grey-900) / 5%;
+  --mk-input-background-color-hover: transparent;
+
+  // Utils as functions
+  --mk-info-color: var(--mk-blue);
+  --mk-info-soft-color: var(--mk-blue) / 5%;
+  --mk-success-color: var(--mk-green);
+  --mk-success-soft-color: var(--mk-green) / 5%;
+  --mk-warning-color: var(--mk-orange);
+  --mk-warning-soft-color: var(--mk-orange) / 5%;
+  --mk-error-color: var(--mk-red);
+  --mk-error-soft-color: var(--mk-red) / 5%;
+}
+
+@mixin dark-theme() {
+  color-scheme: dark;
+
+  // Shade
+  --mk-shade: 220;
+
+  // Shade 0
+  --mk-shade-0-hsl: var(--mk-shade) 33% 4%;
+  --mk-shade-0: hsl(var(--mk-shade-0-hsl) / 100%);
+  --mk-shade-0-75: hsl(var(--mk-shade-0-hsl) / 75%);
+  --mk-shade-0-50: hsl(var(--mk-shade-0-hsl) / 50%);
+  --mk-shade-0-25: hsl(var(--mk-shade-0-hsl) / 25%);
+  --mk-shade-0-15: hsl(var(--mk-shade-0-hsl) / 15%);
+
+  // Shade 1
+  --mk-shade-1-hsl: var(--mk-shade) 20% 7%;
+  --mk-shade-1: hsl(var(--mk-shade-1-hsl) / 100%);
+  --mk-shade-1-75: hsl(var(--mk-shade-1-hsl) / 75%);
+  --mk-shade-1-50: hsl(var(--mk-shade-1-hsl) / 50%);
+  --mk-shade-1-25: hsl(var(--mk-shade-1-hsl) / 25%);
+  --mk-shade-1-15: hsl(var(--mk-shade-1-hsl) / 15%);
+
+  // Shade 2
+  --mk-shade-2-hsl: var(--mk-shade) 19% 9%;
+  --mk-shade-2: hsl(var(--mk-shade-2-hsl) / 100%);
+  --mk-shade-2-75: hsl(var(--mk-shade-2-hsl) / 75%);
+  --mk-shade-2-50: hsl(var(--mk-shade-2-hsl) / 50%);
+  --mk-shade-2-25: hsl(var(--mk-shade-2-hsl) / 25%);
+  --mk-shade-2-15: hsl(var(--mk-shade-2-hsl) / 15%);
+
+  // Shade 3
+  --mk-shade-3-hsl: var(--mk-shade) 14% 11%;
+  --mk-shade-3: hsl(var(--mk-shade-3-hsl) / 100%);
+  --mk-shade-3-75: hsl(var(--mk-shade-3-hsl) / 75%);
+  --mk-shade-3-50: hsl(var(--mk-shade-3-hsl) / 50%);
+  --mk-shade-3-25: hsl(var(--mk-shade-3-hsl) / 25%);
+  --mk-shade-3-15: hsl(var(--mk-shade-3-hsl) / 15%);
+
+  // Shade 4
+  --mk-shade-4-hsl: var(--mk-shade) 10% 17%;
+  --mk-shade-4: hsl(var(--mk-shade-4-hsl) / 100%);
+  --mk-shade-4-75: hsl(var(--mk-shade-4-hsl) / 75%);
+  --mk-shade-4-50: hsl(var(--mk-shade-4-hsl) / 50%);
+  --mk-shade-4-25: hsl(var(--mk-shade-4-hsl) / 25%);
+  --mk-shade-4-15: hsl(var(--mk-shade-4-hsl) / 15%);
+
+  // Shade 5
+  --mk-shade-5-hsl: var(--mk-shade) 9% 23%;
+  --mk-shade-5: hsl(var(--mk-shade-5-hsl) / 100%);
+  --mk-shade-5-75: hsl(var(--mk-shade-5-hsl) / 75%);
+  --mk-shade-5-50: hsl(var(--mk-shade-5-hsl) / 50%);
+  --mk-shade-5-25: hsl(var(--mk-shade-5-hsl) / 25%);
+  --mk-shade-5-15: hsl(var(--mk-shade-5-hsl) / 15%);
+
+  // Shade 6
+  --mk-shade-6-hsl: var(--mk-shade) 7% 26%;
+  --mk-shade-6: hsl(var(--mk-shade-6-hsl) / 100%);
+  --mk-shade-6-75: hsl(var(--mk-shade-6-hsl) / 75%);
+  --mk-shade-6-50: hsl(var(--mk-shade-6-hsl) / 50%);
+  --mk-shade-6-25: hsl(var(--mk-shade-6-hsl) / 25%);
+  --mk-shade-6-15: hsl(var(--mk-shade-6-hsl) / 15%);
+
+  // Shade 7
+  --mk-shade-7-hsl: var(--mk-shade) 6% 30%;
+  --mk-shade-7: hsl(var(--mk-shade-7-hsl) / 100%);
+  --mk-shade-7-75: hsl(var(--mk-shade-7-hsl) / 75%);
+  --mk-shade-7-50: hsl(var(--mk-shade-7-hsl) / 50%);
+  --mk-shade-7-25: hsl(var(--mk-shade-7-hsl) / 25%);
+  --mk-shade-7-15: hsl(var(--mk-shade-7-hsl) / 15%);
+
+  // Shade 8
+  --mk-shade-8-hsl: var(--mk-shade) 5% 56%;
+  --mk-shade-8: hsl(var(--mk-shade-8-hsl) / 100%);
+  --mk-shade-8-75: hsl(var(--mk-shade-8-hsl) / 75%);
+  --mk-shade-8-50: hsl(var(--mk-shade-8-hsl) / 50%);
+  --mk-shade-8-25: hsl(var(--mk-shade-8-hsl) / 25%);
+  --mk-shade-8-15: hsl(var(--mk-shade-8-hsl) / 15%);
+
+  // Shade 9
+  --mk-shade-9-hsl: var(--mk-shade) 5% 70%;
+  --mk-shade-9: hsl(var(--mk-shade-9-hsl) / 100%);
+  --mk-shade-9-75: hsl(var(--mk-shade-9-hsl) / 75%);
+  --mk-shade-9-50: hsl(var(--mk-shade-9-hsl) / 50%);
+  --mk-shade-9-25: hsl(var(--mk-shade-9-hsl) / 25%);
+  --mk-shade-9-15: hsl(var(--mk-shade-9-hsl) / 15%);
+
+  // Shade 10
+  --mk-shade-10-hsl: var(--mk-shade) 14% 93%;
+  --mk-shade-10: hsl(var(--mk-shade-10-hsl) / 100%);
+  --mk-shade-10-75: hsl(var(--mk-shade-10-hsl) / 75%);
+  --mk-shade-10-50: hsl(var(--mk-shade-10-hsl) / 50%);
+  --mk-shade-10-25: hsl(var(--mk-shade-10-hsl) / 25%);
+  --mk-shade-10-15: hsl(var(--mk-shade-10-hsl) / 15%);
+
+  // Core
+  --mk-core-background-color: var(--mk-shade-0);
+
+  // Surface
+  --mk-surface-low-background-color: var(--mk-shade-1);
+  --mk-surface-background-color: var(--mk-shade-2);
+  --mk-surface-high-background-color: var(--mk-shade-3);
+  --mk-surface-border-color: var(--mk-shade-4);
+
+  // Text
+
+  --mk-text-color: var(--mk-shade-10);
+  --mk-text-soft-color: var(--mk-shade-8);
+
+  // Tone feedback
+  // --mk-info-color: var(--c-blue);
+  // --mk-info-color-soft: rgb(var(--c-tone-blue) / 10%);
+  // --mk-success-color: var(--c-green);
+  // --mk-success-color-soft: rgb(var(--c-tone-green) / 10%);
+  // --mk-warning-color: var(--c-orange);
+  // --mk-warning-color-soft: rgb(var(--c-tone-orange) / 10%);
+  // --mk-error-color: var(--c-red);
+  // --mk-error-color-soft: rgb(var(--c-tone-red) / 10%);
+
+  --mk-border-color: var(--mk-shade-5);
+  --mk-border-color-hover: var(--mk-shade-7);
+  --mk-border-color-active: var(--mk-shade-9);
+
+  // Inputs
+
+  --mk-input-text-color: var(--mk-text-color);
+  --mk-input-placeholder-color: var(--mk-text-soft-color);
+  --mk-input-icon-color: var(--mk-shade-9);
+
+  // Input Background
+  --mk-input-background-color: var(--mk-text-color) / 5%;
+  --mk-input-background-color-hover: transparent;
+
+  // Utils as functions
+  --mk-info-color: hsl(var(--mk-blue-hsl));
+  --mk-info-soft-color: hsl(var(--mk-blue-hsl) / 10%);
+  --mk-success-color: hsl(var(--mk-green-hsl));
+  --mk-success-soft-color: hsl(var(--mk-green-hsl) / 10%);
+  --mk-warning-color: hsl(var(--mk-orange-hsl));
+  --mk-warning-soft-color: hsl(var(--mk-orange-hsl) / 10%);
+  --mk-error-color: hsl(var(--mk-red-hsl));
+  --mk-error-soft-color: hsl(var(--mk-red-hsl) / 10%);
+}

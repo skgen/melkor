@@ -1,0 +1,37 @@
+{
+  "name": "@skgn/melkor-playground",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --mode production --config vite.config.ts"
+  },
+  "dependencies": {
+    "@skgn/melkor": "workspace:*",
+    "@types/chroma-js": "^2.4.4",
+    "@types/color-diff": "^1.2.5",
+    "chroma-js": "^3.1.2",
+    "color": "^4.2.3",
+    "color-diff": "^1.4.0",
+    "pinia": "catalog:",
+    "polished": "^4.3.1",
+    "tailwind-shades": "^1.1.2",
+    "tinycolor2": "^1.6.0",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "catalog:",
+    "@types/jsdom": "catalog:",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "eslint": "catalog:",
+    "jsdom": "catalog:",
+    "sass-embedded": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

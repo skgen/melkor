@@ -1,0 +1,17 @@
+@mixin mq-to($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin mq-from($breakpoint) {
+  @media screen and (min-width: $breakpoint + 1) {
+    @content;
+  }
+}
+
+@mixin mq-from-to($breakpointMin, $breakpointMax) {
+  @media screen and (min-width: $breakpointMin + 1) and (max-width: $breakpointMax) {
+    @content;
+  }
+}

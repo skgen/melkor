@@ -1,0 +1,11 @@
+.mk-fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity var(--mk-transition-opacity-duration);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}

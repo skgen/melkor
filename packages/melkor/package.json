@@ -1,0 +1,108 @@
+{
+  "name": "@skgn/melkor",
+  "type": "module",
+  "version": "2.0.0",
+  "packageManager": "pnpm@9.15.4",
+  "description": "Melkor UI",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/melkor.esm.js"
+    },
+    "./styles": {
+      "import": "./dist/melkor.css"
+    },
+    "./styles/*": {
+      "import": "./lib/styles/*"
+    },
+    "./plugin": {
+      "types": "./lib/plugin.d.ts",
+      "import": "./lib/plugin.js"
+    },
+    "./components": {
+      "types": "./lib/components/index.d.ts",
+      "import": "./lib/components/index.js"
+    },
+    "./components/*": {
+      "types": "./lib/components/*/*.d.ts",
+      "import": "./lib/components/*/*.js"
+    },
+    "./composables": {
+      "types": "./lib/composables/index.d.ts",
+      "import": "./lib/composables/index.js"
+    },
+    "./composables/*": {
+      "types": "./lib/composables/*/*.d.ts",
+      "import": "./lib/composables/*/*.d.js"
+    },
+    "./features": {
+      "types": "./lib/features/index.d.ts",
+      "import": "./lib/features/index.js"
+    },
+    "./features/*": {
+      "types": "./lib/features/*/*.d.ts",
+      "import": "./lib/features/*/*.d.js"
+    },
+    "./types": {
+      "types": "./lib/types/index.d.ts"
+    },
+    "./schema.json": {
+      "import": "./lib/schema.json"
+    }
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "dev": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm dev:lib\" \"pnpm dev:esm\"",
+    "dev:lib": "vite build --watch --mode lib-dev --config vite.config.ts",
+    "dev:esm": "vite build --watch --mode esm-dev --config vite.config.ts",
+    "dev:types": "vue-tsc --emitDeclarationOnly --noEmit false -p tsconfig.app.json",
+    "build:lib": "vite build --mode lib --config vite.config.ts",
+    "build:esm": "vite build --mode esm --config vite.config.ts",
+    "build": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm lib\" \"pnpm esm\"",
+    "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
+    "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "review:eslint": "eslint . --fix",
+    "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
+    "postinstall": "pnpm build:esm && pnpm build:lib"
+  },
+  "peerDependencies": {
+    "vue": "catalog:"
+  },
+  "dependencies": {
+    "@iconify/vue": "catalog:",
+    "defu": "catalog:",
+    "lodash-es": "catalog:",
+    "normalize.css": "catalog:",
+    "universal-cookie": "catalog:",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "catalog:",
+    "@types/lodash-es": "catalog:",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "colorette": "catalog:",
+    "concurrently": "catalog:",
+    "esbuild": "catalog:",
+    "eslint": "catalog:",
+    "glob": "catalog:",
+    "sass": "catalog:",
+    "sass-embedded": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-recess-order": "catalog:",
+    "stylelint-config-standard": "catalog:",
+    "stylelint-config-standard-scss": "catalog:",
+    "stylelint-config-standard-vue": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vite-plugin-no-bundle": "catalog:",
+    "vite-plugin-static-copy": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

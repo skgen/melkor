@@ -1,0 +1,68 @@
+@mixin pseudo($content: '', $pos: absolute, $display: block) {
+  position: $pos;
+  display: $display;
+  content: $content;
+}
+
+@mixin font-size($font-size, $height) {
+  font-size: #{$font-size}px;
+
+  @include line-height($font-size, $height);
+}
+
+@mixin line-height($font-size, $height) {
+  line-height: math.div($height, $font-size);
+}
+
+@mixin underline($size: 1px, $speed: var(--mk-transition-3-duration), $reverse: false) {
+  text-decoration: none;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% $size;
+
+  &:hover,
+  &:focus {
+    animation: underline-#{$size} $speed ease-in-out;
+  }
+
+  @if $reverse {
+    background-position: 100% 100%;
+    background-size: 0 $size;
+    transition: background-size $speed ease-in-out;
+
+    &:hover,
+    &:focus {
+      background-position: 0 100%;
+      background-size: 100% $size;
+      animation: none;
+    }
+  }
+
+  /* stylelint-disable-next-line keyframes-name-pattern */
+  @keyframes underline-#{$size} {
+    0% {
+      background-position: 100% 100%;
+      background-size: 100% $size;
+    }
+
+    50% {
+      background-position: 100% 100%;
+      background-size: 0 $size;
+    }
+
+    51% {
+      background-position: 0 100%;
+      background-size: 0 $size;
+    }
+
+    100% {
+      background-position: 0 100%;
+      background-size: 100% $size;
+    }
+  }
+}
+
+@mixin mk-fill() {
+  width: 100%;
+}
