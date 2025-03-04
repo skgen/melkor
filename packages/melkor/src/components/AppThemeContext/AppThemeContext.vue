@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ThemeInstance } from '../../types';
+import type { ThemeInstance } from '../../features';
 import { computed, provide } from 'vue';
 import { useGlobalTheme, useThemes } from '../../composables';
 import { getThemeValue, themeContextKey } from '../../features';

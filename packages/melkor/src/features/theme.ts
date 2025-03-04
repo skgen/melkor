@@ -1,6 +1,14 @@
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import type { SystemTheme, ThemeInstance } from '../types';
 import { isClient, isValue, STORAGE_THEME_KEY } from '.';
+
+export type Themes = string[];
+
+export type SystemTheme = 'light' | 'dark';
+
+export interface ThemeInstance {
+  preference: string;
+  value: string;
+}
 
 // function onThemeChange(newThemeValue: string): void {
 //   console.log('theme changed');

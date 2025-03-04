@@ -1,4 +1,4 @@
-import type { InputModel, InputProps, ValidateInputValue } from '../types';
+import type { InputModel, InputProps, ValidateInputValue } from '../features';
 import { isEqual } from 'lodash-es';
 import {
   computed,

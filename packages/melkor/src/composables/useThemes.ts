@@ -1,4 +1,4 @@
-import type { Themes } from '../types';
+import type { Themes } from '../features';
 import { useGlobalConfig } from '.';
 
 export function useThemes(): Themes {

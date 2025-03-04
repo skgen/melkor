@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputSelectOption } from '../../types';
+import type { InputSelectOption } from '../../features';
 import { computed, onBeforeUnmount, onMounted, ref, watch, type WatchHandle } from 'vue';
 import AppInputSelect from '../../components/AppInputSelect/AppInputSelect.vue';
 import { createInputModel, useGlobalTheme, useThemes } from '../../composables';

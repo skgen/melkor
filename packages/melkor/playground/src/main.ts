@@ -1,11 +1,11 @@
-// Modules
-import { createMelkorUI } from '@skgn/melkor/plugin';
-
-import { createApp } from 'vue';
-import '@skgn/melkor/styles/index.css';
-
 // App
 import App from '@/App.vue';
+
+// Modules
+import { createMelkorUI } from '@skgn/melkor/plugin';
+import { createApp } from 'vue';
+
+import '@skgn/melkor/styles/index.css';
 
 const app = createApp(App);
 

@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputTextEmits, InputTextProps, InputTextValue } from '../../types';
+import type { InputTextEmits, InputTextProps, InputTextValue } from '../../features';
 import { computed, ref } from 'vue';
 import { useGlobalConfig, useInput, useTheme } from '../../composables';
 import { isValue } from '../../features';

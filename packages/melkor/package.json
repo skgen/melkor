@@ -81,6 +81,7 @@
   },
   "devDependencies": {
     "@tsconfig/node20": "catalog:",
+    "@types/jsdom": "catalog:",
     "@types/lodash-es": "catalog:",
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:",

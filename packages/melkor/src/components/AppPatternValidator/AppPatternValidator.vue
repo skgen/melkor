@@ -23,6 +23,6 @@ const theme = useTheme();
 </script>
 
 <style lang="scss">
-.mk-AppPatternValidator {
-}
+// .mk-AppPatternValidator {
+// }
 </style>

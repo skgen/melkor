@@ -1,4 +1,4 @@
-import type { GlobalConfig } from '../types';
+import type { GlobalConfig } from '../features';
 import { inject } from 'vue';
 import { globalConfigContextKey, isValue } from '../features';
 

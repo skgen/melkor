@@ -1,4 +1,4 @@
-import type { SurfaceContextInjection, SurfaceElevation, SurfaceElevationDirection } from '../types';
+import type { SurfaceContextInjection, SurfaceElevation, SurfaceElevationDirection } from '../features';
 import { computed, type ComputedRef, inject, provide } from 'vue';
 import { surfaceContextKey, surfaceElevationOrder } from '../features';
 

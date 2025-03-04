@@ -1,12 +1,13 @@
 import type { App, Plugin } from 'vue';
-import type { DeepObjectPartial, MelkorOptions } from './types';
 import defu from 'defu';
 import { registerDirectives } from './directives';
 import {
   createGlobalConfig,
   createMelkorOptions,
+  type DeepObjectPartial,
   getDefaultAs,
   globalConfigContextKey,
+  type MelkorOptions,
 } from './features';
 
 // import registerComponents from '@src/registerComponents';

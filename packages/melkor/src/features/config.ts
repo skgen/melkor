@@ -1,7 +1,35 @@
 import type { InjectionKey } from 'vue';
 
-import type { GlobalConfig, MelkorOptions } from '../types';
-import { Theme } from '.';
+import { Theme, type ThemeInstance } from '.';
+
+export interface GlobalConfig {
+  debug: boolean;
+  themes: string[];
+  theme: ThemeInstance;
+  icons: {
+    AppInputSelect: {
+      arrow: string;
+    };
+    AppInputText: {
+      passwordToggleVisibility: {
+        show: string;
+        hide: string;
+      };
+    };
+    AppInputTextableCancel: {
+      cancel: string;
+    };
+  };
+}
+
+export interface MelkorOptions {
+  debug: boolean;
+  themes: string[];
+  // dateFnsLocales?: DateFnsLocales;
+  // components?: {
+  //   icon?: IconOptions;
+  // };
+}
 
 export const globalConfigContextKey = Symbol('Inject key of global config') as InjectionKey<GlobalConfig>;
 

@@ -1,5 +1,11 @@
-import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import type { SurfaceContextInjection, SurfaceElevation } from '../types';
+import type { ComputedRef, InjectionKey } from 'vue';
+
+export type SurfaceElevation = 'surface-low' | 'surface' | 'surface-high';
+export type SurfaceElevationDirection = 'up' | 'down';
+export interface SurfaceContextInjection {
+  elevation: SurfaceElevation;
+  direction: SurfaceElevationDirection;
+}
 
 export const surfaceContextKey = Symbol('Inject key of surface') as InjectionKey<ComputedRef<SurfaceContextInjection>>;
 

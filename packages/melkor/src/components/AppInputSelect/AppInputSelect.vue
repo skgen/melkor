@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputSelectEmits, InputSelectProps } from '../../types';
+import type { InputSelectEmits, InputSelectProps } from '../../features';
 import { isEqual } from 'lodash-es';
 import { computed, ref } from 'vue';
 import AppIcon from '../../components/AppIcon/AppIcon.vue';

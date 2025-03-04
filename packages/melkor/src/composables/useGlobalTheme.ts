@@ -1,4 +1,4 @@
-import type { ThemeInstance } from '../types';
+import type { ThemeInstance } from '../features';
 import { inject, type Ref } from 'vue';
 import { globalThemeContextKey, isValue } from '../features';
 

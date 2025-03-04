@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { SurfaceElevation } from '../../types';
+import type { SurfaceElevation } from '../../features';
 import { useSurface, useTheme } from '../../composables';
 
 interface Props {
