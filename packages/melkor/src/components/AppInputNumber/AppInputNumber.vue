@@ -1,8 +1,8 @@
 <template>
   <AppInputTextable
-    class="mk-AppInputText"
+    class="mk-AppInputNumber"
     v-bind="props"
-    @update:model-value="(model: InputTextModel) => emit('update:model-value', model)"
+    @update:model-value="(model: InputNumberModel) => emit('update:model-value', model)"
   >
     <template v-if="$slots.cancel" #cancel>
       <slot name="cancel" />
@@ -17,8 +17,8 @@
       <input
         :ref="inputRef"
         :name="inputName"
-        :type="type ?? 'text'"
-        :value="model.value"
+        :type="type ?? 'number'"
+        :value="type ? model.value?.toString() : model.value"
         :placeholder="placeholder"
         :disabled="disabled"
         @input="(event: Event) => {
@@ -27,11 +27,13 @@
           }
           const { value } = event.target as HTMLInputElement;
 
+          const parsedValue = parseFloat(value.toString().replace(/\D/g, ''));
+
           if (value === '') {
             onChange(event, null);
           }
           else {
-            onChange(event, value);
+            onChange(event, isNaN(parsedValue) ? null : parsedValue);
           }
         }"
         @focus="onFocus"
@@ -42,9 +44,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputTextEmits, InputTextModel, InputTextProps } from '../../features';
+import type { InputNumberEmits, InputNumberModel, InputNumberProps } from '../../features';
 import AppInputTextable from '../AppInputTextable/AppInputTextable.vue';
 
-const props = defineProps<InputTextProps>();
-const emit = defineEmits<InputTextEmits>();
+const props = defineProps<InputNumberProps>();
+const emit = defineEmits<InputNumberEmits>();
 </script>

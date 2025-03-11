@@ -73,3 +73,10 @@ export function isEmpty<T extends Record<string, unknown> | unknown[] | string |
 export function isClient(): boolean {
   return window !== undefined;
 }
+
+export function formatError(error: string | string[]): string {
+  if (isString(error)) {
+    return error;
+  }
+  return error.join('\n');
+}

@@ -10,7 +10,7 @@ export interface GlobalConfig {
     AppInputSelect: {
       arrow: string;
     };
-    AppInputText: {
+    AppInputTextable: {
       passwordToggleVisibility: {
         show: string;
         hide: string;
@@ -47,7 +47,7 @@ export function createGlobalConfig(): GlobalConfig {
       AppInputSelect: {
         arrow: 'material-symbols:keyboard-arrow-down',
       },
-      AppInputText: {
+      AppInputTextable: {
         passwordToggleVisibility: {
           show: 'material-symbols:visibility',
           hide: 'material-symbols:visibility-off',
