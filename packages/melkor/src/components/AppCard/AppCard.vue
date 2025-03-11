@@ -4,7 +4,6 @@
     class="mk-AppCard"
     :data-type="surface.elevation"
   >
-    <pre>{{ surface }}</pre>
     <slot v-bind="surface" />
   </div>
 </template>
@@ -28,9 +27,14 @@ const theme = useTheme();
 
 <style lang="scss">
 .mk-AppCard {
-  padding: var(--mk-size-4);
-  border: 1px solid var(--mk-surface-border-color);
-  border-radius: var(--mk-border-radius-size);
+  --mk-card-padding-size: var(--mk-size-4);
+  --mk-card-border-size: var(--mk-border-size);
+  --mk-card-border-color: var(--mk-surface-border-color);
+  --mk-card-border-radius-size: var(--mk-border-radius-size);
+
+  padding: var(--mk-card-padding-size);
+  border: var(--mk-card-border-size) solid var(--mk-card-border-color);
+  border-radius: var(--mk-card-border-radius-size);
 
   &[data-type='surface-low'] {
     background-color: var(--mk-surface-low-background-color);
