@@ -26,8 +26,20 @@ export const asideNavigation: NavigationLevel[] = [
         path: '/components/input-text',
       },
       {
+        label: 'Number Input',
+        path: '/components/input-number',
+      },
+      {
+        label: 'Color Input',
+        path: '/components/input-color',
+      },
+      {
         label: 'Card',
         path: '/components/card',
+      },
+      {
+        label: 'Image',
+        path: '/components/image',
       },
     ],
   },

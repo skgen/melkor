@@ -39,6 +39,24 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <AppColorPalette
+        :colors="[
+          `var(--mk-shade-0)`,
+          `var(--mk-shade-1)`,
+          `var(--mk-shade-2)`,
+          `var(--mk-shade-3)`,
+          `var(--mk-shade-4)`,
+          `var(--mk-shade-5)`,
+          `var(--mk-shade-6)`,
+          `var(--mk-shade-7)`,
+          `var(--mk-shade-8)`,
+          `var(--mk-shade-9)`,
+          `var(--mk-shade-10)`,
+        ]"
+      />
+    </div>
   </NuxtLayout>
 </template>
 

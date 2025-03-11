@@ -16,8 +16,8 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: rgb(var(--mk-surface-low-background-color) / 80%);
-  backdrop-filter: blur(10px);
+  background-color: var(--mk-shade-0-75);
+  backdrop-filter: blur(8px);
 
   &-container {
     display: flex;

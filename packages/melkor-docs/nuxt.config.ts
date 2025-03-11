@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   modules: [
     // '@skgn/melkor-nuxt',
     '../melkor-nuxt/src/module',
+    '@unocss/nuxt',
   ],
   css: [
     './src/styles/index.scss',

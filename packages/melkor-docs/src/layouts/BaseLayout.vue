@@ -8,7 +8,9 @@
         <h1>
           <slot name="title" />
         </h1>
-        <slot />
+        <div class="sk-BaseLayout-main-content">
+          <slot />
+        </div>
       </main>
     </div>
   </div>
@@ -38,6 +40,12 @@
     flex-direction: column;
     gap: var(--mk-size-8);
     padding: var(--mk-size-8) 0;
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mk-size-4);
+    }
   }
 
   &-aside {
