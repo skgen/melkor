@@ -41,13 +41,12 @@
       {{ props.hint }}
     </AppInputHint>
     <AppInputError v-if="model.error">
-      {{ model.error }}
+      {{ formatError(model.error) }}
     </AppInputError>
   </div>
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputSelectEmits, InputSelectProps } from '../../features';
 import { isEqual } from 'lodash-es';
 import { computed, ref } from 'vue';
 import AppIcon from '../../components/AppIcon/AppIcon.vue';
@@ -55,6 +54,7 @@ import AppInputError from '../../components/AppInputError/AppInputError.vue';
 import AppInputHint from '../../components/AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../../components/AppInputLabel/AppInputLabel.vue';
 import { useGlobalConfig, useInput, useTheme } from '../../composables';
+import { formatError, type InputSelectEmits, type InputSelectProps } from '../../features';
 
 const props = defineProps<InputSelectProps<TValue>>();
 const emit = defineEmits<InputSelectEmits<TValue>>();
