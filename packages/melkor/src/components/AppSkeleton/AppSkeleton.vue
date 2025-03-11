@@ -58,19 +58,21 @@ const width = computed(() => {
 </script>
 
 <style lang="scss">
+@use '../../styles/mixins' as melkor;
+
 .mk-AppSkeleton {
   --mk-skeleton-rectangle-border-radius: calc(var(--mk-border-radius-size) * 2);
-  --mk-skeleton-background-color: var(--mk-surface-border-color);
+  --mk-skeleton-background-color-hsl: var(--mk-shade-4-hsl);
 
   position: relative;
   width: v-bind('width');
   height: v-bind('height');
-  background: var(--mk-skeleton-background-color);
+  background: hsl(var(--mk-skeleton-background-color-hsl));
   background: linear-gradient(
     to right,
-    rgb(var(--mk-skeleton-background-color) / 20%) 8%,
-    rgb(var(--mk-skeleton-background-color) / 30%) 18%,
-    rgb(var(--mk-skeleton-background-color) / 20%) 33%
+    hsl(var(--mk-skeleton-background-color-hsl) / 80%) 8%,
+    hsl(var(--mk-skeleton-background-color-hsl) / 90%) 18%,
+    hsl(var(--mk-skeleton-background-color-hsl) / 80%) 33%
   );
   background-size: 3200px 400px;
   border-radius: var(--mk-skeleton-rectangle-border-radius);
