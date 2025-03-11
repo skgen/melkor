@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <slot :theme="globalTheme" />
-  </div>
+  <slot :theme="globalTheme" v-bind="$attrs" />
 </template>
 
 <script lang="ts" setup>

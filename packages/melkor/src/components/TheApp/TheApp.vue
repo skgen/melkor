@@ -2,7 +2,7 @@
   <!-- <AppThemeContext> -->
   <TheGlobalTheme v-slot="{ theme }">
     <AppThemeContext :value="theme.value" :preference="theme.preference">
-      <div v-theme="theme" class="mk-TheApp">
+      <div v-theme="theme" class="mk-TheApp" v-bind="$attrs">
         <slot />
         <!-- <teleport to="body">
           <TheFloatingLayer />

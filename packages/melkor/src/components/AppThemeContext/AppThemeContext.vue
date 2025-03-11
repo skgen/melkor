@@ -1,9 +1,10 @@
 <template>
-  <slot v-if="!props.withNode" :theme="theme" />
+  <slot v-if="!props.withNode" :theme="theme" v-bind="$attrs" />
   <div
     v-else
     v-theme="theme"
     class="mk-AppThemeContext"
+    v-bind="$attrs"
   >
     <slot :theme="theme" />
   </div>
