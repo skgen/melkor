@@ -33,7 +33,7 @@
     },
     "./composables/*": {
       "types": "./lib/composables/*/*.d.ts",
-      "import": "./lib/composables/*/*.d.js"
+      "import": "./lib/composables/*/*.js"
     },
     "./features": {
       "types": "./lib/features/index.d.ts",
@@ -41,7 +41,7 @@
     },
     "./features/*": {
       "types": "./lib/features/*/*.d.ts",
-      "import": "./lib/features/*/*.d.js"
+      "import": "./lib/features/*/*.js"
     },
     "./schema.json": {
       "import": "./lib/schema.json"
@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "@iconify/vue": "catalog:",
+    "deepmerge": "catalog:",
     "defu": "catalog:",
     "lodash-es": "catalog:",
     "normalize.css": "catalog:",

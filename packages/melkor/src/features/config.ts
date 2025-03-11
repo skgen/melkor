@@ -1,11 +1,11 @@
 import type { InjectionKey } from 'vue';
+import merge from 'deepmerge';
 
-import { Theme, type ThemeInstance } from '.';
+import { type DeepPartial, Theme, type ThemeInstance } from '.';
 
-export interface GlobalConfig {
+export interface MelkorOptions {
   debug: boolean;
   themes: string[];
-  theme: ThemeInstance;
   icons: {
     AppInputSelect: {
       arrow: string;
@@ -22,53 +22,51 @@ export interface GlobalConfig {
   };
 }
 
-export interface MelkorOptions {
-  debug: boolean;
-  themes: string[];
-  // dateFnsLocales?: DateFnsLocales;
-  // components?: {
-  //   icon?: IconOptions;
-  // };
-}
+export type GlobalConfig = MelkorOptions & {
+  theme: ThemeInstance;
+};
 
 export const globalConfigContextKey = Symbol('Inject key of global config') as InjectionKey<GlobalConfig>;
 
 export const STORAGE_THEME_KEY = 'mk-theme-preference';
 
-export function createGlobalConfig(): GlobalConfig {
+const defaultMelkorOptions: MelkorOptions = {
+  debug: false,
+  themes: [Theme.system, Theme.light, Theme.dark],
+  icons: {
+    AppInputSelect: {
+      arrow: 'material-symbols:keyboard-arrow-down',
+    },
+    AppInputTextable: {
+      passwordToggleVisibility: {
+        show: 'material-symbols:visibility',
+        hide: 'material-symbols:visibility-off',
+      },
+    },
+    AppInputTextableCancel: {
+      cancel: 'material-symbols:cancel',
+    },
+  },
+};
+
+export function createMelkorOptions(melkorOptions?: DeepPartial<MelkorOptions>): MelkorOptions {
+  if (!melkorOptions) {
+    return structuredClone(defaultMelkorOptions);
+  }
+  return merge(defaultMelkorOptions, melkorOptions, {
+    arrayMerge: (_, source) => {
+      return source;
+    },
+  }) as MelkorOptions;
+}
+
+export function createGlobalConfig(melkorOptions = createMelkorOptions()): GlobalConfig {
   return {
-    debug: false,
-    themes: [Theme.system, Theme.light, Theme.dark],
+    ...melkorOptions,
     theme: {
       value: Theme.system,
       preference: Theme.system,
     },
-    icons: {
-      AppInputSelect: {
-        arrow: 'material-symbols:keyboard-arrow-down',
-      },
-      AppInputTextable: {
-        passwordToggleVisibility: {
-          show: 'material-symbols:visibility',
-          hide: 'material-symbols:visibility-off',
-        },
-      },
-      AppInputTextableCancel: {
-        cancel: 'material-symbols:cancel',
-      },
-    },
-  };
-}
-
-export function createMelkorOptions(): MelkorOptions {
-  return {
-    debug: false,
-    themes: [Theme.system, Theme.light, Theme.dark],
-    // components: {
-    //   icon: {
-    //     shape: IconShape.rounded,
-    //   },
-    // },
   };
 }
 

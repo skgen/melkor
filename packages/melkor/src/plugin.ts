@@ -25,20 +25,13 @@ import {
 // }
 
 export function createMelkorUI(options?: DeepObjectPartial<MelkorOptions>): Plugin<[]> {
-  const melkorOptions: MelkorOptions = getDefaultAs(options, melkorOptions => ({
-    ...defu(melkorOptions, createMelkorOptions()),
-    themes: melkorOptions.themes ?? createMelkorOptions().themes,
-  }), createMelkorOptions());
+  const melkorOptions: MelkorOptions = options as MelkorOptions;
 
-  const globalConfig = createGlobalConfig();
-
-  globalConfig.debug = melkorOptions.debug;
+  const globalConfig = createGlobalConfig(melkorOptions);
 
   if (melkorOptions.themes.length === 0) {
     throw new Error('Melkor UI needs at least 1 theme (dark, light or custom), please don\'t provide an empty theme array.');
   }
-
-  globalConfig.themes = melkorOptions.themes;
 
   const plugin: Plugin<[]> = {
     install(app: App) {

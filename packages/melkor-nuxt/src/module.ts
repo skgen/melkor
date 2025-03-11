@@ -1,9 +1,8 @@
-import type { MelkorOptions } from '@skgn/melkor/features';
 import type { MelkorModuleOptions, MelkorNuxtContext, ModuleOptions } from './types';
 import { readFileSync } from 'node:fs';
 import { addPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
-import { createMelkorOptions, getDefaultAs } from '@skgn/melkor/features';
-import defu from 'defu';
+import { createMelkorOptions, type DeepPartial, type MelkorOptions } from '@skgn/melkor/features';
+import merge from 'deepmerge';
 import { name, version } from '../package.json';
 // Melkor
 import { loadComponents } from './namespaces/load-components';
@@ -19,10 +18,19 @@ declare module 'nuxt/schema' {
 
 const logger = useLogger(`nuxt:melkor`);
 
-function createModuleOptions(): ModuleOptions {
-  return {
-    debug: false,
-  };
+const defaultModuleOptions: ModuleOptions = {
+  debug: false,
+};
+
+function createModuleOptions(moduleOptions?: DeepPartial<MelkorOptions>): ModuleOptions {
+  if (!moduleOptions) {
+    return structuredClone(defaultModuleOptions);
+  }
+  return merge(defaultModuleOptions, moduleOptions, {
+    arrayMerge: (_, source) => {
+      return source;
+    },
+  });
 }
 
 export default defineNuxtModule<MelkorModuleOptions>({
@@ -43,11 +51,8 @@ export default defineNuxtModule<MelkorModuleOptions>({
     const ctx: MelkorNuxtContext = {
       logger,
       resolver,
-      melkorOptions: getDefaultAs(options.melkorOptions, melkorOptions => ({
-        ...defu(melkorOptions, createMelkorOptions()),
-        themes: melkorOptions.themes ?? createMelkorOptions().themes,
-      }), createMelkorOptions()),
-      moduleOptions: getDefaultAs(options.moduleOptions, moduleOptions => defu(moduleOptions, createModuleOptions()), createModuleOptions()),
+      melkorOptions: createMelkorOptions(options.melkorOptions),
+      moduleOptions: createModuleOptions(options.moduleOptions),
       schema,
       nuxt,
       runtimeDir: await resolver.resolve('./runtime'),
@@ -60,7 +65,7 @@ export default defineNuxtModule<MelkorModuleOptions>({
     ctx.nuxt.options.alias['@skgen/melkor/styles/mixins'] = '@skgn/melkor/styles/mixins.scss';
 
     // Inject config
-    ctx.nuxt.options.runtimeConfig.public.melkor = defu(nuxt.options.runtimeConfig.public.melkor, ctx.melkorOptions);
+    ctx.nuxt.options.runtimeConfig.public.melkor = ctx.melkorOptions;
 
     // Load plugin
     addPlugin({

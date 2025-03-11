@@ -27,12 +27,12 @@
     "review:typescript": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
     "review:eslint": "eslint . --fix",
     "review:stylelint": "stylelint 'playground/src/**/*.{css,scss,vue}' --color --fix",
-    "postinstall": "pnpm generate"
+    "postinstall": "pnpm dev:prepare && pnpm generate"
   },
   "dependencies": {
     "@nuxt/kit": "catalog:",
     "@skgn/melkor": "workspace:*",
-    "defu": "catalog:"
+    "deepmerge": "catalog:"
   },
   "devDependencies": {
     "@nuxt/devtools": "catalog:",
@@ -52,6 +52,7 @@
     "stylelint-config-standard-vue": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
+    "vite": "catalog:",
     "vitest": "catalog:",
     "vue-tsc": "catalog:",
     "yargs": "catalog:"
