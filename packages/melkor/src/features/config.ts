@@ -5,7 +5,7 @@ import { type DeepPartial, Theme, type ThemeInstance } from '.';
 
 export interface MelkorOptions {
   debug: boolean;
-  themes: string[];
+  themes: ('system' | 'light' | 'dark' | string)[];
   icons: {
     AppInputSelect: {
       arrow: string;
@@ -23,6 +23,12 @@ export interface MelkorOptions {
       prev: string;
       next: string;
       gap: string;
+    };
+    AppThemeToggle: {
+      system: string;
+      light: string;
+      dark: string;
+      [key: string]: string;
     };
   };
 }
@@ -55,6 +61,11 @@ const defaultMelkorOptions: MelkorOptions = {
       prev: 'material-symbols:arrow-back-ios-new',
       next: 'material-symbols:arrow-forward-ios',
       gap: 'material-symbols:more-horiz',
+    },
+    AppThemeToggle: {
+      system: 'material-symbols:settings',
+      light: 'material-symbols:light-mode',
+      dark: 'material-symbols:dark-mode',
     },
   },
 };
