@@ -5,13 +5,17 @@ import type { MelkorOptions } from '@skgn/melkor/features';
 
 export interface ModuleOptions {
   debug: false;
+  prefix?: {
+    components?: string;
+    hooks?: string;
+  };
 }
 
 export interface MelkorNuxtContext<TSchema extends Record<string, any> = Record<string, any>> {
   resolver: Resolver;
   logger: ReturnType<typeof import('@nuxt/kit')['useLogger']>;
   moduleOptions: ModuleOptions;
-  melkorOptions: DeepObjectPartial<MelkorOptions>;
+  melkorOptions: MelkorOptions;
   schema: TSchema;
   nuxt: Nuxt;
   runtimeDir: string;
