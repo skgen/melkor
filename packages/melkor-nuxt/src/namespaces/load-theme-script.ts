@@ -1,7 +1,6 @@
 import type { MelkorNuxtContext } from '../types';
 import { readFileSync } from 'node:fs';
-import { Theme } from '@skgn/melkor';
-import { createGlobalConfig, STORAGE_THEME_KEY } from '@skgn/melkor/features';
+import { createGlobalConfig, STORAGE_THEME_KEY, Theme } from '@skgn/melkor/features';
 
 export function loadThemeScript<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext): void {
   // Thanks @nuxtjs/color-mode for the briliant idea !

@@ -18,12 +18,15 @@ interface Props {
   size?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  circle: false,
-  width: undefined,
-  height: undefined,
-  size: undefined,
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    circle: false,
+    width: undefined,
+    height: undefined,
+    size: undefined,
+  },
+);
 
 const defaultSize = '100%';
 

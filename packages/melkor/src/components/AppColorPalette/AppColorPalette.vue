@@ -24,9 +24,12 @@ interface Props {
   colors?: string[];
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  palette: 'primary',
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    palette: 'primary',
+  },
+);
 
 const theme = useTheme();
 

@@ -23,9 +23,12 @@ interface Props {
   isActive?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  type: 'plain',
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    type: 'plain',
+  },
+);
 
 const theme = useTheme();
 </script>
