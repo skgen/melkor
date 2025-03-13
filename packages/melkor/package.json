@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "@iconify/vue": "catalog:",
+    "@vueuse/core": "catalog:",
     "deepmerge": "catalog:",
     "defu": "catalog:",
     "lodash-es": "catalog:",
