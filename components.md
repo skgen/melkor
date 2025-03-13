@@ -17,11 +17,11 @@
 | AppWysiwygPreview | ❌ | v1
 | AppSkeleton | ✅ | v1
 | AppAlert | ❌ | v1
-| AppImage | ❌ | v1
+| AppImage | ✅ | v1
 | AppIcon | ✅ | v1
 | AppThemeContext | ✅ | v1
 | AppInfiniteScroll | ❌ | v1
-| AppPagination | ❌ | v1
+| AppPagination | ✅ | v1
 | AppDraggable | ❌ | v1
 | AppMediaQuery | ❌ | v1
 | AppMenuGroup | ❌ | v1
