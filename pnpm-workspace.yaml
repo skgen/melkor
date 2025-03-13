@@ -54,4 +54,5 @@ catalog:
   vite-plugin-static-copy: ^2.3.0
   vitest: ^2.1.5
   vue-tsc: ~2.2.8
+  '@vueuse/core': ^13.0.0
   yargs: ^17.7.2
