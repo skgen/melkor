@@ -25,6 +25,6 @@
     "stylelint-config-recess-order": "catalog:",
     "stylelint-config-standard": "catalog:",
     "stylelint-config-standard-scss": "catalog:",
-    "stylelint-config-standard-vue": "catalog:",
+    "stylelint-config-standard-vue": "catalog:"
   }
 }

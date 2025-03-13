@@ -1,3 +1,5 @@
+import { Theme } from '@skgn/melkor/features';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
@@ -47,6 +49,12 @@ export default defineNuxtConfig({
   melkor: {
     melkorOptions: {
       debug: true,
+      themes: [Theme.system, Theme.dark, Theme.light, 'square'],
+      icons: {
+        AppThemeToggle: {
+          square: 'material-symbols:activity-zone',
+        },
+      },
     },
   },
 });

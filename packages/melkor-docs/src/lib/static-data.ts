@@ -45,6 +45,10 @@ export const asideNavigation: NavigationLevel[] = [
         label: 'Pagination',
         path: '/components/pagination',
       },
+      {
+        label: 'Theme Toggle',
+        path: '/components/theme-toggle',
+      },
     ],
   },
 ];
