@@ -1,15 +1,37 @@
 <template>
   <header class="sk-TheHeader">
     <div class="sk-TheHeader-container">
-      <NuxtLink class="sk-TheHeader-title" to="/">
+      <NuxtLink class="sk-TheHeader-logo" to="/">
         Melkor
       </NuxtLink>
-      <div class="sk-TheHeader-toolbar">
+      <nav class="sk-TheHeader-nav">
+        <ul class="sk-TheHeader-nav-list">
+          <li v-for="item of nav" :key="item.path">
+            <NuxtLink class="sk-TheHeader-nav-link" :to="item.path">
+              {{ item.label }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </nav>
+      <div class="sk-TheHeader-dashboard">
         <AppThemeSelector />
       </div>
     </div>
   </header>
 </template>
+
+<script lang="ts" setup>
+const nav = [
+  {
+    label: 'Components',
+    path: '/components/input-text',
+  },
+  {
+    label: 'Composables',
+    path: '#',
+  },
+];
+</script>
 
 <style lang="scss">
 .sk-TheHeader {
@@ -18,6 +40,11 @@
   z-index: 10;
   background-color: var(--mk-shade-0-75);
   backdrop-filter: blur(8px);
+
+  &-logo {
+    flex: 1;
+    font-size: 1.5rem;
+  }
 
   &-container {
     display: flex;
@@ -30,18 +57,32 @@
     margin: 0 auto;
   }
 
-  &-title {
-    font-size: 24px;
+  &-nav {
+    flex: 1;
+
+    &-list {
+      display: flex;
+      gap: var(--mk-size-1);
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-link {
+      padding: var(--mk-size-2);
+      border-radius: var(--mk-border-radius-size);
+      transition: background-color var(--mk-transition-background-duration);
+
+      &:hover {
+        background-color: var(--mk-shade-4);
+      }
+    }
   }
 
-  &-toolbar {
+  &-dashboard {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: flex-end;
-  }
-
-  > * {
-    flex: 1;
   }
 }
 </style>

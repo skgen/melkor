@@ -1,7 +1,7 @@
 <template>
   <div class="sk-TheAsideNavigation">
     <ul class="sk-TheAsideNavigation-list">
-      <li class="sk-TheAsideNavigation-item">
+      <li>
         <AppNavigationLevel
           v-for="(navigationLevel, index) of asideNavigation"
           :key="index"
@@ -16,20 +16,14 @@
 import { asideNavigation } from '@/lib/static-data';
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .sk-TheAsideNavigation {
   padding: var(--mk-size-8) var(--mk-size-4) var(--mk-size-8) 0;
 
-  &-item {
+  &-list {
     display: flex;
     flex-direction: column;
     gap: var(--mk-size-4);
-  }
-
-  .sk-AppNavigationLevel {
-    &-children {
-      padding-left: 0;
-    }
   }
 }
 </style>

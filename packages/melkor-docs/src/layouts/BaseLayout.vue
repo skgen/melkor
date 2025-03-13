@@ -5,7 +5,7 @@
         <TheAsideNavigation />
       </aside>
       <main class="sk-BaseLayout-main">
-        <h1>
+        <h1 v-if="$slots.title">
           <slot name="title" />
         </h1>
         <div class="sk-BaseLayout-main-content">

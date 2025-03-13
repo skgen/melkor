@@ -41,6 +41,10 @@ export const asideNavigation: NavigationLevel[] = [
         label: 'Image',
         path: '/components/image',
       },
+      {
+        label: 'Pagination',
+        path: '/components/pagination',
+      },
     ],
   },
 ];

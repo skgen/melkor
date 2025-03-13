@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   modules: [
     // '@skgn/melkor-nuxt',
     '../melkor-nuxt/src/module',
-    '@unocss/nuxt',
   ],
   css: [
     './src/styles/index.scss',
@@ -45,4 +44,9 @@ export default defineNuxtConfig({
   // nitro: {
   //   preset: 'node-server',
   // },
+  melkor: {
+    melkorOptions: {
+      debug: true,
+    },
+  },
 });

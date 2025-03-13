@@ -9,7 +9,7 @@ export default {
       files: ['*.vue', '**/*.vue'],
       customSyntax: 'postcss-html',
       rules: {
-        'selector-class-pattern': ['(sk|mk-[A-Z][a-zA-Z]+)', { resolveNestedSelectors: false }],
+        'selector-class-pattern': ['(sk|mk)-[A-Z][a-zA-Z]+', { resolveNestedSelectors: false }],
       },
     },
   ],

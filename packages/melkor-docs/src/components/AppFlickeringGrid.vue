@@ -7,6 +7,7 @@
       ref="canvasRef"
       :width="canvasSize.width"
       :height="canvasSize.height"
+      class="sk-AppFlickeringGrid-canvas"
     />
   </div>
 </template>
@@ -23,13 +24,16 @@ interface FlickeringGridProps {
   maxOpacity?: number;
 }
 
-const props = withDefaults(defineProps<FlickeringGridProps>(), {
-  squareSize: 4,
-  gridGap: 6,
-  flickerChance: 0.3,
-  color: 'rgb(0, 0, 0)',
-  maxOpacity: 0.3,
-});
+const props = withDefaults(
+  defineProps<FlickeringGridProps>(),
+  {
+    squareSize: 4,
+    gridGap: 6,
+    flickerChance: 0.3,
+    color: 'rgb(0, 0, 0)',
+    maxOpacity: 0.3,
+  },
+);
 
 const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height } = toRefs(props);
 
@@ -185,7 +189,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
 
-  canvas {
+  &-canvas {
     pointer-events: none;
   }
 }

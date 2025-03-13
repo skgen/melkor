@@ -13,20 +13,18 @@
     "@skgn/melkor": "workspace:*",
     "@skgn/melkor-nuxt": "workspace:*",
     "@types/chroma-js": "^2.4.4",
+    "@vueuse/core": "catalog:",
     "chroma-js": "^3.1.2",
     "nuxt": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
   },
   "devDependencies": {
-    "@unocss/nuxt": "66.1.0-beta.3",
-    "@unocss/preset-mini": "66.1.0-beta.3",
     "sass-embedded": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-recess-order": "catalog:",
     "stylelint-config-standard": "catalog:",
     "stylelint-config-standard-scss": "catalog:",
     "stylelint-config-standard-vue": "catalog:",
-    "unocss": "66.1.0-beta.3"
   }
 }
