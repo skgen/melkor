@@ -39,6 +39,10 @@ a:active {
 button {
   background: transparent;
   border: none;
+
+  &:disabled {
+    color: buttontext;
+  }
 }
 
 img {
