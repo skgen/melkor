@@ -19,6 +19,11 @@ export interface MelkorOptions {
     AppInputTextableCancel: {
       cancel: string;
     };
+    AppPagination: {
+      prev: string;
+      next: string;
+      gap: string;
+    };
   };
 }
 
@@ -45,6 +50,11 @@ const defaultMelkorOptions: MelkorOptions = {
     },
     AppInputTextableCancel: {
       cancel: 'material-symbols:cancel',
+    },
+    AppPagination: {
+      prev: 'material-symbols:arrow-back-ios-new',
+      next: 'material-symbols:arrow-forward-ios',
+      gap: 'material-symbols:more-horiz',
     },
   },
 };

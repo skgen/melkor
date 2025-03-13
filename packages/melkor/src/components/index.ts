@@ -10,6 +10,7 @@ export { default as AppInputLabel } from './AppInputLabel/AppInputLabel.vue';
 export { default as AppInputNumber } from './AppInputNumber/AppInputNumber.vue';
 export { default as AppInputText } from './AppInputText/AppInputText.vue';
 export { default as AppInputTextableCancel } from './AppInputTextableCancel/AppInputTextableCancel.vue';
+export { default as AppPagination } from './AppPagination/AppPagination.vue';
 export { default as AppSkeleton } from './AppSkeleton/AppSkeleton.vue';
 export { default as AppThemeContext } from './AppThemeContext/AppThemeContext.vue';
 export { default as AppThemeSelector } from './AppThemeSelector/AppThemeSelector.vue';
