@@ -114,6 +114,7 @@ defineExpose({
 
 .mk-AppInputSelect {
   --mk-input-select-background-color: var(--mk-input-background-color);
+  --mk-input-select-background-color-hover: var(--mk-input-background-color-hover);
   --mk-input-select-border-color: var(--mk-input-border-color);
   --mk-input-select-border-color-hover: var(--mk-input-border-color-hover);
   --mk-input-select-border-color-active: var(--mk-input-border-color-active);

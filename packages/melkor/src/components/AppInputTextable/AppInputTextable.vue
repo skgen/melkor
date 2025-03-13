@@ -152,6 +152,7 @@ defineExpose({
 
 .mk-AppInputTextable {
   --mk-input-textable-background-color: var(--mk-input-background-color);
+  --mk-input-textable-background-color-hover: var(--mk-input-background-color-hover);
   --mk-input-textable-border-color: var(--mk-input-border-color);
   --mk-input-textable-border-color-hover: var(--mk-input-border-color-hover);
   --mk-input-textable-border-color-active: var(--mk-input-border-color-active);
