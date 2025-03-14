@@ -7,7 +7,9 @@
       <AppCard v-for="(cell, i) of cells" :key="i" class="sk-ImageView-sample">
         <div class="sk-ImageView-sample-specs">
           <strong>{{ `${cell.ratio[0]}:${cell.ratio[1]}` }}</strong>
-          <template v-if="cell.contain || cell.cover"> | {{ cell.contain ? 'contain' : 'cover' }}</template>
+          <template v-if="cell.contain || cell.cover">
+            | {{ cell.contain ? 'contain' : 'cover' }}
+          </template>
         </div>
         <div>
           <AppImage :src="imageSource" :ratio="cell.ratio" :contain="cell.contain" :cover="cell.cover" />

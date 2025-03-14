@@ -22,18 +22,6 @@ export const asideNavigation: NavigationLevel[] = [
         path: '/components/button',
       },
       {
-        label: 'Text Input',
-        path: '/components/input-text',
-      },
-      {
-        label: 'Number Input',
-        path: '/components/input-number',
-      },
-      {
-        label: 'Color Input',
-        path: '/components/input-color',
-      },
-      {
         label: 'Card',
         path: '/components/card',
       },
@@ -48,6 +36,27 @@ export const asideNavigation: NavigationLevel[] = [
       {
         label: 'Theme Toggle',
         path: '/components/theme-toggle',
+      },
+      {
+        label: 'Checkables',
+        path: '/components/checkables',
+      },
+    ],
+  },
+  {
+    label: 'Inputs',
+    children: [
+      {
+        label: 'Text Input',
+        path: '/components/input-text',
+      },
+      {
+        label: 'Number Input',
+        path: '/components/input-number',
+      },
+      {
+        label: 'Color Input',
+        path: '/components/input-color',
       },
     ],
   },

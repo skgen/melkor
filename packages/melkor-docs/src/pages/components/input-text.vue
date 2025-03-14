@@ -34,6 +34,17 @@
         </template>
       </AppInputText>
     </AppCard>
+    <AppCard>
+      <AppInputText
+        v-model="inputTextModel"
+        cancelable
+        placeholder="disabled@disabled.com"
+        hint="I'm disabled"
+        label="Disabled"
+        disabled
+        encrypted
+      />
+    </AppCard>
   </NuxtLayout>
 </template>
 

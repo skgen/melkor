@@ -3,11 +3,13 @@
     <template #title>
       Button
     </template>
-    <AppRow>
+    <AppStack gap="m" align="center">
       <AppButton size="tight">
         Cancel <AppIcon icon="material-symbols:cancel" />
       </AppButton>
-      <AppButton>Cancel <AppIcon icon="material-symbols:cancel" /></AppButton>
+      <AppButton>
+        Cancel <AppIcon icon="material-symbols:cancel" />
+      </AppButton>
       <AppButton size="wide">
         Cancel <AppIcon icon="material-symbols:cancel" />
       </AppButton>
@@ -17,8 +19,8 @@
       <AppButton is-active>
         Cancel <AppIcon icon="material-symbols:check-circle" />
       </AppButton>
-    </AppRow>
-    <AppRow>
+    </AppStack>
+    <AppStack gap="m" align="center">
       <AppButton size="tight" type="outline">
         Cancel <AppIcon icon="material-symbols:cancel" />
       </AppButton>
@@ -34,6 +36,6 @@
       <AppButton type="outline" is-active>
         Cancel <AppIcon icon="material-symbols:check-circle" />
       </AppButton>
-    </AppRow>
+    </AppStack>
   </NuxtLayout>
 </template>
