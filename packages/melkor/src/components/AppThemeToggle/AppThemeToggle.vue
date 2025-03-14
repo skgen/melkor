@@ -1,13 +1,13 @@
 <template>
   <div
-    v-theme="globalTheme"
+    v-theme="theme"
     class="mk-AppThemeToggle"
     v-bind="$attrs"
     @click="() => next()"
   >
     <div class="mk-AppThemeToggle-label">
       <span v-if="!props.compact" class="mk-AppThemeToggle-stateLabel">
-        {{ theme }}
+        {{ currentTheme }}
       </span>
       <div class="mk-AppThemeToggle-input">
         <div class="mk-AppThemeToggle-target">
@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { useGlobalConfig, useGlobalTheme, useNextTheme } from '../../composables';
+import { useGlobalConfig, useGlobalTheme, useNextTheme, useTheme } from '../../composables';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 interface Props {
@@ -36,9 +36,10 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const { next, theme, index } = useNextTheme();
+const { next, theme: currentTheme, index } = useNextTheme();
 
 const globalTheme = useGlobalTheme();
+const theme = useTheme();
 const globalConfig = useGlobalConfig();
 
 const size = computed(() => (2 + globalConfig.themes.length - 1) / 2);
@@ -50,8 +51,8 @@ const translateX = computed(() => `${index.value * 50}%`);
 
 .mk-AppThemeToggle {
   --mk-theme-toggle-background-color: var(--mk-border-color);
-  --mk-theme-toggle-target-background-color: var(--mk-text-color);
-  --mk-theme-toggle-target-color: var(--mk-border-color);
+  --mk-theme-toggle-target-background-color: var(--mk-primary);
+  --mk-theme-toggle-target-icon-color: var(--mk-on-primary);
   --mk-theme-toggle-spacing-size: var(--mk-size-2);
   --mk-theme-toggle-size: 16px;
   --mk-theme-toggle-padding-size: 2px;
@@ -77,7 +78,6 @@ const translateX = computed(() => `${index.value * 50}%`);
     display: block;
     width: calc(var(--mk-theme-toggle-size) * v-bind(size) + var(--mk-theme-toggle-padding-size) * 2);
     padding: var(--mk-theme-toggle-padding-size);
-    color: var(--mk-theme-toggle-target-color);
     background-color: var(--mk-theme-toggle-background-color);
     border-radius: var(--mk-theme-toggle-size);
   }
@@ -98,7 +98,7 @@ const translateX = computed(() => `${index.value * 50}%`);
       left: 50%;
       transform: translate(-50%, -50%);
 
-      --mk-icon-color: var(--mk-theme-toggle-target-color);
+      --mk-icon-color: var(--mk-theme-toggle-target-icon-color);
     }
   }
 
