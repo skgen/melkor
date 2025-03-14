@@ -30,6 +30,9 @@ export interface MelkorOptions {
       dark: string;
       [key: string]: string;
     };
+    AppCheckbox: {
+      checked: string;
+    };
   };
 }
 
@@ -66,6 +69,9 @@ const defaultMelkorOptions: MelkorOptions = {
       system: 'material-symbols:settings',
       light: 'material-symbols:light-mode',
       dark: 'material-symbols:dark-mode',
+    },
+    AppCheckbox: {
+      checked: 'material-symbols:check',
     },
   },
 };
