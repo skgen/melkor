@@ -44,7 +44,6 @@
         <button
           v-if="props.encrypted"
           class="mk-AppInputTextable-toggleVisibility"
-          :disabled="props.disabled"
           @click="handleToggleVisibility"
         >
           <AppIcon :icon="toggleVisibilityIcon" />
@@ -97,7 +96,7 @@ function handleChange(evt: Event, newValue: TValue) {
   onChange(newValue);
 }
 
-const isCancelable = computed(() => props.cancelable && isValue(model.value.value));
+const isCancelable = computed(() => props.cancelable && isValue(model.value.value) && !props.disabled);
 const isEncrypted = ref(true);
 
 const type = computed(() => {
@@ -256,7 +255,12 @@ defineExpose({
   @include melkor.disabled {
     #{$this} {
       &-input {
+        cursor: not-allowed;
         opacity: var(--mk-input-opacity-disabled);
+
+        input {
+          cursor: not-allowed;
+        }
       }
     }
   }
