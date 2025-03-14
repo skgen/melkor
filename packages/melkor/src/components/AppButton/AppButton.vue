@@ -57,21 +57,23 @@ const theme = useTheme();
   --mk-button-outline-border-size-active: var(--mk-input-border-size-active);
   --mk-button-outline-text-color: var(--mk-text-color);
 
-  @include melkor.dark {
-    // Plain
-    --mk-button-plain-text-color: var(--mk-shade-1);
-    --mk-button-plain-background-color: var(--mk-shade-10);
-    --mk-button-plain-background-color-hover: hsl(var(--mk-shade-10-hsl) / 90%);
-    --mk-button-plain-background-color-active: hsl(var(--mk-shade-10-hsl) / 80%);
-  }
+  // Plain
 
-  @include melkor.light {
-    // Plain
-    --mk-button-plain-text-color: var(--mk-grey-100);
-    --mk-button-plain-background-color: var(--mk-grey-900);
-    --mk-button-plain-background-color-hover: var(--mk-grey-900) / 90%;
-    --mk-button-plain-background-color-active: var(--mk-grey-900) / 80%;
-  }
+  // @include melkor.dark {
+  --mk-button-plain-text-color: var(--mk-on-primary);
+  --mk-button-plain-background-color: var(--mk-primary);
+  --mk-button-plain-background-color-hover: hsl(var(--mk-primary-hsl) / 90%);
+  --mk-button-plain-background-color-active: hsl(var(--mk-primary-hsl) / 80%);
+
+  // }
+
+  // @include melkor.light {
+  //   // Plain
+  //   --mk-button-plain-text-color: var(--mk-grey-100);
+  //   --mk-button-plain-background-color: var(--mk-grey-900);
+  //   --mk-button-plain-background-color-hover: var(--mk-grey-900) / 90%;
+  //   --mk-button-plain-background-color-active: var(--mk-grey-900) / 80%;
+  // }
 
   position: relative;
   box-sizing: content-box;
@@ -82,10 +84,10 @@ const theme = useTheme();
   cursor: pointer;
   border-radius: var(--mk-button-border-radius-size);
   transition:
-    border-color var(--mk-transition-color-duration),
     background-color var(--mk-transition-color-duration),
     color var(--mk-transition-color-duration),
-    box-shadow var(--mk-transition-color-duration);
+    box-shadow var(--mk-transition-color-duration),
+    opacity var(--mk-transition-opacity-duration);
 
   .mk-AppIcon {
     --mk-icon-size: 1.25em;
