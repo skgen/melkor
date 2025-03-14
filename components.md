@@ -8,7 +8,7 @@
 | AppLink | ❌ | v1
 | AppLocaleSelector | ❌ | v1
 | AppThemeSelector | ✅ | v1
-| AppThemeToggle | ❌ | v1
+| AppThemeToggle | ✅ | v1
 | AppTabs | ❌ | v1
 | AppTab | ❌ | v1
 | AppTable | ❌ | v1
@@ -44,7 +44,7 @@
 | AppInputTime | ❌ | v1
 | AppInputWysiwyg | ❌ | v1
 | AppInputIcon | ❌ | v1
-| AppCheckbox | ❌ | v1
+| AppCheckbox | ✅ | v1
 | AppRadio | ❌ | v1
 | AppToggle | ❌ | v1
 | AppInputError | ✅ | v1
