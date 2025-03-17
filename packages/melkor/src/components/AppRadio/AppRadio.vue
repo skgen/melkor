@@ -1,0 +1,107 @@
+<template>
+  <div
+    v-theme="theme"
+    class="mk-AppRadio"
+    :data-is-checked="props.checked || undefined"
+    :data-is-disabled="props.disabled || undefined"
+  />
+</template>
+
+<script lang="ts" setup>
+import { useTheme } from '../../composables';
+
+interface Props {
+  checked?: boolean;
+  disabled?: boolean;
+}
+
+const props = defineProps<Props>();
+
+const theme = useTheme();
+</script>
+
+<style lang="scss">
+@use '../../styles/mixins' as melkor;
+
+.mk-AppRadio {
+  // --mk-radio-border-color: grey;
+  // --mk-radio-border-width: 1px;
+  // --mk-radio-border-width-active: 4px;
+  // --mk-radio-color-active: red;
+
+  --mk-radio-background-color: var(--mk-input-background-color);
+  --mk-radio-background-color-hover: var(--mk-input-background-color-hover);
+
+  // dza
+  --mk-radio-border-color: var(--mk-input-border-color);
+  --mk-radio-border-color-hover: var(--mk-input-border-color-hover);
+  --mk-radio-border-color-active: var(--mk-primary);
+
+  // dza
+  --mk-radio-border-size: var(--mk-input-border-size);
+  --mk-radio-border-size-hover: var(--mk-input-border-size-hover);
+  --mk-radio-border-size-active: var(--mk-input-border-size-active);
+
+  // dza
+  --mk-radio-transition-duration: var(--mk-transition-2-duration);
+
+  // dza
+  --mk-radio-size: 16px;
+
+  position: relative;
+  display: block;
+  width: var(--mk-radio-size);
+  height: var(--mk-radio-size);
+  overflow: hidden;
+  background-color: var(--mk-radio-background-color);
+  border-radius: 50%;
+  transition:
+    background-color var(--mk-radio-transition-duration),
+    box-shadow var(--mk-radio-transition-duration),
+    opacity var(--mk-radio-transition-duration);
+  transition-delay: 0ms;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0.01px var(--mk-radio-border-size) var(--mk-radio-border-color);
+    transition:
+      background-color var(--mk-radio-transition-duration),
+      transform var(--mk-radio-transition-duration),
+      box-shadow var(--mk-radio-transition-duration);
+    transition-delay: calc(var(--mk-radio-transition-duration) / 2);
+  }
+
+  &[data-is-checked='true'] {
+    box-shadow: inset 0 0 0.01px var(--mk-radio-border-size-active) var(--mk-radio-border-color-active);
+    transition-delay: calc(var(--mk-radio-transition-duration) / 2);
+
+    &::before {
+      background-color: var(--mk-radio-border-color-active);
+      box-shadow: inset 0 0 0.01px 0 var(--mk-radio-border-color-active) !important;
+      transition-delay: 0ms;
+      transform: scale(0.5);
+    }
+  }
+
+  @include melkor.not-disabled {
+    &:hover {
+      background-color: var(--mk-radio-background-color-hover);
+
+      &::before {
+        box-shadow: inset 0 0 0.01px var(--mk-radio-border-size-hover) var(--mk-radio-border-color-hover);
+      }
+    }
+  }
+
+  @include melkor.disabled {
+    cursor: not-allowed;
+    opacity: var(--mk-opacity-disabled);
+  }
+}
+</style>

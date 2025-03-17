@@ -18,7 +18,16 @@
           </AppStack>
         </AppCard>
         <AppCard>
-          <AppRadio checked />
+          <AppStack col>
+            <span>Radio</span>
+            <AppRadio :checked="checked" @click="() => checked = !checked" />
+            <AppStack>
+              <AppRadio />
+              <AppRadio checked />
+              <AppRadio disabled />
+              <AppRadio disabled checked />
+            </AppStack>
+          </AppStack>
         </AppCard>
         <AppCard>
           <AppToggle checked />
