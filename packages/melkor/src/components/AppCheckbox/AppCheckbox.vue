@@ -44,6 +44,7 @@ const globalConfig = useGlobalConfig();
   --mk-checkbox-icon-color: var(--mk-on-primary);
   --mk-checkbox-icon-size: 14px;
   --mk-checkbox-size: 16px;
+  --mk-checkbox-transition-duration: var(--mk-transition-2-duration);
 
   $this: &;
 
@@ -51,16 +52,14 @@ const globalConfig = useGlobalConfig();
   display: block;
   width: var(--mk-checkbox-size);
   height: var(--mk-checkbox-size);
-  overflow: hidden;
-  user-select: none;
   background-color: var(--mk-checkbox-background-color);
   border-radius: var(--mk-checkbox-border-radius-size);
   box-shadow: inset 0 0 0.01px var(--mk-checkbox-border-size) var(--mk-checkbox-border-color);
   transition:
-    background-color var(--mk-transition-color-duration),
-    box-shadow var(--mk-transition-color-duration),
-    opacity var(--mk-transition-opacity-duration);
-  transition-delay: calc(var(--mk-transition-opacity-duration) / 2);
+    background-color var(--mk-checkbox-transition-duration),
+    box-shadow var(--mk-checkbox-transition-duration),
+    opacity var(--mk-checkbox-transition-duration);
+  transition-delay: calc(var(--mk-checkbox-transition-duration) / 2);
 
   &::before {
     position: absolute;
@@ -72,10 +71,10 @@ const globalConfig = useGlobalConfig();
     border-radius: var(--mk-checkbox-border-radius-size);
     opacity: 0;
     transition:
-      opacity var(--mk-transition-opacity-duration),
-      transform var(--mk-transition-transform-duration),
-      background-color var(--mk-transition-color-duration);
-    transition-delay: calc(var(--mk-transition-opacity-duration) / 2);
+      opacity var(--mk-checkbox-transition-duration),
+      transform var(--mk-checkbox-transition-duration),
+      background-color var(--mk-checkbox-transition-duration);
+    transition-delay: calc(var(--mk-checkbox-transition-duration) / 2);
     transform: scale(0);
   }
 
@@ -90,8 +89,8 @@ const globalConfig = useGlobalConfig();
     height: var(--mk-checkbox-size);
     opacity: 0;
     transition:
-      opacity var(--mk-transition-opacity-duration),
-      transform var(--mk-transition-transform-duration);
+      opacity var(--mk-checkbox-transition-duration),
+      transform var(--mk-checkbox-transition-duration);
     transform: translate(-50%, -50%) scale(0.8);
   }
 
@@ -116,7 +115,7 @@ const globalConfig = useGlobalConfig();
     #{$this} {
       &-icon {
         opacity: 1;
-        transition-delay: calc(var(--mk-transition-opacity-duration) / 2);
+        transition-delay: calc(var(--mk-checkbox-transition-duration) / 2);
         transform: translate(-50%, -50%) scale(1);
       }
     }
