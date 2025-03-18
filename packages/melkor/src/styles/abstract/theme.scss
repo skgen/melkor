@@ -273,8 +273,10 @@
   --mk-shade-10-15: hsl(var(--mk-shade-10-hsl) / 15%);
 
   // Primary
-  // --mk-primary-hue: 160deg;
-  --mk-primary-hsl: var(--mk-shade-10-hsl);
+  --mk-primary-hue: 20deg;
+  --mk-primary-hsl: var(--mk-primary-hue) 100% 66%;
+
+  // --mk-primary-hsl: var(--mk-shade-10-hsl);
   --mk-primary: hsl(var(--mk-primary-hsl) / 100%);
   --mk-primary-75: hsl(var(--mk-primary-hsl) / 75%);
   --mk-primary-50: hsl(var(--mk-primary-hsl) / 50%);
@@ -283,12 +285,16 @@
 
   // On Primary
   // --mk-on-primary-hue: 160deg;
-  --mk-on-primary-hsl: var(--mk-shade-0-hsl);
+  --mk-on-primary-hsl: var(--mk-shade-1-hsl);
   --mk-on-primary: hsl(var(--mk-on-primary-hsl) / 100%);
   --mk-on-primary-75: hsl(var(--mk-on-primary-hsl) / 75%);
   --mk-on-primary-50: hsl(var(--mk-on-primary-hsl) / 50%);
   --mk-on-primary-25: hsl(var(--mk-on-primary-hsl) / 25%);
   --mk-on-primary-15: hsl(var(--mk-on-primary-hsl) / 15%);
+
+  // Success
+  --mk-success-lch: 0.723 0.219 149.579;
+  --mk-success: oklch(var(--mk-success-lch));
 
   // Core
   --mk-core-background-color: var(--mk-shade-0);

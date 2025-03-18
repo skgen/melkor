@@ -30,7 +30,16 @@
           </AppStack>
         </AppCard>
         <AppCard>
-          <AppToggle checked />
+          <AppStack col>
+            <span>Toggle</span>
+            <AppToggle :checked="checked" @click="() => checked = !checked" />
+            <AppStack>
+              <AppToggle />
+              <AppToggle checked />
+              <AppToggle disabled />
+              <AppToggle disabled checked />
+            </AppStack>
+          </AppStack>
         </AppCard>
       </AppStack>
     </div>

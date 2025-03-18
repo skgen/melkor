@@ -18,4 +18,5 @@ export { default as AppThemeContext } from './AppThemeContext/AppThemeContext.vu
 export { default as AppThemeSelector } from './AppThemeSelector/AppThemeSelector.vue';
 export { default as AppThemeSelectorCheap } from './AppThemeSelectorCheap/AppThemeSelectorCheap.vue';
 export { default as AppThemeToggle } from './AppThemeToggle/AppThemeToggle.vue';
+export { default as AppToggle } from './AppToggle/AppToggle.vue';
 export { default as TheApp } from './TheApp/TheApp.vue';
