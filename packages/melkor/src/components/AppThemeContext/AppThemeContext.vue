@@ -41,6 +41,6 @@ provide(themeContextKey, theme);
 <style lang="scss">
 .mk-AppThemeContext {
   color: var(--mk-text-color);
-  background-color: hsl(var(--mk-surface-low-background-color));
+  background-color: var(--mk-surface-low-background-color);
 }
 </style>

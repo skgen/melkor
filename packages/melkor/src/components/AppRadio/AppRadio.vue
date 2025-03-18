@@ -24,29 +24,16 @@ const theme = useTheme();
 @use '../../styles/mixins' as melkor;
 
 .mk-AppRadio {
-  // --mk-radio-border-color: grey;
-  // --mk-radio-border-width: 1px;
-  // --mk-radio-border-width-active: 4px;
-  // --mk-radio-color-active: red;
-
   --mk-radio-background-color: var(--mk-input-background-color);
   --mk-radio-background-color-hover: var(--mk-input-background-color-hover);
-
-  // dza
   --mk-radio-border-color: var(--mk-input-border-color);
   --mk-radio-border-color-hover: var(--mk-input-border-color-hover);
   --mk-radio-border-color-active: var(--mk-primary);
-
-  // dza
   --mk-radio-border-size: var(--mk-input-border-size);
   --mk-radio-border-size-hover: var(--mk-input-border-size-hover);
   --mk-radio-border-size-active: var(--mk-input-border-size-active);
-
-  // dza
-  --mk-radio-transition-duration: var(--mk-transition-2-duration);
-
-  // dza
   --mk-radio-size: 16px;
+  --mk-radio-transition-duration: var(--mk-transition-2-duration);
 
   position: relative;
   display: block;
