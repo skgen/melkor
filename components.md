@@ -32,7 +32,7 @@
 | AppInputColor | ✅ | v1
 | AppInputFile | ❌ | v1
 | AppInputNumber | ✅ | v1
-| AppInputPassword | ❌ | v1
+| AppInputPassword | ✅ | v1 => AppInputText encrypted
 | AppInputRadio | ❌ | v1
 | AppInputRange | ❌ | v1
 | AppInputSelect | ✅ | v1
@@ -45,8 +45,8 @@
 | AppInputWysiwyg | ❌ | v1
 | AppInputIcon | ❌ | v1
 | AppCheckbox | ✅ | v1
-| AppRadio | ❌ | v1
-| AppToggle | ❌ | v1
+| AppRadio | ✅ | v1
+| AppToggle | ✅ | v1
 | AppInputError | ✅ | v1
 | AppInputHint | ✅ | v1
 | AppInputLabel | ✅ | v1
