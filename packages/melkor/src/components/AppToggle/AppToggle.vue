@@ -4,48 +4,14 @@
     class="mk-AppToggle"
     :data-is-checked="props.checked || undefined"
     :data-is-disabled="props.disabled || undefined"
-  >
-    <div class="mk-AppToggle-target">
-      <template v-if="!props.iconInBackground">
-        <slot
-          v-if="props.checked && $slots['checked-icon']"
-          name="checked-icon"
-        />
-        <slot
-          v-if="!props.checked && $slots['unchecked-icon']"
-          name="unchecked-icon"
-        />
-      </template>
-    </div>
-    <template v-if="props.iconInBackground">
-      <transition-group name="mk-fade">
-        <div
-          v-if="props.checked && $slots['checked-icon']"
-          class="mk-AppToggle-icon"
-          data-state="checked"
-        >
-          <slot name="checked-icon" />
-        </div>
-        <div
-          v-if="!props.checked && $slots['unchecked-icon']"
-          class="mk-AppToggle-icon"
-          data-state="unchecked"
-        >
-          <slot name="unchecked-icon" />
-        </div>
-      </transition-group>
-    </template>
-  </div>
+  />
 </template>
 
 <script lang="ts" setup>
+import type { CheckableProps } from '../../features';
 import { useTheme } from '../../composables';
 
-interface Props {
-  checked?: boolean;
-  disabled?: boolean;
-  iconInBackground?: boolean;
-}
+type Props = CheckableProps;
 
 const props = defineProps<Props>();
 
@@ -56,22 +22,19 @@ const theme = useTheme();
 @use '../../styles/mixins' as melkor;
 
 .mk-AppToggle {
-  --mk-toggle-background-color: var(--mk-border-color);
-  --mk-toggle-background-color-hover: var(--mk-border-color-hover);
-
-  // --mk-toggle-background-color-active: var(--mk-success);
-  // --mk-toggle-background-color-active: var(--mk-border-color-active);
-  --mk-toggle-background-color-active: var(--mk-primary);
-
-  // var(--mk-primary);
-
-  // --mk-toggle-icon-size: calc(var(--mk-toggle-target-size) - calc(var(--mk-toggle-target-padding-size) * 2));
-  // --mk-toggle-icon-color: white;
-
-  // --mk-checkbox-icon-size: 14px;
+  --mk-toggle-background-color: var(--mk-input-background-color);
+  --mk-toggle-background-color-hover: transparent;
+  --mk-toggle-border-color: var(--mk-input-border-color);
+  --mk-toggle-border-color-hover: var(--mk-input-border-color-hover);
+  --mk-toggle-border-color-active: var(--mk-input-border-color-active);
+  --mk-toggle-border-size: var(--mk-input-border-size);
+  --mk-toggle-border-size-hover: var(--mk-input-border-size-hover);
+  --mk-toggle-border-size-active: var(--mk-input-border-size-active);
   --mk-toggle-padding-size: 2px;
-  --mk-toggle-target-size: 12px;
-  --mk-toggle-target-color: var(--mk-shade-10);
+  --mk-toggle-target-size: 16px;
+  --mk-toggle-target-scale-hover: 90%;
+  --mk-toggle-target-scale-active: 85%;
+  --mk-toggle-target-color: var(--mk-border-color);
   --mk-toggle-target-color-active: var(--mk-on-primary);
   --mk-toggle-target-padding-size: calc(var(--mk-toggle-padding-size) / 2);
   --mk-toggle-transition-duration: var(--mk-transition-2-duration);
@@ -80,77 +43,47 @@ const theme = useTheme();
 
   position: relative;
   display: block;
-  width: calc(var(--mk-toggle-target-size) * 2 + var(--mk-toggle-padding-size) * 2);
-  padding: var(--mk-toggle-padding-size);
+  width: calc(var(--mk-toggle-target-size) * 2 + var(--mk-toggle-padding-size) * 2 + var(--mk-toggle-border-size) * 2);
+  padding: calc(var(--mk-toggle-padding-size) + var(--mk-toggle-border-size));
   background-color: var(--mk-toggle-background-color);
   border-radius: var(--mk-toggle-target-size);
+  box-shadow: inset 0 0 0.01px var(--mk-toggle-border-size) var(--mk-toggle-border-color);
   transition:
-    background-color var(--mk-toggle-transition-duration),
-    opacity var(--mk-toggle-transition-duration);
+    box-shadow var(--mk-toggle-transition-duration),
+    background-color var(--mk-toggle-transition-duration);
 
-  &-target {
+  &::before {
     position: relative;
+    display: block;
     width: var(--mk-toggle-target-size);
     height: var(--mk-toggle-target-size);
+    content: '';
     user-select: none;
     background-color: var(--mk-toggle-target-color);
     border-radius: 50%;
     transition:
       background-color var(--mk-toggle-transition-duration),
       transform var(--mk-toggle-transition-duration);
-
-    .mk-AppIcon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      --mk-icon-size: var(--mk-checkbox-icon-size);
-      --mk-icon-color: var(--mk-checkbox-icon-color);
-    }
-  }
-
-  &-icon {
-    position: absolute;
-    top: 50%;
-
-    .mk-AppIcon {
-      display: block;
-
-      // opacity: 0.6;
-
-      --mk-icon-color: var(--mk-toggle-target-color);
-    }
-
-    &[data-state='checked'] {
-      left: calc((var(--mk-toggle-padding-size) + var(--mk-toggle-target-size) / 2));
-      transform: translate(-50%, -50%);
-    }
-
-    &[data-state='unchecked'] {
-      right: calc((var(--mk-toggle-padding-size) + var(--mk-toggle-target-size) / 2));
-      transform: translate(50%, -50%);
-    }
   }
 
   &[data-is-checked='true'] {
-    background-color: var(--mk-toggle-background-color-active) !important;
+    box-shadow: inset 0 0 0.01px var(--mk-toggle-border-size-active) var(--mk-toggle-border-color-active) !important;
 
-    #{$this} {
-      &-target {
-        background-color: var(--mk-toggle-target-color-active);
-        transform: translate(100%, 0);
-
-        .mk-AppIcon {
-          --mk-icon-color: var(--mk-toggle-background-color-active);
-        }
-      }
+    &::before {
+      background-color: var(--mk-toggle-border-color-active) !important;
+      transform: translate(100%, 0) scale(var(--mk-toggle-target-scale-active)) !important;
     }
   }
 
   @include melkor.not-disabled {
     &:hover {
       background-color: var(--mk-toggle-background-color-hover);
+      box-shadow: inset 0 0 0.01px var(--mk-toggle-border-size-hover) var(--mk-toggle-border-color-hover);
+
+      &::before {
+        background-color: var(--mk-toggle-border-color-hover);
+        transform: scale(var(--mk-toggle-target-scale-hover));
+      }
     }
   }
 
@@ -158,18 +91,5 @@ const theme = useTheme();
     cursor: not-allowed;
     opacity: var(--mk-opacity-disabled);
   }
-
-  // &[data-is-disabled='true'] {
-  //   background-color: var(--app-input-color-disabled);
-  //   opacity: var(--app-input-opacity-disabled);
-
-  //   #{$this} {
-  //     &-target {
-  //       .mk-AppIcon {
-  //         --mk-icon-color: var(--app-input-color-disabled);
-  //       }
-  //     }
-  //   }
-  // }
 }
 </style>

@@ -8,6 +8,7 @@ export * from './io/input-text';
 export * from './io/input-textable';
 
 // Others
+export * from './checkable';
 export * from './config';
 export * from './logger';
 export * from './surface';
