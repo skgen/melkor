@@ -3,46 +3,44 @@
     <template #title>
       Checkables
     </template>
-    <div class="sk-CheckablesView">
-      <AppStack col>
-        <AppCard>
-          <AppStack col>
-            <span>Checkbox</span>
-            <AppCheckbox :checked="checked" @click="() => checked = !checked" />
-            <AppStack>
-              <AppCheckbox />
-              <AppCheckbox checked />
-              <AppCheckbox disabled />
-              <AppCheckbox disabled checked />
-            </AppStack>
+    <AppStack col>
+      <AppCard>
+        <AppStack col>
+          <span>Checkbox</span>
+          <AppCheckbox :checked="checked" @click="() => checked = !checked" />
+          <AppStack>
+            <AppCheckbox />
+            <AppCheckbox checked />
+            <AppCheckbox disabled />
+            <AppCheckbox disabled checked />
           </AppStack>
-        </AppCard>
-        <AppCard>
-          <AppStack col>
-            <span>Radio</span>
-            <AppRadio :checked="checked" @click="() => checked = !checked" />
-            <AppStack>
-              <AppRadio />
-              <AppRadio checked />
-              <AppRadio disabled />
-              <AppRadio disabled checked />
-            </AppStack>
+        </AppStack>
+      </AppCard>
+      <AppCard>
+        <AppStack col>
+          <span>Radio</span>
+          <AppRadio :checked="checked" @click="() => checked = !checked" />
+          <AppStack>
+            <AppRadio />
+            <AppRadio checked />
+            <AppRadio disabled />
+            <AppRadio disabled checked />
           </AppStack>
-        </AppCard>
-        <AppCard>
-          <AppStack col>
-            <span>Toggle</span>
-            <AppToggle :checked="checked" @click="() => checked = !checked" />
-            <AppStack>
-              <AppToggle />
-              <AppToggle checked />
-              <AppToggle disabled />
-              <AppToggle disabled checked />
-            </AppStack>
+        </AppStack>
+      </AppCard>
+      <AppCard>
+        <AppStack col>
+          <span>Toggle</span>
+          <AppToggle :checked="checked" @click="() => checked = !checked" />
+          <AppStack>
+            <AppToggle />
+            <AppToggle checked />
+            <AppToggle disabled />
+            <AppToggle disabled checked />
           </AppStack>
-        </AppCard>
-      </AppStack>
-    </div>
+        </AppStack>
+      </AppCard>
+    </AppStack>
   </NuxtLayout>
 </template>
 

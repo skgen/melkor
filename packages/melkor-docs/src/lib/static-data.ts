@@ -9,8 +9,8 @@ export const asideNavigation: NavigationLevel[] = [
     label: 'Global',
     children: [
       {
-        label: 'Theme generator',
-        path: '/theme/generator',
+        label: 'Theme convertor',
+        path: '/theme/convertor',
       },
     ],
   },

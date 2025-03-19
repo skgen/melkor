@@ -15,7 +15,7 @@
       </nav>
       <div class="sk-TheHeader-dashboard">
         <!-- <AppThemeSelector /> -->
-        <AppThemeToggle />
+        <AppThemeToggle compact />
       </div>
     </div>
   </header>

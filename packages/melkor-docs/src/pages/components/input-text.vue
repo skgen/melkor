@@ -3,48 +3,50 @@
     <template #title>
       Input Text
     </template>
-    <AppCard>
-      <AppInputText
-        v-model="inputTextModel"
-        cancelable
-        placeholder="hello@world.com"
-        hint="Type your username"
-        label="Username"
-        :validate="handleValidate"
-      >
-        <template #leading-icon>
-          <AppIcon icon="heroicons:user-circle-16-solid" />
-        </template>
-        <template #trailing-icon>
-          <AppIcon icon="heroicons:user-circle-16-solid" />
-        </template>
-      </AppInputText>
-    </AppCard>
-    <AppCard>
-      <AppInputText
-        v-model="inputPasswordModel"
-        cancelable
-        encrypted
-        placeholder="Password"
-        hint="Type your password"
-        label="Password"
-      >
-        <template #leading-icon>
-          <AppIcon icon="heroicons:lock-closed-20-solid" />
-        </template>
-      </AppInputText>
-    </AppCard>
-    <AppCard>
-      <AppInputText
-        v-model="inputTextModel"
-        cancelable
-        placeholder="disabled@disabled.com"
-        hint="I'm disabled"
-        label="Disabled"
-        disabled
-        encrypted
-      />
-    </AppCard>
+    <AppStack col>
+      <AppCard>
+        <AppInputText
+          v-model="inputTextModel"
+          cancelable
+          placeholder="hello@world.com"
+          hint="Type your username"
+          label="Username"
+          :validate="handleValidate"
+        >
+          <template #leading-icon>
+            <AppIcon icon="heroicons:user-circle-16-solid" />
+          </template>
+          <template #trailing-icon>
+            <AppIcon icon="heroicons:user-circle-16-solid" />
+          </template>
+        </AppInputText>
+      </AppCard>
+      <AppCard>
+        <AppInputText
+          v-model="inputPasswordModel"
+          cancelable
+          encrypted
+          placeholder="Password"
+          hint="Type your password"
+          label="Password"
+        >
+          <template #leading-icon>
+            <AppIcon icon="heroicons:lock-closed-20-solid" />
+          </template>
+        </AppInputText>
+      </AppCard>
+      <AppCard>
+        <AppInputText
+          v-model="inputTextModel"
+          cancelable
+          placeholder="disabled@disabled.com"
+          hint="I'm disabled"
+          label="Disabled"
+          disabled
+          encrypted
+        />
+      </AppCard>
+    </AppStack>
   </NuxtLayout>
 </template>
 

@@ -1,29 +1,18 @@
 <template>
-  <div class="sk-AppColor" :style="{ backgroundColor: props.color, color: textColor }">
-    rgb {{ rgb[0] }}, {{ rgb[1] }}, {{ rgb[2] }}
-    <br>
-    <br>
-    hsl {{ hsl[0].toFixed(3) }}, {{ hsl[1].toFixed(3) }}, {{ hsl[2].toFixed(3) }}
+  <div class="sk-AppColor" :style="{ backgroundColor: props.color }" :data-size="props.size">
+    {{ props.color }}
   </div>
 </template>
 
 <script lang="ts" setup>
-import { hex } from 'chroma-js';
-
 interface Props {
   color: string;
+  size?: 'large' | 'medium' | 'tiny';
 }
 
-const props = defineProps<Props>();
-
-const chroma = computed(() => hex(props.color));
-
-const lightness = computed(() => chroma.value.hsl()[2]);
-
-const textColor = computed(() => lightness.value >= 0.5 ? '#000000' : '#ffffff');
-
-const rgb = computed(() => chroma.value.rgba());
-const hsl = computed(() => chroma.value.hsl());
+const props = withDefaults(defineProps<Props>(), {
+  size: 'medium',
+});
 </script>
 
 <style lang="scss">
@@ -31,7 +20,20 @@ const hsl = computed(() => chroma.value.hsl());
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 200px;
+
+  &[data-size='large'] {
+    width: 140px;
+    height: 140px;
+  }
+
+  &[data-size='medium'] {
+    width: 100px;
+    height: 100px;
+  }
+
+  &[data-size='tiny'] {
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>

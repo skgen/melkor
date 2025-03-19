@@ -3,16 +3,18 @@
     <template #title>
       Input Color
     </template>
-    <AppCard>
-      <AppInputColor
-        v-model="inputColorModel"
-        cancelable
-        placeholder="#ffff00"
-        hint="Type your prefered color"
-        label="Color"
-        :validate="handleValidate"
-      />
-    </AppCard>
+    <AppStack col>
+      <AppCard>
+        <AppInputColor
+          v-model="inputColorModel"
+          cancelable
+          placeholder="#ffff00"
+          hint="Type your prefered color"
+          label="Color"
+          :validate="handleValidate"
+        />
+      </AppCard>
+    </AppStack>
   </NuxtLayout>
 </template>
 

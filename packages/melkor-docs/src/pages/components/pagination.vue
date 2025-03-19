@@ -3,16 +3,18 @@
     <template #title>
       Pagination
     </template>
-    <AppCard>
-      <AppPagination v-model="page" :range="range">
-        <template #prev-text>
-          Prev
-        </template>
-        <template #next-text>
-          Next
-        </template>
-      </AppPagination>
-    </AppCard>
+    <AppStack col>
+      <AppCard>
+        <AppPagination v-model="page" :range="range">
+          <template #prev-text>
+            Prev
+          </template>
+          <template #next-text>
+            Next
+          </template>
+        </AppPagination>
+      </AppCard>
+    </AppStack>
   </NuxtLayout>
 </template>
 

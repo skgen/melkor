@@ -3,21 +3,23 @@
     <template #title>
       Input Number
     </template>
-    <AppCard>
-      <AppInputNumber
-        v-model="inputNumberModel"
-        cancelable
-        placeholder="0123456789"
-        hint="Type your number"
-        label="Number"
-        :validate="handleValidate"
-        encrypted
-      >
-        <template #leading-icon>
-          <AppIcon icon="heroicons:credit-card-20-solid" />
-        </template>
-      </AppInputNumber>
-    </AppCard>
+    <AppStack col>
+      <AppCard>
+        <AppInputNumber
+          v-model="inputNumberModel"
+          cancelable
+          placeholder="0123456789"
+          hint="Type your number"
+          label="Number"
+          :validate="handleValidate"
+          encrypted
+        >
+          <template #leading-icon>
+            <AppIcon icon="heroicons:credit-card-20-solid" />
+          </template>
+        </AppInputNumber>
+      </AppCard>
+    </AppStack>
   </NuxtLayout>
 </template>
 

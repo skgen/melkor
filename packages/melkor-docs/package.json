@@ -15,6 +15,7 @@
     "@types/chroma-js": "^2.4.4",
     "@vueuse/core": "catalog:",
     "chroma-js": "^3.1.2",
+    "colorjs.io": "^0.5.2",
     "nuxt": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
