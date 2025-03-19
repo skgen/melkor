@@ -36,7 +36,7 @@ const globalConfig = useGlobalConfig();
   --mk-checkbox-background-color-hover: var(--mk-input-background-color-hover);
   --mk-checkbox-border-color: var(--mk-input-border-color);
   --mk-checkbox-border-color-hover: var(--mk-input-border-color-hover);
-  --mk-checkbox-border-color-active: var(--mk-primary);
+  --mk-checkbox-border-color-active: var(--mk-input-border-color-active);
   --mk-checkbox-border-radius-size: var(--mk-input-border-radius-size);
   --mk-checkbox-border-size: var(--mk-input-border-size);
   --mk-checkbox-border-size-hover: var(--mk-input-border-size-hover);

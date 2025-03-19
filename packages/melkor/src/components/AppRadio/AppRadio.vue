@@ -28,7 +28,7 @@ const theme = useTheme();
   --mk-radio-background-color-hover: var(--mk-input-background-color-hover);
   --mk-radio-border-color: var(--mk-input-border-color);
   --mk-radio-border-color-hover: var(--mk-input-border-color-hover);
-  --mk-radio-border-color-active: var(--mk-primary);
+  --mk-radio-border-color-active: var(--mk-input-border-color-active);
   --mk-radio-border-size: var(--mk-input-border-size);
   --mk-radio-border-size-hover: var(--mk-input-border-size-hover);
   --mk-radio-border-size-active: var(--mk-input-border-size-active);

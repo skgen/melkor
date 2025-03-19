@@ -229,6 +229,7 @@ function handlePage(pageNumber: number) {
     }
 
     @include melkor.active {
+      cursor: default !important;
       background-color: var(--mk-pagination-background-color);
 
       &::before {

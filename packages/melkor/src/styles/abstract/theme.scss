@@ -184,7 +184,7 @@
   // Shade
   --mk-shade-hue: 220;
 
-  // Shade 0
+  // Shade 0 / Background
   --mk-shade-0-hsl: var(--mk-shade-hue) 33% 4%;
   --mk-shade-0: hsl(var(--mk-shade-0-hsl) / 100%);
   --mk-shade-0-75: hsl(var(--mk-shade-0-hsl) / 75%);
@@ -192,7 +192,7 @@
   --mk-shade-0-25: hsl(var(--mk-shade-0-hsl) / 25%);
   --mk-shade-0-15: hsl(var(--mk-shade-0-hsl) / 15%);
 
-  // Shade 1
+  // Shade 1 / Background
   --mk-shade-1-hsl: var(--mk-shade-hue) 20% 7%;
   --mk-shade-1: hsl(var(--mk-shade-1-hsl) / 100%);
   --mk-shade-1-75: hsl(var(--mk-shade-1-hsl) / 75%);
@@ -200,7 +200,7 @@
   --mk-shade-1-25: hsl(var(--mk-shade-1-hsl) / 25%);
   --mk-shade-1-15: hsl(var(--mk-shade-1-hsl) / 15%);
 
-  // Shade 2
+  // Shade 2 / Background
   --mk-shade-2-hsl: var(--mk-shade-hue) 19% 9%;
   --mk-shade-2: hsl(var(--mk-shade-2-hsl) / 100%);
   --mk-shade-2-75: hsl(var(--mk-shade-2-hsl) / 75%);
@@ -208,7 +208,7 @@
   --mk-shade-2-25: hsl(var(--mk-shade-2-hsl) / 25%);
   --mk-shade-2-15: hsl(var(--mk-shade-2-hsl) / 15%);
 
-  // Shade 3
+  // Shade 3 / Background
   --mk-shade-3-hsl: var(--mk-shade-hue) 14% 11%;
   --mk-shade-3: hsl(var(--mk-shade-3-hsl) / 100%);
   --mk-shade-3-75: hsl(var(--mk-shade-3-hsl) / 75%);
@@ -216,7 +216,7 @@
   --mk-shade-3-25: hsl(var(--mk-shade-3-hsl) / 25%);
   --mk-shade-3-15: hsl(var(--mk-shade-3-hsl) / 15%);
 
-  // Shade 4
+  // Shade 4 / Border
   --mk-shade-4-hsl: var(--mk-shade-hue) 10% 17%;
   --mk-shade-4: hsl(var(--mk-shade-4-hsl) / 100%);
   --mk-shade-4-75: hsl(var(--mk-shade-4-hsl) / 75%);
@@ -224,7 +224,7 @@
   --mk-shade-4-25: hsl(var(--mk-shade-4-hsl) / 25%);
   --mk-shade-4-15: hsl(var(--mk-shade-4-hsl) / 15%);
 
-  // Shade 5
+  // Shade 5 / Border
   --mk-shade-5-hsl: var(--mk-shade-hue) 9% 23%;
   --mk-shade-5: hsl(var(--mk-shade-5-hsl) / 100%);
   --mk-shade-5-75: hsl(var(--mk-shade-5-hsl) / 75%);
@@ -240,7 +240,7 @@
   --mk-shade-6-25: hsl(var(--mk-shade-6-hsl) / 25%);
   --mk-shade-6-15: hsl(var(--mk-shade-6-hsl) / 15%);
 
-  // Shade 7
+  // Shade 7 / Border
   --mk-shade-7-hsl: var(--mk-shade-hue) 6% 30%;
   --mk-shade-7: hsl(var(--mk-shade-7-hsl) / 100%);
   --mk-shade-7-75: hsl(var(--mk-shade-7-hsl) / 75%);
@@ -248,7 +248,7 @@
   --mk-shade-7-25: hsl(var(--mk-shade-7-hsl) / 25%);
   --mk-shade-7-15: hsl(var(--mk-shade-7-hsl) / 15%);
 
-  // Shade 8
+  // Shade 8 / Soft text
   --mk-shade-8-hsl: var(--mk-shade-hue) 5% 56%;
   --mk-shade-8: hsl(var(--mk-shade-8-hsl) / 100%);
   --mk-shade-8-75: hsl(var(--mk-shade-8-hsl) / 75%);
@@ -256,7 +256,7 @@
   --mk-shade-8-25: hsl(var(--mk-shade-8-hsl) / 25%);
   --mk-shade-8-15: hsl(var(--mk-shade-8-hsl) / 15%);
 
-  // Shade 9
+  // Shade 9 / Alt text
   --mk-shade-9-hsl: var(--mk-shade-hue) 5% 70%;
   --mk-shade-9: hsl(var(--mk-shade-9-hsl) / 100%);
   --mk-shade-9-75: hsl(var(--mk-shade-9-hsl) / 75%);
@@ -264,7 +264,7 @@
   --mk-shade-9-25: hsl(var(--mk-shade-9-hsl) / 25%);
   --mk-shade-9-15: hsl(var(--mk-shade-9-hsl) / 15%);
 
-  // Shade 10
+  // Shade 10 / Main text
   --mk-shade-10-hsl: var(--mk-shade-hue) 14% 93%;
   --mk-shade-10: hsl(var(--mk-shade-10-hsl) / 100%);
   --mk-shade-10-75: hsl(var(--mk-shade-10-hsl) / 75%);
@@ -322,7 +322,7 @@
 
   --mk-border-color: var(--mk-shade-5);
   --mk-border-color-hover: var(--mk-shade-7);
-  --mk-border-color-active: var(--mk-shade-9);
+  --mk-border-color-active: var(--mk-primary);
 
   // Inputs
 
