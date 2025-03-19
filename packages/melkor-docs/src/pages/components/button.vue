@@ -45,3 +45,9 @@
     </AppStack>
   </NuxtLayout>
 </template>
+
+<script lang="ts" setup>
+useSeoMeta(({
+  title: 'Melkor - Button',
+}));
+</script>

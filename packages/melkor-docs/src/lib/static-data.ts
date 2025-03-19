@@ -1,3 +1,5 @@
+import { components } from '@/lib/components';
+
 export interface NavigationLevel {
   label: string;
   path?: string;
@@ -15,49 +17,22 @@ export const asideNavigation: NavigationLevel[] = [
     ],
   },
   {
-    label: 'Components',
+    label: 'Generics',
     children: [
-      {
-        label: 'Button',
-        path: '/components/button',
-      },
-      {
-        label: 'Card',
-        path: '/components/card',
-      },
-      {
-        label: 'Image',
-        path: '/components/image',
-      },
-      {
-        label: 'Pagination',
-        path: '/components/pagination',
-      },
-      {
-        label: 'Theme Toggle',
-        path: '/components/theme-toggle',
-      },
-      {
-        label: 'Checkables',
-        path: '/components/checkables',
-      },
+      components.button,
+      components.card,
+      components.image,
+      components.pagination,
+      components.themeToggle,
+      components.checkables,
     ],
   },
   {
     label: 'Inputs',
     children: [
-      {
-        label: 'Text Input',
-        path: '/components/input-text',
-      },
-      {
-        label: 'Number Input',
-        path: '/components/input-number',
-      },
-      {
-        label: 'Color Input',
-        path: '/components/input-color',
-      },
+      components.textInput,
+      components.numberInput,
+      components.colorInput,
     ],
   },
 ];

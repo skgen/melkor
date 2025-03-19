@@ -10,13 +10,16 @@
     "postinstall": "pnpm prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^3.3.0",
     "@skgn/melkor": "workspace:*",
     "@skgn/melkor-nuxt": "workspace:*",
     "@types/chroma-js": "^2.4.4",
     "@vueuse/core": "catalog:",
+    "add": "^2.0.6",
     "chroma-js": "^3.1.2",
     "colorjs.io": "^0.5.2",
     "nuxt": "catalog:",
+    "pnpm": "^10.6.5",
     "vue": "catalog:",
     "vue-router": "catalog:"
   },

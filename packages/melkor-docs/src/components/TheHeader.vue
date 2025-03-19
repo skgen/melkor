@@ -25,7 +25,7 @@
 const nav = [
   {
     label: 'Components',
-    path: '/components/input-text',
+    path: '/components',
   },
   {
     label: 'Composables',

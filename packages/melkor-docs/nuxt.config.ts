@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   },
   modules: [
     // '@skgn/melkor-nuxt',
+    '@nuxt/content',
     '../melkor-nuxt/src/module',
   ],
   css: [

@@ -42,6 +42,11 @@ const hasChildren = computed(() => props.navigationLevel.children && props.navig
     display: block;
     padding: var(--mk-size-2);
 
+    /* stylelint-disable-next-line selector-class-pattern */
+    &.router-link-active {
+      color: var(--mk-primary);
+    }
+
     &[data-has-children='true'] {
       font-weight: 600;
     }
