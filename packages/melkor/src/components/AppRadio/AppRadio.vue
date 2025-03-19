@@ -8,12 +8,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { CheckableProps } from '../../features';
 import { useTheme } from '../../composables';
 
-interface Props {
-  checked?: boolean;
-  disabled?: boolean;
-}
+type Props = CheckableProps;
 
 const props = defineProps<Props>();
 

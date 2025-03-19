@@ -14,13 +14,11 @@
 </template>
 
 <script lang="ts" setup>
+import type { CheckableProps } from '../../features';
 import { useGlobalConfig, useTheme } from '../../composables';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
-interface Props {
-  checked?: boolean;
-  disabled?: boolean;
-}
+type Props = CheckableProps;
 
 const props = defineProps<Props>();
 
