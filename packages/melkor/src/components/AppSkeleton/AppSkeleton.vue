@@ -65,17 +65,17 @@ const width = computed(() => {
 
 .mk-AppSkeleton {
   --mk-skeleton-rectangle-border-radius: calc(var(--mk-border-radius-size) * 2);
-  --mk-skeleton-background-color-hsl: var(--mk-shade-4-hsl);
+  --mk-skeleton-background-color: var(--mk-shade-4);
 
   position: relative;
   width: v-bind('width');
   height: v-bind('height');
-  background: hsl(var(--mk-skeleton-background-color-hsl));
+  background: var(--mk-skeleton-background-color);
   background: linear-gradient(
     to right,
-    hsl(var(--mk-skeleton-background-color-hsl) / 80%) 8%,
-    hsl(var(--mk-skeleton-background-color-hsl) / 90%) 18%,
-    hsl(var(--mk-skeleton-background-color-hsl) / 80%) 33%
+    oklch(from var(--mk-skeleton-background-color) l c h / 40%) 8%,
+    oklch(from var(--mk-skeleton-background-color) l c h / 80%) 18%,
+    oklch(from var(--mk-skeleton-background-color) l c h / 40%) 33%
   );
   background-size: 3200px 400px;
   border-radius: var(--mk-skeleton-rectangle-border-radius);

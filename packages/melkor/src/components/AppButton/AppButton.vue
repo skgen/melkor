@@ -40,10 +40,10 @@ const theme = useTheme();
   --mk-button-padding-x-size: var(--mk-size-3);
   --mk-button-padding-y-size: var(--mk-size-2);
   --mk-button-spacing-size: var(--mk-size-2);
-  --mk-button-border-radius-size: 6px;
-  --mk-button-text-size: 16px;
-  --mk-button-tight-text-size: 14px;
-  --mk-button-wide-text-size: 18px;
+  --mk-button-border-radius-size: var(--mk-border-radius-size);
+  --mk-button-text-size: 1rem;
+  --mk-button-tight-text-size: 0.875rem;
+  --mk-button-wide-text-size: 1.125rem;
   --mk-button-text-weight: 400;
 
   // Outline
@@ -56,24 +56,10 @@ const theme = useTheme();
   --mk-button-outline-border-size-hover: var(--mk-input-border-size-hover);
   --mk-button-outline-border-size-active: var(--mk-input-border-size-active);
   --mk-button-outline-text-color: var(--mk-text-color);
-
-  // Plain
-
-  // @include melkor.dark {
   --mk-button-plain-text-color: var(--mk-on-primary);
   --mk-button-plain-background-color: var(--mk-primary);
-  --mk-button-plain-background-color-hover: hsl(var(--mk-primary-hsl) / 90%);
-  --mk-button-plain-background-color-active: hsl(var(--mk-primary-hsl) / 80%);
-
-  // }
-
-  // @include melkor.light {
-  //   // Plain
-  //   --mk-button-plain-text-color: var(--mk-grey-100);
-  //   --mk-button-plain-background-color: var(--mk-grey-900);
-  //   --mk-button-plain-background-color-hover: var(--mk-grey-900) / 90%;
-  //   --mk-button-plain-background-color-active: var(--mk-grey-900) / 80%;
-  // }
+  --mk-button-plain-background-color-hover: oklch(from var(--mk-primary) calc(l + 0.05) c h);
+  --mk-button-plain-background-color-active: oklch(from var(--mk-primary) calc(l - 0.05) c h);
 
   position: relative;
   box-sizing: content-box;

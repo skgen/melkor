@@ -1,7 +1,6 @@
 export { default as AppButton } from './AppButton/AppButton.vue';
 export { default as AppCard } from './AppCard/AppCard.vue';
 export { default as AppCheckbox } from './AppCheckbox/AppCheckbox.vue';
-export { default as AppColorPalette } from './AppColorPalette/AppColorPalette.vue';
 export { default as AppIcon } from './AppIcon/AppIcon.vue';
 export { default as AppImage } from './AppImage/AppImage.vue';
 export { default as AppInputColor } from './AppInputColor/AppInputColor.vue';
