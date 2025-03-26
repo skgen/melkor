@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { components } from '@/lib/components';
+import { components } from '~/lib/components';
 
 const list = Object.keys(components).map(k => components[k as keyof typeof components]);
 useHead(({

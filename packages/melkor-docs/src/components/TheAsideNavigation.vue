@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { asideNavigation } from '@/lib/static-data';
+import { asideNavigation } from '~/lib/static-data';
 </script>
 
 <style lang="scss" scoped>

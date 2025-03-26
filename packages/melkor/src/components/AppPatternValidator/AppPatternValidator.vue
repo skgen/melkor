@@ -13,7 +13,6 @@ import { useTheme } from '../../composables';
 // eslint-disable-next-line ts/consistent-type-definitions
 type Props = {
   label: string;
-
   validator?: (value: TValue) => boolean | string;
 };
 

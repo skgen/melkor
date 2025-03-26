@@ -1,4 +1,4 @@
-import { components } from '@/lib/components';
+import { components } from '~/lib/components';
 
 export interface NavigationLevel {
   label: string;

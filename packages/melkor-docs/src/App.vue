@@ -23,8 +23,8 @@
 </template>
 
 <script lang="ts" setup>
-const route = useRoute();
-const opacity = computed(() => route.fullPath === '/' ? 1 : 0.2);
+// const route = useRoute();
+// const opacity = computed(() => route.fullPath === '/' ? 1 : 0.2);
 </script>
 
 <style lang="scss">

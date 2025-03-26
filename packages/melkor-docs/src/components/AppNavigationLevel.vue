@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { NavigationLevel } from '@/lib/static-data';
+import type { NavigationLevel } from '~/lib/static-data';
 
 interface Props {
   navigationLevel: NavigationLevel;
