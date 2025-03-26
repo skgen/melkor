@@ -62,5 +62,7 @@ Temporary Items
 # Custom
 .melkor
 packages/melkor/lib
+packages/melkor/dist
+packages/melkor-docs/content/generated
 packages/melkor-nuxt/src/schema.json
 packages/melkor-nuxt/src/ssr-theme.min.js
