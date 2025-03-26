@@ -56,7 +56,9 @@ import AppInputLabel from '../../components/AppInputLabel/AppInputLabel.vue';
 import { useGlobalConfig, useInput, useTheme } from '../../composables';
 import { formatError, type InputSelectEmits, type InputSelectProps } from '../../features';
 
-const props = defineProps<InputSelectProps<TValue>>();
+export type Props<TValue> = InputSelectProps<TValue>;
+
+const props = defineProps<Props<TValue>>();
 const emit = defineEmits<InputSelectEmits<TValue>>();
 const selectInput = ref<HTMLSelectElement | null>(null);
 

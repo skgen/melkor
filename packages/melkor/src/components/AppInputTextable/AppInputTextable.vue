@@ -73,7 +73,9 @@ import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
 import AppInputTextableCancel from '../AppInputTextableCancel/AppInputTextableCancel.vue';
 
-const props = defineProps<InputTextableProps<TValue>>();
+export type Props<TValue> = InputTextableProps<TValue>;
+
+const props = defineProps<Props<TValue>>();
 const emit = defineEmits<InputTextableEmits<TValue>>();
 
 const inputRef = ref<HTMLInputElement | null>(null);

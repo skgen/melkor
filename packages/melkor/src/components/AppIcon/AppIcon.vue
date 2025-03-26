@@ -10,7 +10,7 @@
 import { Icon } from '@iconify/vue';
 import { useTheme } from '../../composables';
 
-interface Props {
+export interface Props {
   icon: string;
   inline?: boolean;
   width?: string | number;

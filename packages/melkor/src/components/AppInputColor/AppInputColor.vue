@@ -64,15 +64,17 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useInput, useTheme } from '../../composables';
-import { formatError, type InputColorValue, type InputTextEmits, type InputTextProps, isValue } from '../../features';
+import { formatError, type InputColorEmits, type InputColorProps, type InputColorValue, isValue } from '../../features';
 import AppIcon from '../AppIcon/AppIcon.vue';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
 import AppInputTextableCancel from '../AppInputTextableCancel/AppInputTextableCancel.vue';
 
-const props = defineProps<InputTextProps>();
-const emit = defineEmits<InputTextEmits>();
+export type Props = InputColorProps;
+
+const props = defineProps<Props>();
+const emit = defineEmits<InputColorEmits>();
 
 const theme = useTheme();
 

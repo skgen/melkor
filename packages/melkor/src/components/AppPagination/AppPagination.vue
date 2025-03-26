@@ -76,7 +76,7 @@ import { useGlobalConfig, usePagination, useTheme } from '../../composables';
 import { isValue } from '../../features';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
-interface Props {
+export interface Props {
   modelValue: number;
   range: [number, number];
   gap?: number;

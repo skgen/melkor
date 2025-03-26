@@ -12,7 +12,7 @@
 import type { SurfaceElevation } from '../../features';
 import { useSurface, useTheme } from '../../composables';
 
-interface Props {
+export interface Props {
   elevation?: SurfaceElevation;
 }
 

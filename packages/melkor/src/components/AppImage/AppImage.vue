@@ -21,18 +21,12 @@ import { useTheme } from '../../composables';
 
 const props = defineProps<Props>();
 
-enum Fit {
-  cover = 'cover',
-  contain = 'contain',
-}
-
-interface Props {
+export interface Props {
   src: string;
   alt?: string;
   title?: string;
   ratio?: [number, number];
-  cover?: boolean;
-  contain?: boolean;
+  fit?: 'cover' | 'contain';
 }
 
 const theme = useTheme();
@@ -42,16 +36,6 @@ const ratio = computed(() => {
     return `${(props.ratio[1] / props.ratio[0]) * 100}%`;
   }
   return 'initial';
-});
-
-const fit = computed(() => {
-  if (props.cover) {
-    return Fit.cover;
-  }
-  if (props.contain) {
-    return Fit.contain;
-  }
-  return null;
 });
 </script>
 

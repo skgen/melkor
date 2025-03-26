@@ -11,7 +11,7 @@
 import type { CheckableProps } from '../../features';
 import { useTheme } from '../../composables';
 
-type Props = CheckableProps;
+export type Props = CheckableProps;
 
 const props = defineProps<Props>();
 

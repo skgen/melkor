@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { useTheme } from '../../composables';
 
-interface Props {
+export interface Props {
   type?: 'plain' | 'outline' ;
   size?: 'wide' | 'tight';
   isDisabled?: boolean;

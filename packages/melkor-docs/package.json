@@ -7,28 +7,38 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "prepare": "nuxt prepare",
-    "postinstall": "pnpm prepare"
+    "postinstall": "pnpm prepare",
+    "build:data": "tsx scripts/build-data.ts"
   },
   "dependencies": {
-    "@nuxt/content": "^3.3.0",
+    "@nuxt/content": "catalog:",
     "@skgn/melkor": "workspace:*",
     "@skgn/melkor-nuxt": "workspace:*",
     "@types/chroma-js": "^2.4.4",
     "@vueuse/core": "catalog:",
-    "add": "^2.0.6",
     "chroma-js": "^3.1.2",
     "colorjs.io": "^0.5.2",
+    "date-fns": "catalog:",
     "nuxt": "catalog:",
-    "pnpm": "^10.6.5",
     "vue": "catalog:",
-    "vue-router": "catalog:"
+    "vue-router": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
+    "@tsconfig/node20": "catalog:",
+    "@types/fs-extra": "catalog:",
+    "@types/node": "catalog:",
+    "colorette": "catalog:",
+    "fast-glob": "catalog:",
+    "fs-extra": "catalog:",
     "sass-embedded": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-recess-order": "catalog:",
     "stylelint-config-standard": "catalog:",
     "stylelint-config-standard-scss": "catalog:",
-    "stylelint-config-standard-vue": "catalog:"
+    "stylelint-config-standard-vue": "catalog:",
+    "ts-json-schema-generator": "catalog:",
+    "tsx": "catalog:",
+    "typescript-json-schema": "catalog:"
   }
 }

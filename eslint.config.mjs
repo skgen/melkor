@@ -18,6 +18,7 @@ export default antfu(
       'packages/melkor-nuxt/playground/.nuxt',
       'packages/melkor-nuxt/playground/.output',
       'packages/melkor-nuxt/playground/dist',
+      'packages/melkor-docs/content/generated',
       'packages/melkor-docs/playground/.nuxt',
       'packages/melkor-docs/playground/.output',
       'packages/melkor-docs/playground/dist',

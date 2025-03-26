@@ -16,7 +16,7 @@ import { computed, provide } from 'vue';
 import { useGlobalTheme, useThemes } from '../../composables';
 import { getThemeValue, themeContextKey } from '../../features';
 
-interface Props {
+export interface Props {
   withNode?: boolean;
   preference?: string;
   value?: string;

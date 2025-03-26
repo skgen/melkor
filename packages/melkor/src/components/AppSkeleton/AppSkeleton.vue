@@ -11,7 +11,7 @@ import { computed } from 'vue';
 import { useTheme } from '../../composables';
 import { Shape } from '../../features';
 
-interface Props {
+export interface Props {
   circle?: boolean;
   width?: string;
   height?: string;

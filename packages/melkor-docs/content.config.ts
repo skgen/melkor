@@ -1,10 +1,12 @@
 import { defineCollection, defineContentConfig } from '@nuxt/content';
+import { propertyASTSchema } from './src/lib/components';
 
 export default defineContentConfig({
   collections: {
-    components: defineCollection({
-      type: 'page',
-      source: 'components/*.md',
+    componentPropsSchema: defineCollection({
+      type: 'data',
+      schema: propertyASTSchema,
+      source: 'generated/components/**.json',
     }),
   },
 });

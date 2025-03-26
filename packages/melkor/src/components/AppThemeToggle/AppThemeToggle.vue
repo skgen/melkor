@@ -30,7 +30,7 @@ import { computed } from 'vue';
 import { useGlobalConfig, useGlobalTheme, useNextTheme, useTheme } from '../../composables';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
-interface Props {
+export interface Props {
   compact?: boolean;
 }
 

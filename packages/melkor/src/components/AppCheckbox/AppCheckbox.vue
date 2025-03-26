@@ -18,7 +18,7 @@ import type { CheckableProps } from '../../features';
 import { useGlobalConfig, useTheme } from '../../composables';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
-type Props = CheckableProps;
+export type Props = CheckableProps;
 
 const props = defineProps<Props>();
 

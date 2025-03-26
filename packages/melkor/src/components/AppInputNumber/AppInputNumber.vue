@@ -47,6 +47,8 @@
 import type { InputNumberEmits, InputNumberModel, InputNumberProps } from '../../features';
 import AppInputTextable from '../AppInputTextable/AppInputTextable.vue';
 
-const props = defineProps<InputNumberProps>();
+export type Props = InputNumberProps;
+
+const props = defineProps<Props>();
 const emit = defineEmits<InputNumberEmits>();
 </script>
