@@ -13,10 +13,11 @@
     <template v-if="$slots['trailing-icon']" #trailing-icon>
       <slot name="trailing-icon" />
     </template>
-    <template #default="{ placeholder, disabled, onChange, model, type, onFocus, onBlur, inputRef, inputName }">
+    <template #default="{ placeholder, disabled, onChange, model, type, onFocus, onBlur, inputRef, inputName, fill }">
       <input
         :ref="inputRef"
         :name="inputName"
+        :fill="fill"
         :type="type ?? 'number'"
         :value="type ? model.value?.toString() : model.value"
         :placeholder="placeholder"
