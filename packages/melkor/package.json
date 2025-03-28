@@ -9,11 +9,14 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/melkor.esm.js"
     },
-    "./styles": {
+    "./styles/css": {
       "import": "./dist/melkor.css"
     },
-    "./styles/*": {
-      "import": "./lib/styles/*"
+    "./styles/mixins": {
+      "import": "./lib/styles/mixins.scss"
+    },
+    "./styles": {
+      "import": "./lib/styles/index.scss"
     },
     "./plugin": {
       "types": "./lib/plugin.d.ts",

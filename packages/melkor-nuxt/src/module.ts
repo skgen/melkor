@@ -59,10 +59,10 @@ export default defineNuxtModule<MelkorModuleOptions>({
     };
 
     // Inject css
-    // ctx.nuxt.options.css = ['@skgn/melkor/styles/index.scss', ...nuxt.options.css];
-    ctx.nuxt.options.css = ['@skgn/melkor/styles/index.css', ...nuxt.options.css];
+    // ctx.nuxt.options.css = ['@skgn/melkor/styles', ...nuxt.options.css];
 
-    ctx.nuxt.options.alias['@skgen/melkor/styles/mixins'] = '@skgn/melkor/styles/mixins.scss';
+    ctx.nuxt.options.alias['@skgn/melkor-nuxt/styles/mixins'] = '@skgn/melkor/styles/mixins';
+    ctx.nuxt.options.alias['@skgn/melkor-nuxt/styles'] = '@skgn/melkor/styles';
 
     // Inject config
     ctx.nuxt.options.runtimeConfig.public.melkor = ctx.melkorOptions;

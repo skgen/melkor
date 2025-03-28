@@ -51,7 +51,7 @@ const elementRef = ref<null | HTMLDivElement>(null);
 </script>
 
 <style lang="scss">
-@use '@skgen/melkor/styles/mixins' as melkor;
+@use '@skgn/melkor-nuxt/styles/mixins' as melkor;
 
 .mk-AppColorPalette {
   @include melkor.dark {

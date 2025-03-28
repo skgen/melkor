@@ -66,3 +66,15 @@
 @mixin mk-fill() {
   width: 100%;
 }
+
+@mixin generate-lch-color($name, $light, $chroma, $hue) {
+  --mk-#{$name}-light: #{$light};
+  --mk-#{$name}-chroma: #{$chroma};
+  --mk-#{$name}-hue: #{$hue};
+  --mk-#{$name}-lch: var(--mk-#{$name}-light) var(--mk-#{$name}-chroma) var(--mk-#{$name}-hue);
+  --mk-#{$name}: oklch(var(--mk-#{$name}-lch));
+  --mk-#{$name}-75: oklch(var(--mk-#{$name}-lch) / 75%);
+  --mk-#{$name}-50: oklch(var(--mk-#{$name}-lch) / 50%);
+  --mk-#{$name}-25: oklch(var(--mk-#{$name}-lch) / 25%);
+  --mk-#{$name}-15: oklch(var(--mk-#{$name}-lch) / 15%);
+}

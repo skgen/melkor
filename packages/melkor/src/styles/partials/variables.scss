@@ -1,0 +1,68 @@
+$mk-dark-shade-hue: 260deg !default;
+$mk-dark-shade-chroma: 0.015 !default;
+$mk-dark-shade-lights: (
+  // 0. Background
+  0: 14%,
+  // 1. Background
+  1: 17.571%,
+  // 2. Background
+  2: 19.754%,
+  // 3. Background
+  3: 22.055%,
+  // 4. Border
+  4: 28.41%,
+  // 5. Border
+  5: 34.353%,
+  // 6.
+  6: 37.376%,
+  // 7. Border
+  7: 41.212%,
+  // 8. Soft text
+  8: 64.247%,
+  // 9. alt text
+  9: 76.061%,
+  // 10. Main text
+  10: 94.372%
+) !default;
+
+// Primary
+$mk-dark-primary: (
+  'light': 100%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
+// On Primary
+$mk-dark-on-primary: (
+  'light': var(--mk-shade-1-light),
+  'chroma': var(--mk-shade-1-chroma),
+  'hue': var(--mk-shade-1-hue),
+) !default;
+
+// On Success
+$mk-dark-success: (
+  'light': 72.3%,
+  'chroma': 0.219,
+  'hue': 149.579deg,
+) !default;
+
+// Error
+$mk-dark-error: (
+  'light': 63.7%,
+  'chroma': 0.237,
+  'hue': 25.331deg,
+) !default;
+
+// Danger
+$mk-dark-danger: (
+  'light': 76.9%,
+  'chroma': 0.1888,
+  'hue': 70.08deg,
+) !default;
+
+// Info
+$mk-dark-info: (
+  'light': 62.3%,
+  'chroma': 0.214,
+  'hue': 259.815deg,
+) !default;
