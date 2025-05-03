@@ -27,6 +27,7 @@
           :placeholder="props.placeholder"
           :cancelable="props.cancelable"
           :encrypted="props.encrypted"
+          :focused="focused"
           :model="model"
           :type="type"
           :on-change="handleChange"
@@ -214,7 +215,7 @@ defineExpose({
     padding: 0;
     color: currentcolor;
 
-    @include melkor.not-disabled {
+    @include melkor.on-not-disabled {
       @include melkor.expand-click-area;
     }
 
@@ -233,8 +234,8 @@ defineExpose({
     @include melkor.mk-fill;
   }
 
-  @include melkor.not-disabled {
-    &:hover {
+  @include melkor.on-not-disabled {
+    @include melkor.on-hover {
       #{$this} {
         &-input {
           background-color: var(--mk-input-textable-background-color-hover);
@@ -244,7 +245,7 @@ defineExpose({
       }
     }
 
-    @include melkor.focused {
+    @include melkor.on-focused {
       #{$this} {
         &-input {
           box-shadow: inset 0 0 0.01px var(--mk-input-textable-border-size-active)
@@ -254,7 +255,7 @@ defineExpose({
     }
   }
 
-  @include melkor.disabled {
+  @include melkor.on-disabled {
     #{$this} {
       &-input {
         cursor: not-allowed;

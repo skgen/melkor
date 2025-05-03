@@ -183,8 +183,8 @@ defineExpose({
     }
   }
 
-  @include melkor.not-disabled {
-    &:hover {
+  @include melkor.on-not-disabled {
+    @include melkor.on-hover {
       #{$this} {
         &-input {
           background-color: var(--mk-input-select-background-color-hover);
@@ -194,7 +194,7 @@ defineExpose({
       }
     }
 
-    @include melkor.focused {
+    @include melkor.on-focused {
       #{$this} {
         &-input {
           box-shadow: inset 0 0 0.01px var(--mk-input-select-border-size-active)
@@ -204,7 +204,7 @@ defineExpose({
     }
   }
 
-  @include melkor.disabled {
+  @include melkor.on-disabled {
     #{$this} {
       &-input {
         opacity: var(--mk-input-opacity-disabled);

@@ -75,7 +75,7 @@ const theme = useTheme();
     }
   }
 
-  @include melkor.not-disabled {
+  @include melkor.on-not-disabled {
     &:hover {
       background-color: var(--mk-toggle-background-color-hover);
       box-shadow: inset 0 0 0.01px var(--mk-toggle-border-size-hover) var(--mk-toggle-border-color-hover);
@@ -87,7 +87,7 @@ const theme = useTheme();
     }
   }
 
-  @include melkor.disabled {
+  @include melkor.on-disabled {
     cursor: not-allowed;
     opacity: var(--mk-opacity-disabled);
   }

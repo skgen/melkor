@@ -74,8 +74,8 @@ const theme = useTheme();
     }
   }
 
-  @include melkor.not-disabled {
-    &:hover {
+  @include melkor.on-not-disabled {
+    @include melkor.on-hover {
       background-color: var(--mk-radio-background-color-hover);
 
       &::before {
@@ -84,7 +84,7 @@ const theme = useTheme();
     }
   }
 
-  @include melkor.disabled {
+  @include melkor.on-disabled {
     cursor: not-allowed;
     opacity: var(--mk-opacity-disabled);
   }

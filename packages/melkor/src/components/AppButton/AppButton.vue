@@ -90,12 +90,12 @@ const theme = useTheme();
     color: var(--mk-button-plain-text-color);
     background-color: var(--mk-button-plain-background-color);
 
-    @include melkor.not-disabled {
-      &:hover {
+    @include melkor.on-not-disabled {
+      @include melkor.on-hover {
         background-color: var(--mk-button-plain-background-color-hover);
       }
 
-      @include melkor.active {
+      @include melkor.on-active {
         background-color: var(--mk-button-plain-background-color-active);
       }
     }
@@ -106,14 +106,14 @@ const theme = useTheme();
     background-color: var(--mk-button-outline-background-color);
     box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size) var(--mk-button-outline-border-color);
 
-    @include melkor.not-disabled {
-      &:hover {
+    @include melkor.on-not-disabled {
+      @include melkor.on-hover {
         background-color: var(--mk-button-outline-background-color-hover);
         box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-hover)
           var(--mk-button-outline-border-color-hover);
       }
 
-      @include melkor.active {
+      @include melkor.on-active {
         box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-active)
           var(--mk-button-outline-border-color-active);
       }
@@ -132,7 +132,7 @@ const theme = useTheme();
     border-radius: calc(var(--mk-button-border-radius-size) * 0.75);
   }
 
-  @include melkor.disabled {
+  @include melkor.on-disabled {
     cursor: not-allowed;
     opacity: var(--mk-opacity-disabled);
   }

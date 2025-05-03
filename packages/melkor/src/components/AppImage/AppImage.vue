@@ -19,8 +19,6 @@
 import { computed } from 'vue';
 import { useTheme } from '../../composables';
 
-const props = defineProps<Props>();
-
 export interface Props {
   src: string;
   alt?: string;
@@ -28,6 +26,8 @@ export interface Props {
   ratio?: [number, number];
   fit?: 'cover' | 'contain';
 }
+
+const props = defineProps<Props>();
 
 const theme = useTheme();
 

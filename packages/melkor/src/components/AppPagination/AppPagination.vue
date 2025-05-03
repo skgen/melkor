@@ -197,8 +197,8 @@ function handlePage(pageNumber: number) {
       padding: 0 var(--mk-size-2);
     }
 
-    @include melkor.not-disabled {
-      &:hover {
+    @include melkor.on-not-disabled {
+      @include melkor.on-hover {
         background-color: var(--mk-pagination-background-color-hover);
 
         &::before {
@@ -208,7 +208,7 @@ function handlePage(pageNumber: number) {
       }
     }
 
-    @include melkor.disabled {
+    @include melkor.on-disabled {
       cursor: not-allowed;
       opacity: var(--mk-opacity-disabled);
     }
@@ -219,7 +219,7 @@ function handlePage(pageNumber: number) {
       box-shadow: inset 0 0 0.01px var(--mk-pagination-border-size) var(--mk-pagination-border-color);
     }
 
-    &:hover {
+    @include melkor.on-hover {
       background-color: var(--mk-pagination-background-color-hover);
 
       &::before {
@@ -228,7 +228,7 @@ function handlePage(pageNumber: number) {
       }
     }
 
-    @include melkor.active {
+    @include melkor.on-active {
       cursor: default !important;
       background-color: var(--mk-pagination-background-color);
 
@@ -239,7 +239,7 @@ function handlePage(pageNumber: number) {
       }
     }
 
-    @include melkor.disabled {
+    @include melkor.on-disabled {
       cursor: not-allowed;
     }
   }

@@ -15,7 +15,7 @@ const theme = useTheme();
 
 <style lang="scss">
 .mk-AppInputError {
-  --mk-input-error-text-color: var(--mk-error-color);
+  --mk-input-error-text-color: var(--mk-error);
   --mk-input-error-text-size: 0.75rem;
 
   font-size: var(--mk-input-error-text-size);

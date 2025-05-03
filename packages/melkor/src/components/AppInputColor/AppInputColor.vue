@@ -224,8 +224,8 @@ function handleCancel() {
     @include melkor.mk-fill;
   }
 
-  @include melkor.not-disabled {
-    &:hover {
+  @include melkor.on-not-disabled {
+    @include melkor.on-hover {
       #{$this} {
         &-input {
           background-color: var(--mk-input-color-background-color-hover);
@@ -234,7 +234,7 @@ function handleCancel() {
       }
     }
 
-    @include melkor.focused {
+    @include melkor.on-focused {
       #{$this} {
         &-input {
           box-shadow: inset 0 0 0.01px var(--mk-input-color-border-size-active)
@@ -244,7 +244,7 @@ function handleCancel() {
     }
   }
 
-  @include melkor.disabled {
+  @include melkor.on-disabled {
     #{$this} {
       &-input {
         opacity: var(--mk-input-opacity-disabled);
