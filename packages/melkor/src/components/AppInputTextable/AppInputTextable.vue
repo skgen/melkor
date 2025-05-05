@@ -1,73 +1,67 @@
 <template>
-  <div
+  <label
     v-theme="theme"
     class="mk-AppInputTextable"
     :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
-    :data-is-disabled="props.disabled || undefined"
     :data-type="type"
+    v-bind="bindInteractionStateProps(props)"
   >
-    <label>
-      <AppInputLabel v-if="props.label">
-        {{ props.label }}
-      </AppInputLabel>
-      <div class="mk-AppInputTextable-input">
-        <span v-if="$slots['leading-icon']" class="mk-AppInputTextable-icon">
-          <slot name="leading-icon" />
-        </span>
+    <AppInputLabel v-if="$slots.label">
+      <slot name="label" />
+    </AppInputLabel>
+    <div class="mk-AppInputTextable-input">
+      <span v-if="$slots['leading-icon']" class="mk-AppInputTextable-icon">
+        <slot name="leading-icon" />
+      </span>
 
-        <slot
-          input-ref="inputRef"
-          :validate="props.validate"
-          :input-name="props.name"
-          :hint="props.hint"
-          :label="props.label"
-          :disabled="props.disabled"
-          :fill="props.fill"
-          :placeholder="props.placeholder"
-          :cancelable="props.cancelable"
-          :encrypted="props.encrypted"
-          :focused="focused"
-          :model="model"
-          :type="type"
-          :on-change="handleChange"
-          :on-focus="onFocus"
-          :on-blur="onBlur"
-        />
+      <slot
+        input-ref="inputRef"
+        :validate="props.validate"
+        :input-name="props.name"
+        :disabled="props.disabled"
+        :placeholder="props.placeholder"
+        :value="props.value"
+        :type="type"
+        :on-change="handleChange"
+        :on-focus="onFocus"
+        :on-blur="onBlur"
+      />
 
-        <AppInputTextableCancel
-          v-if="isCancelable"
-          :disabled="props.disabled"
-          @click="handleCancel"
-        >
-          <slot name="cancel" />
-        </AppInputTextableCancel>
-        <button
-          v-if="props.encrypted"
-          class="mk-AppInputTextable-toggleVisibility"
-          @click="handleToggleVisibility"
-        >
-          <AppIcon :icon="toggleVisibilityIcon" />
-        </button>
-        <span v-if="$slots['trailing-icon']" class="mk-AppInputTextable-icon">
-          <slot name="trailing-icon" />
-        </span>
-      </div>
-    </label>
-    <AppInputHint v-if="props.hint">
-      {{ props.hint }}
+      <AppInputTextableCancel
+        v-if="isCancelable"
+        :disabled="props.disabled"
+        @click.prevent="handleCancel"
+      >
+        <slot name="cancel-icon" />
+      </AppInputTextableCancel>
+      <button
+        v-if="props.encrypted"
+        class="mk-AppInputTextable-toggleVisibility"
+        @click.prevent="handleToggleVisibility"
+      >
+        <AppIcon :icon="toggleVisibilityIcon" />
+      </button>
+      <span v-if="$slots['trailing-icon']" class="mk-AppInputTextable-icon">
+        <slot name="trailing-icon" />
+      </span>
+    </div>
+    <AppInputHint v-if="$slots.hint">
+      <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="model.error">
-      {{ formatError(model.error) }}
+    <AppInputError v-if="props.error">
+      {{ formatError(props.error) }}
     </AppInputError>
-  </div>
+  </label>
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputTextableEmits, InputTextableProps } from '../../features';
+import type { InputTextableEmits, InputTextableProps, InputTextableSlots } from '../../features';
+
 import { computed, ref } from 'vue';
+
 import { useGlobalConfig, useInput, useTheme } from '../../composables';
-import { formatError, isValue } from '../../features';
+import { bindInteractionStateProps, formatError, isValue } from '../../features';
 import AppIcon from '../AppIcon/AppIcon.vue';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
@@ -77,7 +71,10 @@ import AppInputTextableCancel from '../AppInputTextableCancel/AppInputTextableCa
 export type Props<TValue> = InputTextableProps<TValue>;
 
 const props = defineProps<Props<TValue>>();
+
 const emit = defineEmits<InputTextableEmits<TValue>>();
+
+defineSlots<InputTextableSlots<TValue>>();
 
 const inputRef = ref<HTMLInputElement | null>(null);
 
@@ -88,18 +85,17 @@ const {
   onChange,
   onFocus,
   onBlur,
-  model,
   focused,
 } = useInput<TValue>({
-  props: computed(() => props),
+  props,
   emit,
 });
 
-function handleChange(evt: Event, newValue: TValue) {
+function handleChange(event: Event, newValue: TValue) {
   onChange(newValue);
 }
 
-const isCancelable = computed(() => props.cancelable && isValue(model.value.value) && !props.disabled);
+const isCancelable = computed(() => props.cancelable && isValue(props.value) && !props.disabled);
 const isEncrypted = ref(true);
 
 const type = computed(() => {
@@ -174,7 +170,10 @@ defineExpose({
 
   $this: &;
 
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--mk-size-2);
+  vertical-align: top;
 
   input {
     width: 100%;
@@ -266,21 +265,6 @@ defineExpose({
         }
       }
     }
-  }
-
-  .mk-AppInputLabel {
-    display: block;
-    margin-bottom: var(--mk-size-2);
-  }
-
-  .mk-AppInputHint {
-    display: block;
-    margin-top: var(--mk-size-2);
-  }
-
-  .mk-AppInputError {
-    display: block;
-    margin-top: var(--mk-size-2);
   }
 
   .mk-AppInputTextableCancel {

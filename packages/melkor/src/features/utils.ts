@@ -1,5 +1,7 @@
-export type DeepRequired<T> = {
-  [P in keyof T]-?: T[P] extends object ? DeepRequired<T[P]> : T[P];
+export type Flatten<T> = T extends readonly (infer U)[] ? U : never;
+
+export type DeepRequire<T> = {
+  [P in keyof T]-?: T[P] extends object ? DeepRequire<T[P]> : T[P];
 };
 
 export type DeepPartial<T> = {
@@ -14,12 +16,14 @@ export type DeepObjectPartial<T> = {
       : T[P];
 };
 
-export function isDef<T>(v: T): v is T extends undefined ? never : T {
+export type IsDefined<T> = T extends undefined ? never : T;
+
+export function isDefined<T>(v: T): v is IsDefined<T> {
   return typeof v !== 'undefined';
 }
 
 export function isValue<T>(v: T): v is NonNullable<T> {
-  return !(!isDef(v) || v === null);
+  return !(!isDefined(v) || v === null);
 }
 
 export function isArray<T>(v: unknown): v is T[] {
@@ -79,4 +83,13 @@ export function formatError(error: string | string[]): string {
     return error;
   }
   return error.join('\n');
+}
+
+export function forwardDataAttributes<T extends Record<string, U>, U>(input: T): Partial<T> {
+  return Object.keys(input)
+    .filter(key => key.includes('data'))
+    .reduce((acc, key) => {
+      acc[key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)] = input[key];
+      return acc;
+    }, {} as Record<string, U>) as Partial<T>;
 }

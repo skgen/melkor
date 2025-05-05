@@ -1,65 +1,67 @@
 <template>
-  <div
+  <label
     v-theme="theme"
     class="mk-AppInputSelect"
     :data-theme="theme"
     :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
-    :data-is-disabled="props.disabled || undefined"
+    v-bind="bindInteractionStateProps(props)"
   >
-    <label>
-      <AppInputLabel v-if="props.label">
-        {{ props.label }}
-      </AppInputLabel>
-      <div class="mk-AppInputSelect-input">
-        <select
-          :name="props.name"
-          :disabled="props.disabled"
-          @input="handleChange"
-          @focus="onFocus"
-          @blur="onBlur"
+    <AppInputLabel v-if="$slots.label">
+      <slot name="label" />
+    </AppInputLabel>
+    <div class="mk-AppInputSelect-input">
+      <select
+        :name="props.name"
+        :disabled="props.disabled"
+        @input="handleChange"
+        @focus="onFocus"
+        @blur="onBlur"
+      >
+        <option
+          v-for="(option, index) in props.options"
+          :key="index"
+          :value="index"
+          :disabled="option.disabled"
+          :selected="isSelectedOption(option.value)"
         >
-          <option
-            v-for="(option, index) in props.options"
-            :key="index"
-            :value="index"
-            :disabled="option.disabled"
-            :selected="isSelectedOption(option.value)"
+          <slot
+            name="option"
+            v-bind="{ option, index }"
           >
-            <slot
-              name="option"
-              v-bind="{ option, index }"
-            >
-              {{ option.value }}
-            </slot>
-          </option>
-        </select>
-        <AppIcon :icon="globalConfig.icons.AppInputSelect.arrow" />
-      </div>
-    </label>
-    <AppInputHint v-if="props.hint">
-      {{ props.hint }}
+            {{ option.value }}
+          </slot>
+        </option>
+      </select>
+      <AppIcon :icon="globalConfig.icons.AppInputSelect.arrow" />
+    </div>
+    <AppInputHint v-if="$slots.hint">
+      <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="model.error">
-      {{ formatError(model.error) }}
+    <AppInputError v-if="props.error">
+      {{ formatError(props.error) }}
     </AppInputError>
-  </div>
+  </label>
 </template>
 
 <script lang="ts" setup generic="TValue">
 import { isEqual } from 'lodash-es';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
+
 import AppIcon from '../../components/AppIcon/AppIcon.vue';
 import AppInputError from '../../components/AppInputError/AppInputError.vue';
 import AppInputHint from '../../components/AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../../components/AppInputLabel/AppInputLabel.vue';
 import { useGlobalConfig, useInput, useTheme } from '../../composables';
-import { formatError, type InputSelectEmits, type InputSelectProps } from '../../features';
+import { bindInteractionStateProps, formatError, type InputSelectEmits, type InputSelectProps, type InputSelectSlots } from '../../features';
 
 export type Props<TValue> = InputSelectProps<TValue>;
 
 const props = defineProps<Props<TValue>>();
 const emit = defineEmits<InputSelectEmits<TValue>>();
+
+defineSlots<InputSelectSlots<TValue>>();
+
 const selectInput = ref<HTMLSelectElement | null>(null);
 
 const theme = useTheme();
@@ -69,15 +71,14 @@ const {
   onChange,
   onFocus,
   onBlur,
-  model,
   focused,
 } = useInput<TValue>({
-  props: computed(() => props),
+  props,
   emit,
 });
 
 function isSelectedOption(option: TValue) {
-  return isEqual(option, model.value.value);
+  return isEqual(option, props.value);
 }
 
 function handleChange(evt: Event) {
@@ -135,7 +136,10 @@ defineExpose({
 
   $this: &;
 
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--mk-size-2);
+  vertical-align: top;
 
   select {
     width: 100%;
@@ -220,21 +224,6 @@ defineExpose({
 
   &[data-fill='true'] {
     @include melkor.mk-fill;
-  }
-
-  .mk-AppInputLabel {
-    display: block;
-    margin-bottom: var(--mk-size-2);
-  }
-
-  .mk-AppInputHint {
-    display: block;
-    margin-top: var(--mk-size-2);
-  }
-
-  .mk-AppInputError {
-    display: block;
-    margin-top: var(--mk-size-2);
   }
 }
 </style>

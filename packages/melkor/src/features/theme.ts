@@ -1,4 +1,5 @@
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
+
 import { isClient, isValue, STORAGE_THEME_KEY } from '.';
 
 export type Themes = string[];

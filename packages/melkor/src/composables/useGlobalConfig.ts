@@ -1,5 +1,7 @@
 import type { GlobalConfig } from '../features';
+
 import { inject } from 'vue';
+
 import { globalConfigContextKey, isValue } from '../features';
 
 export function useGlobalConfig(): GlobalConfig {

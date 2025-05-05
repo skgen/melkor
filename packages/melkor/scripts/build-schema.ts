@@ -1,7 +1,9 @@
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { cyan } from 'colorette';
+
 import { log } from './logger';
 
 export function buildSchema(bundleKeys: string[]) {

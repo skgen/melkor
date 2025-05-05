@@ -7,7 +7,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/melkor.esm.js"
+      "import": "./dist/melkor.js"
     },
     "./styles/css": {
       "import": "./dist/melkor.css"
@@ -64,6 +64,7 @@
     "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
     "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "review:eslint": "eslint . --fix",
+    "review:eslint:debug": "eslint src/features/io/input.ts --debug",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
     "postinstall": "pnpm build:esm && pnpm build:lib"
   },

@@ -1,4 +1,4 @@
-import { toRefs, useNetwork } from '@vueuse/core';
+import { toRefs } from '@vueuse/core';
 import { computed, type ComputedRef, type Ref } from 'vue';
 
 interface UsePaginationOptions {

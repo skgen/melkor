@@ -17,6 +17,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+
 import { useTheme } from '../../composables';
 
 export interface Props {

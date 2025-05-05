@@ -1,5 +1,7 @@
 import type { ThemeInstance } from '../features';
+
 import { inject, type Ref } from 'vue';
+
 import { globalThemeContextKey, isValue } from '../features';
 
 export function useGlobalTheme(): Ref<ThemeInstance> {

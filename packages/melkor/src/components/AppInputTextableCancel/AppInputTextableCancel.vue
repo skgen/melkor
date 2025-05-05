@@ -13,6 +13,10 @@
 import { useGlobalConfig, useTheme } from '../../composables';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
+defineSlots<{
+  default: () => any;
+}>();
+
 const theme = useTheme();
 const globalConfig = useGlobalConfig();
 </script>
@@ -26,10 +30,14 @@ const globalConfig = useGlobalConfig();
 
   padding: 0;
 
-  &:not([disabled]) {
+  @include melkor.on-not-disabled {
     cursor: pointer;
 
     @include melkor.expand-click-area;
+  }
+
+  @include melkor.on-disabled {
+    cursor: not-allowed;
   }
 
   .mk-AppIcon {

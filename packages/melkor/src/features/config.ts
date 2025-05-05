@@ -1,4 +1,5 @@
 import type { InjectionKey } from 'vue';
+
 import merge from 'deepmerge';
 
 import { type DeepPartial, Theme, type ThemeInstance } from '.';

@@ -1,6 +1,6 @@
 <template>
   <AppInputSelect
-    v-model="model"
+    :value="value"
     class="mk-AppThemeSelector"
     :options="options"
   >
@@ -12,10 +12,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputSelectOption } from '../../features';
+import type { InputSelectProps } from '../..';
+
 import { computed, onBeforeUnmount, onMounted, ref, watch, type WatchHandle } from 'vue';
+
+import { useGlobalTheme, useThemes } from '../..';
 import AppInputSelect from '../../components/AppInputSelect/AppInputSelect.vue';
-import { createInputModel, useGlobalTheme, useThemes } from '../../composables';
 
 type InputSelectValue = string | null;
 
@@ -25,24 +27,23 @@ const themes = useThemes();
 
 const watchers: WatchHandle[] = [];
 
-const options = computed<InputSelectOption<InputSelectValue>[]>(() => themes.map(theme => ({
+const options = computed<InputSelectProps<InputSelectValue>['options']>(() => themes.map(theme => ({
+  label: theme,
   value: theme,
 })));
 
-const model = ref(createInputModel<InputSelectValue>({
-  value: null,
-}));
+const value = ref<InputSelectValue>(null);
 
 onMounted(() => {
-  watchers.push(watch(() => model.value.value, (newValue) => {
+  watchers.push(watch(value, (newValue) => {
     if (newValue !== globalTheme.value.preference && newValue) {
       globalTheme.value.preference = newValue;
     }
   }));
 
   watchers.push(watch(() => globalTheme.value.preference, (newPreference) => {
-    if (newPreference !== model.value.value) {
-      model.value.value = newPreference;
+    if (newPreference !== value.value) {
+      value.value = newPreference;
     }
   }, {
     immediate: true,

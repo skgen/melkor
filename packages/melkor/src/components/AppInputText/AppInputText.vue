@@ -2,10 +2,21 @@
   <AppInputTextable
     class="mk-AppInputText"
     v-bind="props"
-    @update:model-value="(model: InputTextModel) => emit('update:model-value', model)"
+    @update:value="(value) => emit('update:value', value)"
+    @update:valid="(valid) => emit('update:valid', valid)"
+    @update:touched="(touched) => emit('update:touched', touched)"
+    @update:error="(error) => emit('update:error', error)"
+    @focus="() => emit('focus')"
+    @blur="() => emit('blur')"
   >
-    <template v-if="$slots.cancel" #cancel>
-      <slot name="cancel" />
+    <template v-if="$slots.label" #label>
+      <slot name="label" />
+    </template>
+    <template v-if="$slots.hint" #hint>
+      <slot name="hint" />
+    </template>
+    <template v-if="$slots['cancel-icon']" #cancel-icon>
+      <slot name="cancel-icon" />
     </template>
     <template v-if="$slots['leading-icon']" #leading-icon>
       <slot name="leading-icon" />
@@ -13,13 +24,13 @@
     <template v-if="$slots['trailing-icon']" #trailing-icon>
       <slot name="trailing-icon" />
     </template>
-    <template #default="{ placeholder, disabled, onChange, model, type, onFocus, onBlur, inputRef, inputName, fill }">
+    <template #default="{ placeholder, disabled, onChange, value, type, onFocus, onBlur, inputRef, inputName }">
       <input
         :ref="inputRef"
         :name="inputName"
         :fill="fill"
         :type="type ?? 'text'"
-        :value="model.value"
+        :value="value"
         :placeholder="placeholder"
         :disabled="disabled"
         @input="(event: Event) => {
@@ -43,11 +54,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputTextEmits, InputTextModel, InputTextProps } from '../../features';
+import type { InputTextEmits, InputTextProps, InputTextSlots } from '../../features';
+
 import AppInputTextable from '../AppInputTextable/AppInputTextable.vue';
 
 export type Props = InputTextProps;
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  valid: true,
+  touched: false,
+  error: null,
+});
 const emit = defineEmits<InputTextEmits>();
+
+defineSlots<InputTextSlots>();
 </script>

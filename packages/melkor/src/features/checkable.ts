@@ -1,4 +1,5 @@
-export interface CheckableProps {
+import type { DisabledProps, HoveredProps } from '.';
+
+export type CheckableProps = {
   checked?: boolean;
-  disabled?: boolean;
-}
+} & DisabledProps & HoveredProps;

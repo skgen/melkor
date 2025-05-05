@@ -1,4 +1,5 @@
 import type { Plugin, UserConfig } from 'vite';
+
 import { buildSchema } from './build-schema';
 
 interface Config {

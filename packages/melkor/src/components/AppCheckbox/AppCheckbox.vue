@@ -2,8 +2,8 @@
   <div
     v-theme="theme"
     class="mk-AppCheckbox"
+    v-bind="bindInteractionStateProps(props)"
     :data-is-checked="props.checked || undefined"
-    :data-is-disabled="props.disabled || undefined"
   >
     <span class="mk-AppCheckbox-icon">
       <slot>
@@ -14,13 +14,17 @@
 </template>
 
 <script lang="ts" setup>
-import type { CheckableProps } from '../../features';
 import { useGlobalConfig, useTheme } from '../../composables';
+import { bindInteractionStateProps, type CheckableProps } from '../../features';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 export type Props = CheckableProps;
 
 const props = defineProps<Props>();
+
+defineSlots<{
+  default: () => any;
+}>();
 
 const theme = useTheme();
 const globalConfig = useGlobalConfig();
@@ -119,14 +123,14 @@ const globalConfig = useGlobalConfig();
     }
   }
 
-  @include melkor.not-disabled {
-    &:hover {
+  @include melkor.on-not-disabled {
+    @include melkor.on-hover {
       background-color: var(--mk-checkbox-background-color-hover);
       box-shadow: inset 0 0 0.01px var(--mk-checkbox-border-size-hover) var(--mk-checkbox-border-color-hover);
     }
   }
 
-  @include melkor.disabled {
+  @include melkor.on-disabled {
     cursor: not-allowed;
     opacity: var(--mk-opacity-disabled);
   }

@@ -8,6 +8,7 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
+
 import { useTheme } from '../../composables';
 
 export interface Props {

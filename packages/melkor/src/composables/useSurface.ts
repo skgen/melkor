@@ -1,6 +1,12 @@
-import type { SurfaceContextInjection, SurfaceElevation, SurfaceElevationDirection } from '../features';
 import { computed, type ComputedRef, inject, provide } from 'vue';
-import { surfaceContextKey, surfaceElevationOrder } from '../features';
+
+import {
+  type SurfaceContextInjection,
+  surfaceContextKey,
+  type SurfaceElevation,
+  type SurfaceElevationDirection,
+  surfaceElevationOrder,
+} from '../features';
 
 export interface UseSurfaceOptions {
   override?: {

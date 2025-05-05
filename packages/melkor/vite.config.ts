@@ -1,11 +1,13 @@
 import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
+
 import vue from '@vitejs/plugin-vue';
 import { cyan, gray } from 'colorette';
 import { globSync } from 'glob';
 import { createLogger, defineConfig, loadEnv } from 'vite';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+
 import { log } from './scripts/logger';
 import { vitePluginBuildLib } from './scripts/vite-plugin-build-lib';
 // import svgLoader from 'vite-svg-loader';
@@ -51,7 +53,7 @@ export default ({ mode }: { mode: Modes }) => {
         name: 'MelkorUI',
         fileName: () => {
           if (isEsm) {
-            return 'melkor.esm.js';
+            return 'melkor.js';
           }
           return '[name].js';
         },

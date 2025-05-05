@@ -4,6 +4,7 @@
 
 <script lang="ts" setup>
 import { onMounted, provide, toRef, watch } from 'vue';
+
 import { useGlobalConfig, useThemes } from '../../composables';
 import { getPersistedThemePreference, getThemeValue, globalThemeContextKey, isClient, persistThemePreference, setElementTheme, Theme, watchSystemThemeChange } from '../../features';
 

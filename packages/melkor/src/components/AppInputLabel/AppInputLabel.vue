@@ -16,6 +16,9 @@ const theme = useTheme();
 
 <style lang="scss">
 .mk-AppInputLabel {
+  display: inline-flex;
+  gap: var(--mk-size-1);
+  align-items: center;
   font-weight: 500;
 }
 </style>

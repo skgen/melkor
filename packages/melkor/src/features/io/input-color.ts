@@ -1,19 +1,16 @@
-import type { InputModel, InputOptions, InputProps } from '..';
+import type { InputEmits, InputProps, InputSlots } from '..';
 
 export type InputColorValue = string | null;
 
-export type InputColorProps = InputProps<InputColorValue> & InputColorOptions;
-
-export interface InputColorEmits {
-  (event: 'update:model-value', value: InputColorProps['modelValue']): void;
-  (event: 'focus'): void;
-  (event: 'blur'): void;
-};
-
-export type InputColorModel = InputModel<InputColorValue>;
-
-export type InputColorOptions = InputOptions<InputColorValue> & {
+export type InputColorProps = InputProps<InputColorValue> & {
   fill?: boolean;
   placeholder?: string;
   cancelable?: boolean;
+};
+
+export type InputColorEmits = InputEmits<InputColorValue>;
+
+export type InputColorSlots = InputSlots & {
+  'trailing-icon': () => any;
+  'cancel-icon': () => any;
 };

@@ -10,6 +10,10 @@
 <script lang="ts" setup>
 import { useTheme } from '../../composables';
 
+defineSlots<{
+  default: () => any;
+}>();
+
 const theme = useTheme();
 </script>
 

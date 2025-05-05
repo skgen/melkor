@@ -1,21 +1,19 @@
-import type { InputModel, InputOptions, InputProps } from './input';
+import type { Flatten } from '../utils';
+import type { InputEmits, InputProps, InputSlots } from './input';
 
-export type InputSelectProps<TValue> = InputProps<TValue> & InputSelectOptions<TValue>;
-
-export interface InputSelectEmits<TValue> {
-  (event: 'update:model-value', value: InputSelectProps<TValue>['modelValue']): void;
-  (event: 'focus'): void;
-  (event: 'blur'): void;
+export type InputSelectProps<TValue> = InputProps<TValue> & {
+  fill?: boolean;
+  options: {
+    value: TValue;
+    disabled?: boolean;
+  }[];
 };
 
-export type InputSelectModel<TValue> = InputModel<TValue>;
+export type InputSelectEmits<TValue> = InputEmits<TValue>;
 
-export interface InputSelectOption<TValue> {
-  value: TValue;
-  disabled?: boolean;
-}
-
-export type InputSelectOptions<TValue> = InputOptions<TValue> & {
-  fill?: boolean;
-  options: InputSelectOption<TValue>[];
+export type InputSelectSlots<TValue> = InputSlots & {
+  option: (props: {
+    index: number;
+    option: Flatten<InputSelectProps<TValue>['options']>;
+  }) => any;
 };

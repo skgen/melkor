@@ -72,6 +72,7 @@
 
 <script lang="ts" setup>
 import { computed, reactive } from 'vue';
+
 import { useGlobalConfig, usePagination, useTheme } from '../../composables';
 import { isValue } from '../../features';
 import AppIcon from '../AppIcon/AppIcon.vue';

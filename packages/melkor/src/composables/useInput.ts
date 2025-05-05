@@ -1,11 +1,12 @@
-import type { InputModel, InputProps, ValidateInputValue } from '../features';
+import type { InputEmits, InputProps, ValidateInputValue } from '../features';
+
 import { isEqual } from 'lodash-es';
 import {
-  computed,
-  type ComputedRef,
+  type EmitFn,
   type Ref,
   ref,
 } from 'vue';
+
 import { isValue } from '../features';
 
 // cant use in defineProps because of compiler
@@ -15,9 +16,16 @@ import { isValue } from '../features';
 //   validate?: ValidateInput<TState>;
 // };
 
-type PartialInputModel<T> = Partial<InputModel<T>> & { value: InputModel<T>['value'] };
+// type PartialInputModel<T> = Partial<InputModel<T>> & { value: InputModel<T>['value'] };
 
-export function createInputModel<T>(params: PartialInputModel<T>): InputModel<T> {
+export type InputModel<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'error'>;
+
+export function createInputModel<TValue>(params: {
+  value: TValue;
+  valid?: boolean;
+  touched?: boolean;
+  error?: string | string[] | null;
+}): InputModel<TValue> {
   return {
     value: params.value,
     valid: params.valid ?? true,
@@ -26,13 +34,18 @@ export function createInputModel<T>(params: PartialInputModel<T>): InputModel<T>
   };
 }
 
-interface UseInputOptions<TValue, TEmits> {
-  props: ComputedRef<InputProps<TValue>>;
-  emit: TEmits;
+interface UseInputOptions<TValue> {
+  props: InputProps<TValue>;
+  emit: EmitFn<InputEmits<TValue>>;
 }
 
-export function validateInputModel<TValue>(model: InputModel<TValue>, validate?: ValidateInputValue<TValue>): InputModel<TValue> {
-  const newModel = { ...model };
+export function validateInputModel<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue>): InputModel<TValue> {
+  const newModel: InputModel<TValue> = {
+    value: newValue,
+    touched: true,
+    error: null,
+    valid: true,
+  };
 
   if (isValue(validate)) {
     newModel.error = validate(newModel.value);
@@ -41,49 +54,41 @@ export function validateInputModel<TValue>(model: InputModel<TValue>, validate?:
   return newModel;
 }
 
-interface InputEmits<Value> {
-  (event: 'update:model-value', value: InputModel<Value>): void;
-  (event: 'focus'): void;
-  (event: 'blur'): void;
-}
-
-export function useInput<TValue>(options: UseInputOptions<TValue, InputEmits<TValue>>): {
+export function useInput<TValue>(options: UseInputOptions<TValue>): {
   onChange: (newValue: TValue) => void;
   onFocus: () => void;
   onBlur: () => void;
-  model: ComputedRef<InputModel<TValue>>;
   focused: Ref<boolean>;
 } {
-  const { emit, props } = options;
-
-  const model = computed(() => props.value.modelValue);
-  const validate = computed(() => props.value.validate);
-
   const focused = ref(false);
 
   function onFocus(): void {
     focused.value = true;
-    emit('focus');
+    options.emit('focus');
   }
 
   function onBlur(): void {
     focused.value = false;
-    emit('blur');
+    options.emit('blur');
   }
 
   function onChange(newValue: TValue): void {
-    const partialModel: Pick<InputModel<TValue>, 'touched' | 'error' | 'valid'> = {
-      touched: true,
-      error: null,
-      valid: true,
-    };
-    const newModel: InputModel<TValue> = validateInputModel({
-      value: newValue,
-      ...partialModel,
-    }, validate.value);
+    const newModel: InputModel<TValue> = validateInputModel(newValue, options.props.validate);
 
-    if (!isEqual(model, newModel)) {
-      emit('update:model-value', newModel);
+    if (!isEqual(options.props.value, newModel.value)) {
+      options.emit('update:value', newModel.value);
+    }
+
+    if (options.props.valid !== newModel.valid) {
+      options.emit('update:valid', newModel.valid);
+    }
+
+    if (options.props.touched !== newModel.touched) {
+      options.emit('update:touched', newModel.touched);
+    }
+
+    if (!isEqual(options.props.error, newModel.error)) {
+      options.emit('update:error', newModel.error);
     }
   }
 
@@ -91,7 +96,6 @@ export function useInput<TValue>(options: UseInputOptions<TValue, InputEmits<TVa
     onChange,
     onFocus,
     onBlur,
-    model,
     focused,
   };
 }

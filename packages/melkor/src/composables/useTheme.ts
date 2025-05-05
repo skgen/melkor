@@ -1,5 +1,7 @@
 import type { ThemeInstance } from '../features';
+
 import { type ComputedRef, inject } from 'vue';
+
 import { isValue, themeContextKey } from '../features';
 
 export function useTheme(): ComputedRef<ThemeInstance> {

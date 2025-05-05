@@ -18,7 +18,9 @@
 
 <script lang="ts" setup>
 import type { ThemeInstance } from '../../features';
+
 import { onBeforeUnmount, onMounted, ref, watch, type WatchHandle } from 'vue';
+
 import { useGlobalTheme, useTheme, useThemes } from '../../composables';
 import AppButton from '../AppButton/AppButton.vue';
 

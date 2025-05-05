@@ -1,5 +1,6 @@
 import { useCycleList } from '@vueuse/core';
 import { onBeforeUnmount, onMounted, type Ref, type ShallowRef, watch, type WatchHandle } from 'vue';
+
 import { useGlobalConfig, useGlobalTheme } from '.';
 
 export function useNextTheme(): {

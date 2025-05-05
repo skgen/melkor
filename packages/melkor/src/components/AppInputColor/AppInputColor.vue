@@ -1,71 +1,69 @@
 <template>
-  <div
+  <label
     v-theme="theme"
     class="mk-AppInputColor"
     :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
-    :data-is-disabled="props.disabled || undefined"
+    v-bind="bindInteractionStateProps(props)"
   >
-    <label>
-      <AppInputLabel v-if="props.label">
-        {{ props.label }}
-      </AppInputLabel>
-      <div class="mk-AppInputColor-input">
-        <div
-          class="mk-AppInputColor-color"
-          :style="`background-color: ${model.value};`"
-        />
+    <AppInputLabel v-if="$slots.label">
+      <slot name="label" />
+    </AppInputLabel>
+    <div class="mk-AppInputColor-input">
+      <div
+        class="mk-AppInputColor-color"
+        :style="`background-color: ${props.value};`"
+      />
+      <input
+        :name="props.name"
+        type="color"
+        :value="props.value"
+        :disabled="props.disabled"
+        @input="handleChange"
+        @focus="onFocus"
+        @blur="onBlur"
+      >
+      <span class="mk-AppInputColor-value">
+        <span
+          class="mk-AppInputColor-hashtag"
+          :data-placeholder="!isValue(absoluteValue)"
+        >#</span>
         <input
-          :name="props.name"
-          type="color"
-          :value="model.value"
+          type="text"
+          :value="absoluteValue ?? undefined"
+          :placeholder="placeholder ?? undefined"
           :disabled="props.disabled"
-          @input="handleChange"
+          @input="handleTextChange"
           @focus="onFocus"
           @blur="onBlur"
         >
-        <span class="mk-AppInputColor-value">
-          <span
-            class="mk-AppInputColor-hashtag"
-            :data-placeholder="!isValue(absoluteValue)"
-          >#</span>
-          <input
-            type="text"
-            :value="absoluteValue ?? undefined"
-            :placeholder="placeholder ?? undefined"
-            :disabled="props.disabled"
-            @input="handleTextChange"
-            @focus="onFocus"
-            @blur="onBlur"
-          >
-        </span>
-        <AppInputTextableCancel
-          v-if="isCancelable"
-          :disabled="props.disabled"
-          @click="handleCancel"
-        >
-          <slot name="cancel" />
-        </AppInputTextableCancel>
+      </span>
+      <AppInputTextableCancel
+        v-if="isCancelable"
+        :disabled="props.disabled"
+        @click.prevent="handleCancel"
+      >
+        <slot name="cancel-icon" />
+      </AppInputTextableCancel>
 
-        <span v-if="$slots.icon" class="mk-AppInputColor-icon">
-          <slot name="icon" />
-        </span>
-      </div>
-    </label>
-    <AppInputHint v-if="props.hint">
-      {{ props.hint }}
+      <span v-if="$slots.icon" class="mk-AppInputColor-icon">
+        <slot name="trailing-icon" />
+      </span>
+    </div>
+    <AppInputHint v-if="$slots.hint">
+      <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="model.error">
-      {{ formatError(model.error) }}
+    <AppInputError v-if="props.error">
+      {{ formatError(props.error) }}
     </AppInputError>
-  </div>
+  </label>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+
 import { useInput, useTheme } from '../../composables';
-import { formatError, type InputColorEmits, type InputColorProps, type InputColorValue, isValue } from '../../features';
-import AppIcon from '../AppIcon/AppIcon.vue';
+import { bindInteractionStateProps, formatError, type InputColorEmits, type InputColorProps, type InputColorSlots, type InputColorValue, isValue } from '../../features';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
@@ -76,21 +74,22 @@ export type Props = InputColorProps;
 const props = defineProps<Props>();
 const emit = defineEmits<InputColorEmits>();
 
+defineSlots<InputColorSlots>();
+
 const theme = useTheme();
 
 const {
   onChange,
   onFocus,
   onBlur,
-  model,
   focused,
 } = useInput<InputColorValue>({
-  props: computed(() => props),
+  props,
   emit,
 });
 
-const placeholder = computed(() => (props.placeholder ? props.placeholder.replaceAll(/[^0-9a-f]+/gi, '') : null));
-const absoluteValue = computed(() => (model.value.value ? model.value.value.replaceAll('#', '') : null));
+const placeholder = computed(() => (props.placeholder ? props.placeholder.replace(/[^0-9a-f]+/gi, '') : null));
+const absoluteValue = computed(() => (props.value ? props.value.replace('#', '') : null));
 
 function handleChange(evt: Event) {
   if (!evt.target) {
@@ -107,7 +106,7 @@ function handleTextChange(evt: Event) {
   }
   const { value } = evt.target as HTMLInputElement;
 
-  const filteredValue = value.replaceAll(/[^0-9a-f]+/gi, '').slice(0, 8);
+  const filteredValue = value.replace(/[^0-9a-f]+/gi, '').slice(0, 8);
 
   if (filteredValue === '') {
     onChange(null);
@@ -117,11 +116,10 @@ function handleTextChange(evt: Event) {
   }
 }
 
-const isCancelable = computed(() => props.cancelable && isValue(model.value.value));
+const isCancelable = computed(() => props.cancelable && isValue(props.value));
 
 function handleCancel() {
   onChange(null);
-  onBlur();
 }
 </script>
 
@@ -149,7 +147,10 @@ function handleCancel() {
 
   $this: &;
 
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--mk-size-2);
+  vertical-align: top;
 
   input[type='color'] {
     @include melkor.a11y-hidden;
@@ -247,24 +248,14 @@ function handleCancel() {
   @include melkor.on-disabled {
     #{$this} {
       &-input {
+        cursor: not-allowed;
         opacity: var(--mk-input-opacity-disabled);
+
+        input {
+          cursor: not-allowed;
+        }
       }
     }
-  }
-
-  .mk-AppInputLabel {
-    display: block;
-    margin-bottom: var(--mk-size-2);
-  }
-
-  .mk-AppInputHint {
-    display: block;
-    margin-top: var(--mk-size-2);
-  }
-
-  .mk-AppInputError {
-    display: block;
-    margin-top: var(--mk-size-2);
   }
 
   .mk-AppInputTextableCancel {

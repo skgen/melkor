@@ -22,41 +22,48 @@
   }
 }
 
-@mixin not-disabled() {
+@mixin on-not-disabled() {
   &:not([disabled], [data-is-disabled='true']) {
     @content;
   }
 }
 
-@mixin disabled() {
+@mixin on-disabled() {
   &[disabled],
   &[data-is-disabled='true'] {
     @content;
   }
 }
 
-@mixin not-focused() {
+@mixin on-not-focused() {
   &:not(:focus, [data-is-focused='true']) {
     @content;
   }
 }
 
-@mixin focused() {
+@mixin on-focused() {
   &:focus,
   &[data-is-focused='true'] {
     @content;
   }
 }
 
-@mixin active() {
+@mixin on-active() {
   &:active,
   &[data-is-active='true'] {
     @content;
   }
 }
 
-@mixin not-active() {
+@mixin on-not-active() {
   &:not(&:active, &[data-is-active='true']) {
+    @content;
+  }
+}
+
+@mixin on-hover() {
+  &:hover,
+  &[data-is-hovered='true'] {
     @content;
   }
 }

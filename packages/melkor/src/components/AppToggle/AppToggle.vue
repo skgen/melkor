@@ -2,14 +2,14 @@
   <div
     v-theme="theme"
     class="mk-AppToggle"
+    v-bind="bindInteractionStateProps(props)"
     :data-is-checked="props.checked || undefined"
-    :data-is-disabled="props.disabled || undefined"
   />
 </template>
 
 <script lang="ts" setup>
-import type { CheckableProps } from '../../features';
 import { useTheme } from '../../composables';
+import { bindInteractionStateProps, type CheckableProps } from '../../features';
 
 export type Props = CheckableProps;
 
@@ -76,7 +76,7 @@ const theme = useTheme();
   }
 
   @include melkor.on-not-disabled {
-    &:hover {
+    @include melkor.on-hover {
       background-color: var(--mk-toggle-background-color-hover);
       box-shadow: inset 0 0 0.01px var(--mk-toggle-border-size-hover) var(--mk-toggle-border-color-hover);
 

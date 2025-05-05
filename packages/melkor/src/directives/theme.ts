@@ -1,4 +1,5 @@
 import type { DirectiveBinding } from 'vue';
+
 import { isString, setElementTheme } from '../features';
 
 function directive(el: HTMLElement, binding: DirectiveBinding): void {
