@@ -1,21 +1,13 @@
-import type { MelkorNuxtContext } from '../types';
-import { addImports, addImportsSources } from '@nuxt/kit';
+import { addImportsSources } from '@nuxt/kit';
+import * as melkorComposables from '@skgn/melkor/composables';
 
-export function loadComposables<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext): void {
-  type ComposablesExports = (keyof typeof import('@skgn/melkor/composables'))[];
-
-  for (const composable of Object.keys(ctx.schema.composables)) {
-    addImports({
-      name: composable,
-      from: `@skgn/melkor/composables`,
-    });
-  }
+export function loadComposables(): void {
+  const composables = Object.keys(melkorComposables).filter((k) => {
+    return !['default'].includes(k);
+  });
 
   addImportsSources({
     from: '@skgn/melkor/composables',
-    imports: [
-      'createInputModel',
-      'validateInputModel',
-    ] as ComposablesExports,
+    imports: composables,
   });
 }

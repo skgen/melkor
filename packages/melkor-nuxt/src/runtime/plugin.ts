@@ -1,6 +1,5 @@
 // Modules
 import { createMelkorUI } from '@skgn/melkor/plugin';
-
 import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app';
 
 // App

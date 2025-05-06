@@ -1,5 +1,7 @@
 import type { MelkorNuxtContext } from '../types';
+
 import { readFileSync } from 'node:fs';
+
 import { createGlobalConfig, STORAGE_THEME_KEY, Theme } from '@skgn/melkor/features';
 
 export function loadThemeScript<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext): void {

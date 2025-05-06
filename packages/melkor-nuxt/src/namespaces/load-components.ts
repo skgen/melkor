@@ -1,4 +1,5 @@
 import type { MelkorNuxtContext } from '../types';
+
 import { addComponent } from '@nuxt/kit';
 
 export function loadComponents<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext): void {

@@ -1,6 +1,6 @@
 import type { Resolver } from '@nuxt/kit';
 import type { Nuxt } from '@nuxt/schema';
-import type { DeepObjectPartial } from '@skgn/melkor';
+import type { DeepObjectPartial } from '@skgn/kit';
 import type { MelkorOptions } from '@skgn/melkor/features';
 
 export interface ModuleOptions {
