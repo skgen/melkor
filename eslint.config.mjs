@@ -3,7 +3,41 @@ import antfu from '@antfu/eslint-config';
 export default antfu(
   {
     type: 'lib',
-    typescript: true,
+    typescript: {
+      overrides: {
+        'perfectionist/sort-imports': [
+          'error',
+          {
+            groups: [
+              'type',
+              [
+                'parent-type',
+                'sibling-type',
+                'index-type',
+                'internal-type',
+              ],
+              'builtin',
+              'external',
+              'internal',
+              ['parent', 'sibling', 'index'],
+              // 'side-effect',
+              'object',
+              'unknown',
+            ],
+            newlinesBetween: 'always',
+            internalPattern: ['^@/.+'],
+            order: 'asc',
+            type: 'natural',
+          },
+        ],
+        'ts/explicit-function-return-type': [
+          'off',
+        ],
+        'ts/consistent-type-definitions': [
+          'off',
+        ],
+      },
+    },
     vue: true,
     stylistic: {
       semi: true,
