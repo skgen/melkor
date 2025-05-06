@@ -1,4 +1,4 @@
-import type { DisabledProps, HoveredProps } from '.';
+import type { DisabledProps, HoveredProps } from './interactions';
 
 export type CheckableProps = {
   checked?: boolean;

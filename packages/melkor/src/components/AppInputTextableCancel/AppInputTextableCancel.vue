@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useGlobalConfig, useTheme } from '../../composables';
+import { useGlobalConfig } from '../../composables/useGlobalConfig';
+import { useTheme } from '../../composables/useTheme';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 defineSlots<{

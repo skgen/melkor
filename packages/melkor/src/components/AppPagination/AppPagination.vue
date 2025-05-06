@@ -71,10 +71,12 @@
 </template>
 
 <script lang="ts" setup>
+import { isValue } from '@skgn/kit';
 import { computed, reactive } from 'vue';
 
-import { useGlobalConfig, usePagination, useTheme } from '../../composables';
-import { isValue } from '../../features';
+import { useGlobalConfig } from '../../composables/useGlobalConfig';
+import { usePagination } from '../../composables/usePagination';
+import { useTheme } from '../../composables/useTheme';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 export interface Props {

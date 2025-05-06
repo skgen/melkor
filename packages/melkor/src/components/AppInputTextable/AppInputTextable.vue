@@ -56,12 +56,16 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputTextableEmits, InputTextableProps, InputTextableSlots } from '../../features';
+import type { InputTextableEmits, InputTextableProps, InputTextableSlots } from '../../features/io/input-textable';
 
+import { isValue } from '@skgn/kit';
 import { computed, ref } from 'vue';
 
-import { useGlobalConfig, useInput, useTheme } from '../../composables';
-import { bindInteractionStateProps, formatError, isValue } from '../../features';
+import { useGlobalConfig } from '../../composables/useGlobalConfig';
+import { useInput } from '../../composables/useInput';
+import { useTheme } from '../../composables/useTheme';
+import { bindInteractionStateProps } from '../../features/interactions';
+import { formatError } from '../../features/utils';
 import AppIcon from '../AppIcon/AppIcon.vue';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';

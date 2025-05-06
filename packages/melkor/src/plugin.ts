@@ -1,12 +1,8 @@
+import type { DeepObjectPartial } from '@skgn/kit';
 import type { App, Plugin } from 'vue';
 
 import { registerDirectives } from './directives';
-import {
-  createGlobalConfig,
-  type DeepObjectPartial,
-  globalConfigContextKey,
-  type MelkorOptions,
-} from './features';
+import { createGlobalConfig, globalConfigContextKey, type MelkorOptions } from './features/config';
 
 // import registerComponents from '@src/registerComponents';
 // import registerDirectives from '@src/registerDirectives';

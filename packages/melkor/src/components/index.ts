@@ -11,6 +11,8 @@ export { default as AppInputHint } from './AppInputHint/AppInputHint.vue';
 export { default as AppInputLabel } from './AppInputLabel/AppInputLabel.vue';
 export { default as AppInputNumber } from './AppInputNumber/AppInputNumber.vue';
 export { default as AppInputRadio } from './AppInputRadio/AppInputRadio.vue';
+export { default as AppInputSelect } from './AppInputSelect/AppInputSelect.vue';
+export { default as AppInputSelectNative } from './AppInputSelectNative/AppInputSelectNative.vue';
 export { default as AppInputText } from './AppInputText/AppInputText.vue';
 export { default as AppInputTextableCancel } from './AppInputTextableCancel/AppInputTextableCancel.vue';
 export { default as AppInputToggle } from './AppInputToggle/AppInputToggle.vue';

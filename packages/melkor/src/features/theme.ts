@@ -1,6 +1,8 @@
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
 
-import { isClient, isValue, STORAGE_THEME_KEY } from '.';
+import { isClient, isValue } from '@skgn/kit';
+
+import { STORAGE_THEME_KEY } from './config';
 
 export type Themes = string[];
 
@@ -10,18 +12,6 @@ export interface ThemeInstance {
   preference: string;
   value: string;
 }
-
-// function onThemeChange(newThemeValue: string): void {
-//   console.log('theme changed');
-//   persistTheme(newThemeValue);
-//   setDocumentTheme(newThemeValue);
-// }
-
-// function onSeedChange(): void {
-//   console.log('seed changed');
-//   persistTheme(globalConfig.theme.value);
-//   setDocumentTheme(globalConfig.theme.value);
-// }
 
 export enum Theme {
   light = 'light',

@@ -1,13 +1,17 @@
+import type { DeepPartial } from '@skgn/kit';
 import type { InjectionKey } from 'vue';
 
 import merge from 'deepmerge';
 
-import { type DeepPartial, Theme, type ThemeInstance } from '.';
+import { Theme, type ThemeInstance } from './theme';
 
 export interface MelkorOptions {
   debug: boolean;
   themes: ('system' | 'light' | 'dark' | string)[];
   icons: {
+    AppInputSelectNative: {
+      arrow: string;
+    };
     AppInputSelect: {
       arrow: string;
     };
@@ -50,6 +54,9 @@ const defaultMelkorOptions: MelkorOptions = {
   themes: [Theme.system, Theme.light, Theme.dark],
   icons: {
     AppInputSelect: {
+      arrow: 'material-symbols:keyboard-arrow-down',
+    },
+    AppInputSelectNative: {
       arrow: 'material-symbols:keyboard-arrow-down',
     },
     AppInputTextable: {

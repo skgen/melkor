@@ -4,12 +4,6 @@
     <AppThemeContext :value="theme.value" :preference="theme.preference">
       <div v-theme="theme" class="mk-TheApp" v-bind="$attrs">
         <slot />
-        <!-- <teleport to="body">
-          <TheFloatingLayer />
-        </teleport>
-        <teleport to="body">
-          <TheFullscreenLayer />
-        </teleport> -->
       </div>
     </AppThemeContext>
   </TheGlobalTheme>
@@ -20,10 +14,10 @@ import AppThemeContext from '../../components/AppThemeContext/AppThemeContext.vu
 import TheGlobalTheme from '../../components/TheGlobalTheme/TheGlobalTheme.vue';
 </script>
 
-<style lang="scss">
+<!-- <style lang="scss">
 body[data-is-fullscreen-layer-active='true'] {
   .mk-TheApp {
     filter: blur(1px);
   }
 }
-</style>
+</style> -->

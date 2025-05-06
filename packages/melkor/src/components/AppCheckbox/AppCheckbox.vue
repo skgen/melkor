@@ -14,8 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useGlobalConfig, useTheme } from '../../composables';
-import { bindInteractionStateProps, type CheckableProps } from '../../features';
+import type { CheckableProps } from '../../features/checkable';
+
+import { useGlobalConfig } from '../../composables/useGlobalConfig';
+import { useTheme } from '../../composables/useTheme';
+import { bindInteractionStateProps } from '../../features/interactions';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 export type Props = CheckableProps;

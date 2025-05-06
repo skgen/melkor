@@ -6,7 +6,7 @@ import {
   type SurfaceElevation,
   type SurfaceElevationDirection,
   surfaceElevationOrder,
-} from '../features';
+} from '../features/surface';
 
 export interface UseSurfaceOptions {
   override?: {

@@ -1,7 +1,8 @@
 import type { EmitsToProps, Ref, ShortEmitsToObject } from 'vue';
 
-import type { DisabledProps, HoveredProps } from '..';
+import type { DisabledProps, HoveredProps } from '../interactions';
 
+import { isValue } from '@skgn/kit';
 import { ref } from 'vue';
 
 export type InputProps<TValue> = {
@@ -14,10 +15,6 @@ export type InputProps<TValue> = {
 } &
 DisabledProps &
 HoveredProps;
-
-// function add(a: number, b: number) {
-//   return a + b;
-// }
 
 export type InputEmits<TValue> = {
   'update:value': [value: InputProps<TValue>['value']];
@@ -33,27 +30,12 @@ export type InputSlots = {
   hint: () => any;
 };
 
-// export type InputEmits<TValue> = {
-//   (event: 'update:value', value: InputProps<TValue>['value']): void;
-//   (event: 'update:valid', valid: InputProps<TValue>['valid']): void;
-//   (event: 'update:touched', touched: InputProps<TValue>['touched']): void;
-//   (event: 'update:error', error: InputProps<TValue>['error']): void;
-//   (event: 'focus'): void;
-//   (event: 'blur'): void;
-// };
+export type InputExpose = {
+  focus: () => void;
+  blur: () => void;
+};
 
-// type ShortEmits<T extends Record<string, any>> = UnionToIntersection<RecordToUnion<{
-//   [K in keyof T]: (evt: K, ...args: T[K]) => void;
-// }>>;
-
-// Input
-// Only add properties that change only when value change
-// export interface InputModel<T> {
-//   value: T;
-//   valid: boolean;
-//   touched: boolean;
-//   error: string | string[] | null;
-// }
+export type InputModel<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'error'>;
 
 export type ValidateInputValue<TValue> = (value: TValue) => InputProps<TValue>['error'];
 
@@ -84,6 +66,21 @@ export function inputModel<T>(model: Partial<Omit<InputProps<T>, 'value'>> & Pic
     'onUpdate:touched': v => touched.value = v,
     'onUpdate:error': v => error.value = v,
   };
+}
+
+export function validateInputModel<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue>): InputModel<TValue> {
+  const newModel: InputModel<TValue> = {
+    value: newValue,
+    touched: true,
+    error: null,
+    valid: true,
+  };
+
+  if (isValue(validate)) {
+    newModel.error = validate(newModel.value);
+    newModel.valid = !newModel.error;
+  }
+  return newModel;
 }
 
 // type A = ;

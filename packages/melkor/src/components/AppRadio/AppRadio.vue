@@ -8,8 +8,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useTheme } from '../../composables';
-import { bindInteractionStateProps, type CheckableProps } from '../../features';
+import type { CheckableProps } from '../../features/checkable';
+
+import { useTheme } from '../../composables/useTheme';
+import { bindInteractionStateProps } from '../../features/interactions';
 
 export type Props = CheckableProps;
 

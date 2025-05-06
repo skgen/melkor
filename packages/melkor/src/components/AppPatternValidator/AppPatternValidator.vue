@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import { useTheme } from '../../composables';
+import { useTheme } from '../../composables/useTheme';
 
 type Props = {
   label: string;

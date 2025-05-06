@@ -1,8 +1,7 @@
-import type { ThemeInstance } from '../features';
-
+import { isValue } from '@skgn/kit';
 import { inject, type Ref } from 'vue';
 
-import { globalThemeContextKey, isValue } from '../features';
+import { globalThemeContextKey, type ThemeInstance } from '../features/theme';
 
 export function useGlobalTheme(): Ref<ThemeInstance> {
   const context = inject(globalThemeContextKey);

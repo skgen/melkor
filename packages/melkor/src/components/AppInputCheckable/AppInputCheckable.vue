@@ -45,12 +45,17 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
+import type { InputCheckableEmits, InputCheckableProps, InputCheckableSlots } from '../../features/io/input-checkable';
+
+import { isDefined } from '@skgn/kit';
 import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { computed, ref } from 'vue';
 
-import { useInput, useTheme } from '../../composables';
-import { bindInteractionStateProps, formatError, type InputCheckableEmits, type InputCheckableProps, type InputCheckableSlots, isDefined } from '../../features';
+import { useInput } from '../../composables/useInput';
+import { useTheme } from '../../composables/useTheme';
+import { bindInteractionStateProps } from '../../features/interactions';
+import { formatError } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';

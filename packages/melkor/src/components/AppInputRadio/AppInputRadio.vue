@@ -63,8 +63,10 @@ import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { ref } from 'vue';
 
-import { useInput, useTheme } from '../../composables';
-import { bindInteractionStateProps, formatError } from '../../features';
+import { useInput } from '../../composables/useInput';
+import { useTheme } from '../../composables/useTheme';
+import { bindInteractionStateProps } from '../../features/interactions';
+import { formatError } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';

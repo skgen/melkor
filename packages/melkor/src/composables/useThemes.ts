@@ -1,4 +1,4 @@
-import type { Themes } from '../features';
+import type { Themes } from '../features/theme';
 
 import { useGlobalConfig } from '.';
 

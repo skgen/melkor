@@ -17,11 +17,13 @@
 </template>
 
 <script lang="ts" setup>
-import type { ThemeInstance } from '../../features';
+import type { ThemeInstance } from '../../features/theme';
 
 import { onBeforeUnmount, onMounted, ref, watch, type WatchHandle } from 'vue';
 
-import { useGlobalTheme, useTheme, useThemes } from '../../composables';
+import { useGlobalTheme } from '../../composables/useGlobalTheme';
+import { useTheme } from '../../composables/useTheme';
+import { useThemes } from '../../composables/useThemes';
 import AppButton from '../AppButton/AppButton.vue';
 
 const themes = useThemes();

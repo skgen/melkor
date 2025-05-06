@@ -11,12 +11,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { ThemeInstance } from '../../features';
-
 import { computed, provide } from 'vue';
 
-import { useGlobalTheme, useThemes } from '../../composables';
-import { getThemeValue, themeContextKey } from '../../features';
+import { useGlobalTheme } from '../../composables/useGlobalTheme';
+import { useThemes } from '../../composables/useThemes';
+import { getThemeValue, themeContextKey, type ThemeInstance } from '../../features/theme';
 
 export interface Props {
   withNode?: boolean;

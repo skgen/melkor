@@ -1,6 +1,8 @@
 import type { DirectiveBinding } from 'vue';
 
-import { isString, setElementTheme } from '../features';
+import { isString } from '@skgn/kit';
+
+import { setElementTheme } from '../features/theme';
 
 function directive(el: HTMLElement, binding: DirectiveBinding): void {
   const { value } = binding.value;

@@ -1,8 +1,7 @@
-import type { ThemeInstance } from '../features';
-
+import { isValue } from '@skgn/kit';
 import { type ComputedRef, inject } from 'vue';
 
-import { isValue, themeContextKey } from '../features';
+import { themeContextKey, type ThemeInstance } from '../features/theme';
 
 export function useTheme(): ComputedRef<ThemeInstance> {
   const context = inject(themeContextKey);

@@ -1,3 +1,5 @@
+// Only export features exposed by the module
+
 // IO
 
 export * from './io/input';
@@ -7,15 +9,14 @@ export * from './io/input-color';
 export * from './io/input-number';
 export * from './io/input-radio';
 export * from './io/input-select';
+export * from './io/input-select.native';
 export * from './io/input-text';
 export * from './io/input-textable';
 export * from './io/input-toggle';
 
 // Others
 export * from './checkable';
-export * from './config';
-export * from './interactions';
-export * from './logger';
-export * from './surface';
-export * from './theme';
-export * from './utils';
+export { createGlobalConfig, createMelkorOptions, type MelkorOptions, Shape, STORAGE_THEME_KEY } from './config';
+export { type SurfaceElevation, type SurfaceElevationDirection, surfaceElevationOrder } from './surface';
+export { Theme } from './theme';
+export { formatError } from './utils';

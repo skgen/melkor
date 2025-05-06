@@ -1,7 +1,7 @@
 {
   "name": "@skgn/melkor",
   "type": "module",
-  "version": "2.0.0",
+  "version": "0.0.1",
   "packageManager": "pnpm@9.15.4",
   "description": "Melkor UI",
   "exports": {
@@ -34,17 +34,9 @@
       "types": "./lib/composables/index.d.ts",
       "import": "./lib/composables/index.js"
     },
-    "./composables/*": {
-      "types": "./lib/composables/*/*.d.ts",
-      "import": "./lib/composables/*/*.js"
-    },
     "./features": {
       "types": "./lib/features/index.d.ts",
       "import": "./lib/features/index.js"
-    },
-    "./features/*": {
-      "types": "./lib/features/*/*.d.ts",
-      "import": "./lib/features/*/*.js"
     },
     "./schema.json": {
       "import": "./lib/schema.json"
@@ -73,11 +65,13 @@
   },
   "dependencies": {
     "@iconify/vue": "catalog:",
+    "@skgn/kit": "catalog:",
     "@vueuse/core": "catalog:",
     "deepmerge": "catalog:",
     "defu": "catalog:",
     "lodash-es": "catalog:",
     "normalize.css": "catalog:",
+    "reka-ui": "^2.2.0",
     "universal-cookie": "catalog:",
     "vue": "catalog:"
   },

@@ -1,5 +1,5 @@
 <template>
-  <label
+  <div
     v-theme="theme"
     class="mk-AppInputSelect"
     :data-theme="theme"
@@ -10,50 +10,84 @@
     <AppInputLabel v-if="$slots.label">
       <slot name="label" />
     </AppInputLabel>
-    <div class="mk-AppInputSelect-input">
-      <select
-        :name="props.name"
-        :disabled="props.disabled"
-        @input="handleChange"
-        @focus="onFocus"
-        @blur="onBlur"
-      >
-        <option
-          v-for="(option, index) in props.options"
-          :key="index"
-          :value="index"
-          :disabled="option.disabled"
-          :selected="isSelectedOption(option.value)"
+
+    <PopoverRoot v-model:open="open">
+      <PopoverTrigger as-child>
+        <div
+          class="mk-AppInputSelect-input"
+          role="button"
+          tabindex="0"
+          @keydown="handleKeyDown"
         >
-          <slot
-            name="option"
-            v-bind="{ option, index }"
-          >
-            {{ option.value }}
-          </slot>
-        </option>
-      </select>
-      <AppIcon :icon="globalConfig.icons.AppInputSelect.arrow" />
-    </div>
+          <input type="hidden" :value="JSON.stringify(props.value)" :name="props.name">
+          <span class="mk-AppInputSelect-select">
+            <span class="mk-AppInputSelect-select-value">
+              <slot name="value" v-bind="{ value: props.value }">
+                <template v-if="isArray(props.value)">
+                  {{ props.value.join(',') }}
+                </template>
+                <template v-else>
+                  {{ props.value }}
+                </template>
+              </slot>
+            </span>
+          </span>
+          <AppIcon :icon="globalConfig.icons.AppInputSelect.arrow" />
+        </div>
+      </PopoverTrigger>
+      <PopoverPortal>
+        <PopoverContent :side-offset="4" side="bottom" align="end">
+          <div v-theme="theme" data-root="mk-AppInputSelect" class="mk-AppInputSelect-menu">
+            <template v-if="props.options.length">
+              <button
+                v-for="(option, index) of props.options"
+                :key="index"
+                class="mk-AppInputSelect-option"
+                :disabled="option.disabled"
+                :data-is-active="isSelectedOption(option.value as TValue)"
+                @click="() => handleChange(option.value as TValue)"
+              >
+                <slot name="option" v-bind="{ option, index }">
+                  {{ option.value }}
+                </slot>
+              </button>
+            </template>
+            <template v-else>
+              <slot name="empty-options">
+                No option available
+              </slot>
+            </template>
+          </div>
+        </PopoverContent>
+      </PopoverPortal>
+    </PopoverRoot>
+
     <AppInputHint v-if="$slots.hint">
       <slot name="hint" />
     </AppInputHint>
     <AppInputError v-if="props.error">
       {{ formatError(props.error) }}
     </AppInputError>
-  </label>
+  </div>
 </template>
 
 <script lang="ts" setup generic="TValue">
+import type { InputSelectEmits, InputSelectExpose, InputSelectProps, InputSelectSlots } from '../../features/io/input-select';
+
+import { isArray } from '@skgn/kit';
 import { isEqual } from 'lodash-es';
-import { ref } from 'vue';
+import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
+import { ref, watch } from 'vue';
 
 import AppIcon from '../../components/AppIcon/AppIcon.vue';
 import AppInputError from '../../components/AppInputError/AppInputError.vue';
 import AppInputHint from '../../components/AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../../components/AppInputLabel/AppInputLabel.vue';
-import { useGlobalConfig, useInput, useTheme } from '../../composables';
-import { bindInteractionStateProps, formatError, type InputSelectEmits, type InputSelectProps, type InputSelectSlots } from '../../features';
+import { useGlobalConfig } from '../../composables/useGlobalConfig';
+import { useInput } from '../../composables/useInput';
+import { useTheme } from '../../composables/useTheme';
+import { bindInteractionStateProps } from '../../features/interactions';
+import { formatError } from '../../features/utils';
 
 export type Props<TValue> = InputSelectProps<TValue>;
 
@@ -62,10 +96,10 @@ const emit = defineEmits<InputSelectEmits<TValue>>();
 
 defineSlots<InputSelectSlots<TValue>>();
 
-const selectInput = ref<HTMLSelectElement | null>(null);
-
 const theme = useTheme();
 const globalConfig = useGlobalConfig();
+
+const open = ref(false);
 
 const {
   onChange,
@@ -77,36 +111,60 @@ const {
   emit,
 });
 
-function isSelectedOption(option: TValue) {
-  return isEqual(option, props.value);
-}
-
-function handleChange(evt: Event) {
-  if (!evt.target) {
-    return;
+function isSelectedOption(value: TValue) {
+  if (isArray(props.value)) {
+    return !!props.value.find(v => isEqual(value, v));
   }
-  const { value: index } = evt.target as HTMLSelectElement;
-
-  const newOption = props.options[Number.parseInt(index, 10)];
-
-  onChange(newOption.value);
+  return isEqual(value, props.value);
 }
+
+function handleChange(newValue: TValue) {
+  if (isArray(props.value)) {
+    const found = props.value.find(v => isEqual(newValue, v));
+    if (found) {
+      const filtered = props.value.filter(v => !isEqual(newValue, v));
+      onChange(filtered as TValue);
+    }
+    else {
+      onChange([...props.value, newValue] as TValue);
+    }
+  }
+  else {
+    if (props.cancelable && isEqual(props.value, newValue)) {
+      onChange(null as TValue);
+    }
+    else {
+      onChange(newValue as TValue);
+    }
+  }
+}
+
+function handleKeyDown(event: KeyboardEvent) {
+  if (event.code === 'Enter' || event.code === 'Space') {
+    const target = event.currentTarget as HTMLElement | null;
+    event.preventDefault();
+    target?.click();
+  }
+}
+
+watch(open, (newOpen) => {
+  if (newOpen) {
+    onFocus();
+  }
+  else {
+    onBlur();
+  }
+});
 
 function focus() {
-  if (!selectInput.value) {
-    return;
-  }
-  selectInput.value.focus();
+  open.value = true;
 }
 
 function blur() {
-  if (!selectInput.value) {
-    return;
-  }
-  selectInput.value.blur();
+  open.value = false;
 }
 
-defineExpose({
+defineExpose<InputSelectExpose>({
   focus,
   blur,
 });
@@ -115,7 +173,8 @@ defineExpose({
 <style lang="scss">
 @use '../../styles/mixins' as melkor;
 
-.mk-AppInputSelect {
+.mk-AppInputSelect,
+[data-root='mk-AppInputSelect'] {
   --mk-input-select-background-color: var(--mk-input-background-color);
   --mk-input-select-background-color-hover: var(--mk-input-background-color-hover);
   --mk-input-select-border-color: var(--mk-input-border-color);
@@ -133,35 +192,24 @@ defineExpose({
   --mk-input-select-padding-x-left-size: var(--mk-input-padding-x-size);
   --mk-input-select-padding-x-right-size: calc(var(--mk-input-padding-x-size) * 2 + var(--mk-input-select-icon-size));
   --mk-input-select-padding-y-size: var(--mk-input-padding-y-size);
+  --mk-input-select-value-spacing-size: var(--mk-size-1);
+  --mk-input-select-menu-background-color: var(--mk-shade-0);
+  --mk-input-select-menu-spacing-size: var(--mk-size-1);
+  --mk-input-select-menu-padding-x-size: var(--mk-size-1);
+  --mk-input-select-menu-padding-y-size: var(--mk-size-1);
+  --mk-input-select-option-background-color-hover: var(--mk-shade-2);
+  --mk-input-select-option-background-color-active: var(--mk-shade-3);
+  --mk-input-select-option-padding-x-size: var(--mk-size-3);
+  --mk-input-select-option-padding-y-size: var(--mk-size-2);
+}
 
-  $this: &;
-
+.mk-AppInputSelect {
   display: inline-flex;
   flex-direction: column;
   gap: var(--mk-size-2);
   vertical-align: top;
 
-  select {
-    width: 100%;
-    padding: var(--mk-input-select-padding-y-size) var(--mk-input-select-padding-x-right-size)
-      var(--mk-input-select-padding-y-size) var(--mk-input-select-padding-x-left-size);
-    font-size: var(--mk-input-select-text-size);
-    line-height: var(--mk-input-select-line-height);
-    color: var(--mk-input-select-text-color);
-    appearance: none;
-    background: transparent;
-    border: none;
-    outline: none;
-
-    option {
-      position: relative;
-      background-color: var(--mk-surface-low-background-color);
-
-      &::first-letter {
-        text-transform: capitalize;
-      }
-    }
-  }
+  $this: &;
 
   &-input {
     position: relative;
@@ -175,7 +223,7 @@ defineExpose({
       opacity var(--mk-transition-opacity-duration),
       box-shadow var(--mk-transition-color-duration);
 
-    .mk-AppIcon {
+    > .mk-AppIcon {
       --mk-icon-color: var(--mk-input-select-icon-color);
       --mk-icon-size: var(--mk-input-select-icon-size);
 
@@ -184,6 +232,62 @@ defineExpose({
       right: calc((var(--mk-input-select-padding-x-right-size) - var(--mk-icon-size)) / 2);
       pointer-events: none;
       transform: translate(0, -50%);
+    }
+  }
+
+  &-select {
+    display: block;
+    width: 100%;
+    padding: var(--mk-input-select-padding-y-size) var(--mk-input-select-padding-x-right-size)
+      var(--mk-input-select-padding-y-size) var(--mk-input-select-padding-x-left-size);
+    font-size: var(--mk-input-select-text-size);
+    line-height: var(--mk-input-select-line-height);
+    color: var(--mk-input-select-text-color);
+
+    &-value {
+      display: flex;
+      gap: var(--mk-input-select-value-spacing-size);
+      align-items: center;
+      min-height: calc(var(--mk-input-select-text-size) * var(--mk-input-select-line-height));
+      cursor: default;
+    }
+  }
+
+  &-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mk-input-select-menu-spacing-size);
+    min-width: 180px;
+    max-width: var(--reka-popover-trigger-width);
+    max-height: var(--reka-popover-content-available-height);
+    padding: var(--mk-input-select-menu-padding-y-size) var(--mk-input-select-menu-padding-x-size);
+    background-color: var(--mk-input-select-menu-background-color);
+    border-radius: var(--mk-input-select-border-radius-size);
+    box-shadow: inset 0 0 0.01px var(--mk-input-select-border-size) var(--mk-input-select-border-color);
+  }
+
+  &-option {
+    display: flex;
+    gap: var(--mk-size-1);
+    align-items: center;
+    padding: var(--mk-input-select-option-padding-y-size) var(--mk-input-select-option-padding-x-size);
+    cursor: default;
+    border-radius: var(--mk-input-select-border-radius-size);
+    transition: background-color var(--mk-transition-color-duration);
+
+    @include melkor.on-not-disabled {
+      @include melkor.on-hover {
+        background-color: var(--mk-input-select-option-background-color-hover);
+      }
+    }
+
+    @include melkor.on-active {
+      background-color: var(--mk-input-select-option-background-color-active);
+    }
+
+    @include melkor.on-disabled {
+      cursor: not-allowed;
+      opacity: var(--mk-input-opacity-disabled);
     }
   }
 
@@ -212,12 +316,6 @@ defineExpose({
     #{$this} {
       &-input {
         opacity: var(--mk-input-opacity-disabled);
-      }
-    }
-
-    select {
-      &[disabled] {
-        opacity: 1;
       }
     }
   }

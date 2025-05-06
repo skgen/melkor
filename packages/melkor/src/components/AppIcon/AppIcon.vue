@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
 
-import { useTheme } from '../../composables';
+import { useTheme } from '../../composables/useTheme';
 
 export interface Props {
   icon: string;

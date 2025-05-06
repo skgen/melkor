@@ -28,7 +28,10 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import { useGlobalConfig, useGlobalTheme, useNextTheme, useTheme } from '../../composables';
+import { useGlobalConfig } from '../../composables/useGlobalConfig';
+import { useGlobalTheme } from '../../composables/useGlobalTheme';
+import { useNextTheme } from '../../composables/useNextTheme';
+import { useTheme } from '../../composables/useTheme';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 export interface Props {

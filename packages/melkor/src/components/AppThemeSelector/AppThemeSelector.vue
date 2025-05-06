@@ -1,25 +1,35 @@
 <template>
   <AppInputSelect
-    :value="value"
+    :value="themeValue"
     class="mk-AppThemeSelector"
     :options="options"
+    @update:value="(newValue) => themeValue = newValue"
   >
-    <template #option="{ option }">
-      <!-- {{ $t(`melkor.theme.${option.value}`) }} -->
-      {{ option.value }}
+    <template #value="{ value }">
+      <slot name="value" v-bind="{ value }">
+        {{ value }}
+      </slot>
+    </template>
+    <template #option="{ index, option }">
+      <slot name="option" v-bind="{ index, option }">
+        {{ option.value }}
+      </slot>
     </template>
   </AppInputSelect>
 </template>
 
 <script lang="ts" setup>
-import type { InputSelectProps } from '../..';
+import type { InputSelectProps, InputSelectSlots } from '../../features/io/input-select';
 
 import { computed, onBeforeUnmount, onMounted, ref, watch, type WatchHandle } from 'vue';
 
-import { useGlobalTheme, useThemes } from '../..';
-import AppInputSelect from '../../components/AppInputSelect/AppInputSelect.vue';
+import { useGlobalTheme } from '../../composables/useGlobalTheme';
+import { useThemes } from '../../composables/useThemes';
+import AppInputSelect from '../AppInputSelect/AppInputSelect.vue';
 
-type InputSelectValue = string | null;
+type ThemeSelectorValue = string | null;
+
+defineSlots<Pick<InputSelectSlots<ThemeSelectorValue>, 'option' | 'value'>>();
 
 const globalTheme = useGlobalTheme();
 
@@ -27,27 +37,31 @@ const themes = useThemes();
 
 const watchers: WatchHandle[] = [];
 
-const options = computed<InputSelectProps<InputSelectValue>['options']>(() => themes.map(theme => ({
+const options = computed<InputSelectProps<ThemeSelectorValue>['options']>(() => themes.map(theme => ({
   label: theme,
   value: theme,
 })));
 
-const value = ref<InputSelectValue>(null);
+const themeValue = ref<ThemeSelectorValue>(null);
 
 onMounted(() => {
-  watchers.push(watch(value, (newValue) => {
-    if (newValue !== globalTheme.value.preference && newValue) {
-      globalTheme.value.preference = newValue;
-    }
-  }));
+  watchers.push(
+    watch(themeValue, (newValue) => {
+      if (newValue !== globalTheme.value.preference && newValue) {
+        globalTheme.value.preference = newValue;
+      }
+    }),
+  );
 
-  watchers.push(watch(() => globalTheme.value.preference, (newPreference) => {
-    if (newPreference !== value.value) {
-      value.value = newPreference;
-    }
-  }, {
-    immediate: true,
-  }));
+  watchers.push(
+    watch(() => globalTheme.value.preference, (newPreference) => {
+      if (newPreference !== themeValue.value) {
+        themeValue.value = newPreference;
+      }
+    }, {
+      immediate: true,
+    }),
+  );
 });
 
 onBeforeUnmount(() => {

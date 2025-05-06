@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputCheckboxEmits, InputCheckboxProps, InputCheckboxSlots } from '../../features';
+import type { InputCheckboxEmits, InputCheckboxProps, InputCheckboxSlots } from '../../features/io/input-checkbox';
 
 import AppCheckbox from '../AppCheckbox/AppCheckbox.vue';
 import AppInputCheckable from '../AppInputCheckable/AppInputCheckable.vue';

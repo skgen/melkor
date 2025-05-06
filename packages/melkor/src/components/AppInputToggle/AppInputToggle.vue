@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputToggleEmits, InputToggleProps, InputToggleSlots } from '../../features';
+import type { InputToggleEmits, InputToggleProps, InputToggleSlots } from '../../features/io/input-toggle';
 
 import AppInputCheckable from '../AppInputCheckable/AppInputCheckable.vue';
 import AppToggle from '../AppToggle/AppToggle.vue';

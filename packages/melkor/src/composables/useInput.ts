@@ -1,5 +1,3 @@
-import type { InputEmits, InputProps, ValidateInputValue } from '../features';
-
 import { isEqual } from 'lodash-es';
 import {
   type EmitFn,
@@ -7,7 +5,7 @@ import {
   ref,
 } from 'vue';
 
-import { isValue } from '../features';
+import { type InputEmits, type InputModel, type InputProps, validateInputModel } from '../features/io/input';
 
 // cant use in defineProps because of compiler
 // export type InputProps<TState extends InputState<any>> = {
@@ -18,40 +16,9 @@ import { isValue } from '../features';
 
 // type PartialInputModel<T> = Partial<InputModel<T>> & { value: InputModel<T>['value'] };
 
-export type InputModel<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'error'>;
-
-export function createInputModel<TValue>(params: {
-  value: TValue;
-  valid?: boolean;
-  touched?: boolean;
-  error?: string | string[] | null;
-}): InputModel<TValue> {
-  return {
-    value: params.value,
-    valid: params.valid ?? true,
-    touched: params.touched ?? false,
-    error: params.error ?? null,
-  };
-}
-
 interface UseInputOptions<TValue> {
   props: InputProps<TValue>;
   emit: EmitFn<InputEmits<TValue>>;
-}
-
-export function validateInputModel<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue>): InputModel<TValue> {
-  const newModel: InputModel<TValue> = {
-    value: newValue,
-    touched: true,
-    error: null,
-    valid: true,
-  };
-
-  if (isValue(validate)) {
-    newModel.error = validate(newModel.value);
-    newModel.valid = !newModel.error;
-  }
-  return newModel;
 }
 
 export function useInput<TValue>(options: UseInputOptions<TValue>): {

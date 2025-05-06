@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputTextEmits, InputTextProps, InputTextSlots } from '../../features';
+import type { InputTextEmits, InputTextProps, InputTextSlots } from '../../features/io/input-text';
 
 import AppInputTextable from '../AppInputTextable/AppInputTextable.vue';
 

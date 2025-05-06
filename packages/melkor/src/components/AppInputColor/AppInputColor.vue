@@ -46,7 +46,7 @@
         <slot name="cancel-icon" />
       </AppInputTextableCancel>
 
-      <span v-if="$slots.icon" class="mk-AppInputColor-icon">
+      <span v-if="$slots['trailing-icon']" class="mk-AppInputColor-icon">
         <slot name="trailing-icon" />
       </span>
     </div>
@@ -60,10 +60,15 @@
 </template>
 
 <script lang="ts" setup>
+import type { InputColorEmits, InputColorProps, InputColorSlots, InputColorValue } from '../../features/io/input-color';
+
+import { isValue } from '@skgn/kit';
 import { computed } from 'vue';
 
-import { useInput, useTheme } from '../../composables';
-import { bindInteractionStateProps, formatError, type InputColorEmits, type InputColorProps, type InputColorSlots, type InputColorValue, isValue } from '../../features';
+import { useInput } from '../../composables/useInput';
+import { useTheme } from '../../composables/useTheme';
+import { bindInteractionStateProps } from '../../features/interactions';
+import { formatError } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';

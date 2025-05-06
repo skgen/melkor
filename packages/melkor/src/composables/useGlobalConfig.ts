@@ -1,8 +1,7 @@
-import type { GlobalConfig } from '../features';
-
+import { isValue } from '@skgn/kit';
 import { inject } from 'vue';
 
-import { globalConfigContextKey, isValue } from '../features';
+import { type GlobalConfig, globalConfigContextKey } from '../features/config';
 
 export function useGlobalConfig(): GlobalConfig {
   const context = inject(globalConfigContextKey);

@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useTheme } from '../../composables';
+import { useTheme } from '../../composables/useTheme';
 
 export interface Props {
   type?: 'plain' | 'outline' ;

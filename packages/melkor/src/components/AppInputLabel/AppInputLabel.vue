@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useTheme } from '../../composables';
+import { useTheme } from '../../composables/useTheme';
 
 const theme = useTheme();
 </script>

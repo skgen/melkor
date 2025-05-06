@@ -9,8 +9,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import { useTheme } from '../../composables';
-import { Shape } from '../../features';
+import { useTheme } from '../../composables/useTheme';
+import { Shape } from '../../features/config';
 
 export interface Props {
   circle?: boolean;

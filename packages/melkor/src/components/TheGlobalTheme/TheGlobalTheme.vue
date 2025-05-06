@@ -3,10 +3,12 @@
 </template>
 
 <script lang="ts" setup>
+import { isClient } from '@skgn/kit';
 import { onMounted, provide, toRef, watch } from 'vue';
 
-import { useGlobalConfig, useThemes } from '../../composables';
-import { getPersistedThemePreference, getThemeValue, globalThemeContextKey, isClient, persistThemePreference, setElementTheme, Theme, watchSystemThemeChange } from '../../features';
+import { useGlobalConfig } from '../../composables/useGlobalConfig';
+import { useThemes } from '../../composables/useThemes';
+import { getPersistedThemePreference, getThemeValue, globalThemeContextKey, persistThemePreference, setElementTheme, Theme, watchSystemThemeChange } from '../../features/theme';
 
 const globalConfig = useGlobalConfig();
 const themes = useThemes();
