@@ -1,4 +1,4 @@
-import type { MelkorNuxtContext } from '../types';
+import type { MelkorNuxtContext } from '../module';
 
 import { readFileSync } from 'node:fs';
 
@@ -15,7 +15,7 @@ export function loadThemeScript<TContext extends MelkorNuxtContext = MelkorNuxtC
 
   type ScriptCtxAttributes = keyof typeof scriptCtx;
 
-  const _ssrThemeScript = readFileSync(ctx.resolver.resolve('ssr-theme.min.js'), 'utf-8');
+  const _ssrThemeScript = readFileSync(ctx.resolver.resolve('runtime/ssr-theme.min.js'), 'utf-8');
 
   const ssrThemeScript = _ssrThemeScript.replace(/<%= ctx\.([^ ]+) %>/g, (_, option: ScriptCtxAttributes) => scriptCtx[option]).trim();
 

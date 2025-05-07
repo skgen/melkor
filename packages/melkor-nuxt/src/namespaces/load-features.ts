@@ -1,15 +1,18 @@
-import { addImportsSources } from '@nuxt/kit';
-import * as melkorFeatures from '@skgn/melkor/features';
+import type { MelkorNuxtContext } from '../module';
 
-export function loadFeatures(): void {
+import { addImportsSources, resolvePath } from '@nuxt/kit';
+
+export async function loadFeatures<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext) {
+  const melkorFeatures = await import('@skgn/melkor/features');
+
   const features = Object.keys(melkorFeatures).filter((k) => {
     return !['default'].includes(k);
   });
 
+  ctx.nuxt.options.alias[`${ctx.moduleOptions.namespace}/features`] = await resolvePath(`@skgn/melkor/features`);
+
   addImportsSources({
-    from: '@skgn/melkor/features',
+    from: await resolvePath(`@skgn/melkor/features`),
     imports: features,
   });
-
-  // ctx.nuxt.options.alias['@skgn/melkor-nuxt/features'] = '@skgn/melkor/features';
 }

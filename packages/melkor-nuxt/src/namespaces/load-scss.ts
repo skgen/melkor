@@ -1,6 +1,8 @@
-import type { MelkorNuxtContext } from '../types';
+import type { MelkorNuxtContext } from '../module';
 
-export function loadScss<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext): void {
-  ctx.nuxt.options.alias['@skgn/melkor-nuxt/styles/mixins'] = ctx.resolver.resolve('runtime/mixins.scss');
-  ctx.nuxt.options.alias['@skgn/melkor-nuxt/styles'] = ctx.resolver.resolve('runtime/index.scss');
+import { resolvePath } from '@nuxt/kit';
+
+export async function loadScss<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext) {
+  ctx.nuxt.options.alias[`${ctx.moduleOptions.namespace}/styles/scss`] = await resolvePath(`@skgn/melkor/styles/scss`);
+  ctx.nuxt.options.alias[`${ctx.moduleOptions.namespace}/styles/mixins`] = await resolvePath(`@skgn/melkor/styles/mixins`);
 }

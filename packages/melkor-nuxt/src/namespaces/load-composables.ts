@@ -1,13 +1,18 @@
-import { addImportsSources } from '@nuxt/kit';
-import * as melkorComposables from '@skgn/melkor/composables';
+import type { MelkorNuxtContext } from '../module';
 
-export function loadComposables(): void {
+import { addImportsSources, resolvePath } from '@nuxt/kit';
+
+export async function loadComposables<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext) {
+  const melkorComposables = await import('@skgn/melkor/composables');
+
   const composables = Object.keys(melkorComposables).filter((k) => {
     return !['default'].includes(k);
   });
 
+  ctx.nuxt.options.alias[`${ctx.moduleOptions.namespace}/composables`] = await resolvePath(`@skgn/melkor/composables`);
+
   addImportsSources({
-    from: '@skgn/melkor/composables',
+    from: await resolvePath(`@skgn/melkor/composables`),
     imports: composables,
   });
 }
