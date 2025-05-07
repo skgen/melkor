@@ -15,7 +15,7 @@
     "./styles/mixins": {
       "import": "./lib/styles/mixins.scss"
     },
-    "./styles": {
+    "./styles/scss": {
       "import": "./lib/styles/index.scss"
     },
     "./plugin": {
@@ -72,8 +72,7 @@
     "lodash-es": "catalog:",
     "normalize.css": "catalog:",
     "reka-ui": "^2.2.0",
-    "universal-cookie": "catalog:",
-    "vue": "catalog:"
+    "universal-cookie": "catalog:"
   },
   "devDependencies": {
     "@tsconfig/node20": "catalog:",
