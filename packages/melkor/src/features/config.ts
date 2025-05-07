@@ -1,9 +1,15 @@
 import type { DeepPartial } from '@skgn/kit';
 import type { InjectionKey } from 'vue';
 
+import type { ThemeInstance } from './theme';
+
 import merge from 'deepmerge';
 
-import { Theme, type ThemeInstance } from './theme';
+export enum Theme {
+  light = 'light',
+  dark = 'dark',
+  system = 'system',
+}
 
 export interface MelkorOptions {
   debug: boolean;

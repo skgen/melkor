@@ -1,8 +1,9 @@
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
 
-import { isClient, isValue } from '@skgn/kit';
+import { isValue } from '@skgn/kit';
+import { isClient } from '@vueuse/core';
 
-import { STORAGE_THEME_KEY } from './config';
+import { STORAGE_THEME_KEY, Theme } from './config';
 
 export type Themes = string[];
 
@@ -13,14 +14,8 @@ export interface ThemeInstance {
   value: string;
 }
 
-export enum Theme {
-  light = 'light',
-  dark = 'dark',
-  system = 'system',
-}
-
 export function getSystemColorScheme(): string | null {
-  if (isClient()) {
+  if (isClient) {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return Theme.dark;
     }
@@ -33,14 +28,14 @@ export function getSystemColorScheme(): string | null {
 }
 
 export function getPersistedThemePreference(): string | null {
-  if (isClient()) {
+  if (isClient) {
     return window.localStorage.getItem(STORAGE_THEME_KEY);
   }
   return null;
 }
 
 export function persistThemePreference(themePreference: string | null): void {
-  if (isClient()) {
+  if (isClient) {
     if (isValue(themePreference)) {
       window.localStorage.setItem(STORAGE_THEME_KEY, themePreference);
     }
@@ -73,7 +68,7 @@ export function setElementTheme(el: HTMLElement, theme: string): void {
 }
 
 export function watchSystemThemeChange(systemTheme: SystemTheme, onChange: () => void): void {
-  if (isClient()) {
+  if (isClient) {
     window.matchMedia(`(prefers-color-scheme: ${systemTheme})`).addEventListener('change', (e) => {
       if (e.matches) {
         onChange();
@@ -86,7 +81,7 @@ export function watchSystemThemeChange(systemTheme: SystemTheme, onChange: () =>
 //   return;
 //   // Persist system theme for future use
 //   const preferredThemeValue = getPreferredThemeValue();
-//   if (isClient()) {
+//   if (isClient) {
 //     localStorage.setItem(globalConfig.cookies.preferredTheme, preferredThemeValue);
 //   }
 

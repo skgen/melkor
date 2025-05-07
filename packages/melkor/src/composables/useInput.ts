@@ -16,7 +16,7 @@ import { type InputEmits, type InputModel, type InputProps, validateInputModel }
 
 // type PartialInputModel<T> = Partial<InputModel<T>> & { value: InputModel<T>['value'] };
 
-interface UseInputOptions<TValue> {
+export interface UseInputOptions<TValue> {
   props: InputProps<TValue>;
   emit: EmitFn<InputEmits<TValue>>;
 }

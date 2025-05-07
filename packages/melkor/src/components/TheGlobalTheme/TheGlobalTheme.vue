@@ -3,12 +3,13 @@
 </template>
 
 <script lang="ts" setup>
-import { isClient } from '@skgn/kit';
+import { isClient } from '@vueuse/core';
 import { onMounted, provide, toRef, watch } from 'vue';
 
 import { useGlobalConfig } from '../../composables/useGlobalConfig';
 import { useThemes } from '../../composables/useThemes';
-import { getPersistedThemePreference, getThemeValue, globalThemeContextKey, persistThemePreference, setElementTheme, Theme, watchSystemThemeChange } from '../../features/theme';
+import { Theme } from '../../features/config';
+import { getPersistedThemePreference, getThemeValue, globalThemeContextKey, persistThemePreference, setElementTheme, watchSystemThemeChange } from '../../features/theme';
 
 const globalConfig = useGlobalConfig();
 const themes = useThemes();
@@ -37,7 +38,7 @@ function onThemePreferenceChange(newPreference: string) {
     preference: newPreference,
     value: getThemeValue(newPreference, themes),
   };
-  if (isClient()) {
+  if (isClient) {
     setElementTheme(document.documentElement, globalTheme.value.value);
   }
   persistThemePreference(newPreference);

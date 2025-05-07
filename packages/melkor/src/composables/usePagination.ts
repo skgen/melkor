@@ -1,7 +1,7 @@
 import { toRefs } from '@vueuse/core';
 import { computed, type ComputedRef, type Ref } from 'vue';
 
-interface UsePaginationOptions {
+export interface UsePaginationOptions {
   page: number;
   range: [number, number];
   gap?: number;

@@ -16,7 +16,6 @@ export * from './io/input-toggle';
 
 // Others
 export * from './checkable';
-export { createGlobalConfig, createMelkorOptions, type MelkorOptions, Shape, STORAGE_THEME_KEY } from './config';
+export { createGlobalConfig, createMelkorOptions, type MelkorOptions, Shape, STORAGE_THEME_KEY, Theme } from './config';
 export { type SurfaceElevation, type SurfaceElevationDirection, surfaceElevationOrder } from './surface';
-export { Theme } from './theme';
 export { formatError } from './utils';
