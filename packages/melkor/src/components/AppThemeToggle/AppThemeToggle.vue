@@ -54,7 +54,7 @@ const translateX = computed(() => `${index.value * 50}%`);
 @use '../../styles/mixins' as melkor;
 
 .mk-AppThemeToggle {
-  --mk-theme-toggle-background-color: var(--mk-border-color);
+  --mk-theme-toggle-background-color: var(--mk-shade-3);
   --mk-theme-toggle-target-background-color: var(--mk-primary);
   --mk-theme-toggle-target-icon-color: var(--mk-on-primary);
   --mk-theme-toggle-spacing-size: var(--mk-size-2);
