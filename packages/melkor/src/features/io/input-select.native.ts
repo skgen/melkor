@@ -13,7 +13,7 @@ export type InputSelectNativeProps<TValue> = InputProps<TValue> & {
 export type InputSelectNativeEmits<TValue> = InputEmits<TValue>;
 
 export type InputSelectNativeSlots<TValue> = InputSlots & {
-  option: (props: {
+  option?: (props: {
     index: number;
     option: Flatten<InputSelectNativeProps<TValue>['options']>;
   }) => any;

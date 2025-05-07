@@ -14,12 +14,12 @@ export type InputSelectProps<TValue> = InputProps<TValue> & {
 export type InputSelectEmits<TValue> = InputEmits<TValue>;
 
 export type InputSelectSlots<TValue> = InputSlots & {
-  'option': (props: {
+  'option'?: (props: {
     index: number;
     option: Flatten<InputSelectProps<TValue>['options']>;
   }) => any;
-  'empty-options': () => any;
-  'value': (props: {
+  'empty-options'?: () => any;
+  'value'?: (props: {
     value: TValue;
   }) => any;
 };

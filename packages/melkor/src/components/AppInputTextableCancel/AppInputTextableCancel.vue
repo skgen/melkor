@@ -15,7 +15,7 @@ import { useTheme } from '../../composables/useTheme';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 defineSlots<{
-  default: () => any;
+  default?: () => any;
 }>();
 
 const theme = useTheme();

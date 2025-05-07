@@ -11,6 +11,6 @@ export type InputColorProps = InputProps<InputColorValue> & {
 export type InputColorEmits = InputEmits<InputColorValue>;
 
 export type InputColorSlots = InputSlots & {
-  'trailing-icon': () => any;
-  'cancel-icon': () => any;
+  'trailing-icon'?: () => any;
+  'cancel-icon'?: () => any;
 };

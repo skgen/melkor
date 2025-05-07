@@ -10,7 +10,7 @@ export type InputTextableProps<InputTextableValue> = InputProps<InputTextableVal
 export type InputTextableEmits<InputTextableValue> = InputEmits<InputTextableValue>;
 
 export type InputTextableSlots<InputTextableValue> = InputSlots & {
-  'default': (props: {
+  'default'?: (props: {
     inputRef: string;
     validate: InputTextableProps<InputTextableValue>['validate'];
     inputName: InputTextableProps<InputTextableValue>['name'];
@@ -22,7 +22,7 @@ export type InputTextableSlots<InputTextableValue> = InputSlots & {
     onFocus: () => void;
     onBlur: () => void;
   }) => any;
-  'leading-icon': () => any;
-  'trailing-icon': () => any;
-  'cancel-icon': () => any;
+  'leading-icon'?: () => any;
+  'trailing-icon'?: () => any;
+  'cancel-icon'?: () => any;
 };

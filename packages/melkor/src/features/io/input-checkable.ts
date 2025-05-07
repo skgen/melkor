@@ -9,7 +9,7 @@ export type InputCheckableProps<TValue = boolean> = InputProps<TValue> & {
 export type InputCheckableEmits<TValue = boolean> = InputEmits<TValue>;
 
 export type InputCheckableSlots<TValue = boolean> = InputSlots & {
-  'default': (props: {
+  'default'?: (props: {
     inputRef: string;
     hovered: boolean;
     validate: InputCheckableProps<TValue>['validate'];
@@ -21,6 +21,6 @@ export type InputCheckableSlots<TValue = boolean> = InputSlots & {
     onFocus: () => void;
     onBlur: () => void;
   }) => any;
-  'checked-label': () => any;
-  'unchecked-label': () => any;
+  'checked-label'?: () => any;
+  'unchecked-label'?: () => any;
 };

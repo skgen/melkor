@@ -11,7 +11,7 @@
 import { useTheme } from '../../composables/useTheme';
 
 defineSlots<{
-  default: () => any;
+  default?: () => any;
 }>();
 
 const theme = useTheme();

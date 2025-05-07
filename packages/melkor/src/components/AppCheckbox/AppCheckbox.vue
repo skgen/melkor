@@ -26,7 +26,7 @@ export type Props = CheckableProps;
 const props = defineProps<Props>();
 
 defineSlots<{
-  default: () => any;
+  default?: () => any;
 }>();
 
 const theme = useTheme();

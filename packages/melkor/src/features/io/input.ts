@@ -26,8 +26,8 @@ export type InputEmits<TValue> = {
 };
 
 export type InputSlots = {
-  label: () => any;
-  hint: () => any;
+  label?: () => any;
+  hint?: () => any;
 };
 
 export type InputExpose = {
