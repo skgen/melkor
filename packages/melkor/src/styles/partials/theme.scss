@@ -83,16 +83,7 @@
   --mk-text-color: var(--mk-shade-10);
   --mk-text-soft-color: var(--mk-shade-8);
 
-  // Tone feedback
-  // --mk-info-color: var(--c-blue);
-  // --mk-info-color-soft: rgb(var(--c-tone-blue) / 10%);
-  // --mk-success-color: var(--c-green);
-  // --mk-success-color-soft: rgb(var(--c-tone-green) / 10%);
-  // --mk-warning-color: var(--c-orange);
-  // --mk-warning-color-soft: rgb(var(--c-tone-orange) / 10%);
-  // --mk-error-color: var(--c-red);
-  // --mk-error-color-soft: rgb(var(--c-tone-red) / 10%);
-
+  // Border
   --mk-border-color: var(--mk-shade-5);
   --mk-border-color-hover: var(--mk-shade-7);
   --mk-border-color-active: var(--mk-primary);
@@ -104,21 +95,42 @@
   --mk-input-icon-color: var(--mk-shade-9);
   --mk-input-background-color: var(--mk-shade-4-15);
   --mk-input-background-color-hover: transparent;
-
-  // Utils as functions
-  --mk-info-color: hsl(var(--mk-blue-hsl));
-  --mk-info-soft-color: hsl(var(--mk-blue-hsl) / 10%);
-  --mk-success-color: hsl(var(--mk-green-hsl));
-  --mk-success-soft-color: hsl(var(--mk-green-hsl) / 10%);
-  --mk-warning-color: hsl(var(--mk-orange-hsl));
-  --mk-warning-soft-color: hsl(var(--mk-orange-hsl) / 10%);
-  --mk-error-color: hsl(var(--mk-red-hsl));
-  --mk-error-soft-color: hsl(var(--mk-red-hsl) / 10%);
 }
 
 * {
   @include theme.light {
     color-scheme: light;
+
+    @for $i from 0 through 10 {
+      @include common.generate-lch-color(
+        #{'shade-' + $i},
+        map.get(variables.$mk-light-shade-lights, $i),
+        variables.$mk-light-shade-chroma,
+        variables.$mk-light-shade-hue
+      );
+    }
+
+    $mk-colors: (
+      'primary': variables.$mk-light-primary,
+      'on-primary': variables.$mk-light-on-primary,
+      'success': variables.$mk-light-success,
+      'error': variables.$mk-light-error,
+      'danger': variables.$mk-light-danger,
+      'info': variables.$mk-light-info,
+    );
+
+    @each $color-name, $color in $mk-colors {
+      @each $prop-name, $prop in $color {
+        --mk-#{$color-name}-#{$prop-name}: #{$prop};
+      }
+
+      @include common.generate-lch-color(
+        $color-name,
+        map.get($color, 'light'),
+        map.get($color, 'chroma'),
+        map.get($color, 'hue')
+      );
+    }
   }
 
   @include theme.dark {
@@ -141,6 +153,7 @@
       'on-primary': variables.$mk-dark-on-primary,
       'success': variables.$mk-dark-success,
       'error': variables.$mk-dark-error,
+      'danger': variables.$mk-dark-danger,
       'info': variables.$mk-dark-info,
     );
 

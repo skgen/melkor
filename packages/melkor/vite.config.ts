@@ -10,7 +10,6 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 import { log } from './scripts/logger';
 import { vitePluginBuildLib } from './scripts/vite-plugin-build-lib';
-// import svgLoader from 'vite-svg-loader';
 
 type Modes = 'lib' | 'esm' | 'lib-dev' | 'esm-dev';
 

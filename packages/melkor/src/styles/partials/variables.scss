@@ -1,3 +1,5 @@
+//////////////////////////// DARK ////////////////////////////
+
 $mk-dark-shade-hue: 260deg !default;
 $mk-dark-shade-chroma: 0.015 !default;
 $mk-dark-shade-lights: (
@@ -62,6 +64,78 @@ $mk-dark-danger: (
 
 // Info
 $mk-dark-info: (
+  'light': 62.3%,
+  'chroma': 0.214,
+  'hue': 259.815deg,
+) !default;
+
+
+//////////////////////////// LIGHT ////////////////////////////
+
+$mk-light-shade-hue: 260deg !default;
+$mk-light-shade-chroma: 0.015 !default;
+$mk-light-shade-lights: (
+  // 0. Background
+  0: 98%,
+  // 1. Background
+  1: 96.5%,
+  // 2. Background
+  2: 95%,
+  // 3. Background
+  3: 93.5%,
+  // 4. Border
+  4: 86%,
+  // 5. Border
+  5: 80%,
+  // 6.
+  6: 77%,
+  // 7. Border
+  7: 73%,
+  // 8. Soft text
+  8: 50%,
+  // 9. alt text
+  9: 40%,
+  // 10. Main text
+  10: 10%
+) !default;
+
+// Primary
+$mk-light-primary: (
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
+// On Primary
+$mk-light-on-primary: (
+  'light': var(--mk-shade-1-light),
+  'chroma': var(--mk-shade-1-chroma),
+  'hue': var(--mk-shade-1-hue),
+) !default;
+
+// On Success
+$mk-light-success: (
+  'light': 72.3%,
+  'chroma': 0.219,
+  'hue': 149.579deg,
+) !default;
+
+// Error
+$mk-light-error: (
+  'light': 63.7%,
+  'chroma': 0.237,
+  'hue': 25.331deg,
+) !default;
+
+// Danger
+$mk-light-danger: (
+  'light': 76.9%,
+  'chroma': 0.1888,
+  'hue': 70.08deg,
+) !default;
+
+// Info
+$mk-light-info: (
   'light': 62.3%,
   'chroma': 0.214,
   'hue': 259.815deg,
