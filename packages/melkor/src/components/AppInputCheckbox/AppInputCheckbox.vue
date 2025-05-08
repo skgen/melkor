@@ -1,5 +1,6 @@
 <template>
   <AppInputCheckable
+    ref="checkableRef"
     class="mk-AppInputCheckbox"
     v-bind="props"
     @update:value="(value) => emit('update:value', value)"
@@ -28,9 +29,10 @@
         checked,
         onFocus,
         onBlur,
-        inputRef,
+        ref: inputRef,
         inputName,
         hovered,
+        focused,
       }"
     >
       <input
@@ -40,13 +42,20 @@
         :checked="checked"
         :disabled="disabled"
         @input="onChange"
-        @focus="onFocus"
+        @focus="(event: Event) => {
+          const target = event.target as HTMLInputElement | null;
+          if (target?.matches(':focus-visible') || syntheticFocus) {
+            syntheticFocus = false;
+            onFocus();
+          }
+        }"
         @blur="onBlur"
       >
       <AppCheckbox
         :checked="checked"
         :disabled="disabled"
         :hovered="hovered"
+        :focused="focused"
       >
         <slot name="checked-icon" />
       </AppCheckbox>
@@ -54,23 +63,53 @@
   </AppInputCheckable>
 </template>
 
-<script lang="ts" setup generic="TValue">
-import type { InputCheckboxEmits, InputCheckboxProps, InputCheckboxSlots } from '../../features/io/input-checkbox';
+<script lang="ts" setup generic="TValue = boolean">
+import type { InputCheckableExpose } from '../../features/io/input-checkable';
 
+import { ref } from 'vue';
+
+import { inputCheckboxDefaultProps, type InputCheckboxEmits, type InputCheckboxExpose, type InputCheckboxProps, type InputCheckboxSlots } from '../../features/io/input-checkbox';
 import AppCheckbox from '../AppCheckbox/AppCheckbox.vue';
 import AppInputCheckable from '../AppInputCheckable/AppInputCheckable.vue';
 
-export type Props<TValue = boolean> = InputCheckboxProps<TValue>;
-type Emits<TValue> = InputCheckboxEmits<TValue>;
+export type Props<TValue> = InputCheckboxProps<TValue>;
+export type Emits<TValue> = InputCheckboxEmits<TValue>;
+export type Slots<TValue> = InputCheckboxSlots<TValue>;
+export type Expose = InputCheckboxExpose;
 
 const props = withDefaults(
   defineProps<Props<TValue>>(),
-  {
-    direction: 'vertical',
-  },
+  inputCheckboxDefaultProps,
 );
+
 const emit = defineEmits<Emits<TValue>>();
-defineSlots<InputCheckboxSlots>();
+
+defineSlots<Slots<TValue>>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
+
+const checkableRef = ref<InputCheckableExpose | null>(null);
+const syntheticFocus = ref(false);
+
+function focus() {
+  if (!checkableRef.value) {
+    return;
+  }
+
+  syntheticFocus.value = true;
+  checkableRef.value.focus();
+}
+
+function blur() {
+  if (!checkableRef.value) {
+    return;
+  }
+  syntheticFocus.value = false;
+  checkableRef.value.blur();
+}
 </script>
 
 <style lang="scss">

@@ -1,4 +1,6 @@
-import type { InputEmits, InputProps, InputSlots } from '..';
+import type { InferDefaults } from '../utils';
+
+import { inputDefaultProps, type InputEmits, type InputExpose, type InputProps, type InputSlots } from './input';
 
 export type InputTextableProps<InputTextableValue> = InputProps<InputTextableValue> & {
   fill?: boolean;
@@ -11,7 +13,7 @@ export type InputTextableEmits<InputTextableValue> = InputEmits<InputTextableVal
 
 export type InputTextableSlots<InputTextableValue> = InputSlots & {
   'default'?: (props: {
-    inputRef: string;
+    ref: string;
     validate: InputTextableProps<InputTextableValue>['validate'];
     inputName: InputTextableProps<InputTextableValue>['name'];
     disabled: InputTextableProps<InputTextableValue>['disabled'];
@@ -26,3 +28,7 @@ export type InputTextableSlots<InputTextableValue> = InputSlots & {
   'trailing-icon'?: () => any;
   'cancel-icon'?: () => any;
 };
+
+export type InputTextableExpose = InputExpose;
+
+export const inputTextableDefaultProps: InferDefaults<InputTextableProps<any>> = inputDefaultProps;

@@ -1,6 +1,7 @@
 import type { EmitsToProps, Ref, ShortEmitsToObject } from 'vue';
 
 import type { DisabledProps, HoveredProps } from '../interactions';
+import type { InferDefaults } from '../utils';
 
 import { isValue } from '@skgn/kit';
 import { ref } from 'vue';
@@ -83,19 +84,8 @@ export function validateInputModel<TValue>(newValue: TValue, validate?: Validate
   return newModel;
 }
 
-// type A = ;
-
-// const a: A = {
-//   ''
-// }
-
-// export function bindInputEmits<TValue>(emit: EmitFn<InputNewEmits<TValue>>): ShortEmitsToObject<InputNewEmits<TValue>> {
-//   return {
-//     'update:value': value => emit('update:value', value),
-//     'update:valid': valid => emit('update:valid', valid),
-//     'update:touched': touched => emit('update:touched', touched),
-//     'update:error': error => emit('update:error', error),
-//     'focus': () => emit('focus'),
-//     'blur': () => emit('blur'),
-//   };
-// }
+export const inputDefaultProps: InferDefaults<InputProps<any>> = {
+  valid: true,
+  touched: false,
+  error: null,
+};

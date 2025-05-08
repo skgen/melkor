@@ -5,7 +5,10 @@
     class="mk-AppInputRadio"
     :data-is-focused="focused || undefined"
     :data-direction="props.direction"
-    v-bind="bindInteractionStateProps(props)"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      focused,
+    })"
   >
     <div class="mk-AppInputRadio-wrapper">
       <AppInputLabel v-if="$slots.label">
@@ -27,13 +30,21 @@
             :checked="isActiveOption(option.value)"
             :disabled="option.disabled || props.disabled"
             @click="handleChange"
-            @focus="onFocus"
+            @focus="(event) => {
+              const target = event.target as HTMLInputElement | null;
+              if (target?.matches(':focus-visible') || syntheticFocus) {
+                focusedIndex = index;
+                syntheticFocus = false;
+                onFocus();
+              }
+            }"
             @blur="onBlur"
           >
           <AppRadio
             :checked="isActiveOption(option.value)"
             :disabled="option.disabled && !props.disabled"
             :hovered="(!option.disabled && !props.disabled) && (props.hovered || hovered)"
+            :focused="focused && index === focusedIndex"
           />
           <span class="mk-AppInputRadio-input-option-label">
             <slot
@@ -56,9 +67,7 @@
   </div>
 </template>
 
-<script lang="ts" setup generic="TValue">
-import type { InputRadioEmits, InputRadioProps } from '../../features/io/input-radio';
-
+<script lang="ts" setup generic="TValue = boolean">
 import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { ref } from 'vue';
@@ -66,23 +75,31 @@ import { ref } from 'vue';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { inputRadioDefaultProps, type InputRadioEmits, type InputRadioExpose, type InputRadioProps, type InputRadioSlots } from '../../features/io/input-radio';
 import { formatError } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
 import AppRadio from '../AppRadio/AppRadio.vue';
 
-export type Props<TValue = boolean> = InputRadioProps<TValue>;
-type Emits<TValue> = InputRadioEmits<TValue>;
+export type Props<TValue> = InputRadioProps<TValue>;
+export type Emits<TValue> = InputRadioEmits<TValue>;
+export type Slots<TValue> = InputRadioSlots<TValue>;
+export type Expose = InputRadioExpose;
 
 const props = withDefaults(
   defineProps<Props<TValue>>(),
-  {
-    direction: 'vertical',
-  },
+  inputRadioDefaultProps,
 );
 
 const emit = defineEmits<Emits<TValue>>();
+
+defineSlots<Slots<TValue>>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
 
 const inputRefs = ref<HTMLInputElement[] | null>(null);
 const rootRef = ref<HTMLDivElement | null>(null);
@@ -100,6 +117,8 @@ const {
   props,
   emit,
 });
+
+const focusedIndex = ref(0);
 
 function isActiveOption(option: TValue) {
   return isEqual(option, props.value);
@@ -122,11 +141,15 @@ function handleChange(event: Event) {
   onChange(newValue);
 }
 
+const syntheticFocus = ref(false);
+
 function focus() {
   const firstInputRef = inputRefs.value?.find((v, i) => i === 0);
+
   if (!firstInputRef) {
     return;
   }
+  syntheticFocus.value = true;
   firstInputRef.focus();
 }
 
@@ -134,15 +157,11 @@ function blur() {
   if (!inputRefs.value) {
     return;
   }
+  syntheticFocus.value = false;
   for (const inputRef of inputRefs.value) {
     inputRef.blur();
   }
 }
-
-defineExpose({
-  focus,
-  blur,
-});
 </script>
 
 <style lang="scss">

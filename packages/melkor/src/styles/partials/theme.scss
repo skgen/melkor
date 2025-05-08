@@ -34,6 +34,7 @@
   // Shapes 1px, 1.4px, 2px
   --mk-border-size: 0.0625rem;
   --mk-border-size-hover: 0.0875rem;
+  --mk-border-size-focused: 0.125rem;
   --mk-border-size-active: 0.125rem;
   --mk-border-radius-size: 0.375rem;
   --mk-opacity-disabled: 0.4;
@@ -50,10 +51,12 @@
   // Inputs
   --mk-input-border-color: var(--mk-border-color);
   --mk-input-border-color-hover: var(--mk-border-color-hover);
+  --mk-input-border-color-focused: var(--mk-border-color-focused);
   --mk-input-border-color-active: var(--mk-border-color-active);
   --mk-input-border-radius-size: var(--mk-border-radius-size);
   --mk-input-border-size: var(--mk-border-size);
   --mk-input-border-size-hover: var(--mk-border-size-hover);
+  --mk-input-border-size-focused: var(--mk-border-size-focused);
   --mk-input-border-size-active: var(--mk-border-size-active);
   --mk-input-text-size: 0.875rem;
   --mk-input-line-height: 1.2;
@@ -86,6 +89,7 @@
   // Border
   --mk-border-color: var(--mk-shade-5);
   --mk-border-color-hover: var(--mk-shade-7);
+  --mk-border-color-focused: var(--mk-primary);
   --mk-border-color-active: var(--mk-primary);
 
   // Inputs
@@ -95,6 +99,7 @@
   --mk-input-icon-color: var(--mk-shade-9);
   --mk-input-background-color: var(--mk-shade-4-15);
   --mk-input-background-color-hover: transparent;
+  --mk-input-background-color-focused: transparent;
 }
 
 * {

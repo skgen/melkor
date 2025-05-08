@@ -3,15 +3,18 @@
     v-theme="theme"
     class="mk-AppInputSelectNative"
     :data-theme="theme"
-    :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
-    v-bind="bindInteractionStateProps(props)"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      focused,
+    })"
   >
     <AppInputLabel v-if="$slots.label">
       <slot name="label" />
     </AppInputLabel>
     <div class="mk-AppInputSelectNative-input">
       <select
+        ref="inputRef"
         :name="props.name"
         :disabled="props.disabled"
         @input="handleChange"
@@ -45,8 +48,6 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputSelectNativeEmits, InputSelectNativeProps, InputSelectNativeSlots } from '../../features/io/input-select.native';
-
 import { isEqual } from 'lodash-es';
 import { ref } from 'vue';
 
@@ -58,16 +59,29 @@ import { useGlobalConfig } from '../../composables/useGlobalConfig';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { inputSelectNativeDefaultProps, type InputSelectNativeEmits, type InputSelectNativeExpose, type InputSelectNativeProps, type InputSelectNativeSlots } from '../../features/io/input-select.native';
 import { formatError } from '../../features/utils';
 
 export type Props<TValue> = InputSelectNativeProps<TValue>;
+export type Emits<TValue> = InputSelectNativeEmits<TValue>;
+export type Slots<TValue> = InputSelectNativeSlots<TValue>;
+export type Expose = InputSelectNativeExpose;
 
-const props = defineProps<Props<TValue>>();
-const emit = defineEmits<InputSelectNativeEmits<TValue>>();
+const props = withDefaults(
+  defineProps<Props<TValue>>(),
+  inputSelectNativeDefaultProps,
+);
 
-defineSlots<InputSelectNativeSlots<TValue>>();
+const emit = defineEmits<Emits<TValue>>();
 
-const selectInput = ref<HTMLSelectElement | null>(null);
+defineSlots<Slots<TValue>>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
+
+const inputRef = ref<HTMLSelectElement | null>(null);
 
 const theme = useTheme();
 const globalConfig = useGlobalConfig();
@@ -98,23 +112,18 @@ function handleChange(evt: Event) {
 }
 
 function focus() {
-  if (!selectInput.value) {
+  if (!inputRef.value) {
     return;
   }
-  selectInput.value.focus();
+  inputRef.value.focus();
 }
 
 function blur() {
-  if (!selectInput.value) {
+  if (!inputRef.value) {
     return;
   }
-  selectInput.value.blur();
+  inputRef.value.blur();
 }
-
-defineExpose({
-  focus,
-  blur,
-});
 </script>
 
 <style lang="scss">
@@ -125,11 +134,11 @@ defineExpose({
   --mk-input-select-native-background-color-hover: var(--mk-input-background-color-hover);
   --mk-input-select-native-border-color: var(--mk-input-border-color);
   --mk-input-select-native-border-color-hover: var(--mk-input-border-color-hover);
-  --mk-input-select-native-border-color-active: var(--mk-input-border-color-active);
+  --mk-input-select-native-border-color-focused: var(--mk-input-border-color-focused);
   --mk-input-select-native-border-radius-size: var(--mk-input-border-radius-size);
   --mk-input-select-native-border-size: var(--mk-input-border-size);
   --mk-input-select-native-border-size-hover: var(--mk-input-border-size-hover);
-  --mk-input-select-native-border-size-active: var(--mk-input-border-size-active);
+  --mk-input-select-native-border-size-focused: var(--mk-input-border-size-focused);
   --mk-input-select-native-text-color: var(--mk-input-text-color);
   --mk-input-select-native-text-size: var(--mk-input-text-size);
   --mk-input-select-native-line-height: var(--mk-input-line-height);
@@ -208,8 +217,8 @@ defineExpose({
     @include melkor.on-focused {
       #{$this} {
         &-input {
-          box-shadow: inset 0 0 0.01px var(--mk-input-select-native-border-size-active)
-            var(--mk-input-select-native-border-color-active);
+          box-shadow: inset 0 0 0.01px var(--mk-input-select-native-border-size-focused)
+            var(--mk-input-select-native-border-color-focused);
         }
       }
     }

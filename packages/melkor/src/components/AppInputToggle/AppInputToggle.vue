@@ -1,5 +1,6 @@
 <template>
   <AppInputCheckable
+    ref="checkableRef"
     class="mk-AppInputToggle"
     v-bind="props"
     @update:value="(value) => emit('update:value', value)"
@@ -28,9 +29,10 @@
         checked,
         onFocus,
         onBlur,
-        inputRef,
+        ref: inputRef,
         inputName,
         hovered,
+        focused,
       }"
     >
       <input
@@ -40,36 +42,71 @@
         :checked="checked"
         :disabled="disabled"
         @input="onChange"
-        @focus="onFocus"
+        @focus="(event: Event) => {
+          const target = event.target as HTMLInputElement | null;
+          if (target?.matches(':focus-visible') || syntheticFocus) {
+            syntheticFocus = false;
+            onFocus();
+          }
+        }"
         @blur="onBlur"
       >
       <AppToggle
         :checked="checked"
         :disabled="disabled"
         :hovered="hovered"
+        :focused="focused"
       />
     </template>
   </AppInputCheckable>
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputToggleEmits, InputToggleProps, InputToggleSlots } from '../../features/io/input-toggle';
+import type { InputCheckableExpose } from '../../features/io/input-checkable';
 
+import { ref } from 'vue';
+
+import { inputToggleDefaultProps, type InputToggleEmits, type InputToggleExpose, type InputToggleProps, type InputToggleSlots } from '../../features/io/input-toggle';
 import AppInputCheckable from '../AppInputCheckable/AppInputCheckable.vue';
 import AppToggle from '../AppToggle/AppToggle.vue';
 
-export type Props<TValue = boolean> = InputToggleProps<TValue>;
-type Emits<TValue> = InputToggleEmits<TValue>;
+export type Props<TValue> = InputToggleProps<TValue>;
+export type Emits<TValue> = InputToggleEmits<TValue>;
+export type Slots<TValue> = InputToggleSlots<TValue>;
+export type Expose = InputToggleExpose;
 
 const props = withDefaults(
   defineProps<Props<TValue>>(),
-  {
-    direction: 'vertical',
-  },
+  inputToggleDefaultProps,
 );
 const emit = defineEmits<Emits<TValue>>();
 
 defineSlots<InputToggleSlots>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
+
+const checkableRef = ref<InputCheckableExpose | null>(null);
+const syntheticFocus = ref(false);
+
+function focus() {
+  if (!checkableRef.value) {
+    return;
+  }
+
+  syntheticFocus.value = true;
+  checkableRef.value.focus();
+}
+
+function blur() {
+  if (!checkableRef.value) {
+    return;
+  }
+  syntheticFocus.value = false;
+  checkableRef.value.blur();
+}
 </script>
 
 <style lang="scss">

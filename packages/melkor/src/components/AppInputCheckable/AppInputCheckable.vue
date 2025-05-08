@@ -3,9 +3,11 @@
     ref="rootRef"
     v-theme="theme"
     class="mk-AppInputCheckable"
-    :data-is-focused="focused || undefined"
     :data-direction="props.direction"
-    v-bind="bindInteractionStateProps(props)"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      focused,
+    })"
   >
     <div class="mk-AppInputCheckable-wrapper">
       <AppInputLabel v-if="$slots.label">
@@ -14,13 +16,14 @@
 
       <div class="mk-AppInputCheckable-input">
         <slot
-          input-ref="inputRef"
+          ref="inputRef"
           :hovered="props.hovered || hovered"
           :validate="props.validate"
           :input-name="props.name"
           :disabled="props.disabled"
           :value="props.value"
           :checked="renderChecked"
+          :focused="focused"
           :on-change="handleChange"
           :on-focus="onFocus"
           :on-blur="onBlur"
@@ -45,8 +48,6 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputCheckableEmits, InputCheckableProps, InputCheckableSlots } from '../../features/io/input-checkable';
-
 import { isDefined } from '@skgn/kit';
 import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
@@ -55,23 +56,30 @@ import { computed, ref } from 'vue';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { inputCheckableDefaultProps, type InputCheckableEmits, type InputCheckableExpose, type InputCheckableProps, type InputCheckableSlots } from '../../features/io/input-checkable';
 import { formatError } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
 import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
 
-export type Props<TValue = boolean> = InputCheckableProps<TValue>;
+export type Props<TValue> = InputCheckableProps<TValue>;
+export type Emits<TValue> = InputCheckableEmits<TValue>;
+export type Slots<TValue> = InputCheckableSlots<TValue>;
+export type Expose = InputCheckableExpose;
 
 const props = withDefaults(
   defineProps<Props<TValue>>(),
-  {
-    direction: 'vertical',
-  },
+  inputCheckableDefaultProps,
 );
 
-const emit = defineEmits<InputCheckableEmits<TValue>>();
+const emit = defineEmits<Emits<TValue>>();
 
-defineSlots<InputCheckableSlots<TValue>>();
+defineSlots<Slots<TValue>>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
 
 const inputRef = ref<HTMLInputElement | null>(null);
 const rootRef = ref<HTMLDivElement | null>(null);
@@ -112,6 +120,7 @@ function focus() {
   if (!inputRef.value) {
     return;
   }
+
   inputRef.value.focus();
 }
 
@@ -121,11 +130,6 @@ function blur() {
   }
   inputRef.value.blur();
 }
-
-defineExpose({
-  focus,
-  blur,
-});
 </script>
 
 <style lang="scss">

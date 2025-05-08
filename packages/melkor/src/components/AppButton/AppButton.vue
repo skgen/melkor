@@ -4,8 +4,7 @@
     class="mk-AppButton"
     :data-type="props.type"
     :data-size="props.size"
-    :disabled="props.isDisabled || undefined"
-    :data-is-active="props.isActive || undefined"
+    v-bind="bindInteractionStateProps(props)"
   >
     <span>
       <slot />
@@ -15,13 +14,12 @@
 
 <script lang="ts" setup>
 import { useTheme } from '../../composables/useTheme';
+import { type ActiveProps, bindInteractionStateProps, type DisabledProps } from '../../features/interactions';
 
-export interface Props {
+export type Props = {
   type?: 'plain' | 'outline' ;
   size?: 'wide' | 'tight';
-  isDisabled?: boolean;
-  isActive?: boolean;
-}
+} & DisabledProps & ActiveProps;
 
 const props = withDefaults(
   defineProps<Props>(),
@@ -51,15 +49,20 @@ const theme = useTheme();
   --mk-button-outline-background-color-hover: var(--mk-input-background-color-hover);
   --mk-button-outline-border-color: var(--mk-input-border-color);
   --mk-button-outline-border-color-hover: var(--mk-input-border-color-hover);
+  --mk-button-outline-border-color-focused: var(--mk-input-border-color-focused);
   --mk-button-outline-border-color-active: var(--mk-input-border-color-active);
   --mk-button-outline-border-size: var(--mk-input-border-size);
   --mk-button-outline-border-size-hover: var(--mk-input-border-size-hover);
+  --mk-button-outline-border-size-focused: var(--mk-input-border-size-focused);
   --mk-button-outline-border-size-active: var(--mk-input-border-size-active);
   --mk-button-outline-text-color: var(--mk-text-color);
   --mk-button-plain-text-color: var(--mk-on-primary);
   --mk-button-plain-background-color: var(--mk-primary);
   --mk-button-plain-background-color-hover: oklch(from var(--mk-primary) calc(l + 0.05) c h);
+  --mk-button-plain-background-color-focused: oklch(from var(--mk-primary) calc(l - 0.05) c h);
   --mk-button-plain-background-color-active: oklch(from var(--mk-primary) calc(l - 0.05) c h);
+  --mk-button-plain-border-size-focused: var(--mk-input-border-size-focused);
+  --mk-button-plain-border-color-focused: var(--mk-input-border-color-focused);
 
   position: relative;
   box-sizing: content-box;
@@ -69,6 +72,7 @@ const theme = useTheme();
   line-height: var(--mk-line-height);
   cursor: pointer;
   border-radius: var(--mk-button-border-radius-size);
+  outline: none;
   transition:
     background-color var(--mk-transition-color-duration),
     color var(--mk-transition-color-duration),
@@ -90,13 +94,19 @@ const theme = useTheme();
     color: var(--mk-button-plain-text-color);
     background-color: var(--mk-button-plain-background-color);
 
+    @include melkor.on-active {
+      background-color: var(--mk-button-plain-background-color-active) !important;
+    }
+
     @include melkor.on-not-disabled {
       @include melkor.on-hover {
         background-color: var(--mk-button-plain-background-color-hover);
       }
 
-      @include melkor.on-active {
-        background-color: var(--mk-button-plain-background-color-active);
+      // @include melkor.on-not-active {
+      @include melkor.on-focused-visible {
+        outline: var(--mk-button-plain-border-size-focused) solid var(--mk-button-plain-border-color-focused);
+        outline-offset: 2px;
       }
     }
   }
@@ -106,6 +116,11 @@ const theme = useTheme();
     background-color: var(--mk-button-outline-background-color);
     box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size) var(--mk-button-outline-border-color);
 
+    @include melkor.on-active {
+      box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-active)
+        var(--mk-button-outline-border-color-active) !important;
+    }
+
     @include melkor.on-not-disabled {
       @include melkor.on-hover {
         background-color: var(--mk-button-outline-background-color-hover);
@@ -113,9 +128,9 @@ const theme = useTheme();
           var(--mk-button-outline-border-color-hover);
       }
 
-      @include melkor.on-active {
-        box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-active)
-          var(--mk-button-outline-border-color-active);
+      @include melkor.on-focused-visible {
+        box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-focused)
+          var(--mk-button-outline-border-color-focused);
       }
     }
   }

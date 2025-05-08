@@ -138,7 +138,8 @@ function handlePage(pageNumber: number) {
   --mk-pagination-border-color-active: var(--mk-input-border-color-active);
   --mk-pagination-border-radius-size: var(--mk-input-border-radius-size);
   --mk-pagination-border-size: var(--mk-input-border-size);
-  --mk-pagination-border-size-active: var(--mk-input-border-size-hover);
+
+  // --mk-pagination-border-size-active: var(--mk-input-border-size-hover);
   --mk-pagination-slot-size: var(--mk-size-9);
   --mk-pagination-transition-duration: var(--mk-transition-opacity-duration);
 

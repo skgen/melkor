@@ -2,10 +2,12 @@
   <label
     v-theme="theme"
     class="mk-AppInputTextable"
-    :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
     :data-type="type"
-    v-bind="bindInteractionStateProps(props)"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      focused,
+    })"
   >
     <AppInputLabel v-if="$slots.label">
       <slot name="label" />
@@ -16,7 +18,7 @@
       </span>
 
       <slot
-        input-ref="inputRef"
+        ref="inputRef"
         :validate="props.validate"
         :input-name="props.name"
         :disabled="props.disabled"
@@ -56,8 +58,6 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputTextableEmits, InputTextableProps, InputTextableSlots } from '../../features/io/input-textable';
-
 import { isValue } from '@skgn/kit';
 import { computed, ref } from 'vue';
 
@@ -65,6 +65,7 @@ import { useGlobalConfig } from '../../composables/useGlobalConfig';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { inputTextableDefaultProps, type InputTextableEmits, type InputTextableExpose, type InputTextableProps, type InputTextableSlots } from '../../features/io/input-textable';
 import { formatError } from '../../features/utils';
 import AppIcon from '../AppIcon/AppIcon.vue';
 import AppInputError from '../AppInputError/AppInputError.vue';
@@ -73,12 +74,23 @@ import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
 import AppInputTextableCancel from '../AppInputTextableCancel/AppInputTextableCancel.vue';
 
 export type Props<TValue> = InputTextableProps<TValue>;
+export type Emits<TValue> = InputTextableEmits<TValue>;
+export type Slots<TValue> = InputTextableSlots<TValue>;
+export type Expose = InputTextableExpose;
 
-const props = defineProps<Props<TValue>>();
+const props = withDefaults(
+  defineProps<Props<TValue>>(),
+  inputTextableDefaultProps,
+);
 
 const emit = defineEmits<InputTextableEmits<TValue>>();
 
-defineSlots<InputTextableSlots<TValue>>();
+defineSlots<Slots<TValue>>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
 
 const inputRef = ref<HTMLInputElement | null>(null);
 
@@ -142,11 +154,6 @@ function blur() {
   }
   inputRef.value.blur();
 }
-
-defineExpose({
-  focus,
-  blur,
-});
 </script>
 
 <style lang="scss">
@@ -157,11 +164,11 @@ defineExpose({
   --mk-input-textable-background-color-hover: var(--mk-input-background-color-hover);
   --mk-input-textable-border-color: var(--mk-input-border-color);
   --mk-input-textable-border-color-hover: var(--mk-input-border-color-hover);
-  --mk-input-textable-border-color-active: var(--mk-input-border-color-active);
+  --mk-input-textable-border-color-focused: var(--mk-input-border-color-focused);
   --mk-input-textable-border-radius-size: var(--mk-input-border-radius-size);
   --mk-input-textable-border-size: var(--mk-input-border-size);
   --mk-input-textable-border-size-hover: var(--mk-input-border-size-hover);
-  --mk-input-textable-border-size-active: var(--mk-input-border-size-active);
+  --mk-input-textable-border-size-focused: var(--mk-input-border-size-focused);
   --mk-input-textable-text-color: var(--mk-input-text-color);
   --mk-input-textable-text-size: var(--mk-input-text-size);
   --mk-input-textable-line-height: var(--mk-input-line-height);
@@ -251,8 +258,8 @@ defineExpose({
     @include melkor.on-focused {
       #{$this} {
         &-input {
-          box-shadow: inset 0 0 0.01px var(--mk-input-textable-border-size-active)
-            var(--mk-input-textable-border-color-active);
+          box-shadow: inset 0 0 0.01px var(--mk-input-textable-border-size-focused)
+            var(--mk-input-textable-border-color-focused);
         }
       }
     }

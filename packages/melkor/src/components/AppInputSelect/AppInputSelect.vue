@@ -5,7 +5,10 @@
     :data-theme="theme"
     :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
-    v-bind="bindInteractionStateProps(props)"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      focused: focused || open,
+    })"
   >
     <AppInputLabel v-if="$slots.label">
       <slot name="label" />
@@ -14,12 +17,20 @@
     <PopoverRoot v-model:open="open">
       <PopoverTrigger as-child>
         <div
+          ref="inputRef"
           class="mk-AppInputSelect-input"
           role="button"
           tabindex="0"
           @keydown="handleKeyDown"
+          @focus="onFocus"
+          @blur="onBlur"
         >
-          <input type="hidden" :value="JSON.stringify(props.value)" :name="props.name">
+          <input
+            type="hidden"
+            :disabled="props.disabled"
+            :value="JSON.stringify(props.value)"
+            :name="props.name"
+          >
           <span class="mk-AppInputSelect-select">
             <span class="mk-AppInputSelect-select-value">
               <slot name="value" v-bind="{ value: props.value }">
@@ -72,8 +83,6 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import type { InputSelectEmits, InputSelectExpose, InputSelectProps, InputSelectSlots } from '../../features/io/input-select';
-
 import { isArray } from '@skgn/kit';
 import { isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
@@ -87,14 +96,29 @@ import { useGlobalConfig } from '../../composables/useGlobalConfig';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { inputSelectDefaultProps, type InputSelectEmits, type InputSelectExpose, type InputSelectProps, type InputSelectSlots } from '../../features/io/input-select';
 import { formatError } from '../../features/utils';
 
 export type Props<TValue> = InputSelectProps<TValue>;
+export type Emits<TValue> = InputSelectEmits<TValue>;
+export type Slots<TValue> = InputSelectSlots<TValue>;
+export type Expose = InputSelectExpose;
 
-const props = defineProps<Props<TValue>>();
-const emit = defineEmits<InputSelectEmits<TValue>>();
+const props = withDefaults(
+  defineProps<Props<TValue>>(),
+  inputSelectDefaultProps,
+);
 
-defineSlots<InputSelectSlots<TValue>>();
+const emit = defineEmits<Emits<TValue>>();
+
+defineSlots<Slots<TValue>>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
+
+const inputRef = ref<HTMLDivElement | null>(null);
 
 const theme = useTheme();
 const globalConfig = useGlobalConfig();
@@ -157,17 +181,29 @@ watch(open, (newOpen) => {
 });
 
 function focus() {
+  if (!inputRef.value) {
+    return;
+  }
+
   open.value = true;
 }
 
 function blur() {
+  if (!inputRef.value) {
+    return;
+  }
+
   open.value = false;
 }
 
-defineExpose<InputSelectExpose>({
-  focus,
-  blur,
-});
+// function focus() {
+//   inputRef.va
+//   open.value = true;
+// }
+
+// function blur() {
+//   open.value = false;
+// }
 </script>
 
 <style lang="scss">
@@ -179,11 +215,11 @@ defineExpose<InputSelectExpose>({
   --mk-input-select-background-color-hover: var(--mk-input-background-color-hover);
   --mk-input-select-border-color: var(--mk-input-border-color);
   --mk-input-select-border-color-hover: var(--mk-input-border-color-hover);
-  --mk-input-select-border-color-active: var(--mk-input-border-color-active);
+  --mk-input-select-border-color-focused: var(--mk-input-border-color-focused);
   --mk-input-select-border-radius-size: var(--mk-input-border-radius-size);
   --mk-input-select-border-size: var(--mk-input-border-size);
   --mk-input-select-border-size-hover: var(--mk-input-border-size-hover);
-  --mk-input-select-border-size-active: var(--mk-input-border-size-active);
+  --mk-input-select-border-size-focused: var(--mk-input-border-size-focused);
   --mk-input-select-text-color: var(--mk-input-text-color);
   --mk-input-select-text-size: var(--mk-input-text-size);
   --mk-input-select-line-height: var(--mk-input-line-height);
@@ -217,6 +253,7 @@ defineExpose<InputSelectExpose>({
     overflow: hidden;
     background-color: var(--mk-input-select-background-color);
     border-radius: var(--mk-input-select-border-radius-size);
+    outline: none;
     box-shadow: inset 0 0 0.01px var(--mk-input-select-border-size) var(--mk-input-select-border-color);
     transition:
       background-color var(--mk-transition-color-duration),
@@ -305,8 +342,8 @@ defineExpose<InputSelectExpose>({
     @include melkor.on-focused {
       #{$this} {
         &-input {
-          box-shadow: inset 0 0 0.01px var(--mk-input-select-border-size-active)
-            var(--mk-input-select-border-color-active);
+          box-shadow: inset 0 0 0.01px var(--mk-input-select-border-size-focused)
+            var(--mk-input-select-border-color-focused);
         }
       }
     }

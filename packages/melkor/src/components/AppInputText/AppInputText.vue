@@ -1,5 +1,6 @@
 <template>
   <AppInputTextable
+    ref="textableRef"
     class="mk-AppInputText"
     v-bind="props"
     @update:value="(value) => emit('update:value', value)"
@@ -24,7 +25,7 @@
     <template v-if="$slots['trailing-icon']" #trailing-icon>
       <slot name="trailing-icon" />
     </template>
-    <template #default="{ placeholder, disabled, onChange, value, type, onFocus, onBlur, inputRef, inputName }">
+    <template #default="{ placeholder, disabled, onChange, value, type, onFocus, onBlur, ref: inputRef, inputName }">
       <input
         :ref="inputRef"
         :name="inputName"
@@ -54,18 +55,45 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputTextEmits, InputTextProps, InputTextSlots } from '../../features/io/input-text';
+import type { InputTextableExpose } from '../../features/io/input-textable';
 
+import { ref } from 'vue';
+
+import { inputTextDefaultProps, type InputTextEmits, type InputTextExpose, type InputTextProps, type InputTextSlots } from '../../features/io/input-text';
 import AppInputTextable from '../AppInputTextable/AppInputTextable.vue';
 
 export type Props = InputTextProps;
+export type Emits = InputTextEmits;
+export type Slots = InputTextSlots;
+export type Expose = InputTextExpose;
 
-const props = withDefaults(defineProps<Props>(), {
-  valid: true,
-  touched: false,
-  error: null,
+const props = withDefaults(
+  defineProps<Props>(),
+  inputTextDefaultProps,
+);
+const emit = defineEmits<Emits>();
+
+defineSlots<Slots>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
 });
-const emit = defineEmits<InputTextEmits>();
 
-defineSlots<InputTextSlots>();
+const textableRef = ref<InputTextableExpose | null>(null);
+
+function focus() {
+  if (!textableRef.value) {
+    return;
+  }
+
+  textableRef.value.focus();
+}
+
+function blur() {
+  if (!textableRef.value) {
+    return;
+  }
+  textableRef.value.blur();
+}
 </script>

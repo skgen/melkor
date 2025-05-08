@@ -1,6 +1,8 @@
 import type { Flatten } from '@skgn/kit';
 
-import type { InputEmits, InputExpose, InputProps, InputSlots } from '..';
+import type { InferDefaults } from '../utils';
+
+import { inputDefaultProps, type InputEmits, type InputExpose, type InputProps, type InputSlots } from './input';
 
 export type InputSelectProps<TValue> = InputProps<TValue> & {
   fill?: boolean;
@@ -25,3 +27,5 @@ export type InputSelectSlots<TValue> = InputSlots & {
 };
 
 export type InputSelectExpose = InputExpose;
+
+export const inputSelectDefaultProps: InferDefaults<InputSelectProps<any>> = inputDefaultProps;

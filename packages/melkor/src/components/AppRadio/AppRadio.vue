@@ -2,8 +2,10 @@
   <div
     v-theme="theme"
     class="mk-AppRadio"
-    v-bind="bindInteractionStateProps(props)"
-    :data-is-checked="props.checked || undefined"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      active: props.checked,
+    })"
   />
 </template>
 
@@ -28,9 +30,11 @@ const theme = useTheme();
   --mk-radio-background-color-hover: var(--mk-input-background-color-hover);
   --mk-radio-border-color: var(--mk-input-border-color);
   --mk-radio-border-color-hover: var(--mk-input-border-color-hover);
+  --mk-radio-border-color-focused: var(--mk-input-border-color-focused);
   --mk-radio-border-color-active: var(--mk-input-border-color-active);
   --mk-radio-border-size: var(--mk-input-border-size);
   --mk-radio-border-size-hover: var(--mk-input-border-size-hover);
+  --mk-radio-border-size-focused: var(--mk-input-border-size-focused);
   --mk-radio-border-size-active: var(--mk-input-border-size-active);
   --mk-radio-size: 16px;
   --mk-radio-transition-duration: var(--mk-transition-2-duration);
@@ -64,7 +68,7 @@ const theme = useTheme();
     transition-delay: calc(var(--mk-radio-transition-duration) / 2);
   }
 
-  &[data-is-checked='true'] {
+  @include melkor.on-active {
     box-shadow: inset 0 0 0.01px var(--mk-radio-border-size-active) var(--mk-radio-border-color-active);
     transition-delay: calc(var(--mk-radio-transition-duration) / 2);
 
@@ -82,6 +86,12 @@ const theme = useTheme();
 
       &::before {
         box-shadow: inset 0 0 0.01px var(--mk-radio-border-size-hover) var(--mk-radio-border-color-hover);
+      }
+    }
+
+    @include melkor.on-focused {
+      &::before {
+        box-shadow: inset 0 0 0.01px var(--mk-radio-border-size-focused) var(--mk-radio-border-color-focused);
       }
     }
   }

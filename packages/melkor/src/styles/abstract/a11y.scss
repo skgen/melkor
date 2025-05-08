@@ -48,6 +48,19 @@
   }
 }
 
+@mixin on-not-focused-visible() {
+  &:not(:focus-visible, [data-is-focused='true']) {
+    @content;
+  }
+}
+
+@mixin on-focused-visible() {
+  &:focus-visible,
+  &[data-is-focused='true'] {
+    @content;
+  }
+}
+
 @mixin on-active() {
   &:active,
   &[data-is-active='true'] {

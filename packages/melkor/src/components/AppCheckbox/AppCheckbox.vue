@@ -2,8 +2,10 @@
   <div
     v-theme="theme"
     class="mk-AppCheckbox"
-    v-bind="bindInteractionStateProps(props)"
-    :data-is-checked="props.checked || undefined"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      active: props.checked,
+    })"
   >
     <span class="mk-AppCheckbox-icon">
       <slot>
@@ -39,12 +41,15 @@ const globalConfig = useGlobalConfig();
 .mk-AppCheckbox {
   --mk-checkbox-background-color: var(--mk-input-background-color);
   --mk-checkbox-background-color-hover: var(--mk-input-background-color-hover);
+  --mk-checkbox-background-color-focused: var(--mk-input-background-color-focused);
   --mk-checkbox-border-color: var(--mk-input-border-color);
   --mk-checkbox-border-color-hover: var(--mk-input-border-color-hover);
+  --mk-checkbox-border-color-focused: var(--mk-input-border-color-focused);
   --mk-checkbox-border-color-active: var(--mk-input-border-color-active);
   --mk-checkbox-border-radius-size: var(--mk-input-border-radius-size);
   --mk-checkbox-border-size: var(--mk-input-border-size);
   --mk-checkbox-border-size-hover: var(--mk-input-border-size-hover);
+  --mk-checkbox-border-size-focused: var(--mk-input-border-size-active);
   --mk-checkbox-border-size-active: calc(var(--mk-checkbox-size) / 2);
   --mk-checkbox-icon-color: var(--mk-on-primary);
   --mk-checkbox-icon-size: 14px;
@@ -106,7 +111,7 @@ const globalConfig = useGlobalConfig();
     --mk-icon-color: var(--mk-checkbox-icon-color);
   }
 
-  &[data-is-checked='true'] {
+  @include melkor.on-active {
     box-shadow: inset 0 0 0.01px var(--mk-checkbox-border-size-active) var(--mk-checkbox-border-color-active) !important;
     transition-delay: 0ms;
 
@@ -130,6 +135,11 @@ const globalConfig = useGlobalConfig();
     @include melkor.on-hover {
       background-color: var(--mk-checkbox-background-color-hover);
       box-shadow: inset 0 0 0.01px var(--mk-checkbox-border-size-hover) var(--mk-checkbox-border-color-hover);
+    }
+
+    @include melkor.on-focused {
+      background-color: var(--mk-checkbox-background-color-focused);
+      box-shadow: inset 0 0 0.01px var(--mk-checkbox-border-size-focused) var(--mk-checkbox-border-color-focused);
     }
   }
 

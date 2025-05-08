@@ -2,8 +2,10 @@
   <div
     v-theme="theme"
     class="mk-AppToggle"
-    v-bind="bindInteractionStateProps(props)"
-    :data-is-checked="props.checked || undefined"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      active: props.checked,
+    })"
   />
 </template>
 
@@ -25,16 +27,20 @@ const theme = useTheme();
 
 .mk-AppToggle {
   --mk-toggle-background-color: var(--mk-input-background-color);
-  --mk-toggle-background-color-hover: transparent;
+  --mk-toggle-background-color-hover: var(--mk-input-background-color-hover);
+  --mk-toggle-background-color-focused: var(--mk-input-background-color-focused);
   --mk-toggle-border-color: var(--mk-input-border-color);
   --mk-toggle-border-color-hover: var(--mk-input-border-color-hover);
-  --mk-toggle-border-color-active: var(--mk-input-border-color-active);
+  --mk-toggle-border-color-focused: var(--mk-input-border-color-focused);
+  --mk-toggle-border-color-active: var(--mk-input-border-color-focused);
   --mk-toggle-border-size: var(--mk-input-border-size);
   --mk-toggle-border-size-hover: var(--mk-input-border-size-hover);
+  --mk-toggle-border-size-focused: var(--mk-input-border-size-focused);
   --mk-toggle-border-size-active: var(--mk-input-border-size-active);
   --mk-toggle-padding-size: 2px;
   --mk-toggle-target-size: 16px;
   --mk-toggle-target-scale-hover: 90%;
+  --mk-toggle-target-scale-focused: 90%;
   --mk-toggle-target-scale-active: 85%;
   --mk-toggle-target-color: var(--mk-border-color);
   --mk-toggle-target-color-active: var(--mk-on-primary);
@@ -68,7 +74,7 @@ const theme = useTheme();
       transform var(--mk-toggle-transition-duration);
   }
 
-  &[data-is-checked='true'] {
+  @include melkor.on-active {
     box-shadow: inset 0 0 0.01px var(--mk-toggle-border-size-active) var(--mk-toggle-border-color-active) !important;
 
     &::before {
@@ -85,6 +91,17 @@ const theme = useTheme();
       &::before {
         background-color: var(--mk-toggle-border-color-hover);
         transform: scale(var(--mk-toggle-target-scale-hover));
+      }
+    }
+
+    @include melkor.on-focused {
+      background-color: var(--mk-toggle-background-color-focused);
+      box-shadow: inset 0 0 0.01px var(--mk-toggle-border-size-hover) var(--mk-toggle-border-color-focused);
+
+      &::before {
+        // This is intended => hover on focused
+        background-color: var(--mk-toggle-border-color-hover);
+        transform: scale(var(--mk-toggle-target-scale-focused));
       }
     }
   }

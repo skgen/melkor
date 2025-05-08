@@ -2,9 +2,11 @@
   <label
     v-theme="theme"
     class="mk-AppInputColor"
-    :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
-    v-bind="bindInteractionStateProps(props)"
+    v-bind="bindInteractionStateProps({
+      ...props,
+      focused,
+    })"
   >
     <AppInputLabel v-if="$slots.label">
       <slot name="label" />
@@ -15,6 +17,7 @@
         :style="`background-color: ${props.value};`"
       />
       <input
+        ref="inputRef"
         :name="props.name"
         type="color"
         :value="props.value"
@@ -60,14 +63,13 @@
 </template>
 
 <script lang="ts" setup>
-import type { InputColorEmits, InputColorProps, InputColorSlots, InputColorValue } from '../../features/io/input-color';
-
 import { isValue } from '@skgn/kit';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { inputColorDefaultProps, type InputColorEmits, type InputColorExpose, type InputColorProps, type InputColorSlots, type InputColorValue } from '../../features/io/input-color';
 import { formatError } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';
@@ -75,11 +77,25 @@ import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
 import AppInputTextableCancel from '../AppInputTextableCancel/AppInputTextableCancel.vue';
 
 export type Props = InputColorProps;
+export type Emits = InputColorEmits;
+export type Slots = InputColorSlots;
+export type Expose = InputColorExpose;
 
-const props = defineProps<Props>();
-const emit = defineEmits<InputColorEmits>();
+const props = withDefaults(
+  defineProps<Props>(),
+  inputColorDefaultProps,
+);
 
-defineSlots<InputColorSlots>();
+const emit = defineEmits<Emits>();
+
+defineSlots<Slots>();
+
+defineExpose<Expose>({
+  focus,
+  blur,
+});
+
+const inputRef = ref<HTMLInputElement | null>(null);
 
 const theme = useTheme();
 
@@ -126,6 +142,21 @@ const isCancelable = computed(() => props.cancelable && isValue(props.value));
 function handleCancel() {
   onChange(null);
 }
+
+function focus() {
+  if (!inputRef.value) {
+    return;
+  }
+  inputRef.value.focus();
+  inputRef.value.click();
+}
+
+function blur() {
+  if (!inputRef.value) {
+    return;
+  }
+  inputRef.value.blur();
+}
 </script>
 
 <style lang="scss">
@@ -135,11 +166,11 @@ function handleCancel() {
   --mk-input-color-background-color: var(--mk-input-background-color);
   --mk-input-color-border-color: var(--mk-input-border-color);
   --mk-input-color-border-color-hover: var(--mk-input-border-color-hover);
-  --mk-input-color-border-color-active: var(--mk-input-border-color-active);
+  --mk-input-color-border-color-focused: var(--mk-input-border-color-focused);
   --mk-input-color-border-radius-size: var(--mk-input-border-radius-size);
   --mk-input-color-border-size: var(--mk-input-border-size);
   --mk-input-color-border-size-hover: var(--mk-input-border-size-hover);
-  --mk-input-color-border-size-active: var(--mk-input-border-size-active);
+  --mk-input-color-border-size-focused: var(--mk-input-border-size-focused);
   --mk-input-color-text-color: var(--mk-input-text-color);
   --mk-input-color-text-size: var(--mk-input-text-size);
   --mk-input-color-line-height: var(--mk-input-line-height);
@@ -243,8 +274,8 @@ function handleCancel() {
     @include melkor.on-focused {
       #{$this} {
         &-input {
-          box-shadow: inset 0 0 0.01px var(--mk-input-color-border-size-active)
-            var(--mk-input-color-border-color-active);
+          box-shadow: inset 0 0 0.01px var(--mk-input-color-border-size-focused)
+            var(--mk-input-color-border-color-focused);
         }
       }
     }
