@@ -100,6 +100,10 @@
   --mk-input-background-color: var(--mk-shade-4-15);
   --mk-input-background-color-hover: transparent;
   --mk-input-background-color-focused: transparent;
+
+  // Indexes
+  --mk-fullscreen-layer-z-index: 1000;
+  --mk-floating-layer-z-index: 1100;
 }
 
 * {
