@@ -1,7 +1,7 @@
 {
   "name": "@skgn/melkor-nuxt",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
@@ -16,17 +16,14 @@
   ],
   "scripts": {
     "build-runtime": "tsx scripts/build-runtime.ts",
+    "stub": "nuxt-module-build build --stub && nuxt-module-build prepare",
     "prepack": "pnpm build-runtime && nuxt-module-build build",
-    "dev": "nuxi dev playground",
-    "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
     "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "review": "pnpm review:typescript && pnpm review:eslint",
     "review:typescript": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
-    "review:eslint": "eslint . --fix",
-    "postinstall": "pnpm build-runtime && pnpm dev:prepare"
+    "review:eslint": "eslint . --fix"
   },
   "dependencies": {
     "@nuxt/kit": "catalog:",

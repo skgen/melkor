@@ -96,6 +96,11 @@ export default defineNuxtModule<MelkorModuleOptions>({
     // Inject css
     // ctx.nuxt.options.css = ['@skgn/melkor/styles', ...nuxt.options.css];
 
+    ctx.nuxt.options.build.transpile = [
+      ...ctx.nuxt.options.build.transpile,
+      '@skgn/melkor',
+    ];
+
     // Inject config
     ctx.nuxt.options.runtimeConfig.public.melkor = ctx.melkorOptions;
 
