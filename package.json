@@ -1,8 +1,12 @@
 {
   "name": "@skgn/melkor-monorepo",
   "type": "module",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "publish:melkor": "pnpm publish packages/melkor --access public",
+    "publish:melkor-nuxt": "pnpm publish packages/melkor-nuxt --access public"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
     "eslint": "catalog:",
