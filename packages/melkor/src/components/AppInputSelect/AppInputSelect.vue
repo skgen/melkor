@@ -47,7 +47,7 @@
         </div>
       </PopoverTrigger>
       <PopoverPortal>
-        <PopoverContent :side-offset="4" side="bottom" align="end">
+        <PopoverContent :side-offset="4" side="bottom" align="end" :style="{ zIndex: 'var(--mk-floating-layer-z-index)' }">
           <div v-theme="theme" data-root="mk-AppInputSelect" class="mk-AppInputSelect-menu">
             <template v-if="props.options.length">
               <button
