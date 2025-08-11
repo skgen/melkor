@@ -25,10 +25,9 @@
   --mk-line-height: 1.1875;
 
   // Layout
-  $m: 0.25rem;
 
   @for $i from 1 through 24 {
-    --mk-size-#{$i}: #{$m * $i};
+    --mk-size-#{$i}: #{variables.$m * $i};
   }
 
   // Shapes 1px, 1.4px, 2px
@@ -49,10 +48,6 @@
   --mk-transition-transform-duration: var(--mk-transition-2-duration);
 
   // Inputs
-  --mk-input-border-color: var(--mk-border-color);
-  --mk-input-border-color-hover: var(--mk-border-color-hover);
-  --mk-input-border-color-focused: var(--mk-border-color-focused);
-  --mk-input-border-color-active: var(--mk-border-color-active);
   --mk-input-border-radius-size: var(--mk-border-radius-size);
   --mk-input-border-size: var(--mk-border-size);
   --mk-input-border-size-hover: var(--mk-border-size-hover);
@@ -66,9 +61,17 @@
   --mk-input-spacing-size: var(--mk-size-2);
   --mk-input-icon-size: 1.25rem;
 
-  // Layers
-  --mk-fullscreen-layer-order: 1000;
-  --mk-floating-layer-order: 1100;
+  // Indexes
+  --mk-fullscreen-layer-z-index: 1000;
+  --mk-floating-layer-z-index: 1100;
+}
+
+@mixin system-colors() {
+  // Inputs
+  --mk-input-border-color: var(--mk-border-color);
+  --mk-input-border-color-hover: var(--mk-border-color-hover);
+  --mk-input-border-color-focused: var(--mk-border-color-focused);
+  --mk-input-border-color-active: var(--mk-border-color-active);
 
   // Colors
 
@@ -100,10 +103,6 @@
   --mk-input-background-color: var(--mk-shade-4-15);
   --mk-input-background-color-hover: transparent;
   --mk-input-background-color-focused: transparent;
-
-  // Indexes
-  --mk-fullscreen-layer-z-index: 1000;
-  --mk-floating-layer-z-index: 1100;
 }
 
 * {
@@ -140,6 +139,8 @@
         map.get($color, 'hue')
       );
     }
+
+    @include system-colors;
   }
 
   @include theme.dark {
@@ -178,5 +179,7 @@
         map.get($color, 'hue')
       );
     }
+
+    @include system-colors;
   }
 }
