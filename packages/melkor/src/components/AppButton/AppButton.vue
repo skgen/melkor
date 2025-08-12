@@ -4,6 +4,7 @@
     class="mk-AppButton"
     :data-type="props.type"
     :data-size="props.size"
+    :data-icon="props.icon"
     v-bind="bindInteractionStateProps(props)"
   >
     <span>
@@ -17,8 +18,9 @@ import { useTheme } from '../../composables/useTheme';
 import { type ActiveProps, bindInteractionStateProps, type DisabledProps } from '../../features/interactions';
 
 export type Props = {
-  type?: 'plain' | 'outline' ;
-  size?: 'wide' | 'tight';
+  type?: 'plain' | 'outline';
+  size?: 'wide' | 'tight' | 'compact';
+  icon?: boolean;
 } & DisabledProps & ActiveProps;
 
 const props = withDefaults(
@@ -40,8 +42,6 @@ const theme = useTheme();
   --mk-button-spacing-size: var(--mk-size-2);
   --mk-button-border-radius-size: var(--mk-border-radius-size);
   --mk-button-text-size: 1rem;
-  --mk-button-tight-text-size: 0.875rem;
-  --mk-button-wide-text-size: 1.125rem;
   --mk-button-text-weight: 400;
 
   // Outline
@@ -56,6 +56,8 @@ const theme = useTheme();
   --mk-button-outline-border-size-focused: var(--mk-input-border-size-focused);
   --mk-button-outline-border-size-active: var(--mk-input-border-size-active);
   --mk-button-outline-text-color: var(--mk-text-color);
+
+  // Plain
   --mk-button-plain-text-color: var(--mk-on-primary);
   --mk-button-plain-background-color: var(--mk-primary);
   --mk-button-plain-background-color-hover: oklch(from var(--mk-primary) calc(l + 0.05) c h);
@@ -63,6 +65,27 @@ const theme = useTheme();
   --mk-button-plain-background-color-active: oklch(from var(--mk-primary) calc(l - 0.05) c h);
   --mk-button-plain-border-size-focused: var(--mk-input-border-size-focused);
   --mk-button-plain-border-color-focused: var(--mk-input-border-color-focused);
+
+  // Compact
+  --mk-button-compact-ratio: 0.25;
+  --mk-button-compact-text-size: 0.75rem;
+  --mk-button-compact-padding-x-size: calc(var(--mk-button-padding-x-size) * var(--mk-button-compact-ratio));
+  --mk-button-compact-padding-y-size: calc(var(--mk-button-padding-y-size) * var(--mk-button-compact-ratio));
+  --mk-button-compact-border-radius-size: calc(var(--mk-button-border-radius-size) * 0.75);
+
+  // Tight
+  --mk-button-tight-ratio: 0.75;
+  --mk-button-tight-text-size: 0.875rem;
+  --mk-button-tight-padding-x-size: calc(var(--mk-button-padding-x-size) * var(--mk-button-tight-ratio));
+  --mk-button-tight-padding-y-size: calc(var(--mk-button-padding-y-size) * var(--mk-button-tight-ratio));
+  --mk-button-tight-border-radius-size: calc(var(--mk-button-border-radius-size) * var(--mk-button-tight-ratio));
+
+  // Wide
+  --mk-button-wide-ratio: 1.5;
+  --mk-button-wide-text-size: 1.125rem;
+  --mk-button-wide-padding-x-size: calc(var(--mk-button-padding-x-size) * var(--mk-button-wide-ratio));
+  --mk-button-wide-padding-y-size: calc(var(--mk-button-padding-y-size) * var(--mk-button-wide-ratio));
+  --mk-button-wide-border-radius-size: calc(var(--mk-button-border-radius-size) * var(--mk-button-wide-ratio));
 
   position: relative;
   box-sizing: content-box;
@@ -90,17 +113,21 @@ const theme = useTheme();
     justify-content: center;
   }
 
+  &[data-icon='true'] {
+    padding: calc(var(--mk-button-padding-y-size));
+  }
+
   &[data-type='plain'] {
     color: var(--mk-button-plain-text-color);
     background-color: var(--mk-button-plain-background-color);
 
-    @include melkor.on-active {
-      background-color: var(--mk-button-plain-background-color-active) !important;
-    }
-
     @include melkor.on-not-disabled {
       @include melkor.on-hover {
         background-color: var(--mk-button-plain-background-color-hover);
+      }
+
+      @include melkor.on-active {
+        background-color: var(--mk-button-plain-background-color-active) !important;
       }
 
       // @include melkor.on-not-active {
@@ -116,16 +143,16 @@ const theme = useTheme();
     background-color: var(--mk-button-outline-background-color);
     box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size) var(--mk-button-outline-border-color);
 
-    @include melkor.on-active {
-      box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-active)
-        var(--mk-button-outline-border-color-active) !important;
-    }
-
     @include melkor.on-not-disabled {
       @include melkor.on-hover {
         background-color: var(--mk-button-outline-background-color-hover);
         box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-hover)
           var(--mk-button-outline-border-color-hover);
+      }
+
+      @include melkor.on-active {
+        box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size-active)
+          var(--mk-button-outline-border-color-active) !important;
       }
 
       @include melkor.on-focused-visible {
@@ -135,16 +162,34 @@ const theme = useTheme();
     }
   }
 
-  &[data-size='wide'] {
-    padding: calc(var(--mk-button-padding-y-size) * 1.5) calc(var(--mk-button-padding-x-size) * 1.5);
-    font-size: var(--mk-button-wide-text-size);
-    border-radius: calc(var(--mk-button-border-radius-size) * 1.5);
+  &[data-size='compact'] {
+    padding: var(--mk-button-compact-padding-y-size) var(--mk-button-compact-padding-x-size);
+    font-size: var(--mk-button-compact-text-size);
+    border-radius: var(--mk-button-compact-border-radius-size);
+
+    &[data-icon='true'] {
+      padding: var(--mk-button-compact-padding-y-size);
+    }
   }
 
   &[data-size='tight'] {
-    padding: calc(var(--mk-button-padding-y-size) * 0.75) calc(var(--mk-button-padding-x-size) * 0.75);
+    padding: var(--mk-button-tight-padding-y-size) var(--mk-button-tight-padding-x-size);
     font-size: var(--mk-button-tight-text-size);
-    border-radius: calc(var(--mk-button-border-radius-size) * 0.75);
+    border-radius: var(--mk-button-tight-border-radius-size);
+
+    &[data-icon='true'] {
+      padding: var(--mk-button-tight-padding-y-size);
+    }
+  }
+
+  &[data-size='wide'] {
+    padding: var(--mk-button-wide-padding-y-size) var(--mk-button-wide-padding-x-size);
+    font-size: var(--mk-button-wide-text-size);
+    border-radius: var(--mk-button-wide-border-radius-size);
+
+    &[data-icon='true'] {
+      padding: var(--mk-button-wide-padding-y-size);
+    }
   }
 
   @include melkor.on-disabled {
