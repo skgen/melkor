@@ -1,7 +1,7 @@
 {
   "name": "@skgn/melkor-nuxt",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
@@ -28,7 +28,7 @@
   "dependencies": {
     "@nuxt/kit": "catalog:",
     "@skgn/kit": "catalog:",
-    "@skgn/melkor": "workspace:*",
+    "@skgn/melkor": "workspace:^",
     "deepmerge": "catalog:"
   },
   "devDependencies": {
