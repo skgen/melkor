@@ -29,7 +29,6 @@
       <input
         :ref="inputRef"
         :name="inputName"
-        :fill="fill"
         :type="type ?? 'text'"
         :value="value"
         :placeholder="placeholder"

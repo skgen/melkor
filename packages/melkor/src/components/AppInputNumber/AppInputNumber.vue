@@ -29,7 +29,6 @@
       <input
         :ref="inputRef"
         :name="inputName"
-        :fill="fill"
         :type="type ?? 'number'"
         :value="type ? value?.toString() : value"
         :placeholder="placeholder"
