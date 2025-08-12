@@ -1,7 +1,7 @@
 {
   "name": "@skgn/melkor",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "packageManager": "pnpm@9.15.4",
   "description": "Melkor UI",
   "exports": {
