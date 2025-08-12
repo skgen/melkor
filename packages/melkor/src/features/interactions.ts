@@ -23,12 +23,19 @@ export function bindInteractionStateProps(props: InteractionStateProps & Record<
     'focused',
   ]);
 
+  const nativeKeys: typeof allowedKeys = new Set([
+    'disabled',
+  ]);
+
   const filtered = Object.keys(props).filter(key => allowedKeys.has(key as keyof InteractionStateProps));
 
   return filtered.reduce((acc, key) => {
+    if (nativeKeys.has(key as keyof InteractionStateProps)) {
+      acc[key as keyof InteractionStateProps] = props[key as keyof InteractionStateProps] || undefined;
+    }
     acc[`data-is-${key as keyof InteractionStateProps}`] = props[key as keyof InteractionStateProps] || undefined;
     return acc;
   }, {} as {
-    [K in keyof InteractionStateProps as `data-is-${K}`]?: InteractionStateProps[K];
+    [K in keyof InteractionStateProps as `data-is-${K}` | K]?: InteractionStateProps[K];
   });
 }
