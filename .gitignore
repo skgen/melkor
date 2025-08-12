@@ -66,3 +66,4 @@ packages/melkor/dist
 packages/melkor-docs/content/generated
 packages/melkor-nuxt/src/runtime/schema.json
 packages/melkor-nuxt/src/runtime/ssr-theme.min.js
+.env

@@ -4,12 +4,22 @@
   "version": "1.0.0",
   "packageManager": "pnpm@9.15.4",
   "scripts": {
-    "publish:melkor": "pnpm publish packages/melkor --access public",
-    "publish:melkor-nuxt": "pnpm publish packages/melkor-nuxt --access public"
+    "release": "tsx scripts/release.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@bitwarden/cli": "catalog:",
+    "@tsconfig/node20": "catalog:",
+    "@types/dotenv-parse-variables": "catalog:",
+    "@types/node": "catalog:",
+    "@types/shelljs": "catalog:",
+    "colorette": "catalog:",
+    "dotenv-flow": "catalog:",
+    "dotenv-parse-variables": "catalog:",
+    "enquirer": "catalog:",
     "eslint": "catalog:",
-    "eslint-plugin-format": "catalog:"
+    "eslint-plugin-format": "catalog:",
+    "shelljs": "catalog:",
+    "tsx": "catalog:"
   }
 }
