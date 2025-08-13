@@ -40,7 +40,7 @@
         <slot name="cancel-icon" />
       </AppInputTextableCancel>
       <button
-        v-if="props.encrypted"
+        v-if="props.secure"
         class="mk-AppInputTextable-toggleVisibility"
         @click.prevent="handleToggleVisibility"
       >
@@ -114,10 +114,10 @@ function handleChange(event: Event, newValue: TValue) {
 }
 
 const isCancelable = computed(() => props.cancelable && isValue(props.value) && !props.disabled);
-const isEncrypted = ref(true);
+const isSecure = ref(true);
 
 const type = computed(() => {
-  if (props.encrypted && isEncrypted.value) {
+  if (props.secure && isSecure.value) {
     return 'password' as const;
   }
   return null;
@@ -130,7 +130,7 @@ const toggleVisibilityIcon = computed(() =>
 );
 
 function handleToggleVisibility() {
-  isEncrypted.value = !isEncrypted.value;
+  isSecure.value = !isSecure.value;
 }
 
 function handleCancel() {

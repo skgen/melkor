@@ -6,7 +6,7 @@ export type InputTextableProps<InputTextableValue> = InputProps<InputTextableVal
   fill?: boolean;
   placeholder?: string;
   cancelable?: boolean;
-  encrypted?: boolean;
+  secure?: boolean;
 };
 
 export type InputTextableEmits<InputTextableValue> = InputEmits<InputTextableValue>;

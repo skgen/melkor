@@ -4,7 +4,7 @@ import { inputTextableDefaultProps, type InputTextableEmits, type InputTextableE
 
 export type InputTextareaValue = string | null;
 
-export type InputTextareaProps = Omit<InputTextableProps<InputTextareaValue>, 'encrypted'> & {
+export type InputTextareaProps = Omit<InputTextableProps<InputTextareaValue>, 'secure'> & {
   rows?: number;
 };
 
