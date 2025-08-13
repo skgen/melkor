@@ -3,7 +3,7 @@ import type { MelkorNuxtContext } from '../module';
 import { addComponent, resolvePath } from '@nuxt/kit';
 
 export async function loadComponents<TContext extends MelkorNuxtContext = MelkorNuxtContext>(ctx: TContext) {
-  for (const component of Object.keys(ctx.schema.components)) {
+  for (const component of Object.keys(ctx.meta.schema.components)) {
     const filePath = await resolvePath(`@skgn/melkor/components/${component}`);
 
     const name = ctx.moduleOptions?.prefix?.components

@@ -15,6 +15,6 @@ esbuild.buildSync({
 
 shell.cp(
   '-r',
-  path.resolve(root, 'node_modules/@skgn/melkor/lib/schema.json'),
-  path.resolve(root, `./src/runtime/schema.json`),
+  path.resolve(root, 'node_modules/@skgn/melkor/lib/meta.json'),
+  path.resolve(root, `./src/runtime/meta.json`),
 );

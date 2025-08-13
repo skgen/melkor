@@ -3,10 +3,10 @@ import type { Nuxt } from '@nuxt/schema';
 import type { DeepObjectPartial, DeepPartial } from '@skgn/kit';
 
 import { readFileSync } from 'node:fs';
-import path from 'node:path';
 
-import { addPlugin, createResolver, defineNuxtModule, resolveModule, useLogger } from '@nuxt/kit';
+import { addPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
 import { createMelkorOptions, type MelkorOptions } from '@skgn/melkor/features';
+import meta from '@skgn/melkor/meta.json';
 import merge from 'deepmerge';
 
 import { name, version } from '../package.json';
@@ -32,12 +32,12 @@ export interface ModuleOptions {
   };
 }
 
-export interface MelkorNuxtContext<TSchema extends Record<string, any> = Record<string, any>> {
+export interface MelkorNuxtContext<TMeta extends Record<string, any> = Record<string, any>> {
   resolver: Resolver;
   logger: ReturnType<typeof import('@nuxt/kit')['useLogger']>;
   moduleOptions: ModuleOptions;
   melkorOptions: MelkorOptions;
-  schema: TSchema;
+  meta: TMeta;
   nuxt: Nuxt;
   runtimeDir: string;
   melkorDir: string;
@@ -80,14 +80,12 @@ export default defineNuxtModule<MelkorModuleOptions>({
     const runtimeDir = await resolver.resolve('./runtime');
     const melkorDir = await resolver.resolve('./runtime/melkor');
 
-    const schema = JSON.parse(readFileSync(resolver.resolve(runtimeDir, 'schema.json'), { encoding: 'utf-8' })) as Record<string, any>;
-
     const ctx: MelkorNuxtContext = {
       logger,
       resolver,
       melkorOptions: createMelkorOptions(options.melkorOptions),
       moduleOptions: createModuleOptions(options.moduleOptions),
-      schema,
+      meta,
       nuxt,
       runtimeDir,
       melkorDir,
