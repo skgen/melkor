@@ -2,11 +2,8 @@ import type { Resolver } from '@nuxt/kit';
 import type { Nuxt } from '@nuxt/schema';
 import type { DeepObjectPartial, DeepPartial } from '@skgn/kit';
 
-import { readFileSync } from 'node:fs';
-
 import { addPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
 import { createMelkorOptions, type MelkorOptions } from '@skgn/melkor/features';
-import meta from '@skgn/melkor/meta.json';
 import merge from 'deepmerge';
 
 import { name, version } from '../package.json';
@@ -14,8 +11,10 @@ import { name, version } from '../package.json';
 import { loadComponents } from './namespaces/load-components';
 import { loadComposables } from './namespaces/load-composables';
 import { loadFeatures } from './namespaces/load-features';
+import { loadMeta } from './namespaces/load-meta';
 import { loadScss } from './namespaces/load-scss';
 import { loadThemeScript } from './namespaces/load-theme-script';
+import { meta } from './utils/meta';
 
 declare module 'nuxt/schema' {
   interface PublicRuntimeConfig {
@@ -106,6 +105,8 @@ export default defineNuxtModule<MelkorModuleOptions>({
     addPlugin({
       src: ctx.resolver.resolve(ctx.runtimeDir, 'plugin'),
     });
+
+    await loadMeta(ctx);
 
     await loadScss(ctx);
 

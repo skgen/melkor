@@ -12,9 +12,3 @@ esbuild.buildSync({
   ],
   outfile: path.resolve(root, `./src/runtime/ssr-theme.min.js`),
 });
-
-shell.cp(
-  '-r',
-  path.resolve(root, 'node_modules/@skgn/melkor/lib/meta.json'),
-  path.resolve(root, `./src/runtime/meta.json`),
-);
