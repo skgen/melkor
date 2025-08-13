@@ -7,7 +7,7 @@
         Copy
         <AppIcon icon="heroicons:clipboard-document-check" />
       </AppButton>
-      <AppButton type="outline">
+      <AppButton variant="outline">
         Submit code
         <AppIcon icon="heroicons:command-line" />
       </AppButton>
@@ -17,10 +17,10 @@
       <AppButton type="plain">
         <AppIcon icon="heroicons:camera" />
       </AppButton>
-      <AppButton type="outline" size="tight">
+      <AppButton variant="outline" size="tight">
         <AppIcon icon="heroicons:camera" />
       </AppButton>
-      <AppButton type="outline" size="wide">
+      <AppButton variant="outline" size="wide">
         <AppIcon icon="heroicons:camera" />
       </AppButton>
     </AppCard>
@@ -31,7 +31,7 @@
           Copy
           <AppIcon icon="heroicons:clipboard-document-check" />
         </AppButton>
-        <AppButton type="outline" size="wide">
+        <AppButton variant="outline" size="wide">
           Submit code
           <AppIcon icon="heroicons:command-line" />
         </AppButton>
@@ -41,7 +41,7 @@
         <AppButton type="plain">
           <AppIcon icon="heroicons:camera" />
         </AppButton>
-        <AppButton type="outline">
+        <AppButton variant="outline">
           <AppIcon icon="heroicons:camera" />
         </AppButton>
       </AppCard>
