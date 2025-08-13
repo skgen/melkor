@@ -104,6 +104,7 @@ res = sh.exec(`pnpm publish ${releasePackage.path} --access public ${publishArgs
 if (res.code === 1) {
   console.error(red(`Failed to publish ${cyan(`${packageJson.name}@${packageJson.version}`)}`));
   console.error(res.stderr);
+  process.exit(1);
 }
 
 console.log(green(`\nPackage ${cyan(`${packageJson.name}@${packageJson.version}`)} successfuly deployed !`));
