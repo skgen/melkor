@@ -39,7 +39,8 @@
       "import": "./lib/features/index.js"
     },
     "./meta.json": {
-      "import": "./lib/meta.json"
+      "import": "./lib/meta.json",
+      "require": "./lib/meta.json"
     }
   },
   "files": [
