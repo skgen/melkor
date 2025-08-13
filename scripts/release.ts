@@ -66,6 +66,7 @@ res = sh.exec(`bw login --apikey`, { silent: true });
 
 if (res.code === 1) {
   console.error(red(`Login failed`));
+  console.error(res.stderr);
   process.exit(1);
 }
 
@@ -75,6 +76,7 @@ res = sh.exec(`bw unlock --raw --passwordenv BW_PASSWORD`, { silent: true });
 
 if (res.code === 1) {
   console.error(red(`Unlock failed`));
+  console.error(res.stderr);
   process.exit(1);
 }
 
@@ -86,6 +88,7 @@ res = sh.exec(`bw get totp ${process.env.BW_ITEM_ID} --session ${session}`, { si
 
 if (res.code === 1) {
   console.error(red(`Failed to read item`));
+  console.error(res.stderr);
   process.exit(1);
 }
 
@@ -100,6 +103,7 @@ res = sh.exec(`pnpm publish ${releasePackage.path} --access public ${publishArgs
 
 if (res.code === 1) {
   console.error(red(`Failed to publish ${cyan(`${packageJson.name}@${packageJson.version}`)}`));
+  console.error(res.stderr);
 }
 
 console.log(green(`\nPackage ${cyan(`${packageJson.name}@${packageJson.version}`)} successfuly deployed !`));
