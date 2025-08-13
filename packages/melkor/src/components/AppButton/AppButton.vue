@@ -14,15 +14,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { ButtonHTMLAttributes } from 'vue';
-
 import { useTheme } from '../../composables/useTheme';
 import { type ActiveProps, bindInteractionStateProps, type DisabledProps } from '../../features/interactions';
 
-export type Props = /* @vue-ignore */ Pick<ButtonHTMLAttributes, 'type'> & {
+export type Props = {
   variant?: 'plain' | 'outline';
   size?: 'wide' | 'tight' | 'compact';
   icon?: boolean;
+  type?: 'submit' | 'reset' | 'button';
 } & DisabledProps & ActiveProps;
 
 const props = withDefaults(
