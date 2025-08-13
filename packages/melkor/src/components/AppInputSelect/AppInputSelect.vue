@@ -298,6 +298,7 @@ function blur() {
     max-width: var(--reka-popover-trigger-width);
     max-height: var(--reka-popover-content-available-height);
     padding: var(--mk-input-select-menu-padding-y-size) var(--mk-input-select-menu-padding-x-size);
+    overflow: auto;
     background-color: var(--mk-input-select-menu-background-color);
     border-radius: var(--mk-input-select-border-radius-size);
     box-shadow: inset 0 0 0.01px var(--mk-input-select-border-size) var(--mk-input-select-border-color);
