@@ -38,7 +38,7 @@ export function useSurface(options?: UseSurfaceOptions): ComputedRef<SurfaceCont
     nextElevation = surfaceElevationOrder[surfaceElevationOrder.indexOf(surfaceContext.value.elevation) + 1];
   }
 
-  if (options?.inject !== false) {
+  if (options?.inject) {
     const nextSurface = computed(() => {
       return <SurfaceContextInjection>{
         elevation: options?.override?.elevation ?? nextElevation,
