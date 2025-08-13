@@ -9,7 +9,7 @@
     class="mk-AppThemeSelectorCheap"
   >
     <template v-for="t of themes" :key="t">
-      <AppButton type="outline" :data-is-active="t === currentTheme?.preference" @click="() => handleClick(t)">
+      <AppButton variant="outline" :data-is-active="t === currentTheme?.preference" @click="() => handleClick(t)">
         {{ `${t[0].toUpperCase()}${t.slice(1, t.length)}` }}
       </AppButton>
     </template>
