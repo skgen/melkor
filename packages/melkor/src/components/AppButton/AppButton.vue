@@ -2,7 +2,7 @@
   <button
     v-theme="theme"
     class="mk-AppButton"
-    :data-type="props.type"
+    :data-variant="props.variant"
     :data-size="props.size"
     :data-icon="props.icon"
     v-bind="bindInteractionStateProps(props)"
@@ -14,11 +14,13 @@
 </template>
 
 <script lang="ts" setup>
+import type { ButtonHTMLAttributes } from 'vue';
+
 import { useTheme } from '../../composables/useTheme';
 import { type ActiveProps, bindInteractionStateProps, type DisabledProps } from '../../features/interactions';
 
-export type Props = {
-  type?: 'plain' | 'outline';
+export type Props = /* @vue-ignore */ Pick<ButtonHTMLAttributes, 'type'> & {
+  variant?: 'plain' | 'outline';
   size?: 'wide' | 'tight' | 'compact';
   icon?: boolean;
 } & DisabledProps & ActiveProps;
@@ -26,7 +28,7 @@ export type Props = {
 const props = withDefaults(
   defineProps<Props>(),
   {
-    type: 'plain',
+    variant: 'plain',
   },
 );
 
@@ -117,7 +119,7 @@ const theme = useTheme();
     padding: calc(var(--mk-button-padding-y-size));
   }
 
-  &[data-type='plain'] {
+  &[data-variant='plain'] {
     color: var(--mk-button-plain-text-color);
     background-color: var(--mk-button-plain-background-color);
 
@@ -138,7 +140,7 @@ const theme = useTheme();
     }
   }
 
-  &[data-type='outline'] {
+  &[data-variant='outline'] {
     color: var(--mk-button-outline-text-color);
     background-color: var(--mk-button-outline-background-color);
     box-shadow: inset 0 0 0.01px var(--mk-button-outline-border-size) var(--mk-button-outline-border-color);
