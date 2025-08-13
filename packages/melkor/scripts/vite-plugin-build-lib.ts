@@ -1,6 +1,6 @@
 import type { Plugin, UserConfig } from 'vite';
 
-import { buildSchema } from './build-schema';
+import { extractMeta } from './meta/extract.meta';
 
 interface Config {
   root?: string;
@@ -96,7 +96,9 @@ export function vitePluginBuildLib(config: Config): Plugin {
       }
     },
     writeBundle(options, bundle) {
-      buildSchema(Object.keys(bundle));
+      extractMeta({
+        bundleKeys: Object.keys(bundle),
+      });
     },
   };
 };

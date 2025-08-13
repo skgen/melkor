@@ -1,13 +1,7 @@
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-import { cyan } from 'colorette';
-
-import { log } from './logger';
-
-export function buildSchema(bundleKeys: string[]) {
-  const melkorSchema = bundleKeys
+export function extractSchema(bundleKeys: string[]) {
+  return bundleKeys
     .filter((k) => {
       if (k.startsWith('node_modules')) {
         return false;
@@ -38,16 +32,4 @@ export function buildSchema(bundleKeys: string[]) {
       components: {},
       composables: {},
     });
-
-  const libPath = fileURLToPath(new URL('../lib', import.meta.url));
-  if (!existsSync(libPath)) {
-    mkdirSync(libPath);
-  }
-  const schemaPath = path.resolve(libPath, 'schema.json');
-  if (existsSync(schemaPath)) {
-    rmSync(schemaPath);
-  }
-  writeFileSync(schemaPath, `${JSON.stringify(melkorSchema, null, 2)}\n`, { encoding: 'utf-8' });
-
-  log(`Schema updated at ${cyan(schemaPath)}`);
 }

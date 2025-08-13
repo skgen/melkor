@@ -38,8 +38,8 @@
       "types": "./lib/features/index.d.ts",
       "import": "./lib/features/index.js"
     },
-    "./schema.json": {
-      "import": "./lib/schema.json"
+    "./meta.json": {
+      "import": "./lib/meta.json"
     }
   },
   "files": [
