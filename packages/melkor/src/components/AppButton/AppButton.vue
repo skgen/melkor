@@ -4,7 +4,7 @@
     class="mk-AppButton"
     :data-variant="props.variant"
     :data-size="props.size"
-    :data-icon="props.icon"
+    :data-icon="props.icon || undefined"
     v-bind="bindInteractionStateProps(props)"
   >
     <span>
