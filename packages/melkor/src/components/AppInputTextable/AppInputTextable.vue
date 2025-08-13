@@ -224,6 +224,7 @@ function blur() {
 
     &-stub {
       display: flex;
+      flex: 1 1 100%;
       padding: var(--mk-input-textable-padding-y-size) 0;
     }
 
