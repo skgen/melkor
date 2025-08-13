@@ -17,18 +17,20 @@
         <slot name="leading-icon" />
       </span>
 
-      <slot
-        ref="inputRef"
-        :validate="props.validate"
-        :input-name="props.name"
-        :disabled="props.disabled"
-        :placeholder="props.placeholder"
-        :value="props.value"
-        :type="type"
-        :on-change="handleChange"
-        :on-focus="onFocus"
-        :on-blur="onBlur"
-      />
+      <div class="mk-AppInputTextable-input-stub">
+        <slot
+          ref="inputRef"
+          :validate="props.validate"
+          :input-name="props.name"
+          :disabled="props.disabled"
+          :placeholder="props.placeholder"
+          :value="props.value"
+          :type="type"
+          :on-change="handleChange"
+          :on-focus="onFocus"
+          :on-blur="onBlur"
+        />
+      </div>
 
       <AppInputTextableCancel
         v-if="isCancelable"
@@ -186,9 +188,10 @@ function blur() {
   gap: var(--mk-size-2);
   vertical-align: top;
 
-  input {
+  input,
+  textarea {
     width: 100%;
-    padding: var(--mk-input-textable-padding-y-size) 0;
+    padding: 0;
     font-size: var(--mk-input-textable-text-size);
     line-height: var(--mk-input-textable-line-height);
     color: var(--mk-input-textable-text-color);
@@ -199,6 +202,10 @@ function blur() {
     &::placeholder {
       color: var(--mk-input-textable-placeholder-text-color);
     }
+  }
+
+  textarea {
+    resize: none;
   }
 
   &-input {
@@ -214,6 +221,11 @@ function blur() {
       background-color var(--mk-transition-color-duration),
       opacity var(--mk-transition-opacity-duration),
       box-shadow var(--mk-transition-color-duration);
+
+    &-stub {
+      display: flex;
+      padding: var(--mk-input-textable-padding-y-size) 0;
+    }
 
     .mk-AppIcon {
       --mk-icon-size: var(--mk-input-textable-icon-size);

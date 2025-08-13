@@ -12,6 +12,7 @@ export * from './io/input-select';
 export * from './io/input-select.native';
 export * from './io/input-text';
 export * from './io/input-textable';
+export * from './io/input-textarea';
 export * from './io/input-toggle';
 
 // Others

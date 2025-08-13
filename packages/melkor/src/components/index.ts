@@ -15,6 +15,7 @@ export { default as AppInputSelect } from './AppInputSelect/AppInputSelect.vue';
 export { default as AppInputSelectNative } from './AppInputSelectNative/AppInputSelectNative.vue';
 export { default as AppInputText } from './AppInputText/AppInputText.vue';
 export { default as AppInputTextableCancel } from './AppInputTextableCancel/AppInputTextableCancel.vue';
+export { default as AppInputTextarea } from './AppInputTextarea/AppInputTextarea.vue';
 export { default as AppInputToggle } from './AppInputToggle/AppInputToggle.vue';
 export { default as AppPagination } from './AppPagination/AppPagination.vue';
 export { default as AppRadio } from './AppRadio/AppRadio.vue';
