@@ -195,15 +195,6 @@ function blur() {
 
   open.value = false;
 }
-
-// function focus() {
-//   inputRef.va
-//   open.value = true;
-// }
-
-// function blur() {
-//   open.value = false;
-// }
 </script>
 
 <style lang="scss">
