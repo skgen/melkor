@@ -3,6 +3,7 @@
     v-theme="theme"
     class="mk-AppIcon"
     v-bind="props"
+    :data-is-inline="props.inline || undefined"
   />
 </template>
 
@@ -33,8 +34,11 @@ const theme = useTheme();
   --mk-icon-size: 1em;
   --mk-icon-color: currentcolor;
 
-  display: inline-block;
   font-size: var(--mk-icon-size);
   color: var(--mk-icon-color);
+
+  [data-is-inline='true'] {
+    display: inline-block;
+  }
 }
 </style>
