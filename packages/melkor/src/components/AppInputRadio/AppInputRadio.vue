@@ -3,7 +3,6 @@
     ref="rootRef"
     v-theme="theme"
     class="mk-AppInputRadio"
-    :data-is-focused="focused || undefined"
     :data-direction="props.direction"
     v-bind="bindInteractionStateProps({
       ...props,
