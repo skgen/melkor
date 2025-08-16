@@ -36,6 +36,12 @@
             :name="props.name"
           >
           <div class="mk-AppInputIcon-input-value">
+            <div
+              v-if="!props.value && $slots.placeholder"
+              class="mk-AppInputIcon-input-value-placeholder"
+            >
+              <slot name="placeholder" />
+            </div>
             <AppIcon v-if="props.value" :icon="props.value" />
           </div>
         </div>
@@ -43,7 +49,10 @@
       <PopoverPortal>
         <PopoverContent :side-offset="4" side="bottom" align="center" :style="{ zIndex: 'var(--mk-floating-layer-z-index)' }">
           <div
-            v-theme="theme" data-root="mk-AppInputIcon" class="mk-AppInputIcon-menu" :style="{
+            v-theme="theme"
+            data-root="mk-AppInputIcon"
+            class="mk-AppInputIcon-menu"
+            :style="{
               '--mk-input-icon-menu-grid-column-template': cssColumnSize,
             }"
           >
@@ -265,8 +274,8 @@ const cssColumnSize = computed(() => Array.from({ length: props.columnSize }).fi
   --mk-input-icon-border-size: var(--mk-input-border-size);
   --mk-input-icon-border-size-hover: var(--mk-input-border-size-hover);
   --mk-input-icon-border-size-focused: var(--mk-input-border-size-focused);
-  --mk-input-icon-text-color: var(--mk-input-text-color);
-  --mk-input-icon-icon-color: var(--mk-input-icon-color);
+  --mk-input-icon-icon-color: var(--mk-input-text-color);
+  --mk-input-icon-placeholder-icon-color: var(--mk-input-placeholder-text-color);
   --mk-input-icon-icon-size: 24px;
   --mk-input-icon-padding-x-size: var(--mk-size-2);
   --mk-input-icon-padding-y-size: var(--mk-size-2);
@@ -281,6 +290,7 @@ const cssColumnSize = computed(() => Array.from({ length: props.columnSize }).fi
   // Menu Option
   --mk-input-icon-option-icon-size: 24px;
   --mk-input-icon-option-padding-size: var(--mk-size-2);
+  --mk-input-icon-option-icon-color: var(--mk-input-icon-color);
   --mk-input-icon-option-background-color: var(--mk-shade-1);
   --mk-input-icon-option-background-color-hover: var(--mk-shade-4);
   --mk-input-icon-option-background-color-active: var(--mk-shade-3);
@@ -316,6 +326,14 @@ const cssColumnSize = computed(() => Array.from({ length: props.columnSize }).fi
       .mk-AppIcon {
         --mk-icon-color: var(--mk-input-icon-icon-color);
         --mk-icon-size: var(--mk-input-icon-icon-size);
+      }
+
+      &-placeholder {
+        filter: grayscale(1);
+
+        .mk-AppIcon {
+          --mk-icon-color: var(--mk-input-icon-placeholder-icon-color);
+        }
       }
     }
   }
@@ -402,37 +420,12 @@ const cssColumnSize = computed(() => Array.from({ length: props.columnSize }).fi
         }
 
         .mk-AppIcon {
-          --mk-icon-color: var(--mk-input-icon-icon-color);
+          --mk-icon-color: var(--mk-input-icon-option-icon-color);
           --mk-icon-size: var(--mk-input-icon-option-icon-size);
         }
       }
     }
   }
-
-  // &-option {
-  //   display: flex;
-  //   gap: var(--mk-size-1);
-  //   align-items: center;
-  //   padding: var(--mk-input-icon-option-padding-y-size) var(--mk-input-icon-option-padding-x-size);
-  //   cursor: default;
-  //   border-radius: var(--mk-input-icon-border-radius-size);
-  //   transition: background-color var(--mk-transition-color-duration);
-
-  //   @include melkor.on-not-disabled {
-  //     @include melkor.on-hover {
-  //       background-color: var(--mk-input-icon-option-background-color-hover);
-  //     }
-  //   }
-
-  //   @include melkor.on-active {
-  //     background-color: var(--mk-input-icon-option-background-color-active);
-  //   }
-
-  //   @include melkor.on-disabled {
-  //     cursor: not-allowed;
-  //     opacity: var(--mk-input-opacity-disabled);
-  //   }
-  // }
 
   @include melkor.on-not-disabled {
     @include melkor.on-hover {

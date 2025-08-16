@@ -15,13 +15,15 @@ export type InputIconProps = InputProps<InputIconValue> & {
 
 export type InputIconEmits = InputEmits<InputIconValue>;
 
-export type InputIconSlots = InputSlots;
+export type InputIconSlots = InputSlots & {
+  placeholder?: () => any;
+};
 
 export type InputIconExpose = InputExpose;
 
 export const inputIconDefaultProps: InferDefaults<InputIconProps> = {
   ...inputDefaultProps,
-  collection: 'mdi',
+  collection: 'material-symbols',
   pageSize: 100,
   columnSize: 6,
 };
