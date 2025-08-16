@@ -8,6 +8,7 @@ export { default as AppInputCheckbox } from './AppInputCheckbox/AppInputCheckbox
 export { default as AppInputColor } from './AppInputColor/AppInputColor.vue';
 export { default as AppInputError } from './AppInputError/AppInputError.vue';
 export { default as AppInputHint } from './AppInputHint/AppInputHint.vue';
+export { default as AppInputIcon } from './AppInputIcon/AppInputIcon.vue';
 export { default as AppInputLabel } from './AppInputLabel/AppInputLabel.vue';
 export { default as AppInputNumber } from './AppInputNumber/AppInputNumber.vue';
 export { default as AppInputRadio } from './AppInputRadio/AppInputRadio.vue';
