@@ -3,7 +3,6 @@
     v-theme="theme"
     class="mk-AppInputSelect"
     :data-theme="theme"
-    :data-is-focused="focused || undefined"
     :data-fill="props.fill || undefined"
     v-bind="bindInteractionStateProps({
       ...props,
@@ -17,7 +16,6 @@
     <PopoverRoot v-model:open="open">
       <PopoverTrigger as-child>
         <div
-          ref="inputRef"
           class="mk-AppInputSelect-input"
           role="button"
           tabindex="0"
@@ -86,7 +84,7 @@
 import { isArray } from '@skgn/kit';
 import { isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
-import { ref, watch } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 
 import AppIcon from '../../components/AppIcon/AppIcon.vue';
 import AppInputError from '../../components/AppInputError/AppInputError.vue';
@@ -117,8 +115,6 @@ defineExpose<Expose>({
   focus,
   blur,
 });
-
-const inputRef = ref<HTMLDivElement | null>(null);
 
 const theme = useTheme();
 const globalConfig = useGlobalConfig();
@@ -172,27 +168,21 @@ function handleKeyDown(event: KeyboardEvent) {
 }
 
 watch(open, (newOpen) => {
-  if (newOpen) {
-    onFocus();
-  }
-  else {
-    onBlur();
-  }
+  nextTick(() => {
+    if (newOpen) {
+      onFocus();
+    }
+    else {
+      onBlur();
+    }
+  });
 });
 
 function focus() {
-  if (!inputRef.value) {
-    return;
-  }
-
   open.value = true;
 }
 
 function blur() {
-  if (!inputRef.value) {
-    return;
-  }
-
   open.value = false;
 }
 </script>
