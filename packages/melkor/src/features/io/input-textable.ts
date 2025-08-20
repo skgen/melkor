@@ -14,7 +14,6 @@ export type InputTextableEmits<InputTextableValue> = InputEmits<InputTextableVal
 export type InputTextableSlots<InputTextableValue> = InputSlots & {
   'default'?: (props: {
     ref: string;
-    validate: InputTextableProps<InputTextableValue>['validate'];
     inputName: InputTextableProps<InputTextableValue>['name'];
     disabled: InputTextableProps<InputTextableValue>['disabled'];
     placeholder: InputTextableProps<InputTextableValue>['placeholder'];

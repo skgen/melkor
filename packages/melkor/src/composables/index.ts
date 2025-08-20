@@ -1,6 +1,7 @@
 export * from './useGlobalConfig';
 export * from './useGlobalTheme';
 export * from './useInput';
+export * from './useInputBinding';
 export * from './useNextTheme';
 export * from './usePagination';
 export * from './useSurface';

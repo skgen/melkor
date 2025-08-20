@@ -1,10 +1,11 @@
-import { isString } from '@skgn/kit';
+import { isObject } from 'lodash-es';
+import { z, type ZodError, type ZodType } from 'zod';
 
-export function formatError(error: string | string[]): string {
-  if (isString(error)) {
-    return error;
+export function formatErrors(errors: string[] | ZodError): string {
+  if (isZodError(errors)) {
+    return z.treeifyError(errors).errors.join('\n');
   }
-  return error.join('\n');
+  return errors.join('\n');
 }
 
 export function forwardDataAttributes<T extends Record<string, U>, U>(input: T): Partial<T> {
@@ -14,6 +15,23 @@ export function forwardDataAttributes<T extends Record<string, U>, U>(input: T):
       acc[key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)] = input[key];
       return acc;
     }, {} as Record<string, U>) as Partial<T>;
+}
+
+export function isZodType(value: unknown): value is ZodType {
+  return (
+    isObject(value)
+    && '_zod' in value
+    && 'parse' in value
+    && 'safeParse' in value
+  );
+}
+export function isZodError(value: unknown): value is ZodError {
+  return (
+    isObject(value)
+    && '_zod' in value
+    && 'issues' in value
+    && 'format' in value
+  );
 }
 
 export type InferDefaults<T> = {

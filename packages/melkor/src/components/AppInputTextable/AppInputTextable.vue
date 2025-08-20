@@ -20,7 +20,6 @@
       <div class="mk-AppInputTextable-input-stub">
         <slot
           ref="inputRef"
-          :validate="props.validate"
           :input-name="props.name"
           :disabled="props.disabled"
           :placeholder="props.placeholder"
@@ -53,8 +52,8 @@
     <AppInputHint v-if="$slots.hint">
       <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="props.error">
-      {{ formatError(props.error) }}
+    <AppInputError v-if="props.errors">
+      {{ formatErrors(props.errors) }}
     </AppInputError>
   </label>
 </template>
@@ -68,7 +67,7 @@ import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
 import { inputTextableDefaultProps, type InputTextableEmits, type InputTextableExpose, type InputTextableProps, type InputTextableSlots } from '../../features/io/input-textable';
-import { formatError } from '../../features/utils';
+import { formatErrors } from '../../features/utils';
 import AppIcon from '../AppIcon/AppIcon.vue';
 import AppInputError from '../AppInputError/AppInputError.vue';
 import AppInputHint from '../AppInputHint/AppInputHint.vue';

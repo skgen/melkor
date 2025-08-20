@@ -1,18 +1,19 @@
-import type { EmitsToProps, Ref, ShortEmitsToObject } from 'vue';
+import type { ZodError, ZodType } from 'zod';
 
 import type { DisabledProps, HoveredProps } from '../interactions';
-import type { InferDefaults } from '../utils';
 
 import { isValue } from '@skgn/kit';
-import { ref } from 'vue';
+import { isArray, isString } from 'lodash-es';
+
+import { type InferDefaults, isZodType } from '../utils';
 
 export type InputProps<TValue> = {
   value: TValue;
   valid?: boolean;
   touched?: boolean;
-  error?: string | string[] | null;
-  validate?: ValidateInputValue<TValue>;
   name?: string;
+  errors?: string[] | ZodError;
+  validate?: ValidateInputValue<TValue> | ZodType;
 } &
 DisabledProps &
 HoveredProps;
@@ -21,7 +22,7 @@ export type InputEmits<TValue> = {
   'update:value': [value: InputProps<TValue>['value']];
   'update:valid': [valid: InputProps<TValue>['valid']];
   'update:touched': [touched: InputProps<TValue>['touched']];
-  'update:error': [error: InputProps<TValue>['error']];
+  'update:errors': [errors: InputProps<TValue>['errors']];
   'focus': [];
   'blur': [];
 };
@@ -36,56 +37,38 @@ export type InputExpose = {
   blur: () => void;
 };
 
-export type InputModel<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'error'>;
+export type InputModel<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'errors'>;
+export type InputModelRest<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'errors'>;
 
-export type ValidateInputValue<TValue> = (value: TValue) => InputProps<TValue>['error'];
+export type ValidateInputValue<TValue> = (value: TValue) => string[] | string | void;
 
-export function inputModel<T>(model: Partial<Omit<InputProps<T>, 'value'>> & Pick<InputProps<T>, 'value'>): {
-  value: Ref<InputProps<T>['value']>;
-  valid: Ref<InputProps<T>['valid']>;
-  touched: Ref<InputProps<T>['touched']>;
-  error: Ref<InputProps<T>['error']>;
-} & Required<Pick<
-  EmitsToProps<ShortEmitsToObject<InputEmits<T>>>,
-  'onUpdate:value' |
-  'onUpdate:valid' |
-  'onUpdate:touched' |
-  'onUpdate:error'
->> {
-  const value = ref(model.value) as Ref<T>;
-  const valid: Ref<InputProps<T>['valid']> = ref(model.valid ?? true);
-  const touched: Ref<InputProps<T>['touched']> = ref(model.touched ?? false);
-  const error: Ref<InputProps<T>['error']> = ref(model.error ?? null);
+export const inputDefaultProps = {
+  valid: true,
+  touched: false,
+  errors: (): string[] => [],
+} as const satisfies InferDefaults<InputProps<any>>;
 
-  return {
-    value,
-    valid,
-    touched,
-    error,
-    'onUpdate:value': v => value.value = v,
-    'onUpdate:valid': v => valid.value = v,
-    'onUpdate:touched': v => touched.value = v,
-    'onUpdate:error': v => error.value = v,
-  };
-}
-
-export function validateInputModel<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue>): InputModel<TValue> {
+export function validateInputModel<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue> | ZodType): InputModel<TValue> {
   const newModel: InputModel<TValue> = {
     value: newValue,
     touched: true,
-    error: null,
+    errors: [],
     valid: true,
   };
 
   if (isValue(validate)) {
-    newModel.error = validate(newModel.value);
-    newModel.valid = !newModel.error;
+    if (isZodType(validate)) {
+      const result = validate.safeParse(newValue);
+      newModel.errors = result.success ? [] : result.error;
+      newModel.valid = result.success;
+    }
+    else {
+      const _errors = validate(newModel.value) ?? [];
+      if (isString(_errors)) {
+        newModel.errors = [_errors];
+      }
+      newModel.valid = isArray(newModel.errors) && newModel.errors.length === 0;
+    }
   }
   return newModel;
 }
-
-export const inputDefaultProps: InferDefaults<InputProps<any>> = {
-  valid: true,
-  touched: false,
-  error: null,
-};

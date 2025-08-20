@@ -74,8 +74,8 @@
     <AppInputHint v-if="$slots.hint">
       <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="props.error">
-      {{ formatError(props.error) }}
+    <AppInputError v-if="props.errors">
+      {{ formatErrors(props.errors) }}
     </AppInputError>
   </div>
 </template>
@@ -95,7 +95,7 @@ import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
 import { inputSelectDefaultProps, type InputSelectEmits, type InputSelectExpose, type InputSelectProps, type InputSelectSlots } from '../../features/io/input-select';
-import { formatError } from '../../features/utils';
+import { formatErrors } from '../../features/utils';
 
 export type Props<TValue> = InputSelectProps<TValue>;
 export type Emits<TValue> = InputSelectEmits<TValue>;

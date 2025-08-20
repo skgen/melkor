@@ -6,7 +6,7 @@
     @update:value="(value) => emit('update:value', value)"
     @update:valid="(valid) => emit('update:valid', valid)"
     @update:touched="(touched) => emit('update:touched', touched)"
-    @update:error="(error) => emit('update:error', error)"
+    @update:errors="(errors) => emit('update:errors', errors)"
     @focus="() => emit('focus')"
     @blur="() => emit('blur')"
   >

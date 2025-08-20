@@ -54,8 +54,8 @@ export function useInput<TValue>(options: UseInputOptions<TValue>): {
       options.emit('update:touched', newModel.touched);
     }
 
-    if (!isEqual(options.props.error, newModel.error)) {
-      options.emit('update:error', newModel.error);
+    if (!isEqual(options.props.errors, newModel.errors)) {
+      options.emit('update:errors', newModel.errors);
     }
   }
 

@@ -20,4 +20,4 @@ export * from './io/input-toggle';
 export * from './checkable';
 export { createGlobalConfig, createMelkorOptions, type MelkorOptions, Shape, STORAGE_THEME_KEY, Theme } from './config';
 export { type SurfaceElevation, type SurfaceElevationDirection, surfaceElevationOrder } from './surface';
-export { formatError } from './utils';
+export { formatErrors } from './utils';
