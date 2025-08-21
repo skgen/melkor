@@ -6,7 +6,7 @@
         <div v-theme="theme" class="mk-TheApp" v-bind="$attrs">
           <slot />
         </div>
-      </TheIconsContext>x
+      </TheIconsContext>
     </AppThemeContext>
   </TheGlobalTheme>
 </template>
