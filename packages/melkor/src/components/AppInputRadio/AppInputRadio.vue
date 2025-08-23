@@ -60,7 +60,8 @@
     <AppInputHint v-if="$slots.hint">
       <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="props.errors">
+    <AppInputError v-if="hasErrors(props.errors)">
+      >
       {{ formatErrors(props.errors) }}
     </AppInputError>
   </div>
@@ -74,6 +75,7 @@ import { ref } from 'vue';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { hasErrors } from '../../features/io/input';
 import { inputRadioDefaultProps, type InputRadioEmits, type InputRadioExpose, type InputRadioProps, type InputRadioSlots } from '../../features/io/input-radio';
 import { formatErrors } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';

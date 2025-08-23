@@ -5,7 +5,7 @@ import type { DisabledProps, HoveredProps } from '../interactions';
 import { isValue } from '@skgn/kit';
 import { isArray, isString } from 'lodash-es';
 
-import { type InferDefaults, isZodType } from '../utils';
+import { type InferDefaults, isZodError, isZodType } from '../utils';
 
 export type InputProps<TValue> = {
   value: TValue;
@@ -71,4 +71,8 @@ export function validateInputModel<TValue>(newValue: TValue, validate?: Validate
     }
   }
   return newModel;
+}
+
+export function hasErrors(maybeErrors: InputProps<any>['errors']) {
+  return isZodError(maybeErrors) || !!maybeErrors?.length;
 }

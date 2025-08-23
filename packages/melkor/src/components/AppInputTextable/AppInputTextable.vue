@@ -52,7 +52,7 @@
     <AppInputHint v-if="$slots.hint">
       <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="props.errors">
+    <AppInputError v-if="hasErrors(props.errors)">
       {{ formatErrors(props.errors) }}
     </AppInputError>
   </label>
@@ -66,6 +66,7 @@ import { useGlobalConfig } from '../../composables/useGlobalConfig';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { hasErrors } from '../../features/io/input';
 import { inputTextableDefaultProps, type InputTextableEmits, type InputTextableExpose, type InputTextableProps, type InputTextableSlots } from '../../features/io/input-textable';
 import { formatErrors } from '../../features/utils';
 import AppIcon from '../AppIcon/AppIcon.vue';

@@ -56,7 +56,7 @@
     <AppInputHint v-if="$slots.hint">
       <slot name="hint" />
     </AppInputHint>
-    <AppInputError v-if="props.errors">
+    <AppInputError v-if="hasErrors(props.errors)">
       {{ formatErrors(props.errors) }}
     </AppInputError>
   </label>
@@ -69,6 +69,7 @@ import { computed, ref } from 'vue';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
 import { bindInteractionStateProps } from '../../features/interactions';
+import { hasErrors } from '../../features/io/input';
 import { inputColorDefaultProps, type InputColorEmits, type InputColorExpose, type InputColorProps, type InputColorSlots, type InputColorValue } from '../../features/io/input-color';
 import { formatErrors } from '../../features/utils';
 import AppInputError from '../AppInputError/AppInputError.vue';

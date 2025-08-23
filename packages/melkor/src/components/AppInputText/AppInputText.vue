@@ -70,6 +70,7 @@ const props = withDefaults(
   defineProps<Props>(),
   inputTextDefaultProps,
 );
+
 const emit = defineEmits<Emits>();
 
 defineSlots<Slots>();
