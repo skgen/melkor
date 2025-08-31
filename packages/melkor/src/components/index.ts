@@ -19,6 +19,7 @@ export { default as AppInputTextableCancel } from './AppInputTextableCancel/AppI
 export { default as AppInputTextarea } from './AppInputTextarea/AppInputTextarea.vue';
 export { default as AppInputToggle } from './AppInputToggle/AppInputToggle.vue';
 export { default as AppPagination } from './AppPagination/AppPagination.vue';
+export { default as AppProgress } from './AppProgress/AppProgress.vue';
 export { default as AppRadio } from './AppRadio/AppRadio.vue';
 export { default as AppSkeleton } from './AppSkeleton/AppSkeleton.vue';
 export { default as AppThemeContext } from './AppThemeContext/AppThemeContext.vue';
