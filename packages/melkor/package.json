@@ -73,7 +73,6 @@
     "lodash-es": "catalog:",
     "normalize.css": "catalog:",
     "reka-ui": "^2.2.0",
-    "universal-cookie": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
