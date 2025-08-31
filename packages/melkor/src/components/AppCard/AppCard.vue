@@ -20,9 +20,12 @@ export interface Props {
 
 const props = defineProps<Props>();
 
-const surface = useSurface({ override: {
-  elevation: props.elevation,
-} });
+const surface = useSurface({
+  inject: true,
+  override: {
+    elevation: props.elevation,
+  },
+});
 
 const theme = useTheme();
 </script>
