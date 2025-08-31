@@ -4,9 +4,12 @@
 
 <script lang="ts" setup>
 import { isArray, isObject } from '@skgn/kit';
+import { useNetwork } from '@vueuse/core';
 import { provide } from 'vue';
 
 import { globalIconsContextKey, type IconCollection, type IconCollectionName } from '../../features/icons';
+
+const { isOnline } = useNetwork();
 
 const collections: IconCollection[] = [];
 const pendingCallbacks: {
@@ -22,29 +25,37 @@ function getCachedCollection(collectionName: IconCollectionName) {
 }
 
 async function fetchCollection(collectionName: IconCollectionName): Promise<IconCollection> {
-  const res = await fetch(`https://api.iconify.design/collection?prefix=${collectionName}`, {
-    method: 'GET',
-  });
-  const data = await res.json();
-  const collection: IconCollection = {
-    name: collectionName,
-    categories: [],
-  };
-  if (isObject(data.categories)) {
-    Object.keys(data.categories).forEach((key: keyof typeof data.categories) => {
-      collection.categories.push({
-        label: key.toString(),
-        icons: data.categories[key],
+  try {
+    const res = await fetch(`https://api.iconify.design/collection?prefix=${collectionName}`, {
+      method: 'GET',
+    });
+    const data = await res.json();
+    const collection: IconCollection = {
+      name: collectionName,
+      categories: [],
+    };
+    if (isObject(data.categories)) {
+      Object.keys(data.categories).forEach((key: keyof typeof data.categories) => {
+        collection.categories.push({
+          label: key.toString(),
+          icons: data.categories[key],
+        });
       });
-    });
+    }
+    if (isArray(data.uncategorized)) {
+      collection.categories.push({
+        label: 'Uncategorized',
+        icons: data.uncategorized,
+      });
+    }
+    return collection;
   }
-  if (isArray(data.uncategorized)) {
-    collection.categories.push({
-      label: 'Uncategorized',
-      icons: data.uncategorized,
-    });
+  catch (e) {
+    if (!isOnline) {
+      throw new Error('Internet connection required');
+    }
+    throw e;
   }
-  return collection;
 }
 
 async function loadCollection(collectionName: IconCollectionName): Promise<IconCollection> {
