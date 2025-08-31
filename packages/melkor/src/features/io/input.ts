@@ -37,9 +37,6 @@ export type InputExpose = {
   blur: () => void;
 };
 
-export type InputModel<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'errors'>;
-export type InputModelRest<T> = Pick<InputProps<T>, 'value' | 'valid' | 'touched' | 'errors'>;
-
 export type ValidateInputValue<TValue> = (value: TValue) => string[] | string | void;
 
 export const inputDefaultProps = {
@@ -48,8 +45,10 @@ export const inputDefaultProps = {
   errors: (): string[] => [],
 } as const satisfies InferDefaults<InputProps<any>>;
 
-export function validateInputModel<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue> | ZodType): InputModel<TValue> {
-  const newModel: InputModel<TValue> = {
+export type ValidateInputValueReturn<TValue> = Pick<InputProps<TValue>, 'value' | 'valid' | 'touched' | 'errors'>;
+
+export function validateInputValue<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue> | ZodType): ValidateInputValueReturn<TValue> {
+  const newModel: ValidateInputValueReturn<TValue> = {
     value: newValue,
     touched: true,
     errors: [],

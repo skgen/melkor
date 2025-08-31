@@ -5,16 +5,7 @@ import {
   ref,
 } from 'vue';
 
-import { type InputEmits, type InputModel, type InputProps, validateInputModel } from '../features/io/input';
-
-// cant use in defineProps because of compiler
-// export type InputProps<TState extends InputState<any>> = {
-//   modelValue: TState;
-//   name?: string;
-//   validate?: ValidateInput<TState>;
-// };
-
-// type PartialInputModel<T> = Partial<InputModel<T>> & { value: InputModel<T>['value'] };
+import { type InputEmits, type InputProps, validateInputValue } from '../features/io/input';
 
 export interface UseInputOptions<TValue> {
   props: InputProps<TValue>;
@@ -40,7 +31,7 @@ export function useInput<TValue>(options: UseInputOptions<TValue>): {
   }
 
   function onChange(newValue: TValue): void {
-    const newModel: InputModel<TValue> = validateInputModel(newValue, options.props.validate);
+    const newModel = validateInputValue(newValue, options.props.validate);
 
     if (!isEqual(options.props.value, newModel.value)) {
       options.emit('update:value', newModel.value);
