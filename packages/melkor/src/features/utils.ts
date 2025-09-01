@@ -34,6 +34,10 @@ export function isZodError(value: unknown): value is ZodError {
   );
 }
 
+export type KeysAs<T, V> = {
+  [K in keyof T]: NonNullable<T[K]> extends infer _R ? V | undefined : V;
+};
+
 export type InferDefaults<T> = {
   [K in keyof T]?: InferDefault<T, T[K]>;
 };

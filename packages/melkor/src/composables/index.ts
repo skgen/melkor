@@ -8,3 +8,4 @@ export * from './usePagination';
 export * from './useSurface';
 export * from './useTheme';
 export * from './useThemes';
+export * from './useToast';

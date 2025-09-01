@@ -2,6 +2,7 @@ import type { DeepPartial } from '@skgn/kit';
 import type { InjectionKey } from 'vue';
 
 import type { ThemeInstance } from './theme';
+import type { ToastPosition } from './toast';
 
 import merge from 'deepmerge';
 
@@ -44,6 +45,13 @@ export interface MelkorOptions {
     AppCheckbox: {
       checked: string;
     };
+    AppToast: {
+      close: string;
+    };
+  };
+  toast: {
+    position: ToastPosition;
+    limit: number;
   };
 }
 
@@ -87,6 +95,13 @@ const defaultMelkorOptions: MelkorOptions = {
     AppCheckbox: {
       checked: 'material-symbols:check',
     },
+    AppToast: {
+      close: 'material-symbols:close',
+    },
+  },
+  toast: {
+    position: 'bottom-right',
+    limit: 10 ** 1e2,
   },
 };
 

@@ -1,17 +1,80 @@
-@mixin mq-to($breakpoint) {
-  @media screen and (max-width: $breakpoint) {
+@use 'sass:map';
+@use '../partials/variables' as variables;
+
+@mixin screen-to($breakpoint) {
+  @media screen and (max-width: map.get(variables.$mk-media-queries, $breakpoint)) {
     @content;
   }
 }
 
-@mixin mq-from($breakpoint) {
-  @media screen and (min-width: $breakpoint + 1) {
+@mixin screen-from($breakpoint) {
+  @media screen and (min-width: map.get(variables.$mk-media-queries, $breakpoint) + 0.01rem) {
     @content;
   }
 }
 
-@mixin mq-from-to($breakpointMin, $breakpointMax) {
-  @media screen and (min-width: $breakpointMin + 1) and (max-width: $breakpointMax) {
+// @mixin mq-from-to($breakpointMin, $breakpointMax) {
+//   @media screen and (min-width: $breakpointMin + 1) and (max-width: $breakpointMax) {
+//     @content;
+//   }
+// }
+
+@mixin screen-to-sm {
+  @include screen-to('sm') {
+    @content;
+  }
+}
+
+@mixin screen-to-md {
+  @include screen-to('md') {
+    @content;
+  }
+}
+
+@mixin screen-to-lg {
+  @include screen-to('lg') {
+    @content;
+  }
+}
+
+@mixin screen-to-xl {
+  @include screen-to('xl') {
+    @content;
+  }
+}
+
+@mixin screen-to-2xl {
+  @include screen-to('2xl') {
+    @content;
+  }
+}
+
+@mixin screen-from-sm {
+  @include screen-from('sm') {
+    @content;
+  }
+}
+
+@mixin screen-from-md {
+  @include screen-from('md') {
+    @content;
+  }
+}
+
+@mixin screen-from-lg {
+  @include screen-from('lg') {
+    @content;
+  }
+}
+
+@mixin screen-from-xl {
+  @include screen-from('xl') {
+    @content;
+  }
+}
+
+@mixin screen-from-2xl {
+  @include screen-from('2xl') {
     @content;
   }
 }

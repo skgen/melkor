@@ -27,7 +27,7 @@
   // Layout
 
   @for $i from 1 through 24 {
-    --mk-size-#{$i}: #{variables.$m * $i};
+    --mk-size-#{$i}: #{variables.$mk-size-base * $i};
   }
 
   // Shapes 1px, 1.4px, 2px
