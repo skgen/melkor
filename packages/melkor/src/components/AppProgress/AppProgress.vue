@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ProgressRootEmits, ProgressRootProps } from 'reka-ui';
+import type { ProgressRootEmits } from 'reka-ui';
 
 import { clamp, isValue, map } from '@skgn/kit';
 import { isArray, round } from 'lodash-es';
