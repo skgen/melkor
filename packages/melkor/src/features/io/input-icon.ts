@@ -1,3 +1,5 @@
+import type { Slot } from 'vue';
+
 import type { IconCollectionName } from '../icons';
 import type { InferDefaults } from '../utils';
 
@@ -16,7 +18,7 @@ export type InputIconProps = InputProps<InputIconValue> & {
 export type InputIconEmits = InputEmits<InputIconValue>;
 
 export type InputIconSlots = InputSlots & {
-  placeholder?: () => any;
+  placeholder?: Slot;
 };
 
 export type InputIconExpose = InputExpose;

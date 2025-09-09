@@ -1,3 +1,5 @@
+import type { Slot } from 'vue';
+
 import type { InferDefaults } from '../utils';
 
 import { inputDefaultProps, type InputEmits, type InputExpose, type InputProps, type InputSlots } from './input';
@@ -13,8 +15,8 @@ export type InputColorProps = InputProps<InputColorValue> & {
 export type InputColorEmits = InputEmits<InputColorValue>;
 
 export type InputColorSlots = InputSlots & {
-  'trailing-icon'?: () => any;
-  'cancel-icon'?: () => any;
+  'trailing-icon'?: Slot;
+  'cancel-icon'?: Slot;
 };
 
 export type InputColorExpose = InputExpose;

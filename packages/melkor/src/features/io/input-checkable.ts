@@ -1,3 +1,5 @@
+import type { Slot } from 'vue';
+
 import type { InferDefaults } from '../utils';
 
 import { inputDefaultProps, type InputEmits, type InputExpose, type InputProps, type InputSlots } from './input';
@@ -11,7 +13,7 @@ export type InputCheckableProps<TValue = boolean> = InputProps<TValue> & {
 export type InputCheckableEmits<TValue = boolean> = InputEmits<TValue>;
 
 export type InputCheckableSlots<TValue = boolean> = InputSlots & {
-  'default'?: (props: {
+  'default'?: Slot<{
     ref: string;
     hovered: boolean;
     validate: InputCheckableProps<TValue>['validate'];
@@ -23,9 +25,9 @@ export type InputCheckableSlots<TValue = boolean> = InputSlots & {
     onChange: (event: Event) => void;
     onFocus: () => void;
     onBlur: () => void;
-  }) => any;
-  'checked-label'?: () => any;
-  'unchecked-label'?: () => any;
+  }>;
+  'checked-label'?: Slot;
+  'unchecked-label'?: Slot;
 };
 
 export type InputCheckableExpose = InputExpose;

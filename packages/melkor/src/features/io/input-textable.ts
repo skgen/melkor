@@ -1,3 +1,5 @@
+import type { Slot } from 'vue';
+
 import type { InferDefaults } from '../utils';
 
 import { inputDefaultProps, type InputEmits, type InputExpose, type InputProps, type InputSlots } from './input';
@@ -12,7 +14,7 @@ export type InputTextableProps<InputTextableValue> = InputProps<InputTextableVal
 export type InputTextableEmits<InputTextableValue> = InputEmits<InputTextableValue>;
 
 export type InputTextableSlots<InputTextableValue> = InputSlots & {
-  'default'?: (props: {
+  'default'?: Slot<{
     ref: string;
     inputName: InputTextableProps<InputTextableValue>['name'];
     disabled: InputTextableProps<InputTextableValue>['disabled'];
@@ -22,10 +24,10 @@ export type InputTextableSlots<InputTextableValue> = InputSlots & {
     onChange: (event: Event, newValue: InputTextableValue) => void;
     onFocus: () => void;
     onBlur: () => void;
-  }) => any;
-  'leading-icon'?: () => any;
-  'trailing-icon'?: () => any;
-  'cancel-icon'?: () => any;
+  }>;
+  'leading-icon'?: Slot;
+  'trailing-icon'?: Slot;
+  'cancel-icon'?: Slot;
 };
 
 export type InputTextableExpose = InputExpose;

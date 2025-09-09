@@ -1,4 +1,5 @@
 import type { Flatten } from '@skgn/kit';
+import type { Slot } from 'vue';
 
 import type { InferDefaults } from '../utils';
 
@@ -16,10 +17,10 @@ export type InputRadioProps<TValue = boolean> = InputProps<TValue> & {
 export type InputRadioEmits<TValue = boolean> = InputEmits<TValue>;
 
 export type InputRadioSlots<TValue = boolean> = InputSlots & {
-  option?: (props: {
+  option?: Slot<{
     index: number;
     option: Flatten<InputRadioProps<TValue>['options']>;
-  }) => any;
+  }>;
 };
 
 export type InputRadioExpose = InputExpose;

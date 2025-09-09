@@ -1,4 +1,5 @@
 import type { Flatten } from '@skgn/kit';
+import type { Slot } from 'vue';
 
 import type { InferDefaults } from '../utils';
 
@@ -15,10 +16,10 @@ export type InputSelectNativeProps<TValue> = InputProps<TValue> & {
 export type InputSelectNativeEmits<TValue> = InputEmits<TValue>;
 
 export type InputSelectNativeSlots<TValue> = InputSlots & {
-  option?: (props: {
+  option?: Slot<{
     index: number;
     option: Flatten<InputSelectNativeProps<TValue>['options']>;
-  }) => any;
+  }>;
 };
 
 export type InputSelectNativeExpose = InputExpose;

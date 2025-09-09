@@ -1,3 +1,4 @@
+import type { Slot } from 'vue';
 import type { ZodError, ZodType } from 'zod';
 
 import type { DisabledProps, HoveredProps } from '../interactions';
@@ -28,8 +29,8 @@ export type InputEmits<TValue> = {
 };
 
 export type InputSlots = {
-  label?: () => any;
-  hint?: () => any;
+  label?: Slot;
+  hint?: Slot;
 };
 
 export type InputExpose = {
