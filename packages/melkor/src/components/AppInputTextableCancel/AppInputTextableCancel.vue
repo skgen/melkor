@@ -10,12 +10,14 @@
 </template>
 
 <script lang="ts" setup>
+import type { Slot } from 'vue';
+
 import { useGlobalConfig } from '../../composables/useGlobalConfig';
 import { useTheme } from '../../composables/useTheme';
 import AppIcon from '../AppIcon/AppIcon.vue';
 
 defineSlots<{
-  default?: () => any;
+  default?: Slot;
 }>();
 
 const theme = useTheme();

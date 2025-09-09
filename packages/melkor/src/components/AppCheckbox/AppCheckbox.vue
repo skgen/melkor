@@ -16,6 +16,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { Slot } from 'vue';
+
 import type { CheckableProps } from '../../features/checkable';
 
 import { useGlobalConfig } from '../../composables/useGlobalConfig';
@@ -28,7 +30,7 @@ export type Props = CheckableProps;
 const props = defineProps<Props>();
 
 defineSlots<{
-  default?: () => any;
+  default?: Slot;
 }>();
 
 const theme = useTheme();

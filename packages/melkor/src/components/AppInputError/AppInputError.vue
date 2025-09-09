@@ -8,10 +8,12 @@
 </template>
 
 <script lang="ts" setup>
+import type { Slot } from 'vue';
+
 import { useTheme } from '../../composables/useTheme';
 
 defineSlots<{
-  default?: () => any;
+  default?: Slot;
 }>();
 
 const theme = useTheme();
