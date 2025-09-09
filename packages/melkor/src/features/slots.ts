@@ -1,4 +1,4 @@
-import { isArray, isBoolean, isNumber, isString } from 'lodash-es';
+import { isArray, isBoolean, isFunction, isNumber, isString } from 'lodash-es';
 import { createTextVNode, type Slot, type VNode } from 'vue';
 
 export type MaybeSlot = Slot | VNode | VNode[] | string | number | boolean | null | undefined;
@@ -11,7 +11,7 @@ export function normalizeSlot(s?: MaybeSlot): Slot | undefined {
   if (!s) {
     return undefined;
   }
-  if (typeof s === 'function') {
+  if (isFunction(s)) {
     return s;
   }
   if (isString(s) || isBoolean(s) || isNumber(s)) {
