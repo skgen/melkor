@@ -77,37 +77,6 @@ export function watchSystemThemeChange(systemTheme: SystemTheme, onChange: () =>
   }
 }
 
-// export function setupThemes(newThemes: Themes): void {
-//   return;
-//   // Persist system theme for future use
-//   const preferredThemeValue = getPreferredThemeValue();
-//   if (isClient) {
-//     localStorage.setItem(globalConfig.cookies.preferredTheme, preferredThemeValue);
-//   }
-
-//   if (newThemes.length === 0) {
-//     throw new Error('Melkor UI needs at least 1 theme (dark, light or custom), please don\'t provide an empty theme array.');
-//   }
-
-//   globalConfig.themes = newThemes;
-
-//   if (globalConfig.themes.includes(Theme.light)) {
-//     watchSystemThemeChange(Theme.light);
-//   }
-//   if (globalConfig.themes.includes(Theme.dark)) {
-//     watchSystemThemeChange(Theme.dark);
-//   }
-
-//   globalConfig.theme.value = getPreferredTheme();
-
-//   // Force loading system theme real value
-//   onThemeChange(globalConfig.theme.value);
-
-//   // Only watch after to prevent triggering twice
-//   watch(() => globalConfig.theme.value, onThemeChange);
-//   watch(() => globalConfig.theme.seed, onSeedChange);
-// }
-
 // Local theme config
 
 export const globalThemeContextKey = Symbol('Inject key of global theme') as InjectionKey<Ref<ThemeInstance>>;
