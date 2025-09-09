@@ -1,4 +1,5 @@
 import type { DeepPartial } from '@skgn/kit';
+import type { TooltipContentProps, TooltipProviderProps } from 'reka-ui';
 import type { InjectionKey } from 'vue';
 
 import type { ThemeInstance } from './theme';
@@ -52,7 +53,11 @@ export interface MelkorOptions {
   toast: {
     position: ToastPosition;
     limit: number;
+    duration: number;
+    swipeThreshold: number;
   };
+  tooltip: Required<Pick<TooltipProviderProps, 'delayDuration' | 'disableClosingTrigger' | 'disableHoverableContent' | 'ignoreNonKeyboardFocus' | 'skipDelayDuration'>>
+    & Required<Pick<TooltipContentProps, 'align' | 'alignOffset' | 'side' | 'sideOffset' | 'avoidCollisions' | 'collisionPadding' | 'hideWhenDetached' | 'positionStrategy' | 'sticky' | 'updatePositionStrategy'>>;
 }
 
 export type GlobalConfig = MelkorOptions & {
@@ -102,6 +107,25 @@ const defaultMelkorOptions: MelkorOptions = {
   toast: {
     position: 'bottom-right',
     limit: 10 ** 1e2,
+    duration: 5000,
+    swipeThreshold: 50,
+  },
+  tooltip: {
+    delayDuration: 300,
+    disableClosingTrigger: false,
+    disableHoverableContent: false,
+    ignoreNonKeyboardFocus: false,
+    skipDelayDuration: 300,
+    align: 'center',
+    alignOffset: 0,
+    side: 'top',
+    sideOffset: 4,
+    avoidCollisions: true,
+    collisionPadding: 0,
+    hideWhenDetached: true,
+    positionStrategy: 'fixed',
+    sticky: 'partial',
+    updatePositionStrategy: 'optimized',
   },
 };
 
