@@ -2,7 +2,6 @@
   <span
     v-theme="theme"
     class="mk-AppInputLabel"
-    :data-theme="theme"
   >
     <slot />
   </span>

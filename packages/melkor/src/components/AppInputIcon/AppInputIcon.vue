@@ -2,7 +2,6 @@
   <div
     v-theme="theme"
     class="mk-AppInputIcon"
-    :data-theme="theme"
     v-bind="bindInteractionStateProps({
       ...props,
       focused: focused || open,

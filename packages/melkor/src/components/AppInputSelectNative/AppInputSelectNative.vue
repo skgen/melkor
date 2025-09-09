@@ -2,7 +2,6 @@
   <label
     v-theme="theme"
     class="mk-AppInputSelectNative"
-    :data-theme="theme"
     :data-fill="props.fill || undefined"
     v-bind="bindInteractionStateProps({
       ...props,
