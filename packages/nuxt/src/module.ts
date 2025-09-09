@@ -31,12 +31,12 @@ export interface ModuleOptions {
   };
 }
 
-export interface MelkorNuxtContext<TMeta extends Record<string, any> = Record<string, any>> {
+export interface MelkorNuxtContext {
   resolver: Resolver;
   logger: ReturnType<typeof import('@nuxt/kit')['useLogger']>;
   moduleOptions: ModuleOptions;
   melkorOptions: MelkorOptions;
-  meta: TMeta;
+  meta: typeof meta;
   nuxt: Nuxt;
   runtimeDir: string;
   melkorDir: string;
