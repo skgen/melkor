@@ -39,6 +39,7 @@
       "import": "./lib/features/index.js"
     },
     "./meta.json": {
+      "types": "./lib/meta.d.ts",
       "import": "./lib/meta.json",
       "require": "./lib/meta.json"
     }
@@ -59,7 +60,8 @@
     "review:eslint": "eslint . --fix",
     "review:eslint:debug": "eslint src/features/io/input.ts --debug",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
-    "prepack": "pnpm run build"
+    "prepack": "pnpm run build",
+    "meta": "tsx ./scripts/meta/extract-meta-types.ts"
   },
   "peerDependencies": {
     "vue": "catalog:"
@@ -100,6 +102,7 @@
     "vite-plugin-dts": "catalog:",
     "vite-plugin-no-bundle": "catalog:",
     "vite-plugin-static-copy": "catalog:",
+    "vue-component-meta": "catalog:",
     "vue-tsc": "catalog:"
   }
 }

@@ -1,6 +1,6 @@
 import type { Plugin, UserConfig } from 'vite';
 
-import { extractMeta } from './meta/extract.meta';
+import { extractMeta } from './meta/extract-meta';
 
 interface Config {
   root?: string;
@@ -95,10 +95,8 @@ export function vitePluginBuildLib(config: Config): Plugin {
         }
       }
     },
-    writeBundle(options, bundle) {
-      extractMeta({
-        bundleKeys: Object.keys(bundle),
-      });
+    closeBundle() {
+      extractMeta();
     },
   };
 };
