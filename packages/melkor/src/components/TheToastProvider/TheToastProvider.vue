@@ -1,57 +1,60 @@
 <template>
-  <ToastProvider :swipe-direction="swipeDirection">
+  <ToastProvider :swipe-direction="swipeDirection" v-bind="rekaProviderProps">
     <slot />
-    <ToastViewport
-      as-child
-    >
-      <ol
-        ref="rootRef"
-        class="mk-TheToastContext"
-        :data-position="config.toast.position"
-        :style="{
-          '--virtual-height': height,
-        }"
+    <ToastPortal :to="`#${floatingLayerId}`">
+      <ToastViewport
+        as-child
       >
-        <AppToast
-          v-for="(toast, i) of collection"
-          ref="collectionRefs"
-          :key="toast.id"
-          class="mk-TheToastContext-toast"
-          v-bind="toast.props"
+        <ol
+          ref="rootRef"
+          class="mk-TheToastContext"
+          :data-position="config.toast.position"
           :style="{
-            '--offset': getOffset(i),
-            '--translate-direction': config.toast.position.includes('top') ? '1px' : '-1px',
-            '--offset-y': 'calc(var(--offset) * var(--translate-direction))',
+            '--virtual-height': height,
           }"
-          @update:open="() => remove(toast.id)"
         >
-          <template v-if="toast.slots.default" #default>
-            <component :is="toast.slots.default" />
-          </template>
-          <template v-if="toast.slots.leading" #leading>
-            <component :is="toast.slots.leading" />
-          </template>
-          <template v-if="toast.slots.title" #title>
-            <component :is="toast.slots.title" />
-          </template>
-          <template v-if="toast.slots.description" #description>
-            <component :is="toast.slots.description" />
-          </template>
-          <template v-if="toast.slots.actions" #actions>
-            <component :is="node" v-for="(node, j) in toast.slots.actions()" :key="j" />
-          </template>
-        </AppToast>
-      </ol>
-    </ToastViewport>
+          <AppToast
+            v-for="(toast, i) of collection"
+            ref="collectionRefs"
+            :key="toast.id"
+            class="mk-TheToastContext-toast"
+            v-bind="toast.props"
+            :style="{
+              '--offset': getOffset(i),
+              '--translate-direction': config.toast.position.includes('top') ? '1px' : '-1px',
+              '--offset-y': 'calc(var(--offset) * var(--translate-direction))',
+            }"
+            @update:open="() => remove(toast.id)"
+          >
+            <template v-if="toast.slots.default" #default>
+              <component :is="toast.slots.default" />
+            </template>
+            <template v-if="toast.slots.leading" #leading>
+              <component :is="toast.slots.leading" />
+            </template>
+            <template v-if="toast.slots.title" #title>
+              <component :is="toast.slots.title" />
+            </template>
+            <template v-if="toast.slots.description" #description>
+              <component :is="toast.slots.description" />
+            </template>
+            <template v-if="toast.slots.actions" #actions>
+              <component :is="node" v-for="(node, j) in toast.slots.actions()" :key="j" />
+            </template>
+          </AppToast>
+        </ol>
+      </ToastViewport>
+    </ToastPortal>
   </ToastProvider>
 </template>
 
 <script lang="ts" setup>
-import { useCssVar } from '@vueuse/core';
-import { ToastProvider, ToastViewport } from 'reka-ui';
+import { reactivePick, useCssVar } from '@vueuse/core';
+import { ToastPortal, ToastProvider, ToastViewport, useForwardProps } from 'reka-ui';
 import { computed, markRaw, provide, ref } from 'vue';
 
 import { useGlobalConfig } from '../../composables';
+import { floatingLayerId } from '../../features/layer';
 import { normalizeSlot } from '../../features/slots';
 import { durationToNumber, remToPixels } from '../../features/style';
 import { globalToastContextKey, type ToastContext, type ToastExpose, type ToastProps, type ToastSlots, type ToastSwipeDirection } from '../../features/toast';
@@ -92,6 +95,8 @@ const swipeDirection = computed<ToastSwipeDirection>(() => {
       return 'right';
   }
 });
+
+const rekaProviderProps = useForwardProps(reactivePick(config.toast, 'duration', 'swipeThreshold'));
 
 // Layout
 
