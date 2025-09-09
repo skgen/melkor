@@ -121,17 +121,19 @@
     $mk-colors: (
       'primary': variables.$mk-light-primary,
       'on-primary': variables.$mk-light-on-primary,
+      'neutral': variables.$mk-light-neutral,
+      'on-neutral': variables.$mk-light-on-neutral,
       'success': variables.$mk-light-success,
+      'on-success': variables.$mk-light-on-success,
       'error': variables.$mk-light-error,
+      'on-error': variables.$mk-light-on-error,
       'danger': variables.$mk-light-danger,
+      'on-danger': variables.$mk-light-on-danger,
       'info': variables.$mk-light-info,
+      'on-info': variables.$mk-light-on-info,
     );
 
     @each $color-name, $color in $mk-colors {
-      @each $prop-name, $prop in $color {
-        --mk-#{$color-name}-#{$prop-name}: #{$prop};
-      }
-
       @include common.generate-lch-color(
         $color-name,
         map.get($color, 'light'),
@@ -161,17 +163,19 @@
     $mk-colors: (
       'primary': variables.$mk-dark-primary,
       'on-primary': variables.$mk-dark-on-primary,
+      'neutral': variables.$mk-dark-neutral,
+      'on-neutral': variables.$mk-dark-on-neutral,
       'success': variables.$mk-dark-success,
+      'on-success': variables.$mk-dark-on-success,
       'error': variables.$mk-dark-error,
+      'on-error': variables.$mk-dark-on-error,
       'danger': variables.$mk-dark-danger,
+      'on-danger': variables.$mk-dark-on-danger,
       'info': variables.$mk-dark-info,
+      'on-info': variables.$mk-dark-on-info,
     );
 
     @each $color-name, $color in $mk-colors {
-      @each $prop-name, $prop in $color {
-        --mk-#{$color-name}-#{$prop-name}: #{$prop};
-      }
-
       @include common.generate-lch-color(
         $color-name,
         map.get($color, 'light'),

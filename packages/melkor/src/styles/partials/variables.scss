@@ -38,24 +38,46 @@ $mk-dark-shade-lights: (
 ) !default;
 
 // Primary
+
 $mk-dark-primary: (
+  'light': 66%,
+  'chroma': 0.1882,
+  'hue': 22deg,
+) !default;
+
+// On Primary
+$mk-dark-on-primary: (
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
+// Neutral
+$mk-dark-neutral: (
   'light': 100%,
   'chroma': 0,
   'hue': 0deg,
 ) !default;
 
-// On Primary
-$mk-dark-on-primary: (
+// On Neutral
+$mk-dark-on-neutral: (
   'light': var(--mk-shade-1-light),
   'chroma': var(--mk-shade-1-chroma),
   'hue': var(--mk-shade-1-hue),
 ) !default;
 
-// On Success
+// Success
 $mk-dark-success: (
   'light': 72.3%,
   'chroma': 0.219,
   'hue': 149.579deg,
+) !default;
+
+// On Success
+$mk-dark-on-success: (
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
 ) !default;
 
 // Error
@@ -65,6 +87,13 @@ $mk-dark-error: (
   'hue': 25.331deg,
 ) !default;
 
+// On Error
+$mk-dark-on-error: (
+  'light': 100%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
 // Danger
 $mk-dark-danger: (
   'light': 76.9%,
@@ -72,11 +101,25 @@ $mk-dark-danger: (
   'hue': 70.08deg,
 ) !default;
 
+// On Danger
+$mk-dark-on-danger: (
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
 // Info
 $mk-dark-info: (
   'light': 62.3%,
   'chroma': 0.214,
   'hue': 259.815deg,
+) !default;
+
+// On Info
+$mk-dark-on-info: (
+  'light': 100%,
+  'chroma': 0,
+  'hue': 0deg,
 ) !default;
 
 //////////////////////////// LIGHT ////////////////////////////
@@ -109,24 +152,46 @@ $mk-light-shade-lights: (
 ) !default;
 
 // Primary
+
 $mk-light-primary: (
+  'light': 71%,
+  'chroma': 0.1284,
+  'hue': 161deg,
+) !default;
+
+// On Primary
+$mk-light-on-primary: (
   'light': 0%,
   'chroma': 0,
   'hue': 0deg,
 ) !default;
 
-// On Primary
-$mk-light-on-primary: (
+// Neutral
+$mk-light-neutral: (
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
+// On Neutral
+$mk-light-on-neutral: (
   'light': var(--mk-shade-1-light),
   'chroma': var(--mk-shade-1-chroma),
   'hue': var(--mk-shade-1-hue),
 ) !default;
 
-// On Success
+// Success
 $mk-light-success: (
   'light': 72.3%,
   'chroma': 0.219,
   'hue': 149.579deg,
+) !default;
+
+// On Success
+$mk-light-on-success: (
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
 ) !default;
 
 // Error
@@ -136,6 +201,13 @@ $mk-light-error: (
   'hue': 25.331deg,
 ) !default;
 
+// On Error
+$mk-light-on-error: (
+  'light': 100%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
 // Danger
 $mk-light-danger: (
   'light': 76.9%,
@@ -143,9 +215,23 @@ $mk-light-danger: (
   'hue': 70.08deg,
 ) !default;
 
+// On Danger
+$mk-light-on-danger: (
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
+) !default;
+
 // Info
 $mk-light-info: (
   'light': 62.3%,
   'chroma': 0.214,
   'hue': 259.815deg,
+) !default;
+
+// On Info
+$mk-light-on-info: (
+  'light': 100%,
+  'chroma': 0,
+  'hue': 0deg,
 ) !default;
