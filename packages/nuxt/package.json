@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build-runtime": "tsx scripts/build-runtime.ts",
-    "stub": "nuxt-module-build build --stub && nuxt-module-build prepare",
+    "prepare": "nuxt-module-build build --stub && nuxt-module-build prepare",
     "prepack": "pnpm build-runtime && nuxt-module-build build",
     "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "test": "vitest run",
