@@ -52,7 +52,6 @@ const exists = await fetch(`https://registry.npmjs.org/${packageJson.name}/${pac
 
 if (exists.status === 200) {
   console.error(red(`\nPackage ${cyan(`${packageJson.name}@${packageJson.version}`)} already exists at https://registry.npmjs.org`));
-  console.error(red(`Existing ...`));
   process.exit(1);
 }
 
@@ -67,6 +66,7 @@ res = sh.exec(`bw login --apikey`, { silent: true });
 if (res.code === 1) {
   console.error(red(`Login failed`));
   console.error(res.stderr);
+  console.error(res.stdout);
   process.exit(1);
 }
 
@@ -77,6 +77,7 @@ res = sh.exec(`bw unlock --raw --passwordenv BW_PASSWORD`, { silent: true });
 if (res.code === 1) {
   console.error(red(`Unlock failed`));
   console.error(res.stderr);
+  console.error(res.stdout);
   process.exit(1);
 }
 
@@ -89,6 +90,7 @@ res = sh.exec(`bw get totp ${process.env.BW_ITEM_ID} --session ${session}`, { si
 if (res.code === 1) {
   console.error(red(`Failed to read item`));
   console.error(res.stderr);
+  console.error(res.stdout);
   process.exit(1);
 }
 
@@ -104,6 +106,7 @@ res = sh.exec(`pnpm publish ${releasePackage.path} --access public ${publishArgs
 if (res.code === 1) {
   console.error(red(`Failed to publish ${cyan(`${packageJson.name}@${packageJson.version}`)}`));
   console.error(res.stderr);
+  console.error(res.stdout);
   process.exit(1);
 }
 
