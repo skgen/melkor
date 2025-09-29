@@ -144,6 +144,26 @@ const theme = useTheme();
       --computed-intent-color: var(--mk-neutral);
       --computed-text-color: var(--mk-on-neutral);
     }
+
+    &[data-intent='success'] {
+      --computed-intent-color: var(--mk-success);
+      --computed-text-color: var(--mk-on-success);
+    }
+
+    &[data-intent='error'] {
+      --computed-intent-color: var(--mk-error);
+      --computed-text-color: var(--mk-on-error);
+    }
+
+    &[data-intent='danger'] {
+      --computed-intent-color: var(--mk-danger);
+      --computed-text-color: var(--mk-on-danger);
+    }
+
+    &[data-intent='info'] {
+      --computed-intent-color: var(--mk-info);
+      --computed-text-color: var(--mk-on-info);
+    }
   }
 
   &[data-variant='outline'] {
@@ -181,6 +201,26 @@ const theme = useTheme();
     &[data-intent='neutral'] {
       --computed-intent-color: var(--mk-neutral);
       --computed-border-color-hover: var(--mk-neutral-50);
+    }
+
+    &[data-intent='success'] {
+      --computed-intent-color: var(--mk-success);
+      --computed-border-color-hover: var(--mk-success-50);
+    }
+
+    &[data-intent='error'] {
+      --computed-intent-color: var(--mk-error);
+      --computed-border-color-hover: var(--mk-error-50);
+    }
+
+    &[data-intent='danger'] {
+      --computed-intent-color: var(--mk-danger);
+      --computed-border-color-hover: var(--mk-danger-50);
+    }
+
+    &[data-intent='info'] {
+      --computed-intent-color: var(--mk-info);
+      --computed-border-color-hover: var(--mk-info-50);
     }
   }
 
