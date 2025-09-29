@@ -21,10 +21,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#app {
-  min-height: 100vh;
-}
-
 b,
 strong {
   font-weight: 500;
@@ -39,6 +35,7 @@ a:active {
 }
 
 button {
+  color: inherit;
   text-align: left;
   appearance: none;
   background: transparent;

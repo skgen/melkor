@@ -78,3 +78,18 @@
   --mk-#{$name}-25: oklch(var(--mk-#{$name}-lch) / 25%);
   --mk-#{$name}-15: oklch(var(--mk-#{$name}-lch) / 15%);
 }
+
+@mixin background-cover($url, $size: cover) {
+  background: url($url);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: $size;
+}
+
+@mixin text-ellipsis($max-lines: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: #{$max-lines};
+  line-clamp: #{$max-lines};
+  -webkit-box-orient: vertical;
+}

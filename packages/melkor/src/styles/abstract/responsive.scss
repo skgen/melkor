@@ -13,11 +13,11 @@
   }
 }
 
-// @mixin mq-from-to($breakpointMin, $breakpointMax) {
-//   @media screen and (min-width: $breakpointMin + 1) and (max-width: $breakpointMax) {
-//     @content;
-//   }
-// }
+@mixin screen-from-to($breakpointMin, $breakpointMax) {
+  @media screen and (min-width: $breakpointMin + 1) and (max-width: $breakpointMax) {
+    @content;
+  }
+}
 
 @mixin screen-to-sm {
   @include screen-to('sm') {
