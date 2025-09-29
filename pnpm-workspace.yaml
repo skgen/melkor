@@ -1,32 +1,34 @@
 packages:
   - packages/melkor
-  # - packages/melkor/playground
-  - packages/melkor-docs
-  - packages/melkor-nuxt
-  # - packages/melkor-nuxt/playground
+  - packages/docs
+  - packages/nuxt
+  - packages/meta
 
 catalog:
-  '@antfu/eslint-config': ^3.7.1
-  '@bitwarden/cli': ^2025.4.0
+  '@antfu/eslint-config': ^3.16.0
+  '@bitwarden/cli': ^2025.8.0
   '@iconify/vue': ^4.1.2
-  '@nuxt/devtools': ^1.6.0
-  '@skgn/kit': ^1.0.3
-  '@nuxt/kit': ^3.13.159
   '@nuxt/content': ^3.3.0
+  '@nuxt/devtools': ^1.6.0
+  '@nuxt/kit': ^3.13.159
   '@nuxt/module-builder': ^0.8.4
   '@nuxt/schema': ^3.14.159
   '@nuxt/test-utils': ^3.14.4
-  '@tsconfig/node20': ^20.1.4
+  '@nuxtjs/mdc': ^0.17.3
+  '@skgn/kit': ^1.1.0
+  '@tsconfig/node20': ^20.1.6
   '@types/dotenv-parse-variables': ^2.0.3
   '@types/fs-extra': ^11.0.4
   '@types/jsdom': ^21.1.7
   '@types/lodash-es': ^4.17.12
-  '@types/node': ^22.7.4
-  '@types/shelljs': ^0.8.15
+  '@types/node': ^22.18.1
+  '@types/shelljs': ^0.8.17
   '@types/yargs': ^17.0.33
   '@vitejs/plugin-vue': ^5.1.4
   '@vue/tsconfig': ^0.5.1
   '@vueuse/core': ^13.1.0
+  JSONStream: ^1.3.5
+  better-sqlite3: ^12.2.0
   colorette: ^2.0.20
   commander: ^13.1.0
   concurrently: ^9.1.0
@@ -37,37 +39,47 @@ catalog:
   dotenv-parse-variables: ^2.0.0
   enquirer: ^2.4.1
   esbuild: ^0.24.0
-  eslint: ^9.15.1
+  eslint: ^9.34.0
   eslint-plugin-format: ^1.0.1
   fast-glob: ^3.3.3
   fs-extra: ^11.3.0
-  jsdom: ^24.1.3
   glob: ^11.0.0
+  jsdom: ^24.1.3
   lodash-es: ^4.17.21
   normalize.css: ^8.0.1
-  nuxt: ^3.15.4
+  nuxt: ^4.0.0
   pinia: ^2.2.4
   sass: ^1.80.6
   sass-embedded: ^1.80.6
   shelljs: ^0.8.5
+  shiki: ^3.12.2
+  shiki-transformer-color-highlight: ^1.0.0
   stylelint: ^16.9.0
   stylelint-config-recess-order: ^5.1.1
   stylelint-config-standard: ^36.0.1
   stylelint-config-standard-scss: ^13.1.0
   stylelint-config-standard-vue: ^1.0.0
   ts-json-schema-generator: ^2.3.0
-  tsx: ^4.19.2
+  tsx: ^4.20.5
   typescript: ~5.7.3
   typescript-json-schema: ^0.65.1
   universal-cookie: ^7.2.2
-  vue: ^3.5.12
-  vue-router: ^4.4.5
   vite: ^6.0.0
-  # vite-plugin-dts 4.5.1 breaks, don't upgrade without testing
   vite-plugin-dts: 4.5.0
   vite-plugin-no-bundle: ^4.0.0
   vite-plugin-static-copy: ^2.3.0
   vitest: ^2.1.5
+  vue: ^3.5.12
+  vue-component-meta: ^3.0.6
+  vue-router: ^4.4.5
   vue-tsc: ~2.2.8
   yargs: ^17.7.2
-  zod: ^3.24.2
+  zod: ^4.0.17
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - better-sqlite3
+  - core-js
+  - esbuild
+  - unrs-resolver
+  - vue-demi

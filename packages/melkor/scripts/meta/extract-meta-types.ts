@@ -1,6 +1,5 @@
 import path from 'node:path';
 
-import { Extractor, ExtractorConfig } from '@microsoft/api-extractor';
 import ts from 'typescript';
 
 import { rootPath } from '../utils';
