@@ -12,7 +12,9 @@ export type InputCheckableProps<TValue = boolean> = InputProps<TValue> & {
 
 export type InputCheckableEmits<TValue = boolean> = InputEmits<TValue>;
 
-export type InputCheckableSlots<TValue = boolean> = InputSlots & {
+// export "type" breaks dts generation, export interface prevents issue
+// @todo investigate further
+export interface InputCheckableSlots<TValue = boolean> extends InputSlots {
   'default'?: Slot<{
     ref: string;
     hovered: boolean;
