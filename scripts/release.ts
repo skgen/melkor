@@ -9,6 +9,16 @@ import { cyan, green, red } from 'colorette';
 import * as enquirer from 'enquirer';
 import sh from 'shelljs';
 
+function handleError(options: { res: ShellString; message: string }) {
+  const { res, message } = options;
+  if (res.code === 1) {
+    console.error(message);
+    console.error(res.stderr);
+    console.error(res.stdout);
+    process.exit(1);
+  }
+}
+
 const Enquirer = enquirer.default;
 const e = new Enquirer();
 
@@ -48,6 +58,19 @@ const releasePackage = packages[packagePrompt.package];
 
 const packageJson = await import(path.resolve(path.resolve(root, releasePackage.path), 'package.json'));
 
+let res: ShellString | null = null;
+
+// Building & releasing
+
+res = sh.exec(`pnpm -r --filter=./${releasePackage.path} run release`, { silent: true });
+
+handleError({
+  res,
+  message: red(`Failed to release ${cyan(`${packageJson.name}@${packageJson.version}`)}`),
+});
+
+// Check if exists before publishing
+
 const exists = await fetch(`https://registry.npmjs.org/${packageJson.name}/${packageJson.version}`);
 
 if (exists.status === 200) {
@@ -55,31 +78,25 @@ if (exists.status === 200) {
   process.exit(1);
 }
 
-let res: ShellString | null = null;
-
 console.log(`\nDeploying ${cyan(`${packageJson.name}@${packageJson.version}`)} ...`);
 
 sh.exec(`bw logout`, { silent: true });
 sh.exec(`bw config server ${process.env.BW_SERVER}`, { silent: true });
 res = sh.exec(`bw login --apikey`, { silent: true });
 
-if (res.code === 1) {
-  console.error(red(`Login failed`));
-  console.error(res.stderr);
-  console.error(res.stdout);
-  process.exit(1);
-}
+handleError({
+  res,
+  message: red(`Failed to login`),
+});
 
 console.log(green('Logged in'));
 
 res = sh.exec(`bw unlock --raw --passwordenv BW_PASSWORD`, { silent: true });
 
-if (res.code === 1) {
-  console.error(red(`Unlock failed`));
-  console.error(res.stderr);
-  console.error(res.stdout);
-  process.exit(1);
-}
+handleError({
+  res,
+  message: red(`Failed to unlock`),
+});
 
 const session = res.toString();
 
@@ -87,27 +104,23 @@ console.log(green('Unlocked'));
 
 res = sh.exec(`bw get totp ${process.env.BW_ITEM_ID} --session ${session}`, { silent: true });
 
-if (res.code === 1) {
-  console.error(red(`Failed to read item`));
-  console.error(res.stderr);
-  console.error(res.stdout);
-  process.exit(1);
-}
+handleError({
+  res,
+  message: red(`Failed to read item`),
+});
 
 const totp = res.toString();
 
 const publishArgs = [
-  // '--dry-run',
+  '--dry-run',
   `--otp ${totp}`,
 ];
 
 res = sh.exec(`pnpm publish ${releasePackage.path} --access public ${publishArgs.join(' ')}`, { silent: true });
 
-if (res.code === 1) {
-  console.error(red(`Failed to publish ${cyan(`${packageJson.name}@${packageJson.version}`)}`));
-  console.error(res.stderr);
-  console.error(res.stdout);
-  process.exit(1);
-}
+handleError({
+  res,
+  message: red(`Failed to publish ${cyan(`${packageJson.name}@${packageJson.version}`)}`),
+});
 
 console.log(green(`\nPackage ${cyan(`${packageJson.name}@${packageJson.version}`)} successfuly deployed !`));
