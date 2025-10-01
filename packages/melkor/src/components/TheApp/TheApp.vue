@@ -12,9 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useProvideIcons } from 'src/composables/internal/useProvideIcons';
-
 import { useInitGlobalTheme } from '../../composables/internal/useInitGlobalTheme';
+import { useProvideIcons } from '../../composables/internal/useProvideIcons';
 import AppThemeContext from '../AppThemeContext/AppThemeContext.vue';
 import TheFloatingLayer from '../TheFloatingLayer/TheFloatingLayer.vue';
 import TheToastProvider from '../TheToastProvider/TheToastProvider.vue';
