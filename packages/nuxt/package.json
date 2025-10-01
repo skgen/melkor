@@ -18,12 +18,13 @@
     "stub": "nuxt-module-build build --stub && nuxt-module-build prepare",
     "build": "pnpm build:runtime && nuxt-module-build build",
     "build:runtime": "tsx scripts/build-runtime.ts",
-    
     "test": "echo \"No test yet\"",
     "test:run": "vitest run",
     "test:watch": "vitest watch",
     "review": "pnpm review:typescript && pnpm review:eslint",
     "review:typescript": "vue-tsc --noEmit",
+    "changelog": "changelogen --release",
+    "release": "pnpm run review && pnpm run test && pnpm run build && pnpm run changelog && git push --follow-tags",
     "review:eslint": "eslint . --fix"
   },
   "dependencies": {
