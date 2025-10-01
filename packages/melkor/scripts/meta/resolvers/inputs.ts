@@ -1,7 +1,4 @@
 import type { InferDefaults } from 'src/features/utils';
-import type { PropertyMeta } from 'vue-component-meta';
-
-import process from 'node:process';
 
 import { isArray, isFunction, isUndefined } from 'lodash-es';
 
