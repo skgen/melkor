@@ -19,7 +19,7 @@ const packages = {
     path: 'packages/melkor',
   },
   'melkor-nuxt': {
-    path: 'packages/melkor-nuxt',
+    path: 'packages/nuxt',
   },
 } as const;
 
