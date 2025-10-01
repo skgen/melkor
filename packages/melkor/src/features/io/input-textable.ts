@@ -32,4 +32,4 @@ export type InputTextableSlots<InputTextableValue> = InputSlots & {
 
 export type InputTextableExpose = InputExpose;
 
-export const inputTextableDefaultProps: InferDefaults<InputTextableProps<any>> = inputDefaultProps;
+export const inputTextableDefaultProps = inputDefaultProps satisfies InferDefaults<InputTextableProps<any>>;

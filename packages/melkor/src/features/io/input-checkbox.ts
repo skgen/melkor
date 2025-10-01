@@ -14,4 +14,4 @@ export type InputCheckboxSlots<TValue = boolean> = Omit<InputCheckableSlots<TVal
 
 export type InputCheckboxExpose = InputCheckableExpose;
 
-export const inputCheckboxDefaultProps: InferDefaults<InputCheckboxProps<any>> = inputCheckableDefaultProps;
+export const inputCheckboxDefaultProps = inputCheckableDefaultProps satisfies InferDefaults<InputCheckboxProps<any>>;

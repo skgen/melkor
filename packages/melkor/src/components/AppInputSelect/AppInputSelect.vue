@@ -31,12 +31,7 @@
           <span class="mk-AppInputSelect-select">
             <span class="mk-AppInputSelect-select-value">
               <slot name="value" v-bind="{ value: props.value }">
-                <template v-if="isArray(props.value)">
-                  {{ props.value.join(',') }}
-                </template>
-                <template v-else>
-                  {{ props.value }}
-                </template>
+                {{ renderedValue }}
               </slot>
             </span>
           </span>
@@ -80,15 +75,10 @@
 </template>
 
 <script lang="ts" setup generic="TValue">
-import { isArray } from '@skgn/kit';
-import { isEqual } from 'lodash-es';
+import { isArray, isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
-import { nextTick, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 
-import AppIcon from '../../components/AppIcon/AppIcon.vue';
-import AppInputError from '../../components/AppInputError/AppInputError.vue';
-import AppInputHint from '../../components/AppInputHint/AppInputHint.vue';
-import AppInputLabel from '../../components/AppInputLabel/AppInputLabel.vue';
 import { useGlobalConfig } from '../../composables/useGlobalConfig';
 import { useInput } from '../../composables/useInput';
 import { useTheme } from '../../composables/useTheme';
@@ -96,6 +86,10 @@ import { bindInteractionStateProps } from '../../features/interactions';
 import { hasErrors } from '../../features/io/input';
 import { inputSelectDefaultProps, type InputSelectEmits, type InputSelectExpose, type InputSelectProps, type InputSelectSlots } from '../../features/io/input-select';
 import { formatErrors } from '../../features/utils';
+import AppIcon from '../AppIcon/AppIcon.vue';
+import AppInputError from '../AppInputError/AppInputError.vue';
+import AppInputHint from '../AppInputHint/AppInputHint.vue';
+import AppInputLabel from '../AppInputLabel/AppInputLabel.vue';
 
 export type Props<TValue> = InputSelectProps<TValue>;
 export type Emits<TValue> = InputSelectEmits<TValue>;
@@ -158,6 +152,13 @@ function handleChange(newValue: TValue) {
     }
   }
 }
+
+const renderedValue = computed(() => {
+  if(isArray(props.value)) {
+    return props.value.join(',');
+  }
+  return props.value;
+});
 
 function handleKeyDown(event: KeyboardEvent) {
   if (event.code === 'Enter' || event.code === 'Space') {

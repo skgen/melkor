@@ -21,4 +21,4 @@ export type InputColorSlots = InputSlots & {
 
 export type InputColorExpose = InputExpose;
 
-export const inputColorDefaultProps: InferDefaults<InputColorProps> = inputDefaultProps;
+export const inputColorDefaultProps = inputDefaultProps satisfies InferDefaults<InputColorProps>;

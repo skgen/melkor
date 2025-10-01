@@ -10,4 +10,4 @@ export type InputToggleSlots<TValue = boolean> = Omit<InputCheckableSlots<TValue
 
 export type InputToggleExpose = InputCheckableExpose;
 
-export const inputToggleDefaultProps: InferDefaults<InputToggleProps<any>> = inputCheckableDefaultProps;
+export const inputToggleDefaultProps = inputCheckableDefaultProps satisfies InferDefaults<InputToggleProps<any>>;

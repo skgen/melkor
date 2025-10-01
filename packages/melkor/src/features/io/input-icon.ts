@@ -23,9 +23,9 @@ export type InputIconSlots = InputSlots & {
 
 export type InputIconExpose = InputExpose;
 
-export const inputIconDefaultProps: InferDefaults<InputIconProps> = {
+export const inputIconDefaultProps = {
   ...inputDefaultProps,
   collection: 'material-symbols',
   pageSize: 100,
   columnSize: 6,
-};
+} satisfies InferDefaults<InputIconProps>;

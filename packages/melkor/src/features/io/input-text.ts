@@ -12,4 +12,4 @@ export type InputTextSlots = Omit<InputTextableSlots<InputTextValue>, 'default'>
 
 export type InputTextExpose = InputTextableExpose;
 
-export const inputTextDefaultProps: InferDefaults<InputTextProps> = inputTextableDefaultProps;
+export const inputTextDefaultProps = inputTextableDefaultProps satisfies InferDefaults<InputTextProps>;

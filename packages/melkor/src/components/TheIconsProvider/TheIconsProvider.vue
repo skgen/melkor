@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isArray, isObject } from '@skgn/kit';
+import { isArray, isObject } from 'lodash-es';
 import { useNetwork } from '@vueuse/core';
 import { provide } from 'vue';
 

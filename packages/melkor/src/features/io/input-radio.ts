@@ -25,7 +25,7 @@ export type InputRadioSlots<TValue = boolean> = InputSlots & {
 
 export type InputRadioExpose = InputExpose;
 
-export const inputRadioDefaultProps: InferDefaults<InputRadioProps<any>> = {
+export const inputRadioDefaultProps = {
   ...inputDefaultProps,
   direction: 'vertical',
-};
+} satisfies InferDefaults<InputRadioProps<any>>;

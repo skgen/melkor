@@ -14,7 +14,7 @@ export type InputTextareaSlots = Omit<InputTextableSlots<InputTextareaValue>, 'd
 
 export type InputTextareaExpose = InputTextableExpose;
 
-export const inputTextareaDefaultProps: InferDefaults<InputTextareaProps> = {
+export const inputTextareaDefaultProps = {
   ...inputTextableDefaultProps,
   rows: 2,
-};
+} satisfies InferDefaults<InputTextareaProps>;

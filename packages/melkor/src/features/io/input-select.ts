@@ -29,4 +29,4 @@ export type InputSelectSlots<TValue> = InputSlots & {
 
 export type InputSelectExpose = InputExpose;
 
-export const inputSelectDefaultProps: InferDefaults<InputSelectProps<any>> = inputDefaultProps;
+export const inputSelectDefaultProps = inputDefaultProps satisfies InferDefaults<InputSelectProps<any>>;

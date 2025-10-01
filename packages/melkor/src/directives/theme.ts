@@ -1,6 +1,6 @@
 import type { DirectiveBinding } from 'vue';
 
-import { isString } from '@skgn/kit';
+import { isString } from 'lodash-es';
 
 import { setElementTheme } from '../features/theme';
 

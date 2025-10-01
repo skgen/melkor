@@ -32,7 +32,7 @@ export type InputCheckableSlots<TValue = boolean> = InputSlots & {
 
 export type InputCheckableExpose = InputExpose;
 
-export const inputCheckableDefaultProps: InferDefaults<InputCheckableProps<any>> = {
+export const inputCheckableDefaultProps = {
   ...inputDefaultProps,
   direction: 'vertical',
-};
+} satisfies InferDefaults<InputCheckableProps<any>>;

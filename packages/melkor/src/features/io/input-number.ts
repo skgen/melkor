@@ -12,4 +12,4 @@ export type InputNumberSlots = Omit<InputTextableSlots<InputNumberValue>, 'defau
 
 export type InputNumberExpose = InputTextableExpose;
 
-export const inputNumberDefaultProps: InferDefaults<InputNumberProps> = inputTextableDefaultProps;
+export const inputNumberDefaultProps = inputTextableDefaultProps satisfies InferDefaults<InputNumberProps>;

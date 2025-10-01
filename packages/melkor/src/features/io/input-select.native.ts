@@ -24,4 +24,4 @@ export type InputSelectNativeSlots<TValue> = InputSlots & {
 
 export type InputSelectNativeExpose = InputExpose;
 
-export const inputSelectNativeDefaultProps: InferDefaults<InputSelectNativeProps<any>> = inputDefaultProps;
+export const inputSelectNativeDefaultProps = inputDefaultProps satisfies InferDefaults<InputSelectNativeProps<any>>;
