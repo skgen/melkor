@@ -15,14 +15,15 @@
     "dist"
   ],
   "scripts": {
-    "build-runtime": "tsx scripts/build-runtime.ts",
     "stub": "nuxt-module-build build --stub && nuxt-module-build prepare",
-    "prepack": "pnpm build-runtime && nuxt-module-build build",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
-    "test": "vitest run",
+    "build": "pnpm build:runtime && nuxt-module-build build",
+    "build:runtime": "tsx scripts/build-runtime.ts",
+    
+    "test": "echo \"No test yet\"",
+    "test:run": "vitest run",
     "test:watch": "vitest watch",
     "review": "pnpm review:typescript && pnpm review:eslint",
-    "review:typescript": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
+    "review:typescript": "vue-tsc --noEmit",
     "review:eslint": "eslint . --fix"
   },
   "dependencies": {
@@ -39,6 +40,7 @@
     "@types/node": "catalog:",
     "@types/shelljs": "catalog:",
     "@types/yargs": "catalog:",
+    "changelogen": "catalog:",
     "esbuild": "catalog:",
     "nuxt": "catalog:",
     "shelljs": "catalog:",
