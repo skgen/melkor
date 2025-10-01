@@ -1,28 +1,27 @@
 <template>
-  <!-- <AppThemeContext> -->
-  <TheGlobalTheme v-slot="{ theme }">
-    <AppThemeContext :value="theme.value" :preference="theme.preference">
-      <TheIconsProvider>
-        <TheTooltipProvider>
-          <TheToastProvider>
-            <div v-theme="theme" class="mk-TheApp" v-bind="$attrs">
-              <slot />
-              <TheFloatingLayer />
-            </div>
-          </TheToastProvider>
-        </TheTooltipProvider>
-      </TheIconsProvider>
-    </AppThemeContext>
-  </TheGlobalTheme>
+  <AppThemeContext :value="theme.value" :preference="theme.preference">
+    <TheTooltipProvider>
+      <TheToastProvider>
+        <div v-theme="theme" class="mk-TheApp" v-bind="$attrs">
+          <slot />
+          <TheFloatingLayer />
+        </div>
+      </TheToastProvider>
+    </TheTooltipProvider>
+  </AppThemeContext>
 </template>
 
 <script lang="ts" setup>
+import { useProvideIcons } from 'src/composables/internal/useProvideIcons';
+
+import { useInitGlobalTheme } from '../../composables/internal/useInitGlobalTheme';
 import AppThemeContext from '../AppThemeContext/AppThemeContext.vue';
 import TheFloatingLayer from '../TheFloatingLayer/TheFloatingLayer.vue';
-import TheGlobalTheme from '../TheGlobalTheme/TheGlobalTheme.vue';
-import TheIconsProvider from '../TheIconsProvider/TheIconsProvider.vue';
 import TheToastProvider from '../TheToastProvider/TheToastProvider.vue';
 import TheTooltipProvider from '../TheTooltipProvider/TheTooltipProvider.vue';
+
+const { theme } = useInitGlobalTheme();
+useProvideIcons();
 </script>
 
 <!-- <style lang="scss">
