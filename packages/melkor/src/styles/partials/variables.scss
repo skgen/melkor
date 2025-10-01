@@ -40,16 +40,16 @@ $mk-dark-shade-lights: (
 // Primary
 
 $mk-dark-primary: (
-  'light': 66%,
-  'chroma': 0.1882,
-  'hue': 22deg,
+  'light': 100%,
+  'chroma': 0,
+  'hue': 0deg,
 ) !default;
 
 // On Primary
 $mk-dark-on-primary: (
-  'light': 0%,
-  'chroma': 0,
-  'hue': 0deg,
+  'light': var(--mk-shade-1-light),
+  'chroma': var(--mk-shade-1-chroma),
+  'hue': var(--mk-shade-1-hue),
 ) !default;
 
 // Neutral
@@ -154,16 +154,16 @@ $mk-light-shade-lights: (
 // Primary
 
 $mk-light-primary: (
-  'light': 71%,
-  'chroma': 0.1284,
-  'hue': 161deg,
+  'light': 0%,
+  'chroma': 0,
+  'hue': 0deg,
 ) !default;
 
 // On Primary
 $mk-light-on-primary: (
-  'light': 0%,
-  'chroma': 0,
-  'hue': 0deg,
+  'light': var(--mk-shade-1-light),
+  'chroma': var(--mk-shade-1-chroma),
+  'hue': var(--mk-shade-1-hue),
 ) !default;
 
 // Neutral
