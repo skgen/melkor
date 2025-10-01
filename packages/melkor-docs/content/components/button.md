@@ -1,3 +1,0 @@
-# Button
-
-Some button content.
