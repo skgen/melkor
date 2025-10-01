@@ -61,7 +61,8 @@
     "review:eslint:debug": "eslint src/features/io/input.ts --debug",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
     "prepack": "pnpm run build",
-    "meta": "tsx ./scripts/meta/extract-meta-types.ts"
+    "meta": "tsx ./scripts/meta/extract-meta-types.ts",
+    "prepare": "pnpm build:lib"
   },
   "peerDependencies": {
     "vue": "catalog:"
