@@ -52,17 +52,16 @@
     "dev": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm dev:lib\" \"pnpm dev:esm\"",
     "dev:lib": "vite build --watch --mode lib-dev --config vite.config.ts",
     "dev:esm": "vite build --watch --mode esm-dev --config vite.config.ts",
+    "build": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm build:lib\" \"pnpm build:esm\"",
     "build:lib": "vite build --mode lib --config vite.config.ts",
     "build:esm": "vite build --mode esm --config vite.config.ts",
-    "build": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm build:lib\" \"pnpm build:esm\"",
+    "test": "echo \"No test yet\"",
     "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
     "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "review:eslint": "eslint . --fix",
-    "review:eslint:debug": "eslint src/features/io/input.ts --debug",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
-    "prepack": "pnpm run build",
-    "meta": "tsx ./scripts/meta/extract-meta-types.ts",
-    "prepare": "pnpm build:lib"
+    "changelog": "changelogen --release --no-commit --no-tag",
+    "release": "pnpm run review && pnpm run test && pnpm run build && pnpm run changelog"
   },
   "peerDependencies": {
     "vue": "catalog:"
@@ -85,6 +84,7 @@
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/tsconfig": "catalog:",
+    "changelogen": "catalog:",
     "colorette": "catalog:",
     "concurrently": "catalog:",
     "esbuild": "catalog:",

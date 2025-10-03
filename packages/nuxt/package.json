@@ -23,8 +23,8 @@
     "test:watch": "vitest watch",
     "review": "pnpm review:typescript && pnpm review:eslint",
     "review:typescript": "vue-tsc --noEmit",
-    "changelog": "changelogen --release",
-    "release": "pnpm run review && pnpm run test && pnpm run build && pnpm run changelog && git push --follow-tags",
+    "changelog": "changelogen --release --no-commit --no-tag",
+    "release": "pnpm run review && pnpm run test && pnpm run build && pnpm run changelog",
     "review:eslint": "eslint . --fix"
   },
   "dependencies": {
