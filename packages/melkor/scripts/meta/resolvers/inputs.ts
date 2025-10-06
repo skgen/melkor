@@ -7,8 +7,8 @@ import { inputNumberDefaultProps, inputRadioDefaultProps, inputSelectDefaultProp
 const inputs: Record<string, InferDefaults<unknown>> = {
   AppInputNumber: inputNumberDefaultProps,
   AppInputRadio: inputRadioDefaultProps,
-  AppInputSelect: inputSelectDefaultProps,
-  AppInputSelectNative: inputSelectNativeDefaultProps,
+  InputSelect: inputSelectDefaultProps,
+  InputSelectNative: inputSelectNativeDefaultProps,
   AppInputText: inputTextDefaultProps,
   AppInputTextarea: inputTextareaDefaultProps,
   AppInputToggle: inputToggleDefaultProps,

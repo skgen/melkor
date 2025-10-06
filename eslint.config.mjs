@@ -5,6 +5,10 @@ export default antfu(
     type: 'lib',
     typescript: {
       overrides: {
+        // lack of vue support, see https://github.com/un-ts/eslint-plugin-import-x/issues/177
+        'import/first': ['off'],
+        // lack of vue support, same as https://github.com/un-ts/eslint-plugin-import-x/issues/177
+        'import/no-duplicates': ['off'],
         'perfectionist/sort-imports': [
           'error',
           {
@@ -30,12 +34,8 @@ export default antfu(
             type: 'natural',
           },
         ],
-        'ts/explicit-function-return-type': [
-          'off',
-        ],
-        'ts/consistent-type-definitions': [
-          'off',
-        ],
+        'ts/explicit-function-return-type': ['off'],
+        'ts/consistent-type-definitions': ['off'],
       },
     },
     vue: true,
@@ -43,19 +43,10 @@ export default antfu(
       semi: true,
     },
     ignores: [
-      'packages/melkor/lib',
-      'packages/melkor/dist',
-      'packages/melkor/playground/dist',
-      'packages/melkor-nuxt/.nuxt',
-      'packages/melkor-nuxt/.output',
-      'packages/melkor-nuxt/dist',
-      'packages/melkor-nuxt/playground/.nuxt',
-      'packages/melkor-nuxt/playground/.output',
-      'packages/melkor-nuxt/playground/dist',
-      'packages/melkor-docs/content/generated',
-      'packages/melkor-docs/playground/.nuxt',
-      'packages/melkor-docs/playground/.output',
-      'packages/melkor-docs/playground/dist',
+      'packages/*/dist',
+      'packages/*/.nuxt',
+      'packages/*/.output',
+      'packages/docs/content/generated',
     ],
     formatters: {
       css: true,

@@ -4,29 +4,29 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     // For src include
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    // "lib": [
+    //   "ES2022",
+    //   "DOM",
+    //   "DOM.Iterable"
+    // ],
     "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "types": [
-      "node",
+      "node"
       // For src include
-      "ES2021",
-      "DOM",
-      "DOM.Iterable"
+      // "ES2021",
+      // "DOM",
+      // "DOM.Iterable"
     ],
     "noEmit": true
   },
   "include": [
-    "vite.config.*",
-    "vitest.config.*",
-    "nuxt.config.ts",
-    "scripts",
+    // "vite.config.*",
+    // "vitest.config.*",
+    // "nuxt.config.ts",
+    "scripts"
     // Used to overrides default metas
-    "src"
+    // "src"
   ]
 }

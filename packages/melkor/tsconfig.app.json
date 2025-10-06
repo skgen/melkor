@@ -1,27 +1,4 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "compilerOptions": {
-    "composite": true,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "lib": [
-      "ES2021",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "strict": true,
-    "outDir": "dist"
-  },
-  "include": [
-    "env.d.ts",
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.json",
-    "src/**/*.vue",
-    "i18n/*.json"
-  ],
-  "exclude": [
-    "src/**/__tests__/*"
-  ]
+  "extends": "./.nuxt/tsconfig.json",
+  "exclude": ["dist", "node_modules"]
 }

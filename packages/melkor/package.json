@@ -5,56 +5,17 @@
   "packageManager": "pnpm@9.15.4",
   "description": "Melkor UI",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/melkor.js"
-    },
-    "./styles/css": {
-      "import": "./dist/melkor.css"
-    },
-    "./styles/mixins": {
-      "import": "./lib/styles/mixins.scss"
-    },
-    "./styles/scss": {
-      "import": "./lib/styles/index.scss"
-    },
-    "./plugin": {
-      "types": "./lib/plugin.d.ts",
-      "import": "./lib/plugin.js"
-    },
-    "./components": {
-      "types": "./lib/components/index.d.ts",
-      "import": "./lib/components/index.js"
-    },
-    "./components/*": {
-      "types": "./lib/components/*/*.d.ts",
-      "import": "./lib/components/*/*.js"
-    },
-    "./composables": {
-      "types": "./lib/composables/index.d.ts",
-      "import": "./lib/composables/index.js"
-    },
-    "./features": {
-      "types": "./lib/features/index.d.ts",
-      "import": "./lib/features/index.js"
-    },
-    "./meta.json": {
-      "types": "./lib/meta.d.ts",
-      "import": "./lib/meta.json",
-      "require": "./lib/meta.json"
+    "./nuxt": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs"
     }
   },
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "dev": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm dev:lib\" \"pnpm dev:esm\"",
-    "dev:lib": "vite build --watch --mode lib-dev --config vite.config.ts",
-    "dev:esm": "vite build --watch --mode esm-dev --config vite.config.ts",
-    "build": "concurrently --names \"lib,esm\" --prefix-colors \"cyan,yellow\" \"pnpm build:lib\" \"pnpm build:esm\"",
-    "build:lib": "vite build --mode lib --config vite.config.ts",
-    "build:esm": "vite build --mode esm --config vite.config.ts",
+    "build": "tsx scripts/nuxt/build-ssr-theme && nuxt-module-build build",
+    "prebuild": "nuxt-module-build prepare",
     "test": "echo \"No test yet\"",
     "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
     "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
@@ -64,42 +25,52 @@
     "release": "pnpm run review && pnpm run test && pnpm run build && pnpm run changelog"
   },
   "peerDependencies": {
-    "vue": "catalog:"
+    "vue": "catalog:runtime",
+    "vue-router": "catalog:runtime"
   },
   "dependencies": {
-    "@iconify/vue": "catalog:",
-    "@skgn/kit": "catalog:",
-    "@vueuse/core": "catalog:",
-    "deepmerge": "catalog:",
-    "defu": "catalog:",
-    "lodash-es": "catalog:",
-    "normalize.css": "catalog:",
-    "reka-ui": "^2.2.0",
-    "zod": "catalog:"
+    "@iconify/vue": "catalog:runtime",
+    "@nuxt/kit": "catalog:build",
+    "@skgn/kit": "catalog:runtime",
+    "@vueuse/core": "catalog:runtime",
+    "deepmerge": "catalog:runtime",
+    "defu": "catalog:runtime",
+    "lodash-es": "catalog:runtime",
+    "normalize.css": "catalog:runtime",
+    "reka-ui": "catalog:runtime",
+    "zod": "catalog:runtime"
   },
   "devDependencies": {
-    "@tsconfig/node20": "catalog:",
-    "@types/jsdom": "catalog:",
-    "@types/lodash-es": "catalog:",
-    "@types/node": "catalog:",
-    "@vitejs/plugin-vue": "catalog:",
-    "@vue/tsconfig": "catalog:",
+    "@nuxt/devtools": "catalog:runtime",
+    "@nuxt/module-builder": "catalog:build",
+    "@nuxt/schema": "catalog:build",
+    "@tsconfig/node20": "catalog:build",
+    "@types/fs-extra": "catalog:types",
+    "@types/jsdom": "catalog:types",
+    "@types/lodash-es": "catalog:types",
+    "@types/node": "catalog:types",
+    "@vitejs/plugin-vue": "catalog:build",
+    "@vue/tsconfig": "catalog:build",
     "changelogen": "catalog:",
     "colorette": "catalog:",
     "concurrently": "catalog:",
-    "esbuild": "catalog:",
-    "eslint": "catalog:",
+    "esbuild": "catalog:build",
+    "eslint": "catalog:lint",
+    "fs-extra": "catalog:build",
     "glob": "catalog:",
+    "magic-string": "catalog:build",
+    "nitropack": "catalog:build",
+    "pathe": "catalog:build",
     "sass": "catalog:",
     "sass-embedded": "catalog:",
-    "stylelint": "catalog:",
-    "stylelint-config-recess-order": "catalog:",
-    "stylelint-config-standard": "catalog:",
-    "stylelint-config-standard-scss": "catalog:",
-    "stylelint-config-standard-vue": "catalog:",
-    "tsx": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:",
+    "stylelint": "catalog:lint",
+    "stylelint-config-recess-order": "catalog:lint",
+    "stylelint-config-standard": "catalog:lint",
+    "stylelint-config-standard-scss": "catalog:lint",
+    "stylelint-config-standard-vue": "catalog:lint",
+    "tsx": "catalog:build",
+    "typescript": "catalog:build",
+    "vite": "catalog:build",
     "vite-plugin-dts": "catalog:",
     "vite-plugin-no-bundle": "catalog:",
     "vite-plugin-static-copy": "catalog:",

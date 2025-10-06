@@ -5,22 +5,22 @@
   "packageManager": "pnpm@10.15.0",
   "scripts": {
     "release": "tsx scripts/release.ts",
-    "postinstall": "pnpm -r --filter=./packages/melkor run build && pnpm -r --filter=./packages/nuxt run stub"
+    "postinstall": "pnpm -r --filter=./packages/melkor run build"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:",
-    "@bitwarden/cli": "catalog:",
-    "@tsconfig/node20": "catalog:",
-    "@types/dotenv-parse-variables": "catalog:",
-    "@types/node": "catalog:",
-    "@types/shelljs": "catalog:",
+    "@antfu/eslint-config": "catalog:lint",
+    "@bitwarden/cli": "catalog:build",
+    "@tsconfig/node20": "catalog:build",
+    "@types/dotenv-parse-variables": "catalog:types",
+    "@types/node": "catalog:types",
+    "@types/shelljs": "catalog:types",
     "colorette": "catalog:",
     "dotenv-flow": "catalog:",
     "dotenv-parse-variables": "catalog:",
     "enquirer": "catalog:",
-    "eslint": "catalog:",
-    "eslint-plugin-format": "catalog:",
-    "shelljs": "catalog:",
-    "tsx": "catalog:"
+    "eslint": "catalog:lint",
+    "eslint-plugin-format": "catalog:lint",
+    "shelljs": "catalog:build",
+    "tsx": "catalog:build"
   }
 }
