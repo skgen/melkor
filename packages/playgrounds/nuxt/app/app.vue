@@ -6,5 +6,5 @@
 </template>
 
 <style lang="scss">
-@use '#melkor/styles/scss' as melkor;
+@use '@skgn/melkor/styles/scss' as melkor;
 </style>

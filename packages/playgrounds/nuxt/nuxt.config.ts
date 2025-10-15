@@ -1,3 +1,5 @@
+// import { Theme } from '@skgn/melkor/features';
+
 export default defineNuxtConfig({
   modules: [
     '../../melkor/src/module',
@@ -8,4 +10,7 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-07-09',
+
+  melkor: {
+  },
 });
