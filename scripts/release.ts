@@ -6,7 +6,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 import { cyan, green, red } from 'colorette';
-import * as enquirer from 'enquirer';
+import Enquirer from 'enquirer';
 import sh from 'shelljs';
 
 function handleError(options: { res: ShellString; message: string }) {
@@ -19,7 +19,6 @@ function handleError(options: { res: ShellString; message: string }) {
   }
 }
 
-const Enquirer = enquirer.default;
 const e = new Enquirer();
 
 const root = path.resolve(import.meta.filename, '../..');

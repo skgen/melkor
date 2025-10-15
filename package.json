@@ -2,7 +2,7 @@
   "name": "@skgn/melkor-monorepo",
   "type": "module",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.18.1",
   "scripts": {
     "release": "tsx scripts/release.ts",
     "postinstall": "pnpm -r --filter=./packages/melkor run build"
@@ -10,7 +10,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",
     "@bitwarden/cli": "catalog:build",
-    "@tsconfig/node20": "catalog:build",
+    "@tsconfig/node22": "catalog:build",
     "@types/dotenv-parse-variables": "catalog:types",
     "@types/node": "catalog:types",
     "@types/shelljs": "catalog:types",
