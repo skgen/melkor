@@ -1,9 +1,9 @@
 import { isValue } from '@skgn/kit';
 import { inject } from 'vue';
 
-import { globalToastContextKey } from '../features';
+import { globalToastContextKey, type ToastContext } from '../features';
 
-export function useToast() {
+export function useToast(): ToastContext {
   const context = inject(globalToastContextKey);
 
   if (!isValue(context)) {
