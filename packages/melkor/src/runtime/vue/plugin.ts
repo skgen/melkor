@@ -18,9 +18,11 @@ import { createGlobalConfig, createMelkorOptions, globalConfigContextKey, type M
 //   shape?: IconShape;
 // }
 
+export type MelkorPluginOptions = DeepObjectPartial<MelkorOptions>;
+
 // export function createMelkor(options?: DeepObjectPartial<MelkorOptions>): Plugin<MelkorOptions> {
-export const createMelkor: Plugin<DeepObjectPartial<MelkorOptions>> = {
-  install(app: App, _options?) {
+export const createMelkor: Plugin<MelkorPluginOptions> = {
+  install(app: App, _options) {
     const options = createMelkorOptions(_options);
 
     const globalConfig = createGlobalConfig(options);
