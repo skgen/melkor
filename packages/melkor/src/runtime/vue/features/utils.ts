@@ -12,7 +12,7 @@ export function forwardDataAttributes<T extends Record<string, U>, U>(input: T):
   return Object.keys(input)
     .filter(key => key.includes('data'))
     .reduce((acc, key) => {
-      acc[key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)] = input[key];
+      acc[key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)] = input[key] as U;
       return acc;
     }, {} as Record<string, U>) as Partial<T>;
 }

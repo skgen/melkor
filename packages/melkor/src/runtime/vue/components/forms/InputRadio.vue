@@ -154,6 +154,9 @@ function handleChange(event: Event) {
   const { value: index } = event.target as HTMLInputElement;
 
   const newOption = props.options[Number.parseInt(index, 10)];
+  if (!newOption) {
+    return;
+  }
   const newValue = newOption.value;
 
   if (props.nullable && isActiveOption(newValue)) {

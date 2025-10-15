@@ -15,8 +15,6 @@ export default {
   ],
   ignoreFiles: [
     'node_modules/**',
-    'lib/**',
     'dist/**',
-    'playground/**',
   ],
 };

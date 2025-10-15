@@ -2,23 +2,39 @@
   "name": "@skgn/melkor",
   "type": "module",
   "version": "1.8.0",
-  "packageManager": "pnpm@9.15.4",
   "description": "Melkor UI",
   "exports": {
     "./nuxt": {
       "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs"
-    }
+    },
+    "./unplugin": {
+      "types": "./dist/unplugin.d.mts",
+      "import": "./dist/unplugin.mjs"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.mts",
+      "import": "./dist/vite.mjs"
+    },
+    "./vue-plugin": {
+      "types": "./dist/runtime/vue/plugin.d.ts",
+      "import": "./dist/runtime/vue/plugin.js"
+    },
+    "./styles/css": "./dist/runtime/vue/styles/index.css",
+    "./styles/scss": "./dist/runtime/vue/styles/index.scss",
+    "./styles/mixins": "./dist/runtime/vue/styles/mixins.scss"
   },
   "files": [
     "dist"
   ],
   "scripts": {
+    "prebuild": "nuxt-module-build prepare && tsx scripts/tsconfig",
     "build": "tsx scripts/nuxt/build-ssr-theme && nuxt-module-build build",
-    "prebuild": "nuxt-module-build prepare",
     "test": "echo \"No test yet\"",
     "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
-    "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "review:typescript": "pnpm review:typescript:vue && pnpm review:typescript:nuxt",
+    "review:typescript:vue": "vue-tsc --noEmit -p .melkor/tsconfig.vue.json",
+    "review:typescript:nuxt": "vue-tsc --noEmit -p .melkor/tsconfig.nuxt.json",
     "review:eslint": "eslint . --fix",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
     "changelog": "changelogen --release --no-commit --no-tag",
@@ -32,19 +48,23 @@
     "@iconify/vue": "catalog:runtime",
     "@nuxt/kit": "catalog:build",
     "@skgn/kit": "catalog:runtime",
+    "@skgn/melkor-kit": "workspace:*",
     "@vueuse/core": "catalog:runtime",
-    "deepmerge": "catalog:runtime",
     "defu": "catalog:runtime",
+    "fs-extra": "catalog:build",
+    "glob": "catalog:build",
     "lodash-es": "catalog:runtime",
     "normalize.css": "catalog:runtime",
     "reka-ui": "catalog:runtime",
+    "unplugin": "catalog:build",
+    "unplugin-auto-import": "catalog:build",
+    "unplugin-vue-components": "catalog:build",
     "zod": "catalog:runtime"
   },
   "devDependencies": {
-    "@nuxt/devtools": "catalog:runtime",
     "@nuxt/module-builder": "catalog:build",
     "@nuxt/schema": "catalog:build",
-    "@tsconfig/node20": "catalog:build",
+    "@tsconfig/node22": "catalog:build",
     "@types/fs-extra": "catalog:types",
     "@types/jsdom": "catalog:types",
     "@types/lodash-es": "catalog:types",
@@ -56,10 +76,7 @@
     "concurrently": "catalog:",
     "esbuild": "catalog:build",
     "eslint": "catalog:lint",
-    "fs-extra": "catalog:build",
-    "glob": "catalog:",
     "magic-string": "catalog:build",
-    "nitropack": "catalog:build",
     "pathe": "catalog:build",
     "sass": "catalog:",
     "sass-embedded": "catalog:",
@@ -71,9 +88,6 @@
     "tsx": "catalog:build",
     "typescript": "catalog:build",
     "vite": "catalog:build",
-    "vite-plugin-dts": "catalog:",
-    "vite-plugin-no-bundle": "catalog:",
-    "vite-plugin-static-copy": "catalog:",
     "vue-component-meta": "catalog:",
     "vue-tsc": "catalog:"
   }

@@ -124,6 +124,10 @@ function handleChange(evt: Event) {
 
   const newOption = props.options[Number.parseInt(index, 10)];
 
+  if (!newOption) {
+    return;
+  }
+
   onChange(newOption.value);
 }
 

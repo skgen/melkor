@@ -40,7 +40,8 @@ export function usePagination(params: UsePaginationOptions): Readonly<{
     }
     if (firstPage.value + (refParams.gap.value + 1 + 1) >= refParams.page.value) {
       const withoutGap = rawBase.map<number>((_, i) => firstPage.value + i + 1);
-      if (withoutGap.length === displayRangeMaxSize.value && withoutGap[withoutGap.length - 1] + 1 === lastPage.value) {
+      const lastWithoutGap = withoutGap[withoutGap.length - 1];
+      if (withoutGap.length === displayRangeMaxSize.value && lastWithoutGap && lastWithoutGap + 1 === lastPage.value) {
         return withoutGap;
       }
       const withGap: (number | null)[] = withoutGap;
@@ -49,7 +50,8 @@ export function usePagination(params: UsePaginationOptions): Readonly<{
     }
     if (lastPage.value - (refParams.gap.value + 1 + 1) <= refParams.page.value) {
       const withoutGap = rawBase.map<number>((_, i) => lastPage.value - i - 1).reverse();
-      if (withoutGap.length === displayRangeMaxSize.value && withoutGap[0] - 1 === firstPage.value) {
+      const firstWithoutGap = withoutGap[0];
+      if (withoutGap.length === displayRangeMaxSize.value && firstWithoutGap && firstWithoutGap - 1 === firstPage.value) {
         return withoutGap;
       }
       const withGap: (number | null)[] = withoutGap;

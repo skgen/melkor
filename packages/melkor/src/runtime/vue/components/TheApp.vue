@@ -12,12 +12,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useProvideGlobalTheme } from '../composables/internal/useProvideGlobalTheme';
-import { useProvideIcons } from '../composables/internal/useProvideIcons';
-import { floatingLayerId } from '../features';
-import TheToastProvider from './internal/TheToastProvider.vue';
-import TheTooltipProvider from './internal/TheTooltipProvider.vue';
-import ThemeContext from './ThemeContext.vue';
+import TheToastProvider from '#melkor/components/internal/TheToastProvider.vue';
+import TheTooltipProvider from '#melkor/components/internal/TheTooltipProvider.vue';
+import ThemeContext from '#melkor/components/ThemeContext.vue';
+import { useProvideGlobalTheme, useProvideIcons } from '#melkor/composables';
+import { floatingLayerId } from '#melkor/features';
 
 const { theme } = useProvideGlobalTheme();
 useProvideIcons();

@@ -14,7 +14,7 @@
           <transition-group name="mk-fade">
             <template v-for="localTheme of globalConfig.themes" :key="localTheme">
               <AppIcon
-                v-if="localTheme === globalTheme.preference"
+                v-if="localTheme === globalTheme.preference && globalConfig.icons.ThemeToggle[localTheme]"
                 :icon="globalConfig.icons.ThemeToggle[localTheme]"
               />
             </template>

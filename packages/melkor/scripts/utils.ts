@@ -1,9 +1,7 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { globSync } from 'glob';
+import path from 'pathe';
 
-export const rootPath = fileURLToPath(new URL('..', import.meta.url));
+export const rootPath = path.resolve(import.meta.dirname, '..');
 
 export function getAllComponentPaths() {
   const componentsPath = path.join(rootPath, 'src/components/**/*.vue');

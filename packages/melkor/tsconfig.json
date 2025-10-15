@@ -1,11 +1,11 @@
 {
   "references": [
     {
-      "path": "./tsconfig.node.json"
+      "path": "./.melkor/tsconfig.vue.json"
     },
     {
-      "path": "./tsconfig.app.json"
-    },
+      "path": "./.melkor/tsconfig.nuxt.json"
+    }
     // {
     //   "path": "./tsconfig.vitest.json"
     // }

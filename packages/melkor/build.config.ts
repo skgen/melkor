@@ -2,29 +2,29 @@ import fs from 'fs-extra';
 import { globSync } from 'glob';
 import MagicString from 'magic-string';
 import path from 'pathe';
-import { type BuildConfig, defineBuildConfig } from 'unbuild';
+import { defineBuildConfig } from 'unbuild';
 
 function resolveStyles(from: string, ...paths: string[]): string {
-  return path.resolve(from, 'runtime/isomorphic/styles', ...paths);
+  return path.resolve(from, 'runtime/vue/styles', ...paths);
 }
 
 function stylesTask() {
-  const isoSrcStyles = resolveStyles(path.resolve(import.meta.dirname, 'src'));
-  const isoDistStyles = resolveStyles(path.resolve(import.meta.dirname, 'dist'));
+  const srcStyles = resolveStyles(path.resolve(import.meta.dirname, 'src'));
+  const distStyles = resolveStyles(path.resolve(import.meta.dirname, 'dist'));
 
   // Removes all css extra files
-  globSync(path.resolve(isoDistStyles, '**/*.css'), {
+  globSync(path.resolve(distStyles, '**/*.css'), {
     ignore: [
-      path.resolve(isoDistStyles, '**/index.css'),
-      path.resolve(isoDistStyles, '**/normalize.css'),
+      path.resolve(distStyles, '**/index.css'),
+      path.resolve(distStyles, '**/normalize.css'),
     ],
   }).forEach(fs.removeSync);
 
   // Removes all empty directories
-  globSync(path.resolve(isoDistStyles, '**'), {
+  globSync(path.resolve(distStyles, '**'), {
     ignore: [
-      path.resolve(isoDistStyles, '**/*.*'),
-      isoDistStyles,
+      path.resolve(distStyles, '**/*.*'),
+      distStyles,
     ],
   }).forEach((dir) => {
     const children = globSync(path.resolve(dir, '*'));
@@ -34,7 +34,7 @@ function stylesTask() {
   });
 
   // Copy styles assets
-  globSync(path.resolve(isoSrcStyles, '**/*.scss'))
+  globSync(path.resolve(srcStyles, '**/*.scss'))
     .forEach(p => fs.copySync(p, p.replace('src', 'dist')));
 }
 
@@ -53,10 +53,20 @@ function mergeDefaultTask() {
 }
 
 export default defineBuildConfig({
+  entries: [
+    // Vue support
+    './src/unplugin',
+    './src/vite',
+  ],
   hooks: {
     'build:done': () => {
       stylesTask();
       mergeDefaultTask();
+      // Build meta here
     },
   },
+  externals: [
+    'pathe',
+  ],
+  failOnWarn: false,
 });

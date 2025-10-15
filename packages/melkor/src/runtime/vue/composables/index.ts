@@ -1,6 +1,10 @@
+export * from './internal/useProvideGlobalTheme';
+export * from './internal/useProvideIcons';
 export * from './useForm';
+export * from './useFramework';
 export * from './useGlobalConfig';
 export * from './useGlobalTheme';
+export * from './useIconCollection';
 export * from './useInput';
 export * from './useInputBinding';
 export * from './useInputErrors';
@@ -10,4 +14,3 @@ export * from './useSurface';
 export * from './useTheme';
 export * from './useThemes';
 export * from './useToast';
-export * from './useIconCollection';

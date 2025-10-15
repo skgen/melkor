@@ -121,8 +121,10 @@ const height = computed(() => collectionRefs.value.reduce((acc, { height }) => a
 
 const create: ToastContext['create'] = async (toast) => {
   if (collection.value.length >= config.toast.limit) {
-    const id = collection.value[0].id;
-    await remove(id);
+    const id = collection.value[0]?.id;
+    if (id) {
+      await remove(id);
+    }
   }
   const slots = toast.slots
     ? Object.entries(toast.slots).reduce((acc, [key, v]) => {
@@ -145,7 +147,7 @@ const create: ToastContext['create'] = async (toast) => {
 async function remove(id: string) {
   return new Promise<void>((resolve) => {
     const index = collection.value.findIndex(toast => toast.id === id);
-    if (index !== -1) {
+    if (index !== -1 && collection.value[index]) {
       collection.value[index].props.open = false;
     }
 

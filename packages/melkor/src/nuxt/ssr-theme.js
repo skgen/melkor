@@ -27,7 +27,7 @@
 
     const fallbackColorScheme = themes
       .filter(t => t !== Theme.system)
-      .find((v, i) => i === 0);
+      .at(0);
     if (fallbackColorScheme) {
       return fallbackColorScheme;
     }
@@ -41,7 +41,7 @@
     preference = persistedPreference;
   }
   if (!ctx.themes.includes(preference)) {
-    preference = ctx.themes.find((v, i) => i === 0);
+    preference = ctx.themes.at(0);
     window.localStorage.removeItem(ctx.storageKey);
   }
 

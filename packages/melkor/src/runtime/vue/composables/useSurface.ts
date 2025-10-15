@@ -32,10 +32,10 @@ export function useSurface(options?: UseSurfaceOptions): ComputedRef<SurfaceCont
   }
 
   if (nextDirection === 'down') {
-    nextElevation = surfaceElevationOrder[surfaceElevationOrder.indexOf(surfaceContext.value.elevation) - 1];
+    nextElevation = surfaceElevationOrder[surfaceElevationOrder.indexOf(surfaceContext.value.elevation) - 1] ?? nextElevation;
   }
   else if (nextDirection === 'up') {
-    nextElevation = surfaceElevationOrder[surfaceElevationOrder.indexOf(surfaceContext.value.elevation) + 1];
+    nextElevation = surfaceElevationOrder[surfaceElevationOrder.indexOf(surfaceContext.value.elevation) + 1] ?? nextElevation;
   }
 
   if (options?.inject) {

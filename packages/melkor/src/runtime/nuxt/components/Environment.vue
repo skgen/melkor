@@ -1,29 +1,19 @@
 <template>
-  <div
-    v-theme="theme"
-    class="mk-Environment"
-  >
-    Nuxt <small>env</small>
-  </div>
+  <Environment v-bind="props">
+    <slot>Nuxt</slot>
+  </Environment>
 </template>
 
-<script lang="ts" setup>
-import { useTheme } from '../../isomorphic/composables';
+<script lang="ts">
+import type { EnvironmentProps } from '../../vue/components/Environment.vue';
 
-const theme = useTheme();
+export * from '../../vue/components/Environment.vue';
 </script>
 
-<style lang="scss">
-.mk-Environment {
-  padding: var(--mk-size-2);
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  background-image: repeating-linear-gradient(
-    135deg,
-    transparent,
-    transparent var(--mk-size-1),
-    var(--mk-primary-15) var(--mk-size-1),
-    var(--mk-primary-15) var(--mk-size-2)
-  );
-}
-</style>
+<script lang="ts" setup>
+import { isVue2, isVue3 } from '#imports';
+
+import Environment from '../../vue/components/Environment.vue';
+
+const props = defineProps<EnvironmentProps>();
+</script>

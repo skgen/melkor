@@ -1,23 +1,20 @@
 // import type { Resolver } from '@nuxt/kit';
 // import type { Nuxt } from '@nuxt/schema';
-import type { DeepObjectPartial, DeepPartial } from '@skgn/kit';
+import type { DeepPartial } from '@skgn/kit';
 
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { addComponentsDir, addImportsDir, addPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
-import merge from 'deepmerge';
+import { addComponent, addImportsDir, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
+import {
+  createRuntimeResolver,
+  resolveNuxtComponents,
+  vNamespace,
+} from '@skgn/melkor-kit';
 
-// import { create } from './runtime'
-import { createMelkorOptions, type MelkorOptions, STORAGE_THEME_KEY, Theme } from './runtime/isomorphic/features';
 // Melkor
-// import { loadComponents } from './namespaces/load-components';
-// import { loadComposables } from './namespaces/load-composables';
-// import { loadFeatures } from './namespaces/load-features';
 // import { loadMeta } from './namespaces/load-meta';
-// import { loadScss } from './namespaces/load-scss';
-// import { loadThemeScript } from './namespaces/load-theme-script';
-// import { meta } from './utils/meta';
+import { createMelkorOptions, type MelkorOptions, mergeConfig, STORAGE_THEME_KEY, Theme } from './runtime/vue/features';
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname, '../package.json'), { encoding: 'utf-8' }));
 
@@ -27,14 +24,12 @@ declare module 'nuxt/schema' {
   }
 }
 
-export interface ModuleOptions {
-  debug: boolean;
+export type ModuleOptions = MelkorOptions & {
   prefix?: {
     components?: string;
-    hooks?: string;
+    // composables?: string;
   };
-  ui: MelkorOptions;
-}
+};
 
 export interface ModuleHooks {
 }
@@ -43,35 +38,23 @@ export interface ModuleRuntimeHooks {
 }
 
 export interface ModuleRuntimeConfig {
+  public: {
+    melkor: ModuleOptions;
+  };
 }
 
 export interface ModulePublicRuntimeConfig {
 }
 
-export interface MelkorModuleOptions {
-  moduleOptions?: DeepObjectPartial<ModuleOptions>;
-  melkorOptions?: DeepObjectPartial<MelkorOptions>;
-}
-
-// const logger = useLogger(`nuxt:melkor`);
-
 const defaultModuleOptions: ModuleOptions = {
-  debug: false,
+  ...createMelkorOptions(),
   prefix: {
     components: 'Mk',
   },
-  ui: createMelkorOptions(),
 };
 
-function createModuleOptions(moduleOptions?: DeepPartial<ModuleOptions> & Pick<ModuleOptions, 'ui'>): ModuleOptions {
-  if (!moduleOptions) {
-    return structuredClone(defaultModuleOptions);
-  }
-  return merge(defaultModuleOptions, moduleOptions, {
-    arrayMerge: (_, source) => {
-      return source;
-    },
-  });
+export function createModuleOptions(moduleOptions?: DeepPartial<ModuleOptions>): ModuleOptions {
+  return mergeConfig({}, moduleOptions, defaultModuleOptions);
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -84,58 +67,105 @@ export default defineNuxtModule<ModuleOptions>({
     },
   },
   async setup(_options, nuxt) {
-    const vNamespace = '#melkor';
-    const resolver = createResolver(import.meta.url);
-    const runtimeDir = resolver.resolve('./runtime');
-    const runtimeIsomorphicDir = resolver.resolve(runtimeDir, './isomorphic');
-    const runtimeNuxtDir = resolver.resolve(runtimeDir, './nuxt');
+    const resolver = createResolver(import.meta.dirname);
+    const runtimeResolver = createRuntimeResolver(import.meta.dirname);
 
-    const options = createModuleOptions(_options);
+    const runtimeConfigOptions = nuxt.options.runtimeConfig.public.melkor ?? {};
+    const options = createModuleOptions(mergeConfig({}, runtimeConfigOptions, _options));
 
     // Inject config
-    nuxt.options.runtimeConfig.public.melkor = options.ui;
-
-    nuxt.options.alias[`${vNamespace}/stubs`] = resolver.resolve(runtimeIsomorphicDir, `stubs`);
+    nuxt.options.runtimeConfig.public.melkor = options;
 
     // await loadMeta(ctx);
 
-    nuxt.options.alias[`${vNamespace}/styles/scss`] = resolver.resolve(runtimeIsomorphicDir, `styles/index.scss`);
-    nuxt.options.alias[`${vNamespace}/styles/mixins`] = resolver.resolve(runtimeIsomorphicDir, `styles/mixins.scss`);
+    /* STUBS */
 
-    addComponentsDir({
-      path: resolver.resolve(runtimeIsomorphicDir, 'components'),
-      pathPrefix: false,
+    nuxt.options.alias[`${vNamespace}/stubs`] = resolver.resolve(runtimeResolver.vueDir, `stubs`);
+
+    /* STYLES */
+
+    nuxt.options.alias[`${vNamespace}/styles/scss`] = resolver.resolve(runtimeResolver.vueDir, `styles/index.scss`);
+    nuxt.options.alias[`${vNamespace}/styles/mixins`] = resolver.resolve(runtimeResolver.vueDir, `styles/mixins.scss`);
+
+    /* COMPONENTS */
+
+    const components = resolveNuxtComponents({
+      resolver: runtimeResolver,
       prefix: options.prefix?.components,
-      // ignore: ['color-mode/**', 'content/**', 'prose/**'],
     });
+
+    components.forEach((component) => {
+      addComponent({
+        name: component.name,
+        filePath: component.filepath,
+      });
+
+      nuxt.options.alias[component.alias] = `${component.filepath}`;
+    });
+
+    /* COMPOSABLES */
+
+    nuxt.options.alias[`${vNamespace}/composables`] = resolver.resolve(runtimeResolver.nuxtDir, `composables`);
 
     // @todo need to allow prefixing
-    addImportsDir(resolver.resolve(runtimeIsomorphicDir, 'composables'));
+    // if (!options.prefix?.composables) {
+    addImportsDir(resolver.resolve(runtimeResolver.nuxtDir, 'composables'));
+    // }
+    // else {
+    //   const files = globSync(path.resolve(runtimeResolver.vueDir, 'composables/*.ts'));
+    //   // const composables = await import(resolver.resolve(runtimeResolver.nuxtDir, 'composables'));
+    //   console.log(files);
 
-    addImportsDir(resolver.resolve(runtimeIsomorphicDir, 'features'));
+    //   addImportsSources([
+    //     {
+    //       // 'from'
+    //       // from:
+    //       from: resolver.resolve(runtimeResolver.vueDir, 'composables/useToast'),
+    //       imports: [
+    //         {
+    //           name: 'useToast',
+    //           as: `use${options.prefix.composables}Toast`,
+    //         },
+    //       ],
+    //       // imports: [
+    //       //   {
+    //       //     imports: [
+    //       //       {
+    //       //         im
+    //       //       }
+    //       //     ]
+    //       //   }
+    //       // ]
+    //     },
+    //   ]);
+    // const keys = Object.keys(composables);
+    // const
+    // addImportsSources({
+    //   ''
+    // });
+    // console.log(composables);
+    // }
 
-    /* NUXT specific features */
+    /* FEATURES */
 
-    addComponentsDir({
-      path: resolver.resolve(runtimeNuxtDir, 'components'),
-      pathPrefix: false,
-      prefix: options.prefix?.components,
-      // ignore: ['color-mode/**', 'content/**', 'prose/**'],
-    });
+    nuxt.options.alias[`${vNamespace}/features`] = resolver.resolve(runtimeResolver.nuxtDir, `features`);
 
-    // Load plugin
+    addImportsDir(resolver.resolve(runtimeResolver.vueDir, 'features'));
+
+    /* PLUGIN */
     addPlugin({
-      src: resolver.resolve(runtimeNuxtDir, 'plugin'),
+      src: resolver.resolve(runtimeResolver.nuxtDir, 'plugin'),
     });
 
-    // SSR theme
+    /* SSR theme */
+
     const scriptCtx = {
       storageKey: STORAGE_THEME_KEY,
-      themes: JSON.stringify(options.ui.themes),
+      themes: JSON.stringify(options.themes),
       ThemeEnum: JSON.stringify(Theme),
     };
 
-    const ssrThemeScript = fs.readFileSync(resolver.resolve(runtimeNuxtDir, 'ssr-theme.min.js'), 'utf-8')
+    const ssrThemeScript = fs.readFileSync(resolver.resolve(runtimeResolver.nuxtDir, 'ssr-theme.min.js'), 'utf-8')
       .replace(/<%= ctx\.([^ ]+) %>/g, (_, option: keyof typeof scriptCtx) => scriptCtx[option])
       .trim();
 
@@ -143,7 +173,7 @@ export default defineNuxtModule<ModuleOptions>({
       config.virtual = config.virtual || {};
       config.virtual[`${vNamespace}/nuxt/ssr-theme`] = `export const script = ${JSON.stringify(ssrThemeScript, null, 2)}`;
       config.plugins = config.plugins || [];
-      config.plugins.push(resolver.resolve(runtimeNuxtDir, 'nitro-plugin'));
+      config.plugins.push(resolver.resolve(runtimeResolver.nuxtDir, 'nitro-plugin'));
     });
   },
 });

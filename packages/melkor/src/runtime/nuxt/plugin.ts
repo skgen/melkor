@@ -1,7 +1,9 @@
+import type { MelkorOptions } from '#melkor/features';
+
 import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app';
 
 // Modules
-import { createMelkor } from '../isomorphic/plugin';
+import { createMelkor } from '../vue/plugin';
 
 // App
 export default defineNuxtPlugin(({
@@ -9,8 +11,6 @@ export default defineNuxtPlugin(({
   async setup(nuxtApp) {
     const runtimeConfig = useRuntimeConfig();
 
-    const melkor = createMelkor(runtimeConfig.public.melkor);
-
-    nuxtApp.vueApp.use(melkor);
+    nuxtApp.vueApp.use(createMelkor, runtimeConfig.public.melkor as MelkorOptions);
   },
 }));

@@ -5,7 +5,8 @@ import type { InjectionKey } from 'vue';
 import type { ThemeInstance } from './theme';
 import type { ToastPosition } from './toast';
 
-import merge from 'deepmerge';
+import { createDefu } from 'defu';
+import { isArray } from 'lodash-es';
 
 export enum Theme {
   light = 'light',
@@ -14,8 +15,19 @@ export enum Theme {
 }
 
 export type MelkorOptions = {
+  /**
+   * Enable or disable debug logs
+   * @defaultValue `false`
+   */
   debug: boolean;
+  /**
+   * List of all themes activated
+   * @defaultValue `[Theme.system, Theme.light, Theme.dark]`
+   */
   themes: ('system' | 'light' | 'dark' | string)[];
+  /**
+   * Default icons for specified components
+   */
   icons: {
     InputSelectNative: {
       arrow: string;
@@ -50,10 +62,29 @@ export type MelkorOptions = {
       close: string;
     };
   };
+  /**
+   * Global toast config
+   */
   toast: {
+    /**
+     * Global toast position
+     * @defaultValue `'bottom-right'`
+     */
     position: ToastPosition;
+    /**
+     * Global toast count at the same time
+     * @defaultValue `10 ** 1e2`
+     */
     limit: number;
+    /**
+     * Global toast duration before automatic removal
+     * @defaultValue `5000` (value is in **ms**)
+     */
     duration: number;
+    /**
+     * Global toast swipe distance before triggering removal
+     * @defaultValue `50` (value is in **px**)
+     */
     swipeThreshold: number;
   };
   tooltip: Required<Pick<TooltipProviderProps, 'delayDuration' | 'disableClosingTrigger' | 'disableHoverableContent' | 'ignoreNonKeyboardFocus' | 'skipDelayDuration'>>
@@ -129,15 +160,16 @@ const defaultMelkorOptions: MelkorOptions = {
   },
 };
 
-export function createMelkorOptions(melkorOptions?: DeepPartial<MelkorOptions>): MelkorOptions {
-  if (!melkorOptions) {
-    return structuredClone(defaultMelkorOptions);
+// Factory to create config based on array overring rather than merging
+export const mergeConfig = createDefu((obj, key, value) => {
+  if (isArray(obj[key]) && isArray(value)) {
+    obj[key] = value;
+    return true;
   }
-  return merge(defaultMelkorOptions, melkorOptions, {
-    arrayMerge: (_, source) => {
-      return source;
-    },
-  }) as MelkorOptions;
+});
+
+export function createMelkorOptions(melkorOptions?: DeepPartial<MelkorOptions>): MelkorOptions {
+  return mergeConfig({}, melkorOptions, defaultMelkorOptions);
 }
 
 export function createGlobalConfig(melkorOptions = createMelkorOptions()): GlobalConfig {
