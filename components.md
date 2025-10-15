@@ -20,30 +20,30 @@
 | AppImage | ✅ | v1
 | AppIcon | ✅ | v1
 | AppThemeContext | ✅ | v1
-| AppInfiniteScroll | ❌ | v1
+| AppInfiniteScroll | 🚫 | v1 => using @vueuse/core useInfiniteScroll instead
 | AppPagination | ✅ | v1
 | AppDraggable | ❌ | v1
 | AppMediaQuery | ❌ | v1
 | AppMenuGroup | ❌ | v1
 | AppMenuEntry | ❌ | v1
-| AppInputCheckbox | ❌ | v1
+| AppInputCheckbox | ✅ | v1
 | AppInputCheckboxTree | ❌ | v1
 | AppInputCheckboxTreeLevel | ❌ | v1
 | AppInputColor | ✅ | v1
 | AppInputFile | ❌ | v1
 | AppInputNumber | ✅ | v1
-| AppInputPassword | ✅ | v1 => AppInputText encrypted
-| AppInputRadio | ❌ | v1
+| AppInputPassword | ✅ | v1 => AppInputText secure
+| AppInputRadio | ✅ | v1
 | AppInputRange | ❌ | v1
-| AppInputSelect | ✅ | v1
-| AppInputSelectX | ❌ | v1
+| AppInputSelect | ✅ | v1 => InputSelectNative in v2
+| AppInputSelectX | ✅ | v1  => InputSelect in v2
 | AppInputText | ✅ | v1
-| AppInputTextarea | ❌ | v1
-| AppInputToggle | ❌ | v1
+| AppInputTextarea | ✅ | v1
+| AppInputToggle | ✅ | v1
 | AppInputDate | ❌ | v1
 | AppInputTime | ❌ | v1
 | AppInputWysiwyg | ❌ | v1
-| AppInputIcon | ❌ | v1
+| AppInputIcon | ✅ | v1
 | AppCheckbox | ✅ | v1
 | AppRadio | ✅ | v1
 | AppToggle | ✅ | v1
