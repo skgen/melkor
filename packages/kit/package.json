@@ -1,0 +1,40 @@
+{
+  "name": "@skgn/melkor-kit",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "unbuild",
+    "review": "pnpm review:typescript && pnpm review:eslint",
+    "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "review:eslint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@skgn/kit": "catalog:runtime",
+    "defu": "catalog:runtime",
+    "eslint": "catalog:lint",
+    "fs-extra": "catalog:build",
+    "glob": "catalog:build",
+    "lodash-es": "catalog:runtime",
+    "pathe": "catalog:build",
+    "tsconfck": "^3.1.6",
+    "unbuild": "catalog:build"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "catalog:build",
+    "@types/fs-extra": "catalog:types",
+    "@types/lodash-es": "catalog:types",
+    "@types/node": "catalog:types",
+    "tsx": "catalog:build",
+    "typescript": "catalog:build"
+  }
+}
