@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@skgn/melkor": "workspace:*",
-    "nuxt": "catalog:"
+    "nuxt": "catalog:build"
   },
   "devDependencies": {
-    "sass-embedded": "catalog:",
+    "sass-embedded": "catalog:build",
     "stylelint": "catalog:lint",
     "stylelint-config-recess-order": "catalog:lint",
     "stylelint-config-standard": "catalog:lint",

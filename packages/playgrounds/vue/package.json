@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:build",
-    "sass-embedded": "catalog:",
+    "sass-embedded": "catalog:build",
     "stylelint": "catalog:lint",
     "stylelint-config-recess-order": "catalog:lint",
     "stylelint-config-standard": "catalog:lint",
