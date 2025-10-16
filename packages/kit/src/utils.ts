@@ -12,10 +12,21 @@ export function createRuntimeResolver(cwd: string) {
   };
 }
 
+export function createGeneratedResolver(cwd: string) {
+  const dir = path.resolve(cwd, '.melkor');
+  const vueTsConfigPath = path.resolve(dir, 'tsconfig.vue.json');
+  const nuxtTsConfigPath = path.resolve(dir, 'tsconfig.nuxt.json');
+
+  return {
+    dir,
+    vueTsConfigPath,
+    nuxtTsConfigPath,
+  };
+}
+
 export type RuntimeResolver = ReturnType<typeof createRuntimeResolver>;
 
 export const vNamespace = '#melkor';
-export const generatedDir = '.melkor';
 
 export type Export = {
   __name: string;

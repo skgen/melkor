@@ -13,7 +13,7 @@ import path from 'pathe';
 import { resolveNuxtComponents, resolveVueComponents } from './components';
 import { resolveNuxtComposables, resolveVueComposables } from './composables';
 import { resolveNuxtFeatures, resolveVueFeatures } from './features';
-import { createRuntimeResolver, generatedDir, vNamespace } from './utils';
+import { createGeneratedResolver, createRuntimeResolver, vNamespace } from './utils';
 
 // type CreateTSConfigOptions = {
 //   tsConfigPath: string;
@@ -163,23 +163,21 @@ function transformNuxtAutomaticTSConfig(cwd: string, writeDir: string, paths?: R
 // }
 
 export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: string) {
-  const writeDir = path.resolve(cwd, generatedDir);
   const srcDir = path.resolve(cwd, 'src');
-  const resolver = createRuntimeResolver(srcDir);
-  const dir = resolver.nuxtDir;
-
-  const tsConfigPath = path.resolve(writeDir, 'tsconfig.nuxt.json');
+  const runtimeResolver = createRuntimeResolver(srcDir);
+  const generatedResolver = createGeneratedResolver(srcDir);
+  const dir = runtimeResolver.nuxtDir;
 
   const components = resolveNuxtComponents({
-    resolver,
+    resolver: runtimeResolver,
   });
 
   const composables = resolveNuxtComposables({
-    resolver,
+    resolver: runtimeResolver,
   });
 
   const features = resolveNuxtFeatures({
-    resolver,
+    resolver: runtimeResolver,
   });
 
   const paths = resolvePathsFromDir(
@@ -188,48 +186,46 @@ export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: strin
       ...composables.entries().map(([key, v]) => [`composables:${key}`, v] as const),
       ...features.entries().map(([key, v]) => [`features:${key}`, v] as const),
     ]),
-    writeDir,
+    generatedResolver.dir,
   );
 
-  const nuxtTsConfig = transformNuxtAutomaticTSConfig(cwd, writeDir, paths);
+  const nuxtTsConfig = transformNuxtAutomaticTSConfig(cwd, generatedResolver.dir, paths);
 
   const tsConfig = {
     ...nuxtTsConfig,
     include: [
-      relativePath(writeDir, path.resolve(cwd, '.nuxt/**/*')),
-      relativePath(writeDir, path.resolve(dir, './**/*.ts')),
-      relativePath(writeDir, path.resolve(dir, './**/*.vue')),
+      relativePath(generatedResolver.dir, path.resolve(cwd, '.nuxt/**/*')),
+      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.ts')),
+      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.vue')),
     ],
   };
 
-  fs.ensureDirSync(writeDir);
+  fs.ensureDirSync(generatedResolver.dir);
   fs.writeFileSync(
-    tsConfigPath,
+    generatedResolver.nuxtTsConfigPath,
     JSON.stringify(tsConfig, null, 2),
     { encoding: 'utf-8' },
   );
 
-  await lint(tsConfigPath, eslintConfigPath);
+  await lint(generatedResolver.nuxtTsConfigPath, eslintConfigPath);
 }
 
 export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string) {
-  const writeDir = path.resolve(cwd, generatedDir);
   const srcDir = path.resolve(cwd, 'src');
-  const resolver = createRuntimeResolver(srcDir);
-  const dir = resolver.vueDir;
-
-  const tsConfigPath = path.resolve(writeDir, 'tsconfig.vue.json');
+  const runtimeResolver = createRuntimeResolver(srcDir);
+  const generatedResolver = createGeneratedResolver(srcDir);
+  const dir = runtimeResolver.vueDir;
 
   const components = resolveVueComponents({
-    resolver,
+    resolver: runtimeResolver,
   });
 
   const composables = resolveVueComposables({
-    resolver,
+    resolver: runtimeResolver,
   });
 
   const features = resolveVueFeatures({
-    resolver,
+    resolver: runtimeResolver,
   });
 
   const paths = resolvePathsFromDir(
@@ -238,7 +234,7 @@ export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string
       ...composables.entries().map(([key, v]) => [`composables:${key}`, v] as const),
       ...features.entries().map(([key, v]) => [`features:${key}`, v] as const),
     ]),
-    writeDir,
+    generatedResolver.dir,
   );
 
   const baseTsConfig = createTSConfig({
@@ -248,17 +244,17 @@ export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string
   const tsConfig = {
     ...baseTsConfig,
     include: [
-      relativePath(writeDir, path.resolve(dir, './**/*.ts')),
-      relativePath(writeDir, path.resolve(dir, './**/*.vue')),
+      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.ts')),
+      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.vue')),
     ],
   };
 
-  fs.ensureDirSync(writeDir);
+  fs.ensureDirSync(generatedResolver.dir);
   fs.writeFileSync(
-    tsConfigPath,
+    generatedResolver.vueTsConfigPath,
     `${JSON.stringify(tsConfig, null, 2)}\n`,
     { encoding: 'utf-8' },
   );
 
-  await lint(tsConfigPath, eslintConfigPath);
+  await lint(generatedResolver.vueTsConfigPath, eslintConfigPath);
 }
