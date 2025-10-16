@@ -26,6 +26,8 @@ export function createGeneratedResolver(cwd: string) {
 
 export type RuntimeResolver = ReturnType<typeof createRuntimeResolver>;
 
+export type GeneratedResolver = ReturnType<typeof createGeneratedResolver>;
+
 export const vNamespace = '#melkor';
 
 export type Export = {

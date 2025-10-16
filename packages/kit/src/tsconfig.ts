@@ -165,8 +165,7 @@ function transformNuxtAutomaticTSConfig(cwd: string, writeDir: string, paths?: R
 export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: string) {
   const srcDir = path.resolve(cwd, 'src');
   const runtimeResolver = createRuntimeResolver(srcDir);
-  const generatedResolver = createGeneratedResolver(srcDir);
-  const dir = runtimeResolver.nuxtDir;
+  const generatedResolver = createGeneratedResolver(cwd);
 
   const components = resolveNuxtComponents({
     resolver: runtimeResolver,
@@ -195,8 +194,11 @@ export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: strin
     ...nuxtTsConfig,
     include: [
       relativePath(generatedResolver.dir, path.resolve(cwd, '.nuxt/**/*')),
-      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.ts')),
-      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.vue')),
+      relativePath(generatedResolver.dir, path.resolve(runtimeResolver.nuxtDir, './**/*.ts')),
+      relativePath(generatedResolver.dir, path.resolve(runtimeResolver.nuxtDir, './**/*.vue')),
+      // We also add vue dir because overrides sources are in vue dirs
+      relativePath(generatedResolver.dir, path.resolve(runtimeResolver.vueDir, './**/*.ts')),
+      relativePath(generatedResolver.dir, path.resolve(runtimeResolver.vueDir, './**/*.vue')),
     ],
   };
 
@@ -213,8 +215,7 @@ export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: strin
 export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string) {
   const srcDir = path.resolve(cwd, 'src');
   const runtimeResolver = createRuntimeResolver(srcDir);
-  const generatedResolver = createGeneratedResolver(srcDir);
-  const dir = runtimeResolver.vueDir;
+  const generatedResolver = createGeneratedResolver(cwd);
 
   const components = resolveVueComponents({
     resolver: runtimeResolver,
@@ -244,8 +245,8 @@ export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string
   const tsConfig = {
     ...baseTsConfig,
     include: [
-      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.ts')),
-      relativePath(generatedResolver.dir, path.resolve(dir, './**/*.vue')),
+      relativePath(generatedResolver.dir, path.resolve(runtimeResolver.vueDir, './**/*.ts')),
+      relativePath(generatedResolver.dir, path.resolve(runtimeResolver.vueDir, './**/*.vue')),
     ],
   };
 
