@@ -1,7 +1,7 @@
 <template>
   <div
     v-theme="theme"
-    class="mk-AppColorList"
+    class="sk-AppColorList"
   >
     <AppColor v-for="color of props.colors" :key="color" :background="color" :size="props.size" />
   </div>
@@ -18,7 +18,7 @@ const theme = useTheme();
 </script>
 
 <style lang="scss">
-.mk-AppColorList {
+.sk-AppColorList {
   display: flex;
 }
 </style>

@@ -2,14 +2,14 @@
   <div
     ref="elementRef"
     v-theme="theme"
-    class="mk-AppColorPalette"
+    class="sk-AppColorPalette"
   >
-    <span class="mk-AppColorPalette-description">
+    <span class="sk-AppColorPalette-description">
       <slot name="description">
         {{ theme.value }}
       </slot>
     </span>
-    <div class="mk-AppColorPalette-colors">
+    <div class="sk-AppColorPalette-colors">
       <AppColorList :colors="shades" :size="props.size" />
     </div>
   </div>
@@ -31,13 +31,12 @@ const shades = ref<string[]>([]);
 function getShades(element: HTMLElement) {
   const styles = getComputedStyle(element);
   const _colors = [];
-  const shades = [0,1,2,3,4,5,6,7,8,9,10];
+  const shades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   for (const shade of shades) {
     _colors.push(styles.getPropertyValue(`--mk-shade-${shade}`));
   }
   return _colors;
 }
-
 
 watch(theme, () => {
   if (!elementRef.value) {
@@ -57,7 +56,7 @@ onMounted(() => {
 <style lang="scss">
 @use '#melkor/styles/mixins' as melkor;
 
-.mk-AppColorPalette {
+.sk-AppColorPalette {
   @include melkor.dark {
     --mk-color-palette-background-color: black;
   }

@@ -2,14 +2,14 @@
   <div
     ref="elementRef"
     v-theme="theme"
-    class="mk-AppColorPalette"
+    class="sk-AppColorPalette"
   >
-    <span class="mk-AppColorPalette-description">
+    <span class="sk-AppColorPalette-description">
       <slot name="description">
         {{ props.palette }}
       </slot>
     </span>
-    <div class="mk-AppColorPalette-colors">
+    <div class="sk-AppColorPalette-colors">
       <AppColorList v-for="(list, index) of props.colors" :key="index" :colors="list" :size="props.size" />
     </div>
   </div>
@@ -51,7 +51,7 @@ const elementRef = ref<null | HTMLDivElement>(null);
 <style lang="scss">
 @use '#melkor/styles/mixins' as melkor;
 
-.mk-AppColorPalette {
+.sk-AppColorPalette {
   @include melkor.dark {
     --mk-color-palette-background-color: black;
   }
