@@ -1,19 +1,19 @@
 <template>
-  <NuxtLayout name="base-layout">
+  <NuxtLayout name="default">
     <template #title>
       Colors
     </template>
-    <AppCard>
+    <MkCard>
       <em>Hover a color card to see corresponding <code>css</code> colors</em>
-    </AppCard>
-    <AppCard class="sk-ColorsView-list">
+    </MkCard>
+    <MkCard class="sk-ColorsView-list">
       <AppColorIntent intent="primary" />
       <AppColorIntent intent="neutral" />
       <AppColorIntent intent="success" />
       <AppColorIntent intent="danger" />
       <AppColorIntent intent="error" />
       <AppColorIntent intent="info" />
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

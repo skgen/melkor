@@ -1,13 +1,11 @@
 <template>
-  <TheApp class="sk-TheApp">
-    <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
+  <MkTheApp class="sk-TheApp">
+    <NuxtLoadingIndicator color="var(--mk-primary)" :height="2" />
     <TheHeader />
 
     <div class="sk-TheApp-view">
-      <NuxtLayout>
-        <!-- <pre>{{ navigation }}</pre> -->
-        <NuxtPage />
-      </NuxtLayout>
+      <!-- <pre>{{ navigation }}</pre> -->
+      <NuxtPage />
     </div>
     <TheFooter />
     <!-- <ClientOnly>
@@ -22,7 +20,7 @@
       </div>
     </ClientOnly> -->
     <NuxtRouteAnnouncer />
-  </TheApp>
+  </MkTheApp>
 </template>
 
 <script lang="ts" setup>

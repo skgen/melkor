@@ -1,16 +1,14 @@
 <template>
-  <AppCard v-if="page">
-    <AppProse as-child>
-      <ContentRenderer :value="page" />
-    </AppProse>
-  </AppCard>
+  <NuxtLayout name="docs">
+    <MkCard v-if="page">
+      <MkProse as-child>
+        <ContentRenderer :value="page" />
+      </MkProse>
+    </MkCard>
+  </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-  layout: 'docs',
-});
-
 const route = useRoute();
 
 const { data: page } = await useAsyncData(route.path, () =>

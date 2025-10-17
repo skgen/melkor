@@ -1,13 +1,12 @@
 <template>
-  <NuxtLayout name="empty-layout">
-    <div class="sk-TheHomeView">
-      <div class="sk-TheHomeView-title">
-        <TheTitle>
-          Melkor
-        </TheTitle>
-      </div>
+  <div class="sk-TheHomeView">
+    <div class="sk-TheHomeView-title">
+      <TheTitle>
+        Melkor
+      </TheTitle>
     </div>
-    <!-- <div class="w-[800px] h-[800px] outline-size-1 outline-solid outline-shade-10 relative">
+  </div>
+  <!-- <div class="w-[800px] h-[800px] outline-size-1 outline-solid outline-shade-10 relative">
       <pre>{{ {
         charging,
         chargingTime,
@@ -15,12 +14,11 @@
         level,
       } }}</pre>
     </div> -->
-    <!-- <div class="sk-TheHomePageView">
+  <!-- <div class="sk-TheHomePageView">
       <div>
         <AppSkeleton height="400px" />
       </div>
     </div> -->
-  </NuxtLayout>
 </template>
 
 <style lang="scss">

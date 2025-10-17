@@ -5,15 +5,15 @@
         <AppStack row align="center">
           <!-- <h1>Oups ! Une erreur s'est produite. ({{ props.error.statusCode }})</h1> -->
           <NuxtLink to="/">
-            <AppButton variant="outline">
+            <MkButton variant="outline">
               Retour à l'accueil
-            </AppButton>
+            </MkButton>
           </NuxtLink>
         </AppStack>
-        <AppCard>
+        <MkCard>
           <pre :style="{ whiteSpace: 'pre-line' }">{{ props }}</pre>
           <!-- <pre>{{ err }}</pre> -->
-        </AppCard>
+        </MkCard>
       </AppStack>
     </div>
   </TheApp>
