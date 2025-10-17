@@ -15,12 +15,12 @@ export default defineContentConfig({
       }],
       schema: z.object({
         name: z.string().optional(),
-        // category: z.enum([
-        //   'generic',
-        //   'inputs',
-        //   'layout',
-        //   'overlay',
-        // ]).optional(),
+        category: z.enum([
+          'generic',
+          'inputs',
+          'layout',
+          'overlay',
+        ]).optional(),
         framework: z.enum(['nuxt', 'vue']).optional(),
         links: z.array(
           z.object({
