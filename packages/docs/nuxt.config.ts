@@ -9,16 +9,16 @@ export default defineNuxtConfig({
     port: 1337,
   },
   modules: [
-    '@skgn/melkor-nuxt',
+    '@skgn/melkor/nuxt',
     '@nuxt/content',
     // '../melkor-nuxt/src/module',
   ],
   css: [
     // './src/styles/index.scss',
   ],
-  typescript: {
-    typeCheck: true,
-  },
+  // typescript: {
+  //   typeCheck: true,
+  // },
   app: {
     head: {
       title: 'Melkor Docs !',
@@ -51,6 +51,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   content: {
     build: {
       markdown: {
