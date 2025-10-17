@@ -1,8 +1,9 @@
 ---
 title: Input Text
 description: An Input Text element
-name: AppInputText
+name: InputText
 navigation.category: inputs
+category: inputs
 ---
 
 # {{title}}

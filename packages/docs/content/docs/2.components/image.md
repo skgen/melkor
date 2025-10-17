@@ -1,8 +1,9 @@
 ---
 title: Image
 description: An image element.
-name: AppImage
+name: Image
 navigation.category: generic
+category: generic
 ---
 
 # {{title}}

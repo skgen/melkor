@@ -1,8 +1,9 @@
 ---
 title: Theme Toggle
 description: A Theme Toggle element
-name: AppThemeToggle
+name: ThemeToggle
 navigation.category: generic
+category: generic
 ---
 
 # {{title}}

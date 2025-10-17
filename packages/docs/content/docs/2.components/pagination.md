@@ -1,8 +1,9 @@
 ---
 title: Pagination
 description: A pagination element
-name: AppPagination
+name: Pagination
 navigation.category: generic
+category: generic
 ---
 
 # {{title}}

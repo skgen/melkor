@@ -1,8 +1,9 @@
 ---
 title: Card
 description: A card element
-name: AppCard
+name: Card
 navigation.category: generic
+category: generic
 ---
 
 # {{title}}
