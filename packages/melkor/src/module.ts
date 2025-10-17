@@ -159,21 +159,26 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* SSR theme */
 
-    const scriptCtx = {
-      storageKey: STORAGE_THEME_KEY,
-      themes: JSON.stringify(options.themes),
-      ThemeEnum: JSON.stringify(Theme),
-    };
+    const ssrThemePath = resolver.resolve(runtimeResolver.nuxtDir, 'ssr-theme.min.js');
+    // Bypass if file doesn't exists, aka on prepare
+    // ssr-theme is built on prebuild script but after nuxt-module-build prepare
+    if (fs.existsSync(ssrThemePath)) {
+      const scriptCtx = {
+        storageKey: STORAGE_THEME_KEY,
+        themes: JSON.stringify(options.themes),
+        ThemeEnum: JSON.stringify(Theme),
+      };
 
-    const ssrThemeScript = fs.readFileSync(resolver.resolve(runtimeResolver.nuxtDir, 'ssr-theme.min.js'), 'utf-8')
-      .replace(/<%= ctx\.([^ ]+) %>/g, (_, option: keyof typeof scriptCtx) => scriptCtx[option])
-      .trim();
+      const ssrThemeScript = fs.readFileSync(resolver.resolve(runtimeResolver.nuxtDir, 'ssr-theme.min.js'), 'utf-8')
+        .replace(/<%= ctx\.([^ ]+) %>/g, (_, option: keyof typeof scriptCtx) => scriptCtx[option])
+        .trim();
 
-    nuxt.hook('nitro:config', (config) => {
-      config.virtual = config.virtual || {};
-      config.virtual[`${vNamespace}/nuxt/ssr-theme`] = `export const script = ${JSON.stringify(ssrThemeScript, null, 2)}`;
-      config.plugins = config.plugins || [];
-      config.plugins.push(resolver.resolve(runtimeResolver.nuxtDir, 'nitro-plugin'));
-    });
+      nuxt.hook('nitro:config', (config) => {
+        config.virtual = config.virtual || {};
+        config.virtual[`${vNamespace}/nuxt/ssr-theme`] = `export const script = ${JSON.stringify(ssrThemeScript, null, 2)}`;
+        config.plugins = config.plugins || [];
+        config.plugins.push(resolver.resolve(runtimeResolver.nuxtDir, 'nitro-plugin'));
+      });
+    }
   },
 });

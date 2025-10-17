@@ -28,7 +28,7 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "nuxt-module-build prepare && tsx scripts/tsconfig",
+    "prebuild": "nuxt-module-build prepare && tsx scripts/prebuild",
     "build": "tsx scripts/nuxt/build-ssr-theme && nuxt-module-build build",
     "test": "echo \"No test yet\"",
     "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
@@ -64,13 +64,16 @@
   "devDependencies": {
     "@nuxt/module-builder": "catalog:build",
     "@nuxt/schema": "catalog:build",
+    "@skgn/melkor-meta": "workspace:*",
     "@tsconfig/node22": "catalog:build",
+    "@types/big-json": "catalog:types",
     "@types/fs-extra": "catalog:types",
     "@types/jsdom": "catalog:types",
     "@types/lodash-es": "catalog:types",
     "@types/node": "catalog:types",
     "@vitejs/plugin-vue": "catalog:build",
     "@vue/tsconfig": "catalog:build",
+    "big-json": "catalog:build",
     "changelogen": "catalog:",
     "colorette": "catalog:",
     "concurrently": "catalog:",
@@ -87,8 +90,9 @@
     "stylelint-config-standard-vue": "catalog:lint",
     "tsx": "catalog:build",
     "typescript": "catalog:build",
+    "unbuild": "catalog:build",
     "vite": "catalog:build",
-    "vue-component-meta": "catalog:",
+    "vue-component-meta": "catalog:build",
     "vue-tsc": "catalog:"
   }
 }
