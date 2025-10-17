@@ -27,6 +27,7 @@
     "lodash-es": "catalog:runtime",
     "pathe": "catalog:build",
     "tsconfck": "^3.1.6",
+    "type-fest": "catalog:types",
     "unbuild": "catalog:build"
   },
   "devDependencies": {

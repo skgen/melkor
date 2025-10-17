@@ -1,50 +1,16 @@
-import type { Linter } from 'eslint';
+import type { TsConfigJson } from 'type-fest';
 
 import type { ExportedComponents } from './components';
 
-import { ESLint } from 'eslint';
 import fs from 'fs-extra';
 import path from 'pathe';
 
-// declare module '../../../eslint.config.mjs' {
-//   const _: Linter.Config;
-//   export default _;
-// }
 import { resolveNuxtComponents, resolveVueComponents } from './components';
 import { resolveNuxtComposables, resolveVueComposables } from './composables';
 import { resolveNuxtFeatures, resolveVueFeatures } from './features';
 import { createGeneratedResolver, createRuntimeResolver, vNamespace } from './utils';
 
-// type CreateTSConfigOptions = {
-//   tsConfigPath: string;
-//   components: ExportedComponents;
-// };
-
-async function lint(filepath: string, eslintConfigPath?: string, eslintConfig?: Linter.Config, iteration = 0) {
-  let _eslintConfig = eslintConfig ?? null;
-  if (!_eslintConfig) {
-    const __eslintConfig = eslintConfigPath ? await import(eslintConfigPath) : null;
-    _eslintConfig = __eslintConfig ? await __eslintConfig.default as Linter.Config : null;
-  }
-
-  const eslint = new ESLint({
-    baseConfig: _eslintConfig,
-    fix: true,
-  });
-
-  const results = await eslint.lintFiles(filepath);
-
-  await ESLint.outputFixes(results);
-
-  // Hack to correctly lint tsconfig for multiple paths
-  if (iteration === 1) {
-    return;
-  }
-
-  await lint(filepath, undefined, _eslintConfig ?? undefined, iteration + 1);
-}
-
-function createTSConfig(config: { paths: Record<string, string[]> }) {
+function createTsConfig(config: { paths: Record<string, string[]> }): TsConfigJson {
   return {
     compilerOptions: {
       target: 'esnext',
@@ -93,36 +59,15 @@ function relativePath(from: string, to: string) {
   return _path.startsWith('.') ? _path : `.${path.sep}${_path}`;
 }
 
-// export function overrideTSConfigAlias(options: CreateTSConfigOptions) {
-//   const tsconfigFile = JSON.parse(fs.readFileSync(options.tsConfigPath, { encoding: 'utf-8' }));
-//   if (!tsconfigFile?.compilerOptions?.paths) {
-//     return null;
-//   }
-//   let _paths = JSON.stringify(tsconfigFile?.compilerOptions?.paths);
-
-//   function escape(str: string) {
-//     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-//   }
-
-//   for (const component of options.components.values()) {
-//     const regex = new RegExp(`("${escape(component.alias)}":\\["[./\\w]+)(\/${escape(component.scopedPath)})("\\])`, 'g');
-//     _paths = _paths.replaceAll(regex, (match, $0, _, $2) => `${$0}/${component.scopedFilepath}${$2}`);
-//   }
-
-//   tsconfigFile.compilerOptions.paths = JSON.parse(_paths);
-
-//   return tsconfigFile as Record<string, any>;
-// }
-
-function transformNuxtAutomaticTSConfig(cwd: string, writeDir: string, paths?: Record<string, string[]>) {
-  const nuxtTSConfigPath = path.resolve(cwd, '.nuxt/tsconfig.app.json');
-  const nuxtTSConfigFile = JSON.parse(fs.readFileSync(nuxtTSConfigPath, { encoding: 'utf-8' }));
-  delete nuxtTSConfigFile.include;
-  delete nuxtTSConfigFile.exclude;
-  if (!nuxtTSConfigFile?.compilerOptions?.paths) {
-    return nuxtTSConfigFile;
+function transformNuxtAutomaticTsConfig(cwd: string, writeDir: string, paths?: Record<string, string[]>) {
+  const nuxtTsConfigPath = path.resolve(cwd, '.nuxt/tsconfig.app.json');
+  const nuxtTsConfigFile: TsConfigJson = JSON.parse(fs.readFileSync(nuxtTsConfigPath, { encoding: 'utf-8' }));
+  delete nuxtTsConfigFile.include;
+  delete nuxtTsConfigFile.exclude;
+  if (!nuxtTsConfigFile?.compilerOptions?.paths) {
+    return nuxtTsConfigFile;
   }
-  const oldPaths = nuxtTSConfigFile?.compilerOptions?.paths as Record<string, string[]>;
+  const oldPaths = nuxtTsConfigFile?.compilerOptions?.paths as Record<string, string[]>;
   const relativePaths = {} as Record<string, string[]>;
   for (const key of Object.keys(oldPaths)) {
     if (key.startsWith(vNamespace)) {
@@ -133,36 +78,14 @@ function transformNuxtAutomaticTSConfig(cwd: string, writeDir: string, paths?: R
       return relativePath(writeDir, absP);
     });
   }
-  nuxtTSConfigFile.compilerOptions.paths = {
+  nuxtTsConfigFile.compilerOptions.paths = {
     ...relativePaths,
     ...paths,
   };
-  return nuxtTSConfigFile;
+  return nuxtTsConfigFile;
 }
 
-// function overrideNuxtAutomaticTSConfig(srcDir: string) {
-//   const rootDir = path.resolve(srcDir, '..');
-//   const nuxtTSConfigPath = path.resolve(rootDir, '.nuxt/tsconfig.app.json');
-
-//   const resolver = createRuntimeResolver(srcDir);
-
-//   const nuxtComponents = resolveNuxtComponents({
-//     resolver,
-//   });
-
-//   const newTSConfig = overrideTSConfigAlias({
-//     tsConfigPath: nuxtTSConfigPath,
-//     components: nuxtComponents,
-//   });
-
-//   fs.writeFileSync(
-//     nuxtTSConfigPath,
-//     JSON.stringify(newTSConfig, null, 2),
-//     { encoding: 'utf-8' },
-//   );
-// }
-
-export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: string) {
+export function generateNuxtTsConfig(cwd: string): TsConfigJson {
   const srcDir = path.resolve(cwd, 'src');
   const runtimeResolver = createRuntimeResolver(srcDir);
   const generatedResolver = createGeneratedResolver(cwd);
@@ -188,9 +111,9 @@ export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: strin
     generatedResolver.dir,
   );
 
-  const nuxtTsConfig = transformNuxtAutomaticTSConfig(cwd, generatedResolver.dir, paths);
+  const nuxtTsConfig = transformNuxtAutomaticTsConfig(cwd, generatedResolver.dir, paths);
 
-  const tsConfig = {
+  const tsConfig: TsConfigJson = {
     ...nuxtTsConfig,
     include: [
       relativePath(generatedResolver.dir, path.resolve(cwd, '.nuxt/**/*')),
@@ -202,17 +125,10 @@ export async function generateNuxtTSConfig(cwd: string, eslintConfigPath?: strin
     ],
   };
 
-  fs.ensureDirSync(generatedResolver.dir);
-  fs.writeFileSync(
-    generatedResolver.nuxtTsConfigPath,
-    JSON.stringify(tsConfig, null, 2),
-    { encoding: 'utf-8' },
-  );
-
-  await lint(generatedResolver.nuxtTsConfigPath, eslintConfigPath);
+  return tsConfig;
 }
 
-export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string) {
+export function generateVueTsConfig(cwd: string): TsConfigJson {
   const srcDir = path.resolve(cwd, 'src');
   const runtimeResolver = createRuntimeResolver(srcDir);
   const generatedResolver = createGeneratedResolver(cwd);
@@ -238,11 +154,11 @@ export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string
     generatedResolver.dir,
   );
 
-  const baseTsConfig = createTSConfig({
+  const baseTsConfig = createTsConfig({
     paths,
   });
 
-  const tsConfig = {
+  const tsConfig: TsConfigJson = {
     ...baseTsConfig,
     include: [
       relativePath(generatedResolver.dir, path.resolve(runtimeResolver.vueDir, './**/*.ts')),
@@ -250,12 +166,5 @@ export async function generateVueTSConfig(cwd: string, eslintConfigPath?: string
     ],
   };
 
-  fs.ensureDirSync(generatedResolver.dir);
-  fs.writeFileSync(
-    generatedResolver.vueTsConfigPath,
-    `${JSON.stringify(tsConfig, null, 2)}\n`,
-    { encoding: 'utf-8' },
-  );
-
-  await lint(generatedResolver.vueTsConfigPath, eslintConfigPath);
+  return tsConfig;
 }
