@@ -1,9 +1,10 @@
 packages:
   - packages/melkor
   - packages/kit
+  - packages/meta
   - packages/playgrounds/nuxt
   - packages/playgrounds/vue
-  # - packages/docs
+  - packages/docs
 
 catalog:
   '@nuxt/content': ^3.3.0
@@ -29,7 +30,6 @@ catalog:
   vite-plugin-no-bundle: ^4.0.0
   vite-plugin-static-copy: ^2.3.0
   vitest: ^3.2.0
-  vue-component-meta: ^3.0.6
   vue-tsc: ^3.1.1
   yargs: ^17.7.2
   changelogen: ^0.6.2
@@ -61,6 +61,7 @@ catalogs:
     unplugin-vue-components: ^29.1.0
     glob: ^11.0.0
     unbuild: ^3.6.1
+    vue-component-meta: ^3.0.6
   runtime:
     '@nuxt/devtools': ^2.6.5
     '@iconify/vue': ^4.1.2
@@ -91,6 +92,7 @@ catalogs:
     '@types/node': ^22.18.1
     '@types/shelljs': ^0.8.17
     '@types/yargs': ^17.0.33
+    type-fest: ^5.1.0
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
