@@ -2,9 +2,9 @@
   <ul class="sk-AppComponentsList">
     <li v-for="component of components" :key="component.path">
       <NuxtLink :to="component.path">
-        <AppButton variant="outline">
+        <MkButton variant="outline">
           {{ component.title }}
-        </AppButton>
+        </MkButton>
       </NuxtLink>
     </li>
   </ul>

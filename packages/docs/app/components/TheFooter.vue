@@ -1,8 +1,8 @@
 <template>
   <div class="sk-TheFooter">
-    <AppSkeleton width="200px" height="50px" />
-    <AppSkeleton width="200px" height="50px" />
-    <AppSkeleton width="200px" height="50px" />
+    <MkSkeleton width="200px" height="50px" />
+    <MkSkeleton width="200px" height="50px" />
+    <MkSkeleton width="200px" height="50px" />
   </div>
 </template>
 

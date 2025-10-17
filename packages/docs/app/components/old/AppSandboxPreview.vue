@@ -1,39 +1,39 @@
 <template>
   <div class="sk-AppSandboxPreview">
     <AppStack row align="stretch" justify="space-between">
-      <AppCard class="sk-AppSandboxPreview-props">
+      <MkCard class="sk-AppSandboxPreview-props">
         <AppStack col gap="xl" align="stretch">
           <span class="sk-AppSandboxPreview-subtitle">
             Props
           </span>
           <AppStack col align="stretch">
             <!-- <template v-for="(propModel, key) of propsModel" :key="key">
-              <AppCard v-if="'component' in propModel && 'props' in propModel">
+              <MkCard v-if="'component' in propModel && 'props' in propModel">
                 <component
                   :is="propModel.component"
                   v-bind="propModel.props"
                   v-model="propModel.props.modelValue"
                 />
-              </AppCard>
-              <AppCard v-else-if="propModel.type === 'object'">
+              </MkCard>
+              <MkCard v-else-if="propModel.type === 'object'">
                 <AppStack col>
                   <span>🚧 Prop : <i>{{ key }}</i></span>
                   <span>🚧 Data type : <i>{{ propModel.type }}</i></span>
                   <span>🚧 Required : <i>{{ propModel.required }}</i></span>
                 </AppStack>
-              </AppCard>
-              <AppCard v-else-if="propModel.type === null">
+              </MkCard>
+              <MkCard v-else-if="propModel.type === null">
                 <AppStack col>
                   <span>🚧 Prop : <i>{{ key }}</i></span>
                   <span>🚧 Data type : <i>{{ propModel.typeStr }}</i></span>
                   <span>🚧 Required : <i>{{ propModel.required }}</i></span>
                 </AppStack>
-              </AppCard>
+              </MkCard>
             </template> -->
           </AppStack>
         </AppStack>
-      </AppCard>
-      <AppCard class="sk-AppSandboxPreview-render">
+      </MkCard>
+      <MkCard class="sk-AppSandboxPreview-render">
         <AppStack col gap="xl">
           <span class="sk-AppSandboxPreview-subtitle">
             Preview
@@ -46,7 +46,7 @@
             v-on="injectableEvents"
           /> -->
         </AppStack>
-      </AppCard>
+      </MkCard>
     </AppStack>
     <!-- <pre>{{ props.propsAST.props }}</pre> -->
     <!-- <pre>{{ propsModel }}</pre> -->

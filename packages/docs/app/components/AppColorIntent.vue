@@ -5,7 +5,7 @@
   >
     <span class="sk-AppColorIntent-name">{{ props.intent }}</span>
     <div class="sk-AppColorIntent-list">
-      <AppTooltip>
+      <MkTooltip>
         <template #tooltip>
           <div>
             <strong>background:</strong> <code>{{ toCssVar(scheme.background.intent) }}</code>
@@ -20,8 +20,8 @@
         >
           Some <br> Text
         </AppColor>
-      </AppTooltip>
-      <AppTooltip>
+      </MkTooltip>
+      <MkTooltip>
         <template #tooltip>
           <strong>background:</strong> <code>{{ toCssVar(scheme.background[75]) }}</code>
         </template>
@@ -29,8 +29,8 @@
           size="tiny"
           :background="toCssVar(scheme.background[75])"
         />
-      </AppTooltip>
-      <AppTooltip>
+      </MkTooltip>
+      <MkTooltip>
         <template #tooltip>
           <strong>background:</strong> <code>{{ toCssVar(scheme.background[50]) }}</code>
         </template>
@@ -38,8 +38,8 @@
           size="tiny"
           :background="toCssVar(scheme.background[50])"
         />
-      </AppTooltip>
-      <AppTooltip>
+      </MkTooltip>
+      <MkTooltip>
         <template #tooltip>
           <strong>background:</strong> <code>{{ toCssVar(scheme.background[25]) }}</code>
         </template>
@@ -47,8 +47,8 @@
           size="tiny"
           :background="toCssVar(scheme.background[25])"
         />
-      </AppTooltip>
-      <AppTooltip>
+      </MkTooltip>
+      <MkTooltip>
         <template #tooltip>
           <strong>background:</strong> <code>{{ toCssVar(scheme.background[15]) }}</code>
         </template>
@@ -56,7 +56,7 @@
           size="tiny"
           :background="toCssVar(scheme.background[15])"
         />
-      </AppTooltip>
+      </MkTooltip>
     </div>
   </div>
 </template>

@@ -6,7 +6,9 @@
       </NuxtLink>
 
       <div class="sk-TheHeader-dashboard">
-        <AppThemeToggle compact />
+        <ClientOnly>
+          <MkThemeToggle compact />
+        </ClientOnly>
       </div>
     </div>
     <div class="sk-TheHeader-separator" />
@@ -15,16 +17,16 @@
         <ul class="sk-TheHeader-subnav-list">
           <li v-for="item of navigation" :key="item.path">
             <NuxtLink :to="item.path">
-              <AppButton variant="outline" :active="isShallowActive(item.path)">
-                <AppIcon v-if="item.icon" :icon="item.icon" />
+              <MkButton variant="outline" :active="isShallowActive(item.path)">
+                <MkIcon v-if="item.icon" :icon="item.icon" />
                 {{ item.title }}
-              </AppButton>
+              </MkButton>
             </NuxtLink>
           </li>
         </ul>
       </nav>
       <div class="sk-TheHeader-frameworks">
-        <AppButton
+        <MkButton
           v-for="framework of frameworks"
           :key="framework.value"
           variant="outline"
@@ -32,9 +34,9 @@
           size="tight"
           @click="() => currentFramework = framework.value"
         >
-          <AppIcon :icon="framework.icon" />
+          <MkIcon :icon="framework.icon" />
           {{ framework.title }}
-        </AppButton>
+        </MkButton>
       </div>
     </div>
   </header>

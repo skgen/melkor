@@ -2,9 +2,9 @@
   <div
     v-if="meta?.props"
     v-theme="theme"
-    class="mk-AppComponentProps"
+    class="sk-AppComponentProps"
   >
-    <AppProse>
+    <MkProse>
       <table>
         <thead>
           <tr>
@@ -31,7 +31,7 @@
           </tr>
         </tbody>
       </table>
-    </AppProse>
+    </MkProse>
   </div>
 </template>
 
@@ -48,6 +48,6 @@ const { meta } = useComponentMeta(props.name);
 </script>
 
 <!-- <style lang="scss">
-.mk-AppComponentProps {
+.sk-AppComponentProps {
 }
 </style> -->

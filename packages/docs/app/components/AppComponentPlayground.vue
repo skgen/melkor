@@ -2,9 +2,9 @@
   <div
     v-if="meta?.props"
     v-theme="theme"
-    class="mk-AppComponentPlayground"
+    class="sk-AppComponentPlayground"
   >
-  <AppCard>dza</AppCard>
+    <MkCard>dza</MkCard>
     <!-- <pre>{{ computedProps }}</pre> -->
   </div>
 </template>

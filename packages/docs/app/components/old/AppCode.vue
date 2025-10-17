@@ -185,7 +185,7 @@ function handleExpand() {
       opacity 128ms,
       background-color 128ms;
 
-    .mk-AppIcon {
+    .mk-Icon {
       --mk-icon-size: 20px;
 
       position: absolute;

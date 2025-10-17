@@ -1,6 +1,6 @@
 <template>
   <div class="sk-TheAsideNavigation">
-    <AppCard>
+    <MkCard>
       <ul
         v-if="scopedNavigation?.children"
         class="sk-TheAsideNavigation-list"
@@ -12,7 +12,7 @@
           <AppNavigationLevel :navigation-item="item" />
         </li>
       </ul>
-    </AppCard>
+    </MkCard>
   </div>
 </template>
 
