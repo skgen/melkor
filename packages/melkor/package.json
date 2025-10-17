@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "prebuild": "nuxt-module-build prepare && tsx scripts/prebuild",
-    "build": "tsx scripts/nuxt/build-ssr-theme && nuxt-module-build build",
+    "build": "nuxt-module-build build",
     "test": "echo \"No test yet\"",
     "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
     "review:typescript": "pnpm review:typescript:vue && pnpm review:typescript:nuxt",
