@@ -11,4 +11,4 @@ export * from '../../vue/features/theme';
 export * from '../../vue/features/toast';
 export * from '../../vue/features/utils';
 
-export * from './framework';
+export * from './runtime-scope';

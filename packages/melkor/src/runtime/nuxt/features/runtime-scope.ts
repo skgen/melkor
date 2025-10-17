@@ -1,4 +1,4 @@
 // Used to verify auto imports consistency
-export function getFramework() {
+export function getRuntimeScope() {
   return 'nuxt';
 }

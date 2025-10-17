@@ -14,4 +14,4 @@ export * from '../../vue/composables/useTheme';
 export * from '../../vue/composables/useThemes';
 export * from '../../vue/composables/useToast';
 
-export * from './useFramework';
+export * from './useRuntimeScope';
