@@ -1,5 +1,5 @@
+import { buildSSRTheme } from './build-ssr-theme';
 import { generateTsConfigs } from './generate-tsconfigs';
-import { buildSSRTheme } from './nuxt/build-ssr-theme';
 import { rootPath } from './utils';
 
 await Promise.all([
