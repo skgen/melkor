@@ -1,55 +1,94 @@
+import { vNamespace, write } from '@skgn/melkor-kit';
+import { extractMeta } from '@skgn/melkor-meta';
 import fs from 'fs-extra';
-import { globSync } from 'glob';
+import { glob, globSync } from 'glob';
 import MagicString from 'magic-string';
 import path from 'pathe';
 import { defineBuildConfig } from 'unbuild';
+
+const rootPath = import.meta.dirname;
 
 function resolveStyles(from: string, ...paths: string[]): string {
   return path.resolve(from, 'runtime/vue/styles', ...paths);
 }
 
-function stylesTask() {
-  const srcStyles = resolveStyles(path.resolve(import.meta.dirname, 'src'));
-  const distStyles = resolveStyles(path.resolve(import.meta.dirname, 'dist'));
+async function stylesTask() {
+  const srcStyles = resolveStyles(path.resolve(rootPath, 'src'));
+  const distStyles = resolveStyles(path.resolve(rootPath, 'dist'));
 
   // Removes all css extra files
-  globSync(path.resolve(distStyles, '**/*.css'), {
+  (await glob(path.resolve(distStyles, '**/*.css'), {
     ignore: [
       path.resolve(distStyles, '**/index.css'),
       path.resolve(distStyles, '**/normalize.css'),
     ],
-  }).forEach(fs.removeSync);
+  })).forEach(fs.removeSync);
 
   // Removes all empty directories
-  globSync(path.resolve(distStyles, '**'), {
+  const dirs = await glob(path.resolve(distStyles, '**'), {
     ignore: [
       path.resolve(distStyles, '**/*.*'),
       distStyles,
     ],
-  }).forEach((dir) => {
-    const children = globSync(path.resolve(dir, '*'));
-    if (children.length === 0) {
-      fs.removeSync(dir);
-    }
   });
 
+  const removeDirPromises: Promise<void>[] = [];
+
+  for (const dir of dirs) {
+    removeDirPromises.push(new Promise((resolve, reject) => {
+      try {
+        const children = globSync(path.resolve(dir, '*'));
+        if (children.length === 0) {
+          fs.removeSync(dir);
+        }
+        resolve();
+      }
+      catch (e) {
+        reject(e);
+      }
+    }));
+  }
+
+  await Promise.all(removeDirPromises);
+
   // Copy styles assets
-  globSync(path.resolve(srcStyles, '**/*.scss'))
-    .forEach(p => fs.copySync(p, p.replace('src', 'dist')));
+  const copyPaths = await glob(path.resolve(srcStyles, '**/*.scss'));
+  const copyPathsPromises = copyPaths.map(p => fs.copy(p, p.replace('src', 'dist')));
+
+  await Promise.all(copyPathsPromises);
 }
 
 // Assigning default props other than inline ends up messy with _mergeDefaults function assigned
-function mergeDefaultTask() {
+async function mergeDefaultTask() {
   const pattern = '/* @__PURE__ */ _mergeDefaults';
-  globSync(path.resolve(import.meta.dirname, 'dist/runtime/**/*.vue')).forEach((p) => {
-    const text = fs.readFileSync(p, { encoding: 'utf-8' });
+
+  async function replacePattern(filepath: string) {
+    if (!await fs.exists(filepath)) {
+      throw new Error(`File ${filepath} not found`);
+    }
+    const text = await fs.readFile(filepath, { encoding: 'utf-8' });
     if (!text.includes(pattern)) {
       return;
     }
     const ms = new MagicString(text);
-    ms.replace(/(<script setup>)/, '$0\nimport { _mergeDefaults } from "#melkor/stubs";');
-    fs.writeFileSync(p, ms.toString());
+    ms.replace(/(<script setup>)/, `$0\nimport { _mergeDefaults } from "${vNamespace}/stubs";`);
+    await write(filepath, ms.toString());
+  }
+
+  (await glob(path.resolve(rootPath, 'dist/runtime/**/*.vue'))).map(replacePattern);
+}
+
+async function generateMetaTask() {
+  const distDir = path.resolve(rootPath, 'dist');
+
+  const meta = await extractMeta({
+    cwd: path.resolve(rootPath),
   });
+
+  await write(
+    path.resolve(distDir, 'meta.json'),
+    `${JSON.stringify(meta, null, 2)}\n`,
+  );
 }
 
 export default defineBuildConfig({
@@ -59,10 +98,12 @@ export default defineBuildConfig({
     './src/vite',
   ],
   hooks: {
-    'build:done': () => {
-      stylesTask();
-      mergeDefaultTask();
-      // Build meta here
+    'build:done': async () => {
+      await Promise.all([
+        stylesTask(),
+        mergeDefaultTask(),
+        generateMetaTask(),
+      ]);
     },
   },
   externals: [
