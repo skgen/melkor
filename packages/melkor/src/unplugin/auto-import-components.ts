@@ -1,13 +1,13 @@
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types';
 
-import type { PluginOptions } from '../unplugin';
+import type { MelkorUnpluginOptions } from '../unplugin';
 
 import { resolveVueComponents, type RuntimeResolver } from '@skgn/melkor-kit';
 import { defu } from 'defu';
 import AutoImportComponents from 'unplugin-vue-components';
 
-export function autoImportComponentsPlugin(options: PluginOptions, resolver: RuntimeResolver, meta: UnpluginContextMeta): UnpluginOptions {
+export function autoImportComponentsPlugin(options: MelkorUnpluginOptions, resolver: RuntimeResolver, meta: UnpluginContextMeta): UnpluginOptions {
   const vueComponents = resolveVueComponents({
     resolver,
     prefix: options.prefix?.components,

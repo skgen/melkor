@@ -1,11 +1,11 @@
 import type { RuntimeResolver } from '@skgn/melkor-kit';
 import type { UnpluginOptions } from 'unplugin';
 
-import type { PluginOptions } from '../unplugin';
+import type { MelkorUnpluginOptions } from '../unplugin';
 
 import { resolveVueComponents, resolveVueComposables, resolveVueFeatures, vNamespace } from '@skgn/melkor-kit';
 
-export function resolveInternalAliasPlugin(options: PluginOptions, resolver: RuntimeResolver): UnpluginOptions[] {
+export function resolveInternalAliasPlugin(options: MelkorUnpluginOptions, resolver: RuntimeResolver): UnpluginOptions[] {
   const vueComponents = [...resolveVueComponents({
     resolver,
     prefix: options.prefix?.components,
