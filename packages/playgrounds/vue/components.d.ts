@@ -8,8 +8,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    MkBuildTester: typeof import('./../../melkor/dist/runtime/vue/components/BuildTester.vue')['default']
     MkButton: typeof import('./../../melkor/dist/runtime/vue/components/Button.vue')['default']
+    MkRuntimeScope: typeof import('./../../melkor/dist/runtime/vue/components/RuntimeScope.vue')['default']
     MkTheApp: typeof import('./../../melkor/dist/runtime/vue/components/TheApp.vue')['default']
     MkThemeSelector: typeof import('./../../melkor/dist/runtime/vue/components/ThemeSelector.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

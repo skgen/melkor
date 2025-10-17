@@ -6,7 +6,7 @@
       </MkButton>
       <MkThemeSelector />
       <div class="env">
-        <MkBuildTester />
+        <MkRuntimeScope />
       </div>
     </div>
   </div>
