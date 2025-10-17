@@ -11,6 +11,8 @@ Melkor is currently in beta status. While it can already handle most production 
 
 # Melkor
 
+Track of porting from v1 to v2 [here][url-components]
+
 ## Credits
 
 - [vue](https://github.com/vuejs)
@@ -24,6 +26,7 @@ Melkor is currently in beta status. While it can already handle most production 
 This project is licensed under the [MIT License](LICENSE)
 
 [badge-license]: https://img.shields.io/badge/license-MIT-blue.svg
-[url-license]: https://github.com/skgn/melkor/blob/main/LICENSE
+[url-license]: https://github.com/skgen/melkor/blob/main/LICENSE
 [badge-npm-version]: https://img.shields.io/npm/v/@skgn/melkor/latest?color=brightgreen
 [url-npm]: https://www.npmjs.com/package/@skgn/melkor/v/latest
+[url-components]: https://github.com/skgen/melkor/blob/main/components.md
