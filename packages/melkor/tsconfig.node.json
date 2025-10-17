@@ -25,7 +25,8 @@
     // "vite.config.*",
     // "vitest.config.*",
     // "nuxt.config.ts",
-    "scripts"
+    "scripts",
+    "build.config.ts"
     // Used to overrides default metas
     // "src"
   ]
