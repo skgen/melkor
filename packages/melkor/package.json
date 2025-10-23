@@ -22,19 +22,45 @@
     },
     "./styles/css": "./dist/runtime/vue/styles/index.css",
     "./styles/scss": "./dist/runtime/vue/styles/index.scss",
-    "./styles/mixins": "./dist/runtime/vue/styles/mixins.scss"
+    "./styles/mixins": "./dist/runtime/vue/styles/mixins.scss",
+    "./components": {
+      "types": "./dist/runtime/vue/components/index.js",
+      "import": "./dist/runtime/vue/components/index.d.ts"
+    },
+    "./composables": {
+      "types": "./dist/runtime/vue/composables/index.js",
+      "import": "./dist/runtime/vue/composables/index.d.ts"
+    },
+    "./features": {
+      "types": "./dist/runtime/vue/features/index.js",
+      "import": "./dist/runtime/vue/features/index.d.ts"
+    },
+    "./nuxt/components": {
+      "types": "./dist/runtime/nuxt/components/index.js",
+      "import": "./dist/runtime/nuxt/components/index.d.ts"
+    },
+    "./nuxt/composables": {
+      "types": "./dist/runtime/nuxt/composables/index.js",
+      "import": "./dist/runtime/nuxt/composables/index.d.ts"
+    },
+    "./nuxt/features": {
+      "types": "./dist/runtime/nuxt/features/index.js",
+      "import": "./dist/runtime/nuxt/features/index.d.ts"
+    }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "prebuild": "nuxt-module-build prepare && tsx scripts/prebuild",
+    "generate": "tsx scripts/generate",
+    "prebuild": "pnpm generate && nuxt-module-build prepare && tsx scripts/prebuild",
     "build": "nuxt-module-build build",
+    "postbuild": "tsx scripts/postbuild",
     "test": "echo \"No test yet\"",
-    "review": "pnpm review:typescript && pnpm review:eslint && pnpm review:stylelint",
-    "review:typescript": "pnpm review:typescript:vue && pnpm review:typescript:nuxt",
-    "review:typescript:vue": "vue-tsc --noEmit -p .melkor/tsconfig.vue.json",
-    "review:typescript:nuxt": "vue-tsc --noEmit -p .melkor/tsconfig.nuxt.json",
+    "review": "pnpm review:typecheck && pnpm review:eslint && pnpm review:stylelint",
+    "review:typecheck": "pnpm review:typecheck:vue && pnpm review:typecheck:nuxt",
+    "review:typecheck:vue": "vue-tsc --noEmit -p .melkor/tsconfig.vue.json",
+    "review:typecheck:nuxt": "vue-tsc --noEmit -p .melkor/tsconfig.nuxt.json",
     "review:eslint": "eslint . --fix",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
     "changelog": "changelogen --release --no-commit --no-tag",
@@ -66,16 +92,14 @@
     "@nuxt/schema": "catalog:build",
     "@skgn/melkor-meta": "workspace:*",
     "@tsconfig/node22": "catalog:build",
-    "@types/big-json": "catalog:types",
     "@types/fs-extra": "catalog:types",
     "@types/jsdom": "catalog:types",
     "@types/lodash-es": "catalog:types",
     "@types/node": "catalog:types",
     "@vitejs/plugin-vue": "catalog:build",
     "@vue/tsconfig": "catalog:build",
-    "big-json": "catalog:build",
     "changelogen": "catalog:",
-    "colorette": "catalog:",
+    "colorette": "catalog:build",
     "concurrently": "catalog:",
     "esbuild": "catalog:build",
     "eslint": "catalog:lint",
