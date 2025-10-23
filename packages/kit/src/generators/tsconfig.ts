@@ -1,14 +1,15 @@
 import type { TsConfigJson } from 'type-fest';
 
-import type { ExportedComponents } from './components';
+import type { ExportedComponents } from '../resolvers/components';
+import type { WriteableFile } from '../utils';
 
 import fs from 'fs-extra';
 import path from 'pathe';
 
-import { resolveNuxtComponents, resolveVueComponents } from './components';
-import { resolveNuxtComposables, resolveVueComposables } from './composables';
-import { resolveNuxtFeatures, resolveVueFeatures } from './features';
-import { createGeneratedResolver, createRuntimeResolver, vNamespace } from './utils';
+import { resolveNuxtComponents, resolveVueComponents } from '../resolvers/components';
+import { resolveNuxtComposablesIndex, resolveVueComposablesIndex } from '../resolvers/composables';
+import { resolveNuxtFeatures, resolveVueFeatures } from '../resolvers/features';
+import { createGeneratedResolver, createRuntimeResolver, relativePath, vNamespace } from '../utils';
 
 function createTsConfig(config: { paths: Record<string, string[]> }): TsConfigJson {
   return {
@@ -49,19 +50,13 @@ function resolvePathsFromDir(components: ExportedComponents, dir: string) {
     acc[component.alias] = [
       relativePath(dir, component.filepath),
     ];
-
     return acc;
   }, {});
 }
 
-function relativePath(from: string, to: string) {
-  const _path = path.relative(from, to);
-  return _path.startsWith('.') ? _path : `.${path.sep}${_path}`;
-}
-
-function transformNuxtAutomaticTsConfig(cwd: string, writeDir: string, paths?: Record<string, string[]>) {
+async function transformNuxtAutomaticTsConfig(cwd: string, writeDir: string, paths?: Record<string, string[]>): Promise<TsConfigJson> {
   const nuxtTsConfigPath = path.resolve(cwd, '.nuxt/tsconfig.app.json');
-  const nuxtTsConfigFile: TsConfigJson = JSON.parse(fs.readFileSync(nuxtTsConfigPath, { encoding: 'utf-8' }));
+  const nuxtTsConfigFile: TsConfigJson = JSON.parse(await fs.readFile(nuxtTsConfigPath, { encoding: 'utf-8' }));
   delete nuxtTsConfigFile.include;
   delete nuxtTsConfigFile.exclude;
   if (!nuxtTsConfigFile?.compilerOptions?.paths) {
@@ -85,22 +80,22 @@ function transformNuxtAutomaticTsConfig(cwd: string, writeDir: string, paths?: R
   return nuxtTsConfigFile;
 }
 
-export function generateNuxtTsConfig(cwd: string): TsConfigJson {
+export async function generateNuxtTsConfigFile(cwd: string): Promise<WriteableFile> {
   const srcDir = path.resolve(cwd, 'src');
   const runtimeResolver = createRuntimeResolver(srcDir);
   const generatedResolver = createGeneratedResolver(cwd);
 
-  const components = resolveNuxtComponents({
-    resolver: runtimeResolver,
-  });
-
-  const composables = resolveNuxtComposables({
-    resolver: runtimeResolver,
-  });
-
-  const features = resolveNuxtFeatures({
-    resolver: runtimeResolver,
-  });
+  const [components, composables, features] = await Promise.all([
+    resolveNuxtComponents({
+      resolver: runtimeResolver,
+    }),
+    resolveNuxtComposablesIndex({
+      resolver: runtimeResolver,
+    }),
+    resolveNuxtFeatures({
+      resolver: runtimeResolver,
+    }),
+  ]);
 
   const paths = resolvePathsFromDir(
     new Map([
@@ -111,7 +106,7 @@ export function generateNuxtTsConfig(cwd: string): TsConfigJson {
     generatedResolver.dir,
   );
 
-  const nuxtTsConfig = transformNuxtAutomaticTsConfig(cwd, generatedResolver.dir, paths);
+  const nuxtTsConfig = await transformNuxtAutomaticTsConfig(cwd, generatedResolver.dir, paths);
 
   const tsConfig: TsConfigJson = {
     ...nuxtTsConfig,
@@ -125,25 +120,28 @@ export function generateNuxtTsConfig(cwd: string): TsConfigJson {
     ],
   };
 
-  return tsConfig;
+  return {
+    filePath: generatedResolver.nuxtTsConfigPath,
+    content: JSON.stringify(tsConfig, null, 2),
+  };
 }
 
-export function generateVueTsConfig(cwd: string): TsConfigJson {
+export async function generateVueTsConfigFile(cwd: string): Promise<WriteableFile> {
   const srcDir = path.resolve(cwd, 'src');
   const runtimeResolver = createRuntimeResolver(srcDir);
   const generatedResolver = createGeneratedResolver(cwd);
 
-  const components = resolveVueComponents({
-    resolver: runtimeResolver,
-  });
-
-  const composables = resolveVueComposables({
-    resolver: runtimeResolver,
-  });
-
-  const features = resolveVueFeatures({
-    resolver: runtimeResolver,
-  });
+  const [components, composables, features] = await Promise.all([
+    resolveVueComponents({
+      resolver: runtimeResolver,
+    }),
+    resolveVueComposablesIndex({
+      resolver: runtimeResolver,
+    }),
+    resolveVueFeatures({
+      resolver: runtimeResolver,
+    }),
+  ]);
 
   const paths = resolvePathsFromDir(
     new Map([
@@ -166,5 +164,15 @@ export function generateVueTsConfig(cwd: string): TsConfigJson {
     ],
   };
 
-  return tsConfig;
+  return {
+    filePath: generatedResolver.vueTsConfigPath,
+    content: JSON.stringify(tsConfig, null, 2),
+  };
+}
+
+export async function generateTsConfigFiles(cwd: string): Promise<WriteableFile[]> {
+  return (await Promise.all([
+    generateVueTsConfigFile(cwd),
+    generateNuxtTsConfigFile(cwd),
+  ])).flat(1);
 }

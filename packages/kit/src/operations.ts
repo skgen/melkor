@@ -1,8 +1,11 @@
 import type { Linter } from 'eslint';
 
+import { bold, dim, green } from 'colorette';
 import { ESLint } from 'eslint';
 import fs from 'fs-extra';
 import path from 'pathe';
+
+import { log } from './utils';
 
 async function lint(filepath: string, eslintConfigPath?: string, eslintConfig?: Linter.Config, iteration = 0) {
   let _eslintConfig = eslintConfig ?? null;
@@ -43,6 +46,11 @@ export async function write(filepath: string, data: any, options?: { eslintConfi
     dataAsString,
     { encoding: 'utf-8' },
   );
+
+  const short = filepath.split(`packages${path.sep}melkor${path.sep}`);
+
+  log(`${green('✔')} ${bold(short[short.length - 1])}`);
+  log(dim(`at → ${filepath}`));
 
   if (options?.eslintConfigPath) {
     await lint(filepath, options.eslintConfigPath);

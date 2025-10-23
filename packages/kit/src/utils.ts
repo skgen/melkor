@@ -1,3 +1,4 @@
+import { dim } from 'colorette';
 import path from 'pathe';
 
 export function createRuntimeResolver(cwd: string) {
@@ -39,3 +40,18 @@ export type Export = {
   scopedPath: string;
   alias: string;
 };
+
+export type WriteableFile = {
+  filePath: string;
+  content: string;
+};
+
+export function relativePath(from: string, to: string) {
+  const _path = path.relative(from, to);
+  return _path.startsWith('.') ? _path : `.${path.sep}${_path}`;
+}
+
+export function log(message?: any, ...optionalParams: any[]) {
+  // eslint-disable-next-line no-console
+  console.log(`${dim('[mk]')} ${message}`, ...optionalParams);
+}
