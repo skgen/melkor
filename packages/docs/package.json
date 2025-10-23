@@ -39,7 +39,7 @@
     "@types/node": "catalog:types",
     "@types/prismjs": "^1.26.5",
     "better-sqlite3": "catalog:",
-    "colorette": "catalog:",
+    "colorette": "catalog:build",
     "commander": "catalog:",
     "fast-glob": "catalog:",
     "fs-extra": "catalog:build",

@@ -14,7 +14,7 @@
     "@types/dotenv-parse-variables": "catalog:types",
     "@types/node": "catalog:types",
     "@types/shelljs": "catalog:types",
-    "colorette": "catalog:",
+    "colorette": "catalog:build",
     "dotenv-flow": "catalog:",
     "dotenv-parse-variables": "catalog:",
     "enquirer": "catalog:",
