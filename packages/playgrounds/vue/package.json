@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "vue-tsc -p ./tsconfig.app.json"
+    "typecheck": "vue-tsc --noEmit -p ./tsconfig.app.json"
   },
   "dependencies": {
     "@skgn/melkor": "workspace:*",
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:build",
+    "@vue/tsconfig": "catalog:build",
     "sass-embedded": "catalog:build",
     "stylelint": "catalog:lint",
     "stylelint-config-recess-order": "catalog:lint",
