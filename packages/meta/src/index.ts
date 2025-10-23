@@ -16,13 +16,13 @@ export async function extractMeta(options: ExtractMetaOptions): Promise<Meta> {
 
   return {
     vue: {
-      components: extractVueSFCMeta({
+      components: await extractVueSFCMeta({
         runtimeResolver,
         generatedResolver,
       }),
     },
     nuxt: {
-      components: extractNuxtSFCMeta({
+      components: await extractNuxtSFCMeta({
         runtimeResolver,
         generatedResolver,
       }),

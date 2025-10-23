@@ -14,8 +14,8 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "unbuild",
-    "review": "pnpm review:typescript && pnpm review:eslint",
-    "review:typescript": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "review": "pnpm review:typecheck && pnpm review:eslint",
+    "review:typecheck": "tsc --noEmit -p tsconfig.json",
     "review:eslint": "eslint . --fix"
   },
   "dependencies": {

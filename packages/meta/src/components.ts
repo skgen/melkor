@@ -4,12 +4,12 @@ import { resolveNuxtComponents, resolveVueComponents } from '@skgn/melkor-kit';
 
 import { createChecker, extractSFCMeta } from './sfc-meta';
 
-export function extractVueSFCMeta(options: { runtimeResolver: RuntimeResolver; generatedResolver: GeneratedResolver }) {
+export async function extractVueSFCMeta(options: { runtimeResolver: RuntimeResolver; generatedResolver: GeneratedResolver }) {
   const { generatedResolver, runtimeResolver } = options;
 
   const checker = createChecker(generatedResolver.vueTsConfigPath);
 
-  const vueComponents = resolveVueComponents({
+  const vueComponents = await resolveVueComponents({
     resolver: runtimeResolver,
   });
 
@@ -20,12 +20,12 @@ export function extractVueSFCMeta(options: { runtimeResolver: RuntimeResolver; g
   }));
 }
 
-export function extractNuxtSFCMeta(options: { runtimeResolver: RuntimeResolver; generatedResolver: GeneratedResolver }) {
+export async function extractNuxtSFCMeta(options: { runtimeResolver: RuntimeResolver; generatedResolver: GeneratedResolver }) {
   const { generatedResolver, runtimeResolver } = options;
 
   const checker = createChecker(generatedResolver.nuxtTsConfigPath);
 
-  const nuxtComponents = resolveNuxtComponents({
+  const nuxtComponents = await resolveNuxtComponents({
     resolver: runtimeResolver,
   });
 
