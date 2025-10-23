@@ -8,7 +8,7 @@ import path from 'pathe';
 
 import { resolveNuxtComponents, resolveVueComponents } from '../resolvers/components';
 import { resolveNuxtComposablesIndex, resolveVueComposablesIndex } from '../resolvers/composables';
-import { resolveNuxtFeatures, resolveVueFeatures } from '../resolvers/features';
+import { resolveNuxtFeaturesIndex, resolveVueFeaturesIndex } from '../resolvers/features';
 import { createGeneratedResolver, createRuntimeResolver, relativePath, vNamespace } from '../utils';
 
 function createTsConfig(config: { paths: Record<string, string[]> }): TsConfigJson {
@@ -92,7 +92,7 @@ export async function generateNuxtTsConfigFile(cwd: string): Promise<WriteableFi
     resolveNuxtComposablesIndex({
       resolver: runtimeResolver,
     }),
-    resolveNuxtFeatures({
+    resolveNuxtFeaturesIndex({
       resolver: runtimeResolver,
     }),
   ]);
@@ -138,7 +138,7 @@ export async function generateVueTsConfigFile(cwd: string): Promise<WriteableFil
     resolveVueComposablesIndex({
       resolver: runtimeResolver,
     }),
-    resolveVueFeatures({
+    resolveVueFeaturesIndex({
       resolver: runtimeResolver,
     }),
   ]);
