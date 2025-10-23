@@ -29,7 +29,7 @@ export default antfu(
               'unknown',
             ],
             newlinesBetween: 'always',
-            internalPattern: ['^@/.+'],
+            internalPattern: ['^#melkor/.+'],
             order: 'asc',
             type: 'natural',
           },
