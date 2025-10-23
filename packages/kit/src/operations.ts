@@ -31,7 +31,7 @@ async function lint(filepath: string, eslintConfigPath?: string, eslintConfig?: 
   await lint(filepath, undefined, _eslintConfig ?? undefined, iteration + 1);
 }
 
-export async function write(filepath: string, data: any, options?: { eslintConfigPath?: string }) {
+export async function write(filepath: string, data: any, options?: { eslintConfigPath?: string; writeMessage?: string }) {
   const dir = path.dirname(filepath);
 
   let dataAsString = data;
@@ -49,7 +49,7 @@ export async function write(filepath: string, data: any, options?: { eslintConfi
 
   const short = filepath.split(`packages${path.sep}melkor${path.sep}`);
 
-  log(`${green('✔')} ${bold(short[short.length - 1])}`);
+  log(`${green('✔')} ${options?.writeMessage ?? ''}${bold(short[short.length - 1])}`);
   log(dim(`at → ${filepath}`));
 
   if (options?.eslintConfigPath) {
