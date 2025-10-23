@@ -3,10 +3,8 @@
     <template #title>
       Card
     </template>
-    <AppCard>
-      <AppCard>
-        <AppCard />
-      </AppCard>
-    </AppCard>
+    <MkCard>
+      <AppThemeToggle />
+    </MkCard>
   </NuxtLayout>
 </template>

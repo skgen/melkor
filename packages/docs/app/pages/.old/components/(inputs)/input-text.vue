@@ -4,15 +4,15 @@
       Input Text
     </template>
 
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => text?.focus()">
+          <MkButton variant="outline" @click="() => text?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => text?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => text?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputText
           ref="text"
@@ -22,18 +22,18 @@
           :validate="handleValidate"
         >
           <template #label>
-            <AppIcon icon="heroicons:user-circle-16-solid" /> Username
+            <MkIcon icon="heroicons:user-circle-16-solid" /> Username
           </template>
           <template #hint>
             Type your username
           </template>
           <template #trailing-icon>
-            <AppIcon icon="heroicons:user-circle-16-solid" />
+            <MkIcon icon="heroicons:user-circle-16-solid" />
           </template>
         </AppInputText>
       </AppStack>
-    </AppCard>
-    <AppCard>
+    </MkCard>
+    <MkCard>
       <AppInputText
         v-bind="inputPasswordBinding"
         cancelable
@@ -41,17 +41,17 @@
         placeholder="Password"
       >
         <template #label>
-          <AppIcon icon="heroicons:lock-closed-20-solid" /> Password
+          <MkIcon icon="heroicons:lock-closed-20-solid" /> Password
         </template>
         <template #hint>
           Type your password
         </template>
         <template #leading-icon>
-          <AppIcon icon="heroicons:lock-closed-20-solid" />
+          <MkIcon icon="heroicons:lock-closed-20-solid" />
         </template>
       </AppInputText>
-    </AppCard>
-    <AppCard>
+    </MkCard>
+    <MkCard>
       <AppInputText
         v-bind="inputPasswordBinding"
         cancelable
@@ -60,16 +60,16 @@
         secure
       >
         <template #label>
-          <AppIcon icon="heroicons:no-symbol-20-solid" /> Disabled
+          <MkIcon icon="heroicons:no-symbol-20-solid" /> Disabled
         </template>
         <template #hint>
           I'm disabled
         </template>
       </AppInputText>
-    </AppCard>
-    <AppCard>
+    </MkCard>
+    <MkCard>
       <AppComponentProps name="AppInputText" />
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

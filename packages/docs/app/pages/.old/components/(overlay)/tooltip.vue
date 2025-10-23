@@ -4,13 +4,13 @@
       Tooltip
     </template>
     <AppStack col>
-      <AppCard :style="{ padding: '80px 160px' }">
+      <MkCard :style="{ padding: '80px 160px' }">
         <AppTooltip>
           <template #tooltip>
-            Copy to clipboard<AppIcon icon="material-symbols:title" />
+            Copy to clipboard<MkIcon icon="material-symbols:title" />
           </template>
-          <AppButton variant="outline" icon>
-            <AppIcon icon="material-symbols:copy-all" />
+          <MkButton variant="outline" icon>
+            <MkIcon icon="material-symbols:copy-all" />
             <!-- Call to action
             Call to action
             <br>
@@ -22,18 +22,18 @@
             <br>
             Call to action
             Call to action -->
-          </AppButton>
+          </MkButton>
         </AppTooltip>
         <!-- <AppStack align="center">
-          <AppButton variant="outline" @click="() => handleNotification()">
+          <MkButton variant="outline" @click="() => handleNotification()">
             Pop toasts
-          </AppButton>
+          </MkButton>
           <AppInputNumber v-bind="duration" />
         </AppStack> -->
-      </AppCard>
-      <!-- <AppCard>
+      </MkCard>
+      <!-- <MkCard>
         <AppStack gap="m" align="center">
-          <AppButton
+          <MkButton
             v-for="position of positions"
             :key="position"
             variant="outline"
@@ -42,21 +42,14 @@
             }"
           >
             {{ position }}
-          </AppButton>
+          </MkButton>
         </AppStack>
-      </AppCard> -->
+      </MkCard> -->
     </appstack>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import type { InputNumberProps } from '#melkor/features';
-
-import type { ToastPosition } from '../../../../../melkor/lib/features/toast';
-
-import AppButton from '#melkor/components/AppButton';
-import AppIcon from '#melkor/components/AppIcon';
-
 useSeoMeta(({
   title: 'Melkor - Tooltip',
 }));

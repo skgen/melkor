@@ -4,15 +4,15 @@
       Input Checkbox
     </template>
 
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => checkbox?.focus()">
+          <MkButton variant="outline" @click="() => checkbox?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => checkbox?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => checkbox?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputCheckbox
           v-bind="inputBinding"
@@ -22,22 +22,22 @@
           unchecked-label="Unchecked"
         >
           <template #label>
-            <AppIcon icon="material-symbols:admin-panel-settings-outline" />
+            <MkIcon icon="material-symbols:admin-panel-settings-outline" />
             Protect yourself
           </template>
           <template #hint>
             Check to add protection
           </template>
           <template #checked-label>
-            Protected <AppIcon icon="material-symbols:admin-panel-settings" />
+            Protected <MkIcon icon="material-symbols:admin-panel-settings" />
           </template>
           <template #unchecked-label>
             Vulnerable
           </template>
         </AppInputCheckbox>
       </AppStack>
-    </AppCard>
-    <AppCard>
+    </MkCard>
+    <MkCard>
       <AppInputCheckbox
         v-bind="inputBinding"
         hint="Type your checkbox"
@@ -48,21 +48,21 @@
         direction="horizontal"
       >
         <template #label>
-          <AppIcon icon="material-symbols:admin-panel-settings-outline" />
+          <MkIcon icon="material-symbols:admin-panel-settings-outline" />
           Protect yourself
         </template>
         <template #hint>
           Check to add protection
         </template>
         <template #checked-label>
-          Protected <AppIcon icon="material-symbols:admin-panel-settings" />
+          Protected <MkIcon icon="material-symbols:admin-panel-settings" />
         </template>
         <template #unchecked-label>
           Vulnerable
         </template>
       </AppInputCheckbox>
-    </AppCard>
-    <AppCard>
+    </MkCard>
+    <MkCard>
       <AppInputCheckbox
         v-bind="inputBinding"
         hint="Type your checkbox"
@@ -71,20 +71,20 @@
         disabled
       >
         <template #label>
-          <AppIcon icon="material-symbols:admin-panel-settings-outline" />
+          <MkIcon icon="material-symbols:admin-panel-settings-outline" />
           Protect yourself
         </template>
         <template #hint>
           Check to add protection
         </template>
         <template #checked-label>
-          Protected <AppIcon icon="material-symbols:admin-panel-settings" />
+          Protected <MkIcon icon="material-symbols:admin-panel-settings" />
         </template>
         <template #unchecked-label>
           Vulnerable
         </template>
       </AppInputCheckbox>
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

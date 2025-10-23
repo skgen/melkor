@@ -3,15 +3,15 @@
     <template #title>
       Input Icon
     </template>
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => input?.focus()">
+          <MkButton variant="outline" @click="() => input?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => input?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => input?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputIcon
           ref="input"
@@ -38,11 +38,11 @@
             Pickup your icon
           </template>
           <template #placeholder>
-            <AppIcon icon="material-symbols:abc" />
+            <MkIcon icon="material-symbols:abc" />
           </template>
         </AppInputIcon>
       </AppStack>
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

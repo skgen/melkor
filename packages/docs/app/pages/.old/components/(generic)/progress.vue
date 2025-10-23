@@ -4,54 +4,54 @@
       Progress
     </template>
     <AppStack col>
-      <AppCard>
+      <MkCard>
         <pre>{{ range }}</pre>
         <input v-model="range" type="range" :max="steps.length - 1" :style="{ width: '200px' }">
-      </AppCard>
+      </MkCard>
       <AppStack align="end">
         <AppStack col>
-          <AppCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps.length - 1"
               :style="{ width: '200px' }"
             />
-          </AppCard>
-          <AppCard>
+          </MkCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps.length - 1"
               :style="{ width: '200px' }"
               label="value"
             />
-          </AppCard>
-          <AppCard>
+          </MkCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps.length - 1"
               :style="{ width: '200px' }"
               label="percentage"
             />
-          </AppCard>
-          <AppCard>
+          </MkCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps"
               :style="{ width: '200px' }"
               label="percentage"
             />
-          </AppCard>
+          </MkCard>
         </AppStack>
         <AppStack>
-          <AppCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps.length - 1"
               :style="{ height: '200px' }"
               direction="vertical"
             />
-          </AppCard>
-          <AppCard>
+          </MkCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps.length - 1"
@@ -59,8 +59,8 @@
               direction="vertical"
               label="value"
             />
-          </AppCard>
-          <AppCard>
+          </MkCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps.length - 1"
@@ -68,8 +68,8 @@
               direction="vertical"
               label="percentage"
             />
-          </AppCard>
-          <AppCard>
+          </MkCard>
+          <MkCard>
             <AppProgress
               :model-value="range"
               :max="steps"
@@ -77,7 +77,7 @@
               direction="vertical"
               label="percentage"
             />
-          </AppCard>
+          </MkCard>
         </AppStack>
       </AppStack>
     </AppStack>

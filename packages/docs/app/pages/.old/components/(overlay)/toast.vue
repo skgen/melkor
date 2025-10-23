@@ -4,17 +4,17 @@
       Toast
     </template>
     <AppStack col>
-      <AppCard>
+      <MkCard>
         <AppStack align="center">
-          <AppButton variant="outline" @click="() => handleNotification()">
+          <MkButton variant="outline" @click="() => handleNotification()">
             Pop toasts
-          </AppButton>
+          </MkButton>
           <AppInputNumber v-bind="duration" />
         </AppStack>
-      </AppCard>
-      <AppCard>
+      </MkCard>
+      <MkCard>
         <AppStack gap="m" align="center">
-          <AppButton
+          <MkButton
             v-for="position of positions"
             :key="position"
             variant="outline"
@@ -23,23 +23,21 @@
             }"
           >
             {{ position }}
-          </AppButton>
+          </MkButton>
         </AppStack>
-      </AppCard>
-      <AppCard>
+      </MkCard>
+      <MkCard>
         <AppComponentProps name="AppToast" />
-      </AppCard>
+      </MkCard>
     </appstack>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import type { InputNumberProps } from '#melkor/features';
+import type { InputNumberProps, ToastPosition } from '#melkor/features';
 
-import type { ToastPosition } from '../../../../../melkor/lib/features/toast';
-
-import AppButton from '#melkor/components/AppButton';
-import AppIcon from '#melkor/components/AppIcon';
+import MkButton from '#melkor/components/MkButton';
+import MkIcon from '#melkor/components/MkIcon';
 
 useSeoMeta(({
   title: 'Melkor - Toast',
@@ -66,14 +64,14 @@ function handleNotification() {
       duration: duration.value ?? 1000,
     },
     slots: {
-      leading: h(AppIcon, {
+      leading: h(MkIcon, {
         icon: 'material-symbols:airplane-ticket',
       }),
       title: h('strong', `Flight has been added to the trip !`),
       description: `Trip now contains ${count} flights.`,
       actions: [
         h(
-          AppButton,
+          MkButton,
           {
             variant: 'outline',
             size: 'tight',
@@ -81,7 +79,7 @@ function handleNotification() {
           {
             default: () => [
               h(
-                AppIcon,
+                MkIcon,
                 {
                   icon: 'material-symbols:delete',
                 },
@@ -91,7 +89,7 @@ function handleNotification() {
           },
         ),
         h(
-          AppButton,
+          MkButton,
           {
             variant: 'outline',
             size: 'tight',
@@ -100,7 +98,7 @@ function handleNotification() {
             default: () => [
               'Got it !',
               h(
-                AppIcon,
+                MkIcon,
                 {
                   icon: 'material-symbols:air',
                 },

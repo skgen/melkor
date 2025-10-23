@@ -5,12 +5,12 @@
     </template>
     <div class="sk-ComponentsView">
       <NuxtLink v-for="component of list" :key="component.path" :to="component.path">
-        <AppCard class="">
+        <MkCard class="">
           <AppStack justify="space-between" align="center">
             {{ component.label }}
-            <AppIcon icon="material-symbols:arrow-forward-ios" />
+            <MkIcon icon="material-symbols:arrow-forward-ios" />
           </AppStack>
-        </AppCard>
+        </MkCard>
       </NuxtLink>
     </div>
   </NuxtLayout>
@@ -33,8 +33,8 @@ useHead(({
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: var(--mk-size-4);
 
-  .mk-AppCard {
-    .mk-AppIcon {
+  .mk-Card {
+    .mk-Icon {
       opacity: 0;
       transition:
         transform var(--mk-transition-2-duration),
@@ -43,7 +43,7 @@ useHead(({
     }
 
     @include melkor.on-hover {
-      .mk-AppIcon {
+      .mk-Icon {
         opacity: 1;
         transform: translateX(0);
       }

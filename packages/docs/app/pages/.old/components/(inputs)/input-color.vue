@@ -3,15 +3,15 @@
     <template #title>
       Input Color
     </template>
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => color?.focus()">
+          <MkButton variant="outline" @click="() => color?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => color?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => color?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputColor
           ref="color"
@@ -21,14 +21,14 @@
           :validate="handleValidate"
         >
           <template #label>
-            <AppIcon icon="heroicons:paint-brush-20-solid" /> Color
+            <MkIcon icon="heroicons:paint-brush-20-solid" /> Color
           </template>
           <template #hint>
             Type your prefered color
           </template>
         </AppInputColor>
       </AppStack>
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

@@ -4,7 +4,7 @@
       Checkables
     </template>
     <AppStack col>
-      <AppCard>
+      <MkCard>
         <AppStack col>
           <span>Checkbox</span>
           <AppCheckbox :checked="checked" @click="() => checked = !checked" />
@@ -16,8 +16,8 @@
             <AppCheckbox disabled checked />
           </AppStack>
         </AppStack>
-      </AppCard>
-      <AppCard>
+      </MkCard>
+      <MkCard>
         <AppStack col>
           <span>Radio</span>
           <AppRadio :checked="checked" @click="() => checked = !checked" />
@@ -29,8 +29,8 @@
             <AppRadio disabled checked />
           </AppStack>
         </AppStack>
-      </AppCard>
-      <AppCard>
+      </MkCard>
+      <MkCard>
         <AppStack col>
           <span>Toggle</span>
           <AppToggle :checked="checked" @click="() => checked = !checked" />
@@ -42,7 +42,7 @@
             <AppToggle disabled checked />
           </AppStack>
         </AppStack>
-      </AppCard>
+      </MkCard>
     </AppStack>
   </NuxtLayout>
 </template>

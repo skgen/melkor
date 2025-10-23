@@ -4,15 +4,15 @@
       Input Textarea
     </template>
 
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => textarea?.focus()">
+          <MkButton variant="outline" @click="() => textarea?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => textarea?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => textarea?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputTextarea
           ref="textarea"
@@ -23,20 +23,20 @@
           :rows="4"
         >
           <template #trailing-icon>
-            <AppIcon icon="heroicons:user-circle-16-solid" />
+            <MkIcon icon="heroicons:user-circle-16-solid" />
           </template>
           <template #leading-icon>
-            <AppIcon icon="heroicons:user-circle-16-solid" />
+            <MkIcon icon="heroicons:user-circle-16-solid" />
           </template>
           <template #label>
-            <AppIcon icon="heroicons:user-circle-16-solid" /> Username
+            <MkIcon icon="heroicons:user-circle-16-solid" /> Username
           </template>
           <template #hint>
             Type your username
           </template>
         </AppInputTextarea>
       </AppStack>
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

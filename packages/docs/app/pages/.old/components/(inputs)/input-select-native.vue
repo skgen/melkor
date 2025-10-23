@@ -4,8 +4,8 @@
       Input Select native
     </template>
 
-    <AppCard>
-      <AppInputSelectNative
+    <MkCard>
+      <InputSelectNative
         v-bind="inputBinding"
         :validate="handleValidate"
       >
@@ -18,8 +18,8 @@
         <template #option="{ option }">
           {{ option.value?.name }}
         </template>
-      </AppInputSelectNative>
-    </AppCard>
+      </InputSelectNative>
+    </MkCard>
   </NuxtLayout>
 </template>
 

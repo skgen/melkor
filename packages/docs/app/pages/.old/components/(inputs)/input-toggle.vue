@@ -4,15 +4,15 @@
       Input Toggle
     </template>
 
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => toggle?.focus()">
+          <MkButton variant="outline" @click="() => toggle?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => toggle?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => toggle?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputToggle
           ref="toggle"
@@ -22,22 +22,22 @@
           unchecked-label="Unchecked"
         >
           <template #label>
-            <AppIcon icon="material-symbols:admin-panel-settings-outline" />
+            <MkIcon icon="material-symbols:admin-panel-settings-outline" />
             Protect yourself
           </template>
           <template #hint>
             Check to add protection
           </template>
           <template #checked-label>
-            Protected <AppIcon icon="material-symbols:admin-panel-settings" />
+            Protected <MkIcon icon="material-symbols:admin-panel-settings" />
           </template>
           <template #unchecked-label>
             Vulnerable
           </template>
         </AppInputToggle>
       </AppStack>
-    </AppCard>
-    <AppCard>
+    </MkCard>
+    <MkCard>
       <AppInputToggle
         v-bind="inputBinding"
         :validate="handleValidate"
@@ -46,21 +46,21 @@
         direction="horizontal"
       >
         <template #label>
-          <AppIcon icon="material-symbols:admin-panel-settings-outline" />
+          <MkIcon icon="material-symbols:admin-panel-settings-outline" />
           Protect yourself
         </template>
         <template #hint>
           Check to add protection
         </template>
         <template #checked-label>
-          Protected <AppIcon icon="material-symbols:admin-panel-settings" />
+          Protected <MkIcon icon="material-symbols:admin-panel-settings" />
         </template>
         <template #unchecked-label>
           Vulnerable
         </template>
       </AppInputToggle>
-    </AppCard>
-    <AppCard>
+    </MkCard>
+    <MkCard>
       <AppInputToggle
         v-bind="inputBinding"
         :validate="handleValidate"
@@ -69,20 +69,20 @@
         disabled
       >
         <template #label>
-          <AppIcon icon="material-symbols:admin-panel-settings-outline" />
+          <MkIcon icon="material-symbols:admin-panel-settings-outline" />
           Protect yourself
         </template>
         <template #hint>
           Check to add protection
         </template>
         <template #checked-label>
-          Protected <AppIcon icon="material-symbols:admin-panel-settings" />
+          Protected <MkIcon icon="material-symbols:admin-panel-settings" />
         </template>
         <template #unchecked-label>
           Vulnerable
         </template>
       </AppInputToggle>
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

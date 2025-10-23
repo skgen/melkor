@@ -4,7 +4,7 @@
       Input Number
     </template>
     <AppStack col>
-      <AppCard>
+      <MkCard>
         <AppInputNumber
           v-bind="inputBinding"
           cancelable
@@ -13,16 +13,16 @@
           secure
         >
           <template #label>
-            <AppIcon icon="heroicons:credit-card-20-solid" /> Number
+            <MkIcon icon="heroicons:credit-card-20-solid" /> Number
           </template>
           <template #hint>
             Type your number
           </template>
           <template #leading-icon>
-            <AppIcon icon="heroicons:credit-card-20-solid" />
+            <MkIcon icon="heroicons:credit-card-20-solid" />
           </template>
         </AppInputNumber>
-      </AppCard>
+      </MkCard>
     </AppStack>
   </NuxtLayout>
 </template>

@@ -6,7 +6,7 @@
     <div class="sk-ImageView">
       <AppStack col align="stretch">
         <div class="sk-ImageView-grid">
-          <AppCard v-for="(cell, i) of cells" :key="i" class="sk-ImageView-grid-sample">
+          <MkCard v-for="(cell, i) of cells" :key="i" class="sk-ImageView-grid-sample">
             <div class="sk-ImageView-grid-sample-specs">
               <strong v-if="cell.ratio">{{ `${cell.ratio[0]}:${cell.ratio[1]}` }}</strong>
               <template v-if="cell.fit">
@@ -16,7 +16,7 @@
             <div>
               <AppImage :src="imageSource" :ratio="cell.ratio" :fit="cell.fit" />
             </div>
-          </AppCard>
+          </MkCard>
         </div>
       </AppStack>
     </div>

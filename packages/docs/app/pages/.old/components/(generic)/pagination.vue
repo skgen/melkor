@@ -4,7 +4,7 @@
       Pagination
     </template>
     <AppStack col>
-      <AppCard>
+      <MkCard>
         <AppPagination v-model="page" :range="range">
           <template #prev-text>
             Prev
@@ -13,10 +13,10 @@
             Next
           </template>
         </AppPagination>
-      </AppCard>
-      <AppCard>
+      </MkCard>
+      <MkCard>
         <AppComponentProps name="AppPagination" />
-      </AppCard>
+      </MkCard>
     </AppStack>
   </NuxtLayout>
 </template>

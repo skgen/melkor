@@ -4,15 +4,15 @@
       Input Select
     </template>
 
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => select?.focus()">
+          <MkButton variant="outline" @click="() => select?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => select?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => select?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputSelect
           ref="select"
@@ -35,9 +35,9 @@
           </template>
         </AppInputSelect>
       </AppStack>
-    </AppCard>
+    </MkCard>
 
-    <AppCard>
+    <MkCard>
       <AppInputSelect
         v-bind="inputSelectCollectionModel"
         :options="options"
@@ -52,19 +52,19 @@
         </template>
         <template #value="{ value }">
           {{ value.map(v => v?.name).join(', ') }}
-          <!-- <AppButton
+          <!-- <MkButton
             v-for="(v, i) of value" :key="i" variant="outline" outline @click.stop="() => {
               inputSelectCollectionModel.value = inputSelectCollectionModel.value.filter(_v => !isEqual(v, _v))
             }"
           >
-            {{ v?.name }} <AppIcon icon="material-symbols:cancel-outline" />
-          </AppButton> -->
+            {{ v?.name }} <MkIcon icon="material-symbols:cancel-outline" />
+          </MkButton> -->
         </template>
         <template #option="{ option }">
           {{ option.value?.name }}
         </template>
       </AppInputSelect>
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 

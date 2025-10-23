@@ -4,15 +4,15 @@
       Input Radio
     </template>
 
-    <AppCard>
+    <MkCard>
       <AppStack col>
         <AppStack>
-          <AppButton variant="outline" @click="() => radio?.focus()">
+          <MkButton variant="outline" @click="() => radio?.focus()">
             Focus
-          </AppButton>
-          <AppButton variant="outline" @click="() => radio?.blur()">
+          </MkButton>
+          <MkButton variant="outline" @click="() => radio?.blur()">
             Blur
-          </AppButton>
+          </MkButton>
         </AppStack>
         <AppInputRadio
           ref="radio"
@@ -33,9 +33,9 @@
           </template>
         </AppInputRadio>
       </AppStack>
-    </AppCard>
+    </MkCard>
 
-    <AppCard>
+    <MkCard>
       <AppInputRadio
         v-bind="inputBinding"
         :options="options"
@@ -52,9 +52,9 @@
           {{ option.value?.name }}
         </template>
       </AppInputRadio>
-    </AppCard>
+    </MkCard>
 
-    <AppCard>
+    <MkCard>
       <AppInputRadio
         v-bind="inputBinding"
         nullable
@@ -71,7 +71,7 @@
           {{ option.value?.name }}
         </template>
       </AppInputRadio>
-    </AppCard>
+    </MkCard>
   </NuxtLayout>
 </template>
 
