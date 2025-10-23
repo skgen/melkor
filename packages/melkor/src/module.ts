@@ -88,7 +88,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* COMPONENTS */
 
-    const components = resolveNuxtComponents({
+    const components = await resolveNuxtComponents({
       resolver: runtimeResolver,
       prefix: options.prefix?.components,
     });
@@ -104,7 +104,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* COMPOSABLES */
 
-    nuxt.options.alias[`${vNamespace}/composables`] = resolver.resolve(runtimeResolver.nuxtDir, `composables`);
+    nuxt.options.alias[`${vNamespace}/composables`] = resolver.resolve(runtimeResolver.nuxtDir, `composables/index.ts`);
 
     // @todo need to allow prefixing
     // if (!options.prefix?.composables) {
@@ -147,7 +147,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* FEATURES */
 
-    nuxt.options.alias[`${vNamespace}/features`] = resolver.resolve(runtimeResolver.nuxtDir, `features`);
+    nuxt.options.alias[`${vNamespace}/features`] = resolver.resolve(runtimeResolver.nuxtDir, `features/index.ts`);
 
     addImportsDir(resolver.resolve(runtimeResolver.vueDir, 'features'));
 

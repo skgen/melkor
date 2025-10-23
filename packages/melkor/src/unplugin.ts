@@ -2,7 +2,7 @@ import type { Options as AutoImportOptions } from 'unplugin-auto-import/types';
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types';
 
 import { createRuntimeResolver } from '@skgn/melkor-kit';
-import { createUnplugin, type UnpluginOptions } from 'unplugin';
+import { createUnplugin } from 'unplugin';
 
 import { mergeConfig } from './runtime/vue/features/config';
 import { autoImportComponentsPlugin } from './unplugin/auto-import-components';
@@ -56,5 +56,5 @@ export const melkor = createUnplugin<MelkorUnpluginOptions | undefined>((_option
     autoImportComponentsPlugin(options, resolver, meta),
     autoImportLogicPlugin(options, resolver, meta),
     detectPluginsDuplicationPlugin(),
-  ].flat(1) as UnpluginOptions[];
+  ].flat(1);
 });

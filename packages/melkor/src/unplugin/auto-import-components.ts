@@ -1,3 +1,4 @@
+import type { ExportedComponents } from '@skgn/melkor-kit';
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types';
 
@@ -7,10 +8,17 @@ import { resolveVueComponents, type RuntimeResolver } from '@skgn/melkor-kit';
 import { defu } from 'defu';
 import AutoImportComponents from 'unplugin-vue-components';
 
-export function autoImportComponentsPlugin(options: MelkorUnpluginOptions, resolver: RuntimeResolver, meta: UnpluginContextMeta): UnpluginOptions {
-  const vueComponents = resolveVueComponents({
+export function autoImportComponentsPlugin(options: MelkorUnpluginOptions, resolver: RuntimeResolver, meta: UnpluginContextMeta): UnpluginOptions | UnpluginOptions[] {
+  let vueComponents: ExportedComponents = new Map();
+
+  resolveVueComponents({
     resolver,
     prefix: options.prefix?.components,
+  }).then((components) => {
+    vueComponents = components;
+  }).catch((e) => {
+    console.error('Failed to load components.');
+    console.error(e);
   });
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
@@ -30,5 +38,5 @@ export function autoImportComponentsPlugin(options: MelkorUnpluginOptions, resol
     ],
   });
 
-  return AutoImportComponents.raw(pluginOptions, meta) as UnpluginOptions;
+  return AutoImportComponents.raw(pluginOptions, meta);
 }

@@ -14,5 +14,5 @@ export function resolveStubsPlugin(options: MelkorUnpluginOptions, resolver: Run
         return path.resolve(resolver.vueDir, 'stubs.js');
       }
     },
-  } satisfies UnpluginOptions;
+  };
 }
