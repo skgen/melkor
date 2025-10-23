@@ -5,13 +5,13 @@ import { useGlobalConfig } from '#melkor/composables';
 export function log(...props: any): void {
   const globalConfig = useGlobalConfig();
   if (globalConfig.debug) {
-    console.log(...props);
+    console.log('[Melkor - debug]', ...props);
   }
 }
 
 export function warn(...props: any): void {
   const globalConfig = useGlobalConfig();
   if (globalConfig.debug) {
-    console.warn(...props);
+    console.warn('[Melkor - debug]', ...props);
   }
 }
