@@ -1,10 +1,8 @@
-import type { ComputedRef } from 'vue';
-
-import type { InputProps } from '../features';
+import type { InputProps } from '#melkor/features';
 
 import { computed, reactive, readonly } from 'vue';
 
-import { formatErrors, hasErrors } from '../features';
+import { formatErrors, hasErrors } from '#melkor/features';
 
 export function useInputErrors<T>(errors?: InputProps<T>['errors']) {
   const _hasErrors = computed(() => hasErrors(errors));

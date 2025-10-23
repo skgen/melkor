@@ -50,9 +50,9 @@
 <script lang="ts">
 import type { Slot, VNodeRef } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
+import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
-import { inputDefaultProps } from '../../features';
+import { inputDefaultProps } from '#melkor/features';
 
 export type InputCheckableProps<TValue = boolean> = InputProps<TValue> & {
   checked?: TValue;
@@ -94,11 +94,11 @@ import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { computed, useTemplateRef } from 'vue';
 
-import { useInput, useInputErrors, useTheme } from '../../composables';
-import { bindInteractionStateProps } from '../../features';
-import FieldError from './FieldError.vue';
-import FieldHint from './FieldHint.vue';
-import FieldLabel from './FieldLabel.vue';
+import FieldError from '#melkor/components/forms/FieldError.vue';
+import FieldHint from '#melkor/components/forms/FieldHint.vue';
+import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
+import { useInput, useInputErrors, useTheme } from '#melkor/composables';
+import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputCheckableProps<TValue>>(),

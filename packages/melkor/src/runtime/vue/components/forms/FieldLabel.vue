@@ -16,7 +16,7 @@ export type FieldLabelSlots = {
 </script>
 
 <script lang="ts" setup>
-import { useTheme } from '../../composables';
+import { useTheme } from '#melkor/composables';
 
 defineSlots<FieldLabelSlots>();
 

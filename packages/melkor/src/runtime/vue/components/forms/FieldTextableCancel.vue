@@ -18,9 +18,8 @@ export type FieldTextableCancelSlots = {
 </script>
 
 <script lang="ts" setup>
-import { useGlobalConfig } from '../../composables/useGlobalConfig';
-import { useTheme } from '../../composables/useTheme';
-import AppIcon from '../Icon.vue';
+import AppIcon from '#melkor/components/Icon.vue';
+import { useGlobalConfig, useTheme } from '#melkor/composables';
 
 defineSlots<FieldTextableCancelSlots>();
 

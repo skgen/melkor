@@ -102,9 +102,9 @@
 <script lang="ts">
 import type { Slot } from 'vue';
 
-import type { IconCollectionName, InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
+import type { IconCollectionName, InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
-import { inputDefaultProps } from '../../features';
+import { inputDefaultProps } from '#melkor/features';
 
 export type InputIconValue = string | null;
 
@@ -136,19 +136,19 @@ export const inputIconDefaultProps = {
 // @todo translations in template
 import type { Flatten } from '@skgn/kit';
 
-import type { IconCollection } from '../../features';
+import type { IconCollection } from '#melkor/features';
 
 import { useInfiniteScroll } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 
-import { useIconCollection, useInput, useInputErrors, useTheme } from '../../composables';
-import { bindInteractionStateProps } from '../../features';
-import Icon from '../Icon.vue';
-import FieldError from './FieldError.vue';
-import FieldHint from './FieldHint.vue';
-import FieldLabel from './FieldLabel.vue';
+import FieldError from '#melkor/components/forms/FieldError.vue';
+import FieldHint from '#melkor/components/forms/FieldHint.vue';
+import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
+import Icon from '#melkor/components/Icon.vue';
+import { useIconCollection, useInput, useInputErrors, useTheme } from '#melkor/composables';
+import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputIconProps>(),

@@ -7,10 +7,7 @@
 <script lang="ts">
 import type { NuxtLinkProps } from '#app';
 
-import type { ActiveProps, DisabledProps } from '../../vue/features';
-
-import { reactiveOmit } from '@vueuse/core';
-import { useForwardProps } from 'reka-ui';
+import type { ActiveProps, DisabledProps } from '#melkor/features';
 
 export type LinkProps = NuxtLinkProps & {
   // /**

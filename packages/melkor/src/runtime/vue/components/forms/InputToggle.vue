@@ -62,10 +62,10 @@
 </template>
 
 <script lang="ts">
-import type { InferDefaults } from '../../features';
-import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from './InputCheckable.vue';
+import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from '#melkor/components/forms/InputCheckable.vue';
+import type { InferDefaults } from '#melkor/features';
 
-import { inputCheckableDefaultProps } from './InputCheckable.vue';
+import { inputCheckableDefaultProps } from '#melkor/components/forms/InputCheckable.vue';
 
 export type InputToggleProps<TValue = boolean> = InputCheckableProps<TValue>;
 
@@ -81,8 +81,8 @@ export const inputToggleDefaultProps = { ...inputCheckableDefaultProps } satisfi
 <script lang="ts" setup generic="TValue">
 import { ref, useTemplateRef } from 'vue';
 
-import Toggle from '../Toggle.vue';
-import InputCheckable from './InputCheckable.vue';
+import InputCheckable from '#melkor/components/forms/InputCheckable.vue';
+import Toggle from '#melkor/components/Toggle.vue';
 
 const props = withDefaults(
   defineProps<InputToggleProps<TValue>>(),

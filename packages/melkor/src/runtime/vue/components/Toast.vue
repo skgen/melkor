@@ -52,7 +52,7 @@
 import type { ToastRootEmits, ToastRootProps } from 'reka-ui';
 import type { Ref, Slot } from 'vue';
 
-import type { InferDefaults } from '../features/utils';
+import type { InferDefaults } from '#melkor/features';
 
 export type ToastProps = Pick<ToastRootProps, 'type' | 'duration' | 'open'> & {
   direction?: 'horizontal' | 'vertical';
@@ -84,10 +84,10 @@ import { reactivePick, useElementSize } from '@vueuse/core';
 import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle, useForwardPropsEmits } from 'reka-ui';
 import { computed, ref } from 'vue';
 
-import { useGlobalConfig, useTheme } from '../composables';
-import AppButton from './Button.vue';
-import AppIcon from './Icon.vue';
-import AppProgress from './Progress.vue';
+import AppButton from '#melkor/components/Button.vue';
+import AppIcon from '#melkor/components/Icon.vue';
+import AppProgress from '#melkor/components/Progress.vue';
+import { useGlobalConfig, useTheme } from '#melkor/composables';
 
 const props = withDefaults(
   defineProps<ToastProps>(),

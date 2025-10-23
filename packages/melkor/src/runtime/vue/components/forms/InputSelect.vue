@@ -78,9 +78,9 @@
 import type { Flatten } from '@skgn/kit';
 import type { Slot } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
+import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
-import { inputDefaultProps } from '../../features';
+import { inputDefaultProps } from '#melkor/features';
 
 export type InputSelectProps<TValue> = InputProps<TValue> & {
   fill?: boolean;
@@ -114,12 +114,12 @@ import { isArray, isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
 import { computed, nextTick, ref, watch } from 'vue';
 
-import { useGlobalConfig, useInput, useInputErrors, useTheme } from '../../composables';
-import { bindInteractionStateProps } from '../../features';
-import Icon from '../Icon.vue';
-import FieldLabel from './FieldLabel.vue';
-import FieldError from './FieldLabel.vue';
-import FieldHint from './FieldLabel.vue';
+import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
+import FieldError from '#melkor/components/forms/FieldLabel.vue';
+import FieldHint from '#melkor/components/forms/FieldLabel.vue';
+import Icon from '#melkor/components/Icon.vue';
+import { useGlobalConfig, useInput, useInputErrors, useTheme } from '#melkor/composables';
+import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputSelectProps<TValue>>(),

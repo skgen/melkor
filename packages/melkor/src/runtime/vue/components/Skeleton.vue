@@ -18,8 +18,8 @@ export type SkeletonProps = {
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import { useTheme } from '../composables';
-import { Shape } from '../features';
+import { useTheme } from '#melkor/composables';
+import { Shape } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<SkeletonProps>(),

@@ -7,11 +7,6 @@
 <script lang="ts">
 // import type { NuxtLinkProps } from '#app';
 
-import type { ActiveProps, DisabledProps } from '../features';
-
-import { reactiveOmit } from '@vueuse/core';
-import { useForwardProps } from 'reka-ui';
-
 // export type LinkProps = NuxtLinkProps & {
 // /**
 //  * The element or component this component should render as when not a link.

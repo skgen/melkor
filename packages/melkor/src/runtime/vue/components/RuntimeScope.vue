@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import type { InferDefaults } from '../features';
+import type { InferDefaults } from '#melkor/features';
 
 export type RuntimeScopeProps = {
   raw?: string;

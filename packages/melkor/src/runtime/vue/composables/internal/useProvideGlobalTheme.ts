@@ -1,8 +1,8 @@
 import { isClient } from '@vueuse/core';
 import { onMounted, provide, toRef, watch } from 'vue';
 
-import { useGlobalConfig, useThemes } from '..';
-import { getPersistedThemePreference, getThemeValue, globalThemeContextKey, persistThemePreference, setElementTheme, Theme, watchSystemThemeChange } from '../../features';
+import { useGlobalConfig, useThemes } from '#melkor/composables';
+import { getPersistedThemePreference, getThemeValue, globalThemeContextKey, persistThemePreference, setElementTheme, Theme, watchSystemThemeChange } from '#melkor/features';
 
 export function useProvideGlobalTheme() {
   const globalConfig = useGlobalConfig();

@@ -2,8 +2,7 @@ import type { DeepPartial } from '@skgn/kit';
 import type { TooltipContentProps, TooltipProviderProps } from 'reka-ui';
 import type { InjectionKey } from 'vue';
 
-import type { ThemeInstance } from './theme';
-import type { ToastPosition } from './toast';
+import type { ThemeInstance, ToastPosition } from '#melkor/features';
 
 import { createDefu } from 'defu';
 import { isArray } from 'lodash-es';

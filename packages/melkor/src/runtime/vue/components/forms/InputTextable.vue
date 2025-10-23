@@ -60,9 +60,9 @@
 <script lang="ts">
 import type { Slot, VNodeRef } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
+import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
-import { inputDefaultProps } from '../../features';
+import { inputDefaultProps } from '#melkor/features';
 
 export type InputTextableProps<TValue> = InputProps<TValue> & {
   placeholder?: string;
@@ -98,13 +98,13 @@ export const inputTextableDefaultProps = { ...inputDefaultProps } satisfies Infe
 import { isValue } from '@skgn/kit';
 import { computed, ref, useTemplateRef } from 'vue';
 
-import { useGlobalConfig, useInput, useInputErrors, useTheme } from '../../composables';
-import { bindInteractionStateProps } from '../../features';
-import Icon from '../Icon.vue';
-import FieldError from './FieldError.vue';
-import FieldHint from './FieldHint.vue';
-import FieldLabel from './FieldLabel.vue';
-import FieldTextableCancel from './FieldTextableCancel.vue';
+import FieldError from '#melkor/components/forms/FieldError.vue';
+import FieldHint from '#melkor/components/forms/FieldHint.vue';
+import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
+import FieldTextableCancel from '#melkor/components/forms/FieldTextableCancel.vue';
+import Icon from '#melkor/components/Icon.vue';
+import { useGlobalConfig, useInput, useInputErrors, useTheme } from '#melkor/composables';
+import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputTextableProps<TValue>>(),

@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import type { SurfaceElevation } from '../features';
+import type { SurfaceElevation } from '#melkor/features';
 
 export interface CardProps {
   elevation?: SurfaceElevation;
@@ -17,7 +17,7 @@ export interface CardProps {
 </script>
 
 <script lang="ts" setup>
-import { useSurface, useTheme } from '../composables';
+import { useSurface, useTheme } from '#melkor/composables';
 
 const props = defineProps<CardProps>();
 

@@ -1,4 +1,4 @@
-import type { DisabledProps, FocusedProps, HoveredProps } from './interactions';
+import type { DisabledProps, FocusedProps, HoveredProps } from '#melkor/features';
 
 export type CheckableProps = {
   checked?: boolean;

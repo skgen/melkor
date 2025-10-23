@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import type { InferDefaults } from '#melkor/features';
-
 import type { RuntimeScopeProps } from '../../vue/components/RuntimeScope.vue';
 
 export * from '../../vue/components/RuntimeScope.vue';

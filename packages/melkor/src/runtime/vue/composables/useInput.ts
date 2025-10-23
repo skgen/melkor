@@ -5,7 +5,7 @@ import {
   ref,
 } from 'vue';
 
-import { type InputEmits, type InputProps, validateInputValue } from '../features';
+import { type InputEmits, type InputProps, validateInputValue } from '#melkor/features';
 
 export interface UseInputOptions<TValue> {
   props: InputProps<TValue>;

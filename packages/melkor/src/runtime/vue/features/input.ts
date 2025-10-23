@@ -1,12 +1,12 @@
 import type { Slot } from 'vue';
 import type { ZodError, ZodType } from 'zod';
 
-import type { DisabledProps, HoveredProps, InferDefaults } from '.';
+import type { DisabledProps, HoveredProps, InferDefaults } from '#melkor/features';
 
 import { isValue } from '@skgn/kit';
 import { isArray, isString } from 'lodash-es';
 
-import { isZodError, isZodType } from '.';
+import { isZodError, isZodType } from '#melkor/features';
 
 export type InputProps<TValue> = {
   value: TValue;

@@ -8,7 +8,7 @@
 import { TooltipProvider } from 'reka-ui';
 import { computed } from 'vue';
 
-import { useGlobalConfig } from '../../composables';
+import { useGlobalConfig } from '#melkor/composables';
 
 const config = useGlobalConfig();
 

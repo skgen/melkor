@@ -11,7 +11,7 @@
 <script lang="ts">
 export type ProseProps = PrimitiveProps & {
 
-}
+};
 </script>
 
 <script lang="ts" setup>
@@ -19,7 +19,7 @@ import type { PrimitiveProps } from 'reka-ui';
 
 import { Primitive } from 'reka-ui';
 
-import { useTheme } from '../../composables';
+import { useTheme } from '#melkor/composables';
 
 const props = defineProps<ProseProps>();
 

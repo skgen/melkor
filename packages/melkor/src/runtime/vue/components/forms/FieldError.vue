@@ -16,7 +16,7 @@ export type FieldErrorSlots = {
 </script>
 
 <script lang="ts" setup>
-import { useTheme } from '../../composables/useTheme';
+import { useTheme } from '#melkor/composables';
 
 defineSlots<FieldErrorSlots>();
 

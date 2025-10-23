@@ -2,7 +2,7 @@ import { isValue } from '@skgn/kit';
 import { useAsyncState } from '@vueuse/core';
 import { computed, type ComputedRef, inject } from 'vue';
 
-import { globalIconsContextKey, type IconCollection, type IconCollectionName } from '../features';
+import { globalIconsContextKey, type IconCollection, type IconCollectionName } from '#melkor/features';
 
 export interface UseIconCollectionOptions {
   collectionName: IconCollectionName;

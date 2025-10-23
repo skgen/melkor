@@ -1,6 +1,6 @@
 import { type EmitsToProps, ref, type Ref, type ShortEmitsToObject } from 'vue';
 
-import { inputDefaultProps, type InputEmits, type InputProps } from '../features';
+import { inputDefaultProps, type InputEmits, type InputProps } from '#melkor/features';
 
 export function useInputBinding<TProps extends InputProps<any>>(model: TProps): {
   value: Ref<TProps['value']>;

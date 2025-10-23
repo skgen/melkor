@@ -64,9 +64,9 @@
 <script lang="ts">
 import type { Slot } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
+import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
-import { inputDefaultProps,  } from '../../features';
+import { inputDefaultProps } from '#melkor/features';
 
 export type InputColorValue = string | null;
 
@@ -84,19 +84,19 @@ export type InputColorSlots = InputSlots & {
 
 export type InputColorExpose = InputExpose;
 
-export const inputColorDefaultProps = {...inputDefaultProps} satisfies InferDefaults<InputColorProps>;
+export const inputColorDefaultProps = { ...inputDefaultProps } satisfies InferDefaults<InputColorProps>;
 </script>
 
 <script lang="ts" setup>
 import { isValue } from '@skgn/kit';
 import { computed, useTemplateRef } from 'vue';
 
-import { useInput, useTheme , useInputErrors } from '../../composables';
-import { bindInteractionStateProps } from '../../features';
-import FieldLabel from './FieldLabel.vue';
-import FieldTextableCancel from './FieldTextableCancel.vue';
-import FieldError from './FieldError.vue';
-import FieldHint from './FieldHint.vue';
+import FieldError from '#melkor/components/forms/FieldError.vue';
+import FieldHint from '#melkor/components/forms/FieldHint.vue';
+import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
+import FieldTextableCancel from '#melkor/components/forms/FieldTextableCancel.vue';
+import { useInput, useInputErrors, useTheme } from '#melkor/composables';
+import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputColorProps>(),

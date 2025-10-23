@@ -1,7 +1,7 @@
 import { isValue } from '@skgn/kit';
 import { type ComputedRef, inject } from 'vue';
 
-import { themeContextKey, type ThemeInstance } from '../features';
+import { themeContextKey, type ThemeInstance } from '#melkor/features';
 
 export function useTheme(): ComputedRef<ThemeInstance> {
   const context = inject(themeContextKey);

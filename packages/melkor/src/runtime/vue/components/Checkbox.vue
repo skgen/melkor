@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import type { CheckableProps } from '../features';
+import type { CheckableProps } from '#melkor/features';
 
 type CheckboxProps = CheckableProps;
 
@@ -30,9 +30,9 @@ type CheckboxSlots = {
 <script lang="ts" setup>
 import type { Slot } from 'vue';
 
-import { useGlobalConfig, useTheme } from '../composables';
-import { bindInteractionStateProps } from '../features';
-import AppIcon from './Icon.vue';
+import AppIcon from '#melkor/components/Icon.vue';
+import { useGlobalConfig, useTheme } from '#melkor/composables';
+import { bindInteractionStateProps } from '#melkor/features';
 
 const props = defineProps<CheckboxProps>();
 
