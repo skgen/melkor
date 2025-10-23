@@ -2,10 +2,23 @@ import type { DeepPartial } from '@skgn/kit';
 import type { TooltipContentProps, TooltipProviderProps } from 'reka-ui';
 import type { InjectionKey } from 'vue';
 
-import type { ThemeInstance, ToastPosition } from '#melkor/features';
-
 import { createDefu } from 'defu';
 import { isArray } from 'lodash-es';
+
+/**
+ * WARNING
+ * This file MUST remain PURE, no #melkor imports, because it's used in module.ts
+ * Some code related to scopes like toast or theme SHOULD be in their own files (aka theme.ts, toast.ts),
+ * BUT as they would be in files with #melkor imports, module.ts couldn't resolve this alias
+ * Therefore, the temporary solution is to export those tiny parts along config in a PURE file
+ */
+export type ToastPosition = 'top-left' | 'top-center' | 'top-right' | 'center-left' | 'center-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+
+export interface ThemeInstance {
+  preference: string;
+  value: string;
+}
+/* END WARNING */
 
 export enum Theme {
   light = 'light',

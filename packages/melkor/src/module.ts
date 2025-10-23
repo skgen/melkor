@@ -1,5 +1,3 @@
-// import type { Resolver } from '@nuxt/kit';
-// import type { Nuxt } from '@nuxt/schema';
 import type { DeepPartial } from '@skgn/kit';
 
 import fs from 'node:fs';
@@ -12,9 +10,10 @@ import {
   vNamespace,
 } from '@skgn/melkor-kit';
 
+import { createMelkorOptions, type MelkorOptions, mergeConfig, STORAGE_THEME_KEY, Theme } from './runtime/vue/features/config';
 // Melkor
 // import { loadMeta } from './namespaces/load-meta';
-import { createMelkorOptions, type MelkorOptions, mergeConfig, STORAGE_THEME_KEY, Theme } from './runtime/vue/features';
+// import {  } from './runtime/vue/features';
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname, '../package.json'), { encoding: 'utf-8' }));
 

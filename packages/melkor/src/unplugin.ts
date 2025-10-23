@@ -4,7 +4,7 @@ import type { Options as ComponentsOptions } from 'unplugin-vue-components/types
 import { createRuntimeResolver } from '@skgn/melkor-kit';
 import { createUnplugin, type UnpluginOptions } from 'unplugin';
 
-import { mergeConfig } from './runtime/vue/features';
+import { mergeConfig } from './runtime/vue/features/config';
 import { autoImportComponentsPlugin } from './unplugin/auto-import-components';
 import autoImportLogicPlugin from './unplugin/auto-import-logic';
 import { detectPluginsDuplicationPlugin } from './unplugin/detect-plugins-duplication';

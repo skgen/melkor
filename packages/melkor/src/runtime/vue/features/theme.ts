@@ -3,16 +3,11 @@ import type { ComputedRef, InjectionKey, Ref } from 'vue';
 import { isValue } from '@skgn/kit';
 import { isClient } from '@vueuse/core';
 
-import { STORAGE_THEME_KEY, Theme } from '#melkor/features';
+import { STORAGE_THEME_KEY, Theme, type ThemeInstance } from '#melkor/features';
 
 export type Themes = string[];
 
 export type SystemTheme = 'light' | 'dark';
-
-export interface ThemeInstance {
-  preference: string;
-  value: string;
-}
 
 export function getSystemColorScheme(): string | null {
   if (isClient) {
