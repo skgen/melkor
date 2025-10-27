@@ -49,14 +49,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { ToastExpose, ToastProps, ToastSlots } from '#melkor/components/Toast.vue';
+import type { ToastExpose, ToastProps, ToastSlots } from '#melkor/components';
 import type { ToastContext, ToastSwipeDirection } from '#melkor/features';
 
 import { reactivePick, useCssVar } from '@vueuse/core';
 import { ToastPortal, ToastProvider, ToastViewport, useForwardProps } from 'reka-ui';
 import { computed, markRaw, provide, ref } from 'vue';
 
-import Toast from '#melkor/components/Toast.vue';
+import { Toast } from '#melkor/components';
 import { useGlobalConfig } from '#melkor/composables';
 import { durationToNumber, floatingLayerId, globalToastContextKey, normalizeSlot, remToPixels } from '#melkor/features';
 

@@ -1,7 +1,9 @@
+import type { GlobalConfig } from '#melkor/features';
+
 import { isValue } from '@skgn/kit';
 import { inject } from 'vue';
 
-import { type GlobalConfig, globalConfigContextKey } from '#melkor/features';
+import { globalConfigContextKey } from '#melkor/features';
 
 export function useGlobalConfig(): GlobalConfig {
   const context = inject(globalConfigContextKey);

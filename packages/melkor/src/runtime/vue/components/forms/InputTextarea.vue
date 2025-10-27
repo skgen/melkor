@@ -54,10 +54,7 @@
 </template>
 
 <script lang="ts">
-import type { InputTextableEmits, InputTextableExpose, InputTextableProps, InputTextableSlots } from '#melkor/components/forms/InputTextable.vue';
-import type { InferDefaults } from '#melkor/features';
-
-import { inputTextableDefaultProps } from '#melkor/components/forms/InputTextable.vue';
+import type { InputTextableEmits, InputTextableExpose, InputTextableProps, InputTextableSlots } from '#melkor/components';
 
 export type InputTextareaValue = string | null;
 
@@ -70,21 +67,21 @@ export type InputTextareaEmits = InputTextableEmits<InputTextareaValue>;
 export type InputTextareaSlots = Omit<InputTextableSlots<InputTextareaValue>, 'default'>;
 
 export type InputTextareaExpose = InputTextableExpose;
-
-export const inputTextareaDefaultProps = {
-  ...inputTextableDefaultProps,
-  rows: 2,
-} satisfies InferDefaults<InputTextareaProps>;
 </script>
 
 <script lang="ts" setup>
 import { useTemplateRef } from 'vue';
 
-import InputTextable from '#melkor/components/forms/InputTextable.vue';
+import { InputTextable } from '#melkor/components';
 
 const props = withDefaults(
   defineProps<InputTextareaProps>(),
-  inputTextareaDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+    rows: 2,
+  },
 );
 
 const emit = defineEmits<InputTextareaEmits>();

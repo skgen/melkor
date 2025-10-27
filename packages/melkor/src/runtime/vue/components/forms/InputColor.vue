@@ -64,9 +64,7 @@
 <script lang="ts">
 import type { Slot } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
-
-import { inputDefaultProps } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
 export type InputColorValue = string | null;
 
@@ -83,24 +81,23 @@ export type InputColorSlots = InputSlots & {
 };
 
 export type InputColorExpose = InputExpose;
-
-export const inputColorDefaultProps = { ...inputDefaultProps } satisfies InferDefaults<InputColorProps>;
 </script>
 
 <script lang="ts" setup>
 import { isValue } from '@skgn/kit';
 import { computed, useTemplateRef } from 'vue';
 
-import FieldError from '#melkor/components/forms/FieldError.vue';
-import FieldHint from '#melkor/components/forms/FieldHint.vue';
-import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
-import FieldTextableCancel from '#melkor/components/forms/FieldTextableCancel.vue';
+import { FieldError, FieldHint, FieldLabel, FieldTextableCancel } from '#melkor/components';
 import { useInput, useInputErrors, useTheme } from '#melkor/composables';
 import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputColorProps>(),
-  inputColorDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+  },
 );
 
 const emit = defineEmits<InputColorEmits>();

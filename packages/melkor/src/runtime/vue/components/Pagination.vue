@@ -10,7 +10,7 @@
       @click="handlePrev"
     >
       <slot name="prev-icon">
-        <AppIcon
+        <Icon
           :icon="globalConfig.icons.Pagination.prev"
         />
       </slot>
@@ -42,7 +42,7 @@
           v-else
           class="mk-Pagination-slot mk-Pagination-gap"
         >
-          <AppIcon :icon="globalConfig.icons.Pagination.gap" />
+          <Icon :icon="globalConfig.icons.Pagination.gap" />
         </div>
       </template>
       <button
@@ -62,7 +62,7 @@
     >
       <slot name="next-text" />
       <slot name="next-icon">
-        <AppIcon
+        <Icon
           :icon="globalConfig.icons.Pagination.next"
         />
       </slot>
@@ -86,7 +86,7 @@ export type PaginationEmits = {
 import { isValue } from '@skgn/kit';
 import { computed, reactive } from 'vue';
 
-import AppIcon from '#melkor/components/Icon.vue';
+import { Icon } from '#melkor/components';
 import { useGlobalConfig, usePagination, useTheme } from '#melkor/composables';
 
 const props = withDefaults(

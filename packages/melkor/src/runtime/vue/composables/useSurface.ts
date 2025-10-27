@@ -1,4 +1,6 @@
-import { computed, type ComputedRef, inject, provide } from 'vue';
+import type { ComputedRef } from 'vue';
+
+import { computed, inject, provide } from 'vue';
 
 import {
   type SurfaceContextInjection,

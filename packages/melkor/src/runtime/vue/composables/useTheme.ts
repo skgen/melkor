@@ -1,5 +1,7 @@
+import type { ComputedRef } from 'vue';
+
 import { isValue } from '@skgn/kit';
-import { type ComputedRef, inject } from 'vue';
+import { inject } from 'vue';
 
 import { themeContextKey, type ThemeInstance } from '#melkor/features';
 

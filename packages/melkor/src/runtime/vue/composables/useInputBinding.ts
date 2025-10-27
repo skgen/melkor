@@ -1,6 +1,8 @@
-import { type EmitsToProps, ref, type Ref, type ShortEmitsToObject } from 'vue';
+import type { EmitsToProps, Ref, ShortEmitsToObject } from 'vue';
 
-import { inputDefaultProps, type InputEmits, type InputProps } from '#melkor/features';
+import type { InputEmits, InputProps } from '#melkor/features';
+
+import { ref } from 'vue';
 
 export function useInputBinding<TProps extends InputProps<any>>(model: TProps): {
   value: Ref<TProps['value']>;
@@ -17,9 +19,9 @@ export function useInputBinding<TProps extends InputProps<any>>(model: TProps): 
 >> {
   const { value: _value, valid: _valid, touched: _touched, errors: _errors, ...otherProps } = model;
   const value = ref(_value) as Ref<TProps['value']>;
-  const valid: Ref<TProps['valid']> = ref(_valid ?? inputDefaultProps.valid);
-  const touched: Ref<TProps['touched']> = ref(_touched ?? inputDefaultProps.touched);
-  const errors: Ref<TProps['errors']> = ref(_errors ?? inputDefaultProps.errors());
+  const valid: Ref<TProps['valid']> = ref(_valid ?? true);
+  const touched: Ref<TProps['touched']> = ref(_touched ?? false);
+  const errors: Ref<TProps['errors']> = ref(_errors ?? []);
 
   return {
     ...otherProps,

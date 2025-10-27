@@ -70,9 +70,7 @@
 import type { Flatten } from '@skgn/kit';
 import type { Slot } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
-
-import { inputDefaultProps } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
 export type InputRadioProps<TValue = boolean> = InputProps<TValue> & {
   direction?: 'horizontal' | 'vertical';
@@ -93,11 +91,6 @@ export type InputRadioSlots<TValue = boolean> = InputSlots & {
 };
 
 export type InputRadioExpose = InputExpose;
-
-export const inputRadioDefaultProps = {
-  ...inputDefaultProps,
-  direction: 'vertical',
-} satisfies InferDefaults<InputRadioProps<any>>;
 </script>
 
 <script lang="ts" setup generic="TValue = boolean">
@@ -105,16 +98,18 @@ import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { ref, useTemplateRef } from 'vue';
 
-import FieldError from '#melkor/components/forms/FieldError.vue';
-import FieldHint from '#melkor/components/forms/FieldHint.vue';
-import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
-import Radio from '#melkor/components/Radio.vue';
+import { FieldError, FieldHint, FieldLabel, Radio } from '#melkor/components';
 import { useInput, useInputErrors, useTheme } from '#melkor/composables';
 import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputRadioProps<TValue>>(),
-  inputRadioDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+    direction: 'vertical',
+  },
 );
 
 const emit = defineEmits<InputRadioEmits<TValue>>();

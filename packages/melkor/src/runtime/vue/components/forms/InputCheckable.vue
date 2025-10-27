@@ -50,9 +50,7 @@
 <script lang="ts">
 import type { Slot, VNodeRef } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
-
-import { inputDefaultProps } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
 export type InputCheckableProps<TValue = boolean> = InputProps<TValue> & {
   checked?: TValue;
@@ -81,11 +79,6 @@ export type InputCheckableSlots<TValue = boolean> = InputSlots & {
 };
 
 export type InputCheckableExpose = InputExpose;
-
-export const inputCheckableDefaultProps = {
-  ...inputDefaultProps,
-  direction: 'vertical',
-} satisfies InferDefaults<InputCheckableProps<any>>;
 </script>
 
 <script lang="ts" setup generic="TValue">
@@ -94,15 +87,18 @@ import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { computed, useTemplateRef } from 'vue';
 
-import FieldError from '#melkor/components/forms/FieldError.vue';
-import FieldHint from '#melkor/components/forms/FieldHint.vue';
-import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
+import { FieldError, FieldHint, FieldLabel } from '#melkor/components';
 import { useInput, useInputErrors, useTheme } from '#melkor/composables';
 import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputCheckableProps<TValue>>(),
-  inputCheckableDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+    direction: 'vertical',
+  },
 );
 
 const emit = defineEmits<InputCheckableEmits<TValue>>();

@@ -102,9 +102,7 @@
 <script lang="ts">
 import type { Slot } from 'vue';
 
-import type { IconCollectionName, InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
-
-import { inputDefaultProps } from '#melkor/features';
+import type { IconCollectionName, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
 export type InputIconValue = string | null;
 
@@ -123,13 +121,6 @@ export type InputIconSlots = InputSlots & {
 };
 
 export type InputIconExpose = InputExpose;
-
-export const inputIconDefaultProps = {
-  ...inputDefaultProps,
-  collection: 'material-symbols',
-  pageSize: 100,
-  columnSize: 6,
-} satisfies InferDefaults<InputIconProps>;
 </script>
 
 <script lang="ts" setup>
@@ -143,16 +134,20 @@ import { isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 
-import FieldError from '#melkor/components/forms/FieldError.vue';
-import FieldHint from '#melkor/components/forms/FieldHint.vue';
-import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
-import Icon from '#melkor/components/Icon.vue';
+import { FieldError, FieldHint, FieldLabel, Icon } from '#melkor/components';
 import { useIconCollection, useInput, useInputErrors, useTheme } from '#melkor/composables';
 import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputIconProps>(),
-  inputIconDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+    collection: 'material-symbols',
+    pageSize: 100,
+    columnSize: 6,
+  },
 );
 
 const emit = defineEmits<InputIconEmits>();

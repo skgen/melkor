@@ -1,5 +1,7 @@
+import type { Ref, ShallowRef, WatchHandle } from 'vue';
+
 import { useCycleList } from '@vueuse/core';
-import { onBeforeUnmount, onMounted, type Ref, type ShallowRef, watch, type WatchHandle } from 'vue';
+import { onBeforeUnmount, onMounted, watch } from 'vue';
 
 import { useGlobalConfig, useGlobalTheme } from '#melkor/composables';
 

@@ -1,8 +1,12 @@
+import type { ComputedRef } from 'vue';
+
+import type { IconCollection, IconCollectionName } from '#melkor/features';
+
 import { isValue } from '@skgn/kit';
 import { useAsyncState } from '@vueuse/core';
-import { computed, type ComputedRef, inject } from 'vue';
+import { computed, inject } from 'vue';
 
-import { globalIconsContextKey, type IconCollection, type IconCollectionName } from '#melkor/features';
+import { globalIconsContextKey } from '#melkor/features';
 
 export interface UseIconCollectionOptions {
   collectionName: IconCollectionName;

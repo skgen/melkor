@@ -4,7 +4,7 @@
     class="mk-FieldTextableCancel"
   >
     <slot>
-      <AppIcon :icon="globalConfig.icons.FieldTextableCancel.cancel" />
+      <Icon :icon="globalConfig.icons.FieldTextableCancel.cancel" />
     </slot>
   </button>
 </template>
@@ -18,7 +18,7 @@ export type FieldTextableCancelSlots = {
 </script>
 
 <script lang="ts" setup>
-import AppIcon from '#melkor/components/Icon.vue';
+import { Icon } from '#melkor/components';
 import { useGlobalConfig, useTheme } from '#melkor/composables';
 
 defineSlots<FieldTextableCancelSlots>();

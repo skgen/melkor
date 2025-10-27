@@ -1,6 +1,6 @@
 import type { InjectionKey } from 'vue';
 
-import type { ToastProps, ToastSlots } from '#melkor/components/Toast.vue';
+import type { ToastProps, ToastSlots } from '#melkor/components';
 import type { KeysAs, MaybeSlot } from '#melkor/features';
 
 export type ToastSwipeDirection = 'up' | 'down' | 'left' | 'right';

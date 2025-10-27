@@ -12,9 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import TheToastProvider from '#melkor/components/internal/TheToastProvider.vue';
-import TheTooltipProvider from '#melkor/components/internal/TheTooltipProvider.vue';
-import ThemeContext from '#melkor/components/ThemeContext.vue';
+import { ThemeContext, TheToastProvider, TheTooltipProvider } from '#melkor/components';
 import { useProvideGlobalTheme, useProvideIcons } from '#melkor/composables';
 import { floatingLayerId } from '#melkor/features';
 

@@ -78,9 +78,7 @@
 import type { Flatten } from '@skgn/kit';
 import type { Slot } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
-
-import { inputDefaultProps } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
 export type InputSelectProps<TValue> = InputProps<TValue> & {
   fill?: boolean;
@@ -105,8 +103,6 @@ export type InputSelectSlots<TValue> = InputSlots & {
 };
 
 export type InputSelectExpose = InputExpose;
-
-export const inputSelectDefaultProps = { ...inputDefaultProps } satisfies InferDefaults<InputSelectProps<any>>;
 </script>
 
 <script lang="ts" setup generic="TValue">
@@ -114,16 +110,17 @@ import { isArray, isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
 import { computed, nextTick, ref, watch } from 'vue';
 
-import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
-import FieldError from '#melkor/components/forms/FieldLabel.vue';
-import FieldHint from '#melkor/components/forms/FieldLabel.vue';
-import Icon from '#melkor/components/Icon.vue';
+import { FieldError, FieldHint, FieldLabel, Icon } from '#melkor/components';
 import { useGlobalConfig, useInput, useInputErrors, useTheme } from '#melkor/composables';
 import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputSelectProps<TValue>>(),
-  inputSelectDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+  },
 );
 
 const emit = defineEmits<InputSelectEmits<TValue>>();

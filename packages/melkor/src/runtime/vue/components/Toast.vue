@@ -34,12 +34,12 @@
         </div>
 
         <ToastClose class="mk-Toast-close" as-child @click.stop>
-          <AppButton icon size="compact" variant="outline">
-            <AppIcon :icon="globalConfig.icons.Toast.close" />
-          </AppButton>
+          <Button icon size="compact" variant="outline">
+            <Icon :icon="globalConfig.icons.Toast.close" />
+          </Button>
         </ToastClose>
       </div>
-      <AppProgress
+      <Progress
         :model-value="remaining"
         :max="duration"
         :direction="props.direction"
@@ -51,8 +51,6 @@
 <script lang="ts">
 import type { ToastRootEmits, ToastRootProps } from 'reka-ui';
 import type { Ref, Slot } from 'vue';
-
-import type { InferDefaults } from '#melkor/features';
 
 export type ToastProps = Pick<ToastRootProps, 'type' | 'duration' | 'open'> & {
   direction?: 'horizontal' | 'vertical';
@@ -71,12 +69,6 @@ export type ToastSlots = {
 export type ToastExpose = {
   height: Ref<number>;
 };
-
-export const toastDefaultProps = {
-  duration: 3000,
-  direction: 'horizontal',
-  open: true,
-} satisfies InferDefaults<ToastProps>;
 </script>
 
 <script lang="ts" setup>
@@ -84,14 +76,16 @@ import { reactivePick, useElementSize } from '@vueuse/core';
 import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle, useForwardPropsEmits } from 'reka-ui';
 import { computed, ref } from 'vue';
 
-import AppButton from '#melkor/components/Button.vue';
-import AppIcon from '#melkor/components/Icon.vue';
-import AppProgress from '#melkor/components/Progress.vue';
+import { Button, Icon, Progress } from '#melkor/components';
 import { useGlobalConfig, useTheme } from '#melkor/composables';
 
 const props = withDefaults(
   defineProps<ToastProps>(),
-  toastDefaultProps,
+  {
+    duration: 3000,
+    direction: 'horizontal',
+    open: true,
+  },
 );
 
 const emits = defineEmits<ToastEmits>();

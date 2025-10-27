@@ -40,12 +40,6 @@ export type InputExpose = {
 
 export type ValidateInputValue<TValue> = ((value: TValue) => string[] | string | void) | ZodType;
 
-export const inputDefaultProps = {
-  valid: true,
-  touched: false,
-  errors: (): string[] => [],
-} as const satisfies InferDefaults<InputProps<any>>;
-
 export type ValidateInputValueReturn<TValue> = Pick<InputProps<TValue>, 'value' | 'valid' | 'touched' | 'errors'>;
 
 export function validateInputValue<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue>): ValidateInputValueReturn<TValue> {

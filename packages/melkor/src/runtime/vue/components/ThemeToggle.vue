@@ -13,7 +13,7 @@
         <span class="mk-ThemeToggle-target">
           <transition-group name="mk-fade">
             <template v-for="localTheme of globalConfig.themes" :key="localTheme">
-              <AppIcon
+              <Icon
                 v-if="localTheme === globalTheme.preference && globalConfig.icons.ThemeToggle[localTheme]"
                 :icon="globalConfig.icons.ThemeToggle[localTheme]"
               />
@@ -34,7 +34,7 @@ export type ThemeToggleProps = {
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import AppIcon from '#melkor/components/Icon.vue';
+import { Icon } from '#melkor/components';
 import { useGlobalConfig, useGlobalTheme, useNextTheme, useTheme } from '#melkor/composables';
 
 const props = defineProps<ThemeToggleProps>();

@@ -60,9 +60,7 @@
 <script lang="ts">
 import type { Slot, VNodeRef } from 'vue';
 
-import type { InferDefaults, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
-
-import { inputDefaultProps } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
 
 export type InputTextableProps<TValue> = InputProps<TValue> & {
   placeholder?: string;
@@ -90,25 +88,23 @@ export type InputTextableSlots<TValue> = InputSlots & {
 };
 
 export type InputTextableExpose = InputExpose;
-
-export const inputTextableDefaultProps = { ...inputDefaultProps } satisfies InferDefaults<InputTextableProps<any>>;
 </script>
 
 <script lang="ts" setup generic="TValue">
 import { isValue } from '@skgn/kit';
 import { computed, ref, useTemplateRef } from 'vue';
 
-import FieldError from '#melkor/components/forms/FieldError.vue';
-import FieldHint from '#melkor/components/forms/FieldHint.vue';
-import FieldLabel from '#melkor/components/forms/FieldLabel.vue';
-import FieldTextableCancel from '#melkor/components/forms/FieldTextableCancel.vue';
-import Icon from '#melkor/components/Icon.vue';
+import { FieldError, FieldHint, FieldLabel, FieldTextableCancel, Icon } from '#melkor/components';
 import { useGlobalConfig, useInput, useInputErrors, useTheme } from '#melkor/composables';
 import { bindInteractionStateProps } from '#melkor/features';
 
 const props = withDefaults(
   defineProps<InputTextableProps<TValue>>(),
-  inputTextableDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+  },
 );
 
 const emit = defineEmits<InputTextableEmits<TValue>>();

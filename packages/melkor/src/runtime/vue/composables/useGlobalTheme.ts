@@ -1,7 +1,9 @@
+import type { ThemeInstance } from '#melkor/features';
+
 import { isValue } from '@skgn/kit';
 import { inject, type Ref } from 'vue';
 
-import { globalThemeContextKey, type ThemeInstance } from '#melkor/features';
+import { globalThemeContextKey } from '#melkor/features';
 
 export function useGlobalTheme(): Ref<ThemeInstance> {
   const context = inject(globalThemeContextKey);

@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import type { InputSelectSlots } from '#melkor/components/forms/InputSelect.vue';
+import type { InputSelectSlots } from '#melkor/components';
 
 export type ThemeSelectorValue = string | null;
 
@@ -27,11 +27,11 @@ export type ThemeSelectorSlot = Pick<InputSelectSlots<ThemeSelectorValue>, 'opti
 </script>
 
 <script lang="ts" setup>
-import type { InputSelectProps } from '#melkor/components/forms/InputSelect.vue';
+import type { InputSelectProps } from '#melkor/components';
 
 import { computed, onBeforeUnmount, onMounted, ref, watch, type WatchHandle } from 'vue';
 
-import InputSelect from '#melkor/components/forms/InputSelect.vue';
+import { InputSelect } from '#melkor/components';
 import { useGlobalTheme, useThemes } from '#melkor/composables';
 
 defineSlots<ThemeSelectorSlot>();

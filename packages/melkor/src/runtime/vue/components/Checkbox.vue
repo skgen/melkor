@@ -9,7 +9,7 @@
   >
     <span class="mk-Checkbox-icon">
       <slot v-bind="{ checked: props.checked }">
-        <AppIcon :icon="globalConfig.icons.Checkbox.checked" />
+        <Icon :icon="globalConfig.icons.Checkbox.checked" />
       </slot>
     </span>
   </div>
@@ -30,7 +30,7 @@ type CheckboxSlots = {
 <script lang="ts" setup>
 import type { Slot } from 'vue';
 
-import AppIcon from '#melkor/components/Icon.vue';
+import { Icon } from '#melkor/components';
 import { useGlobalConfig, useTheme } from '#melkor/composables';
 import { bindInteractionStateProps } from '#melkor/features';
 

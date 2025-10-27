@@ -1,11 +1,11 @@
-import { isEqual } from 'lodash-es';
-import {
-  type EmitFn,
-  type Ref,
-  ref,
-} from 'vue';
+import type { EmitFn, Ref } from 'vue';
 
-import { type InputEmits, type InputProps, validateInputValue } from '#melkor/features';
+import type { InputEmits, InputProps } from '#melkor/features';
+
+import { isEqual } from 'lodash-es';
+import { ref } from 'vue';
+
+import { validateInputValue } from '#melkor/features';
 
 export interface UseInputOptions<TValue> {
   props: InputProps<TValue>;

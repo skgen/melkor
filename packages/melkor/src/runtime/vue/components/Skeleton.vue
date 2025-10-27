@@ -25,9 +25,6 @@ const props = withDefaults(
   defineProps<SkeletonProps>(),
   {
     circle: false,
-    width: undefined,
-    height: undefined,
-    size: undefined,
   },
 );
 

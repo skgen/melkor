@@ -1,5 +1,7 @@
+import type { ComputedRef, Ref } from 'vue';
+
 import { toRefs } from '@vueuse/core';
-import { computed, type ComputedRef, type Ref } from 'vue';
+import { computed } from 'vue';
 
 export interface UsePaginationOptions {
   page: number;

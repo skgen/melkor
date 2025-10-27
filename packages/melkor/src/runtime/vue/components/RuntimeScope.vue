@@ -15,8 +15,6 @@
 </template>
 
 <script lang="ts">
-import type { InferDefaults } from '#melkor/features';
-
 export type RuntimeScopeProps = {
   raw?: string;
   reference?: string;
@@ -25,11 +23,6 @@ export type RuntimeScopeProps = {
 export type RuntimeScopeSlots = {
   raw?: Slot;
 };
-
-export const runtimeScopeDefaultProps = {
-  raw: 'pure#Vue',
-  reference: 'ref#Vue',
-} satisfies InferDefaults<RuntimeScopeProps>;
 </script>
 
 <script lang="ts" setup>
@@ -39,7 +32,10 @@ import { useRuntimeScope, useTheme } from '#melkor/composables';
 
 const props = withDefaults(
   defineProps<RuntimeScopeProps>(),
-  runtimeScopeDefaultProps,
+  {
+    raw: 'pure#Vue',
+    reference: 'ref#Vue',
+  },
 );
 
 defineSlots<RuntimeScopeSlots>();

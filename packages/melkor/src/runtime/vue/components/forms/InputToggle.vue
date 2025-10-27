@@ -1,14 +1,9 @@
 <template>
   <InputCheckable
-    ref="inputCheckable"
-    class="mk-InputToggle"
-    v-bind="props"
-    @update:value="(value) => emit('update:value', value)"
-    @update:valid="(valid) => emit('update:valid', valid)"
+    ref="inputCheckable" class="mk-InputToggle" v-bind="props"
+    @update:value="(value) => emit('update:value', value)" @update:valid="(valid) => emit('update:valid', valid)"
     @update:touched="(touched) => emit('update:touched', touched)"
-    @update:errors="(errors) => emit('update:errors', errors)"
-    @focus="() => emit('focus')"
-    @blur="() => emit('blur')"
+    @update:errors="(errors) => emit('update:errors', errors)" @focus="() => emit('focus')" @blur="() => emit('blur')"
   >
     <template v-if="slots.label" #label>
       <slot name="label" />
@@ -36,36 +31,22 @@
       }"
     >
       <input
-        :ref="inputRef"
-        :name="inputName"
-        type="checkbox"
-        :checked="checked"
-        :disabled="disabled"
-        @input="onChange"
+        :ref="inputRef" :name="inputName" type="checkbox" :checked="checked" :disabled="disabled" @input="onChange"
         @focus="(event: Event) => {
           const target = event.target as HTMLInputElement | null;
           if (target?.matches(':focus-visible') || syntheticFocus) {
             syntheticFocus = false;
             onFocus();
           }
-        }"
-        @blur="onBlur"
+        }" @blur="onBlur"
       >
-      <Toggle
-        :checked="checked"
-        :disabled="disabled"
-        :hovered="hovered"
-        :focused="focused"
-      />
+      <Toggle :checked="checked" :disabled="disabled" :hovered="hovered" :focused="focused" />
     </template>
   </InputCheckable>
 </template>
 
 <script lang="ts">
-import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from '#melkor/components/forms/InputCheckable.vue';
-import type { InferDefaults } from '#melkor/features';
-
-import { inputCheckableDefaultProps } from '#melkor/components/forms/InputCheckable.vue';
+import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from '#melkor/components';
 
 export type InputToggleProps<TValue = boolean> = InputCheckableProps<TValue>;
 
@@ -74,19 +55,20 @@ export type InputToggleEmits<TValue = boolean> = InputCheckableEmits<TValue>;
 export type InputToggleSlots<TValue = boolean> = Omit<InputCheckableSlots<TValue>, 'default'>;
 
 export type InputToggleExpose = InputCheckableExpose;
-
-export const inputToggleDefaultProps = { ...inputCheckableDefaultProps } satisfies InferDefaults<InputToggleProps<any>>;
 </script>
 
 <script lang="ts" setup generic="TValue">
 import { ref, useTemplateRef } from 'vue';
 
-import InputCheckable from '#melkor/components/forms/InputCheckable.vue';
-import Toggle from '#melkor/components/Toggle.vue';
+import { InputCheckable, Toggle } from '#melkor/components';
 
 const props = withDefaults(
   defineProps<InputToggleProps<TValue>>(),
-  inputToggleDefaultProps,
+  {
+    valid: true,
+    touched: false,
+    errors: () => [] as string[],
+  },
 );
 
 const emit = defineEmits<InputToggleEmits<TValue>>();
