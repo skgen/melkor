@@ -61,30 +61,30 @@ async function stylesTask(rootPath: string) {
 }
 
 // Assigning default props other than inline ends up messy with _mergeDefaults function assigned
-async function mergeDefaultTask(rootPath: string) {
-  log('Overriding mergeDefault ...\n');
+// async function mergeDefaultTask(rootPath: string) {
+//   log('Overriding mergeDefault ...\n');
 
-  const pattern = '/* @__PURE__ */ _mergeDefaults';
+//   const pattern = '/* @__PURE__ */ _mergeDefaults';
 
-  async function replacePattern(filepath: string) {
-    if (!await fs.exists(filepath)) {
-      throw new Error(`File ${filepath} not found`);
-    }
-    const text = await fs.readFile(filepath, { encoding: 'utf-8' });
-    if (!text.includes(pattern)) {
-      return;
-    }
-    const ms = new MagicString(text);
-    ms.replace(/(<script setup>)/, `$0\nimport { _mergeDefaults } from "${vNamespace}/stubs";`);
-    await write(filepath, ms.toString(), {
-      writeMessage: dim('(override) '),
-    });
-  }
+//   async function replacePattern(filepath: string) {
+//     if (!await fs.exists(filepath)) {
+//       throw new Error(`File ${filepath} not found`);
+//     }
+//     const text = await fs.readFile(filepath, { encoding: 'utf-8' });
+//     if (!text.includes(pattern)) {
+//       return;
+//     }
+//     const ms = new MagicString(text);
+//     ms.replace(/(<script setup>)/, `$0\nimport { _mergeDefaults } from "${vNamespace}/stubs";`);
+//     await write(filepath, ms.toString(), {
+//       writeMessage: dim('(override) '),
+//     });
+//   }
 
-  const filePaths = await glob(path.resolve(rootPath, 'dist/runtime/**/*.vue'));
+//   const filePaths = await glob(path.resolve(rootPath, 'dist/runtime/**/*.vue'));
 
-  await Promise.all(filePaths.map(replacePattern));
-}
+//   await Promise.all(filePaths.map(replacePattern));
+// }
 
 async function generateMetaTask(rootPath: string) {
   log('Generating meta ...\n');
@@ -104,8 +104,7 @@ async function generateMetaTask(rootPath: string) {
 log(`${cyan(`ℹ Postbuild starting...\n`)}`);
 
 await stylesTask(rootPath);
-await mergeDefaultTask(rootPath);
-console.log();
+// await mergeDefaultTask(rootPath);
 await generateMetaTask(rootPath);
 
 console.log();
