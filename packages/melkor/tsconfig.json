@@ -5,10 +5,10 @@
     },
     {
       "path": "./.melkor/tsconfig.nuxt.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
     }
-    // {
-    //   "path": "./tsconfig.vitest.json"
-    // }
   ],
   "files": []
 }
