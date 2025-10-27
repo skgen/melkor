@@ -1,3 +1,4 @@
+import type { UnpluginInstance } from 'unplugin';
 import type { Options as AutoImportOptions } from 'unplugin-auto-import/types';
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types';
 
@@ -46,7 +47,7 @@ export function createPluginOptions(pluginOptions?: MelkorUnpluginOptions): Melk
   return mergeConfig({}, pluginOptions, defaultMelkorUnpluginOptions);
 }
 
-export const melkor = createUnplugin<MelkorUnpluginOptions | undefined>((_options, meta) => {
+export const melkor: UnpluginInstance<MelkorUnpluginOptions | undefined> = createUnplugin((_options, meta) => {
   const options = createPluginOptions(_options);
   const resolver = createRuntimeResolver(import.meta.dirname);
 
