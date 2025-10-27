@@ -59,7 +59,9 @@ export async function resolveNuxtComposables(options: ResolveComposablesOptions)
 }
 
 export async function resolveNuxtComposablesIndex(options: ResolveComposablesOptions): Promise<ExportedComposables> {
-  return new Map([...await resolveVueComposablesIndex(options), ...await resolveNuxtOverrideComposablesIndex(options)]);
+  return resolveComposables({
+    pattern: path.resolve(options.resolver.nuxtDir, 'composables/index.{ts,js}'),
+  });
 }
 
 async function resolveNuxtOverrideComposables(options: ResolveComposablesOptions): Promise<ExportedComposables> {
@@ -70,11 +72,5 @@ async function resolveNuxtOverrideComposables(options: ResolveComposablesOptions
         '**/index.{ts,js}',
       ],
     },
-  });
-}
-
-async function resolveNuxtOverrideComposablesIndex(options: ResolveComposablesOptions): Promise<ExportedComposables> {
-  return resolveComposables({
-    pattern: path.resolve(options.resolver.nuxtDir, 'composables/index.{ts,js}'),
   });
 }

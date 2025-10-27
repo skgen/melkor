@@ -6,7 +6,7 @@ import type { WriteableFile } from '../utils';
 import fs from 'fs-extra';
 import path from 'pathe';
 
-import { resolveNuxtComponents, resolveVueComponents } from '../resolvers/components';
+import { resolveNuxtComponentsIndex, resolveVueComponentsIndex } from '../resolvers/components';
 import { resolveNuxtComposablesIndex, resolveVueComposablesIndex } from '../resolvers/composables';
 import { resolveNuxtFeaturesIndex, resolveVueFeaturesIndex } from '../resolvers/features';
 import { createGeneratedResolver, createRuntimeResolver, relativePath, vNamespace } from '../utils';
@@ -86,7 +86,7 @@ export async function generateNuxtTsConfigFile(cwd: string): Promise<WriteableFi
   const generatedResolver = createGeneratedResolver(cwd);
 
   const [components, composables, features] = await Promise.all([
-    resolveNuxtComponents({
+    resolveNuxtComponentsIndex({
       resolver: runtimeResolver,
     }),
     resolveNuxtComposablesIndex({
@@ -132,7 +132,7 @@ export async function generateVueTsConfigFile(cwd: string): Promise<WriteableFil
   const generatedResolver = createGeneratedResolver(cwd);
 
   const [components, composables, features] = await Promise.all([
-    resolveVueComponents({
+    resolveVueComponentsIndex({
       resolver: runtimeResolver,
     }),
     resolveVueComposablesIndex({

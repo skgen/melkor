@@ -18,6 +18,9 @@ const generatedFileHeader = `/**
 function generateComponentsIndexFile(components: ExportedComponents, destDir: string) {
   let fileContent = generatedFileHeader;
   for (const [_, component] of components) {
+    fileContent += `export { default as ${component.__name} } from '${
+      relativePath(path.join(destDir, 'components'), component.filepath)
+    }';\n`;
     fileContent += `export * from '${
       relativePath(path.join(destDir, 'components'), component.filepath)
     }';\n`;

@@ -59,7 +59,9 @@ export async function resolveNuxtFeatures(options: ResolveFeaturesOptions): Prom
 }
 
 export async function resolveNuxtFeaturesIndex(options: ResolveFeaturesOptions): Promise<ExportedFeatures> {
-  return new Map([...await resolveVueFeaturesIndex(options), ...await resolveNuxtOverrideFeaturesIndex(options)]);
+  return resolveFeatures({
+    pattern: path.resolve(options.resolver.nuxtDir, 'features/index.{ts,js}'),
+  });
 }
 
 async function resolveNuxtOverrideFeatures(options: ResolveFeaturesOptions): Promise<ExportedFeatures> {
@@ -70,11 +72,5 @@ async function resolveNuxtOverrideFeatures(options: ResolveFeaturesOptions): Pro
         '**/index.{ts,js}',
       ],
     },
-  });
-}
-
-async function resolveNuxtOverrideFeaturesIndex(options: ResolveFeaturesOptions): Promise<ExportedFeatures> {
-  return resolveFeatures({
-    pattern: path.resolve(options.resolver.nuxtDir, 'features/index.{ts,js}'),
   });
 }
