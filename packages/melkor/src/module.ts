@@ -1,4 +1,5 @@
 import type { DeepPartial } from '@skgn/kit';
+import type { NuxtModule } from 'nuxt/schema';
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,7 +24,7 @@ declare module 'nuxt/schema' {
   }
 }
 
-export type ModuleOptions = MelkorOptions & {
+export interface ModuleOptions extends MelkorOptions {
   prefix?: {
     components?: string;
     // composables?: string;
@@ -52,7 +53,7 @@ const defaultModuleOptions: ModuleOptions = {
   },
 };
 
-export function createModuleOptions(moduleOptions?: DeepPartial<ModuleOptions>): ModuleOptions {
+function createModuleOptions(moduleOptions?: DeepPartial<ModuleOptions>): ModuleOptions {
   return mergeConfig({}, moduleOptions, defaultModuleOptions);
 }
 
@@ -65,6 +66,7 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt: '>=4.0.0',
     },
   },
+  defaults: defaultModuleOptions,
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.dirname);
     const runtimeResolver = createRuntimeResolver(import.meta.dirname);
@@ -93,18 +95,22 @@ export default defineNuxtModule<ModuleOptions>({
       prefix: options.prefix?.components,
     });
 
+    // Single components alias
     components.forEach((component) => {
       addComponent({
         name: component.name,
         filePath: component.filepath,
       });
 
-      nuxt.options.alias[component.alias] = `${component.filepath}`;
+      // nuxt.options.alias[component.alias] = `${component.filepath}`;
     });
+
+    // Global components alias
+    nuxt.options.alias[`${vNamespace}/components`] = resolver.resolve(runtimeResolver.nuxtDir, `components/index`);
 
     /* COMPOSABLES */
 
-    nuxt.options.alias[`${vNamespace}/composables`] = resolver.resolve(runtimeResolver.nuxtDir, `composables/index.ts`);
+    nuxt.options.alias[`${vNamespace}/composables`] = resolver.resolve(runtimeResolver.nuxtDir, `composables/index`);
 
     // @todo need to allow prefixing
     // if (!options.prefix?.composables) {
@@ -147,9 +153,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* FEATURES */
 
-    nuxt.options.alias[`${vNamespace}/features`] = resolver.resolve(runtimeResolver.nuxtDir, `features/index.ts`);
+    nuxt.options.alias[`${vNamespace}/features`] = resolver.resolve(runtimeResolver.nuxtDir, `features/index`);
 
-    addImportsDir(resolver.resolve(runtimeResolver.vueDir, 'features'));
+    addImportsDir(resolver.resolve(runtimeResolver.nuxtDir, 'features'));
 
     /* PLUGIN */
     addPlugin({
@@ -180,4 +186,4 @@ export default defineNuxtModule<ModuleOptions>({
       });
     }
   },
-});
+}) as NuxtModule<ModuleOptions>;
