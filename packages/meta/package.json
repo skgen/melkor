@@ -12,6 +12,7 @@
     "dist"
   ],
   "scripts": {
+    "prepare": "pnpm build",
     "dev": "tsx src/index.ts",
     "build": "unbuild",
     "review": "pnpm review:typecheck && pnpm review:eslint",
