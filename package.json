@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.18.1",
   "scripts": {
-    "release": "tsx scripts/release.ts",
-    "postinstall": "pnpm -r --filter=./packages/melkor run build"
+    "release": "tsx scripts/release.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",
