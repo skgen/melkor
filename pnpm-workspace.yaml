@@ -29,7 +29,6 @@ catalog:
   vite-plugin-no-bundle: ^4.0.0
   vite-plugin-static-copy: ^2.3.0
   vitest: ^3.2.0
-  vue-tsc: ^3.1.1
   yargs: ^17.7.2
   changelogen: ^0.6.2
 
@@ -62,6 +61,7 @@ catalogs:
     unbuild: ^3.6.1
     vue-component-meta: ^3.0.6
     colorette: ^2.0.20
+    vue-tsc: ^3.1.1
   runtime:
     '@nuxt/devtools': ^2.6.5
     '@iconify/vue': ^4.1.2
