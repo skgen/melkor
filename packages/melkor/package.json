@@ -24,34 +24,35 @@
     "./styles/scss": "./dist/runtime/vue/styles/index.scss",
     "./styles/mixins": "./dist/runtime/vue/styles/mixins.scss",
     "./components": {
-      "types": "./dist/runtime/vue/components/index.js",
-      "import": "./dist/runtime/vue/components/index.d.ts"
+      "types": "./dist/runtime/vue/components/index.d.ts",
+      "import": "./dist/runtime/vue/components/index.js"
     },
     "./composables": {
-      "types": "./dist/runtime/vue/composables/index.js",
-      "import": "./dist/runtime/vue/composables/index.d.ts"
+      "types": "./dist/runtime/vue/composables/index.d.ts",
+      "import": "./dist/runtime/vue/composables/index.js"
     },
     "./features": {
-      "types": "./dist/runtime/vue/features/index.js",
-      "import": "./dist/runtime/vue/features/index.d.ts"
+      "types": "./dist/runtime/vue/features/index.d.ts",
+      "import": "./dist/runtime/vue/features/index.js"
     },
     "./nuxt/components": {
-      "types": "./dist/runtime/nuxt/components/index.js",
-      "import": "./dist/runtime/nuxt/components/index.d.ts"
+      "types": "./dist/runtime/nuxt/components/index.d.ts",
+      "import": "./dist/runtime/nuxt/components/index.js"
     },
     "./nuxt/composables": {
-      "types": "./dist/runtime/nuxt/composables/index.js",
-      "import": "./dist/runtime/nuxt/composables/index.d.ts"
+      "types": "./dist/runtime/nuxt/composables/index.d.ts",
+      "import": "./dist/runtime/nuxt/composables/index.js"
     },
     "./nuxt/features": {
-      "types": "./dist/runtime/nuxt/features/index.js",
-      "import": "./dist/runtime/nuxt/features/index.d.ts"
+      "types": "./dist/runtime/nuxt/features/index.d.ts",
+      "import": "./dist/runtime/nuxt/features/index.js"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
+    "prepare": "pnpm build",
     "generate": "tsx scripts/generate",
     "prebuild": "pnpm generate && nuxt-module-build prepare && tsx scripts/prebuild",
     "build": "nuxt-module-build build",
@@ -117,6 +118,6 @@
     "unbuild": "catalog:build",
     "vite": "catalog:build",
     "vue-component-meta": "catalog:build",
-    "vue-tsc": "catalog:"
+    "vue-tsc": "catalog:build"
   }
 }
