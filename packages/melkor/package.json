@@ -5,8 +5,8 @@
   "description": "Melkor UI",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skgen/melkor.git",
-    "directory": "packages/nuxt"
+    "url": "https://github.com/skgen/melkor.git",
+    "directory": "packages/melkor"
   },
   "exports": {
     "./nuxt": {
