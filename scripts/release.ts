@@ -13,11 +13,13 @@ import sh from 'shelljs';
 
 function handleError(options: { res: ShellString; message: string }) {
   const { res, message } = options;
-  if (res.code === 1) {
+  console.log(res.code);
+  
+  if (res.code !== 0) {
     console.error(message);
     console.error(res.stderr);
     console.error(res.stdout);
-    process.exit(1);
+    process.exit(res.code);
   }
 }
 
@@ -125,7 +127,7 @@ const publishArgs = [
   tag ? `--tag ${tag}` : null,
 ].filter(v => v !== null);
 
-res = sh.exec(`pnpm publish ${releasePackage.path} --access public ${publishArgs.join(' ')}`, { silent: true });
+res = sh.exec(`pnpm publish ${releasePackage.path} --access public ${publishArgs.join(' ')}`, { silent: false });
 
 handleError({
   res,
