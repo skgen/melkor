@@ -9,8 +9,6 @@ import { mergeConfig } from './runtime/vue/features/config';
 import { autoImportComponentsPlugin } from './unplugin/auto-import-components';
 import autoImportLogicPlugin from './unplugin/auto-import-logic';
 import { detectPluginsDuplicationPlugin } from './unplugin/detect-plugins-duplication';
-import { resolveInternalAliasPlugin } from './unplugin/resolve-internal-alias';
-import { resolveStubsPlugin } from './unplugin/resolve-stubs';
 
 export type MelkorUnpluginOptions = {
   debug?: boolean;
@@ -52,8 +50,6 @@ export const melkor: UnpluginInstance<MelkorUnpluginOptions | undefined> = creat
   const resolver = createRuntimeResolver(import.meta.dirname);
 
   return [
-    resolveStubsPlugin(options, resolver),
-    resolveInternalAliasPlugin(options, resolver),
     autoImportComponentsPlugin(options, resolver, meta),
     autoImportLogicPlugin(options, resolver, meta),
     detectPluginsDuplicationPlugin(),

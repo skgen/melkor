@@ -1,11 +1,11 @@
 import type { EmitFn, Ref } from 'vue';
 
-import type { InputEmits, InputProps } from '#melkor/features';
+import type { InputEmits, InputProps } from '../features';
 
 import { isEqual } from 'lodash-es';
 import { ref } from 'vue';
 
-import { validateInputValue } from '#melkor/features';
+import { validateInputValue } from '../features';
 
 export interface UseInputOptions<TValue> {
   props: InputProps<TValue>;
@@ -14,20 +14,20 @@ export interface UseInputOptions<TValue> {
 
 export function useInput<TValue>(options: UseInputOptions<TValue>): {
   onChange: (newValue: TValue) => void;
-  onFocus: () => void;
-  onBlur: () => void;
+  onFocus: (event: FocusEvent) => void;
+  onBlur: (event: FocusEvent) => void;
   focused: Ref<boolean>;
 } {
   const focused = ref(false);
 
-  function onFocus(): void {
+  function onFocus(event: FocusEvent): void {
     focused.value = true;
-    options.emit('focus');
+    options.emit('focus', event);
   }
 
-  function onBlur(): void {
+  function onBlur(event: FocusEvent): void {
     focused.value = false;
-    options.emit('blur');
+    options.emit('blur', event);
   }
 
   function onChange(newValue: TValue): void {

@@ -7,7 +7,7 @@ import path from 'pathe';
 
 import { log } from './utils';
 
-async function lint(filepath: string, eslintConfigPath?: string, eslintConfig?: Linter.Config, iteration = 0) {
+async function lint(filePath: string, eslintConfigPath?: string, eslintConfig?: Linter.Config, iteration = 0) {
   let _eslintConfig = eslintConfig ?? null;
   if (!_eslintConfig) {
     const __eslintConfig = eslintConfigPath ? await import(eslintConfigPath) : null;
@@ -19,7 +19,7 @@ async function lint(filepath: string, eslintConfigPath?: string, eslintConfig?: 
     fix: true,
   });
 
-  const results = await eslint.lintFiles(filepath);
+  const results = await eslint.lintFiles(filePath);
 
   await ESLint.outputFixes(results);
 
@@ -28,11 +28,11 @@ async function lint(filepath: string, eslintConfigPath?: string, eslintConfig?: 
     return;
   }
 
-  await lint(filepath, undefined, _eslintConfig ?? undefined, iteration + 1);
+  await lint(filePath, undefined, _eslintConfig ?? undefined, iteration + 1);
 }
 
-export async function write(filepath: string, data: any, options?: { eslintConfigPath?: string; writeMessage?: string }) {
-  const dir = path.dirname(filepath);
+export async function write(filePath: string, data: any, options?: { eslintConfigPath?: string; writeMessage?: string }) {
+  const dir = path.dirname(filePath);
 
   let dataAsString = data;
   if (typeof data === 'object') {
@@ -42,17 +42,17 @@ export async function write(filepath: string, data: any, options?: { eslintConfi
   await fs.ensureDir(dir);
 
   await fs.writeFile(
-    filepath,
+    filePath,
     dataAsString,
     { encoding: 'utf-8' },
   );
 
-  const short = filepath.split(`packages${path.sep}melkor${path.sep}`);
+  const short = filePath.split(`packages${path.sep}melkor${path.sep}`);
 
   log(`${green('✔')} ${options?.writeMessage ?? ''}${bold(short[short.length - 1])}`);
-  log(dim(`at → ${filepath}`));
+  log(dim(`at → ${filePath}`));
 
   if (options?.eslintConfigPath) {
-    await lint(filepath, options.eslintConfigPath);
+    await lint(filePath, options.eslintConfigPath);
   }
 }

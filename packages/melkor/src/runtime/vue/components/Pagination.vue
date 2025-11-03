@@ -86,8 +86,8 @@ export type PaginationEmits = {
 import { isValue } from '@skgn/kit';
 import { computed, reactive } from 'vue';
 
-import { Icon } from '#melkor/components';
-import { useGlobalConfig, usePagination, useTheme } from '#melkor/composables';
+import { Icon } from '../components';
+import { useGlobalConfig, usePagination, useTheme } from '../composables';
 
 const props = withDefaults(
   defineProps<PaginationProps>(),

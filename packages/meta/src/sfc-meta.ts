@@ -1,6 +1,7 @@
+import type { RuntimeResolver, ScopedModulesResolverFunction } from '@skgn/melkor-kit';
 import type { MetaCheckerOptions, PropertyMeta } from 'vue-component-meta';
 
-import type { SFCComponentMeta, SFCCssMeta, SFCMeta } from './meta';
+import type { SFCComponentMeta, SFCCssMeta, SFCMeta } from './types';
 
 import fs from 'fs-extra';
 import { createChecker as vueCreateChecker } from 'vue-component-meta';
@@ -13,28 +14,28 @@ const checkerOptions: MetaCheckerOptions = {
 
 type Checker = ReturnType<typeof vueCreateChecker>;
 
-export function createChecker(tsconfigPath: string): Checker {
+export function createChecker(tsConfigPath: string): Checker {
   return vueCreateChecker(
   // Write your tsconfig path
-    tsconfigPath,
+    tsConfigPath,
     checkerOptions,
   );
 }
 
-export function extractSFCComponentMeta(filepath: string, checker: Checker): SFCComponentMeta {
-  const meta = checker.getComponentMeta(filepath);
+export function extractSFCComponentMeta(filePath: string, checker: Checker): SFCComponentMeta {
+  const meta = checker.getComponentMeta(filePath);
 
   const removedProps = ['key', 'ref', 'ref_for', 'ref_key', 'class', 'style'];
 
   const filteredProps = meta.props
     .filter(v => !removedProps.includes(v.name))
     .map((v) => {
-      // Dirty way to resolve values deeply and breaking refs
+      // Dirty way to reasolve values deeply and breaking refs
       const properties = JSON.parse(JSON.stringify(v)) as PropertyMeta;
       const { declarations, ...otherProps } = properties;
-      // const defaultValue = v.default ?? resolveDefaultProp(componentName, v.name);
       return {
         ...otherProps,
+        declarations: [],
       };
     });
 
@@ -43,8 +44,8 @@ export function extractSFCComponentMeta(filepath: string, checker: Checker): SFC
   };
 }
 
-export function extractSFCCssMeta(filepath: string): SFCCssMeta {
-  const content = fs.readFileSync(filepath, 'utf8');
+export function extractSFCCssMeta(filePath: string): SFCCssMeta {
+  const content = fs.readFileSync(filePath, 'utf8');
 
   const _css = content.match(/<style\s+lang=["']scss["']>([\s\S]*?)<\/style>/g);
   const css = _css ? _css[0].trim() : null;
@@ -75,14 +76,35 @@ export function extractSFCCssMeta(filepath: string): SFCCssMeta {
   };
 }
 
-export function extractSFCMeta(options: { filepath: string; checker: Checker; name: string }): SFCMeta {
-  const { filepath, checker, name } = options;
-  const componentMeta = extractSFCComponentMeta(filepath, checker);
-  const cssMeta = extractSFCCssMeta(filepath);
+export function extractSFCMeta(options: { filePath: string; checker: Checker }): Omit<SFCMeta, 'name'> {
+  const { filePath, checker } = options;
+  const componentMeta = extractSFCComponentMeta(filePath, checker);
+  const cssMeta = extractSFCCssMeta(filePath);
 
   return {
-    name,
     component: componentMeta,
     css: cssMeta,
   };
 }
+
+export async function extractSFCsMeta(options: {
+  runtimeResolver: RuntimeResolver;
+  tsConfigPath: string;
+  modulesResolverFunction: ScopedModulesResolverFunction;
+}) {
+  const { tsConfigPath, runtimeResolver, modulesResolverFunction } = options;
+
+  const checker = createChecker(tsConfigPath);
+
+  const scoppedModules = await modulesResolverFunction(runtimeResolver);
+
+  return scoppedModules.components
+    .filter(m => m.type === 'sfc')
+    .map(component => ({
+      name: component.name,
+      ...extractSFCMeta({
+        filePath: component.filePath,
+        checker,
+      }),
+    }));
+};

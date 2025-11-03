@@ -1,7 +1,7 @@
 import { isValue } from '@skgn/kit';
 import { inject } from 'vue';
 
-import { globalToastContextKey, type ToastContext } from '#melkor/features';
+import { globalToastContextKey, type ToastContext } from '../features';
 
 export function useToast(): ToastContext {
   const context = inject(globalToastContextKey);

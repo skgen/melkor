@@ -19,7 +19,7 @@ import type { PrimitiveProps } from 'reka-ui';
 
 import { Primitive } from 'reka-ui';
 
-import { useTheme } from '#melkor/composables';
+import { useTheme } from '../../composables';
 
 const props = defineProps<ProseProps>();
 
@@ -163,6 +163,23 @@ const theme = useTheme();
   // @include prose-selector('figure') {
   //   margin: 1em var(--mk-size-10);
   // }
+
+  @include prose-selector('code') {
+    display: inline-block;
+    padding: var(--mk-size-2);
+    font-size: 0.8rem;
+    background-color: var(--mk-core-background-color);
+    border: var(--mk-border-size) solid var(--mk-border-color);
+    border-radius: var(--mk-border-radius-size);
+  }
+
+  @include prose-selector('pre') {
+    padding: var(--mk-size-4);
+    font-size: 0.8rem;
+    background-color: var(--mk-core-background-color);
+    border: var(--mk-border-size) solid var(--mk-border-color);
+    border-radius: var(--mk-border-radius-size);
+  }
 
   @include prose-selector('hr') {
     box-sizing: content-box;

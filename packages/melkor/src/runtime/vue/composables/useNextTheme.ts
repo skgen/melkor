@@ -3,7 +3,7 @@ import type { Ref, ShallowRef, WatchHandle } from 'vue';
 import { useCycleList } from '@vueuse/core';
 import { onBeforeUnmount, onMounted, watch } from 'vue';
 
-import { useGlobalConfig, useGlobalTheme } from '#melkor/composables';
+import { useGlobalConfig, useGlobalTheme } from '../composables';
 
 export function useNextTheme(): {
   next: (n?: number) => string;

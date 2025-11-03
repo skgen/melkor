@@ -53,6 +53,8 @@ export { default as TheTooltipProvider } from './internal/TheTooltipProvider.vue
 export * from './internal/TheTooltipProvider.vue';
 export { default as Link } from './Link.vue';
 export * from './Link.vue';
+export { default as LinkBase } from './LinkBase.vue';
+export * from './LinkBase.vue';
 export { default as Pagination } from './Pagination.vue';
 export * from './Pagination.vue';
 export { default as Progress } from './Progress.vue';
@@ -79,3 +81,5 @@ export { default as Toggle } from './Toggle.vue';
 export * from './Toggle.vue';
 export { default as Tooltip } from './Tooltip.vue';
 export * from './Tooltip.vue';
+export { default as Toto } from './Toto.internal.vue';
+export * from './Toto.internal.vue';

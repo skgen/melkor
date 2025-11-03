@@ -34,8 +34,8 @@ export type ThemeToggleProps = {
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import { Icon } from '#melkor/components';
-import { useGlobalConfig, useGlobalTheme, useNextTheme, useTheme } from '#melkor/composables';
+import { Icon } from '../components';
+import { useGlobalConfig, useGlobalTheme, useNextTheme, useTheme } from '../composables';
 
 const props = defineProps<ThemeToggleProps>();
 

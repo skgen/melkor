@@ -66,7 +66,7 @@
 <script lang="ts">
 import type { Slot } from 'vue';
 
-import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from '#melkor/components';
+import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from '../../components';
 
 export type InputCheckboxProps<TValue = boolean> = InputCheckableProps<TValue>;
 
@@ -82,7 +82,7 @@ export type InputCheckboxExpose = InputCheckableExpose;
 <script lang="ts" setup generic="TValue = boolean">
 import { ref, useTemplateRef } from 'vue';
 
-import { Checkbox, InputCheckable } from '#melkor/components';
+import { Checkbox, InputCheckable } from '../../components';
 
 const props = withDefaults(
   defineProps<InputCheckboxProps<TValue>>(),

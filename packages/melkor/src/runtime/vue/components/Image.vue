@@ -28,7 +28,7 @@ export type ImageProps = {
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import { useTheme } from '#melkor/composables';
+import { useTheme } from '../composables';
 
 const props = defineProps<ImageProps>();
 

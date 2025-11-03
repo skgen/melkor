@@ -1,8 +1,10 @@
+import type { IconCollection, IconCollectionName } from '../../features';
+
 import { useNetwork } from '@vueuse/core';
 import { isArray, isObject } from 'lodash-es';
 import { provide } from 'vue';
 
-import { globalIconsContextKey, type IconCollection, type IconCollectionName } from '#melkor/features';
+import { globalIconsContextKey } from '../../features';
 
 export function useProvideIcons() {
   const { isOnline } = useNetwork();

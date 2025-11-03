@@ -24,7 +24,7 @@ export interface IconProps {
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
 
-import { useTheme } from '#melkor/composables';
+import { useTheme } from '../composables';
 
 const props = defineProps<IconProps>();
 

@@ -1,17 +1,13 @@
 import type { TsConfigJson } from 'type-fest';
 
-import type { ExportedComponents } from '../resolvers/components';
 import type { WriteableFile } from '../utils';
 
 import fs from 'fs-extra';
 import path from 'pathe';
 
-import { resolveNuxtComponentsIndex, resolveVueComponentsIndex } from '../resolvers/components';
-import { resolveNuxtComposablesIndex, resolveVueComposablesIndex } from '../resolvers/composables';
-import { resolveNuxtFeaturesIndex, resolveVueFeaturesIndex } from '../resolvers/features';
 import { createGeneratedResolver, createRuntimeResolver, relativePath, vNamespace } from '../utils';
 
-function createTsConfig(config: { paths: Record<string, string[]> }): TsConfigJson {
+function createTsConfig(config?: { paths?: Record<string, string[]> }): TsConfigJson {
   return {
     compilerOptions: {
       target: 'esnext',
@@ -27,7 +23,7 @@ function createTsConfig(config: { paths: Record<string, string[]> }): TsConfigJs
       baseUrl: '.',
       module: 'esnext',
       moduleResolution: 'bundler',
-      paths: config.paths,
+      paths: config?.paths,
       resolveJsonModule: true,
       types: [],
       strict: true,
@@ -45,14 +41,14 @@ function createTsConfig(config: { paths: Record<string, string[]> }): TsConfigJs
   };
 }
 
-function resolvePathsFromDir(components: ExportedComponents, dir: string) {
-  return components.values().reduce<Record<string, string[]>>((acc, component) => {
-    acc[component.alias] = [
-      relativePath(dir, component.filepath),
-    ];
-    return acc;
-  }, {});
-}
+// function resolvePathsFromDir(components: ExportedComponents, dir: string) {
+//   return components.values().reduce<Record<string, string[]>>((acc, component) => {
+//     acc[component.alias] = [
+//       relativePath(dir, component.filepath),
+//     ];
+//     return acc;
+//   }, {});
+// }
 
 async function transformNuxtAutomaticTsConfig(cwd: string, writeDir: string, paths?: Record<string, string[]>): Promise<TsConfigJson> {
   const nuxtTsConfigPath = path.resolve(cwd, '.nuxt/tsconfig.app.json');
@@ -85,28 +81,28 @@ export async function generateNuxtTsConfigFile(cwd: string): Promise<WriteableFi
   const runtimeResolver = createRuntimeResolver(srcDir);
   const generatedResolver = createGeneratedResolver(cwd);
 
-  const [components, composables, features] = await Promise.all([
-    resolveNuxtComponentsIndex({
-      resolver: runtimeResolver,
-    }),
-    resolveNuxtComposablesIndex({
-      resolver: runtimeResolver,
-    }),
-    resolveNuxtFeaturesIndex({
-      resolver: runtimeResolver,
-    }),
-  ]);
+  // const [components, composables, features] = await Promise.all([
+  //   resolveNuxtComponentsIndex({
+  //     resolver: runtimeResolver,
+  //   }),
+  //   resolveNuxtComposablesIndex({
+  //     resolver: runtimeResolver,
+  //   }),
+  //   resolveNuxtFeaturesIndex({
+  //     resolver: runtimeResolver,
+  //   }),
+  // ]);
 
-  const paths = resolvePathsFromDir(
-    new Map([
-      ...components.entries().map(([key, v]) => [`components:${key}`, v] as const),
-      ...composables.entries().map(([key, v]) => [`composables:${key}`, v] as const),
-      ...features.entries().map(([key, v]) => [`features:${key}`, v] as const),
-    ]),
-    generatedResolver.dir,
-  );
+  // const paths = resolvePathsFromDir(
+  //   new Map([
+  //     ...components.entries().map(([key, v]) => [`components:${key}`, v] as const),
+  //     ...composables.entries().map(([key, v]) => [`composables:${key}`, v] as const),
+  //     ...features.entries().map(([key, v]) => [`features:${key}`, v] as const),
+  //   ]),
+  //   generatedResolver.dir,
+  // );
 
-  const nuxtTsConfig = await transformNuxtAutomaticTsConfig(cwd, generatedResolver.dir, paths);
+  const nuxtTsConfig = await transformNuxtAutomaticTsConfig(cwd, generatedResolver.dir);
 
   const tsConfig: TsConfigJson = {
     ...nuxtTsConfig,
@@ -131,30 +127,28 @@ export async function generateVueTsConfigFile(cwd: string): Promise<WriteableFil
   const runtimeResolver = createRuntimeResolver(srcDir);
   const generatedResolver = createGeneratedResolver(cwd);
 
-  const [components, composables, features] = await Promise.all([
-    resolveVueComponentsIndex({
-      resolver: runtimeResolver,
-    }),
-    resolveVueComposablesIndex({
-      resolver: runtimeResolver,
-    }),
-    resolveVueFeaturesIndex({
-      resolver: runtimeResolver,
-    }),
-  ]);
+  // const [components, composables, features] = await Promise.all([
+  //   resolveVueComponentsIndex({
+  //     resolver: runtimeResolver,
+  //   }),
+  //   resolveVueComposablesIndex({
+  //     resolver: runtimeResolver,
+  //   }),
+  //   resolveVueFeaturesIndex({
+  //     resolver: runtimeResolver,
+  //   }),
+  // ]);
 
-  const paths = resolvePathsFromDir(
-    new Map([
-      ...components.entries().map(([key, v]) => [`components:${key}`, v] as const),
-      ...composables.entries().map(([key, v]) => [`composables:${key}`, v] as const),
-      ...features.entries().map(([key, v]) => [`features:${key}`, v] as const),
-    ]),
-    generatedResolver.dir,
-  );
+  // const paths = resolvePathsFromDir(
+  //   new Map([
+  //     ...components.entries().map(([key, v]) => [`components:${key}`, v] as const),
+  //     ...composables.entries().map(([key, v]) => [`composables:${key}`, v] as const),
+  //     ...features.entries().map(([key, v]) => [`features:${key}`, v] as const),
+  //   ]),
+  //   generatedResolver.dir,
+  // );
 
-  const baseTsConfig = createTsConfig({
-    paths,
-  });
+  const baseTsConfig = createTsConfig();
 
   const tsConfig: TsConfigJson = {
     ...baseTsConfig,

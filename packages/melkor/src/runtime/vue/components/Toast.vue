@@ -76,8 +76,8 @@ import { reactivePick, useElementSize } from '@vueuse/core';
 import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle, useForwardPropsEmits } from 'reka-ui';
 import { computed, ref } from 'vue';
 
-import { Button, Icon, Progress } from '#melkor/components';
-import { useGlobalConfig, useTheme } from '#melkor/composables';
+import { Button, Icon, Progress } from '../components';
+import { useGlobalConfig, useTheme } from '../composables';
 
 const props = withDefaults(
   defineProps<ToastProps>(),

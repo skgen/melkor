@@ -21,8 +21,8 @@ export type ThemeContextProps = {
 <script lang="ts" setup>
 import { computed, provide } from 'vue';
 
-import { useGlobalTheme, useThemes } from '#melkor/composables';
-import { getThemeValue, themeContextKey, type ThemeInstance } from '#melkor/features';
+import { useGlobalTheme, useThemes } from '../composables';
+import { getThemeValue, themeContextKey, type ThemeInstance } from '../features';
 
 const props = defineProps<ThemeContextProps>();
 

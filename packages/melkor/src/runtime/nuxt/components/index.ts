@@ -51,6 +51,8 @@ export { default as TheToastProvider } from '../../vue/components/internal/TheTo
 export * from '../../vue/components/internal/TheToastProvider.vue';
 export { default as TheTooltipProvider } from '../../vue/components/internal/TheTooltipProvider.vue';
 export * from '../../vue/components/internal/TheTooltipProvider.vue';
+export { default as LinkBase } from '../../vue/components/LinkBase.vue';
+export * from '../../vue/components/LinkBase.vue';
 export { default as Pagination } from '../../vue/components/Pagination.vue';
 export * from '../../vue/components/Pagination.vue';
 export { default as Progress } from '../../vue/components/Progress.vue';
@@ -75,6 +77,8 @@ export { default as Toggle } from '../../vue/components/Toggle.vue';
 export * from '../../vue/components/Toggle.vue';
 export { default as Tooltip } from '../../vue/components/Tooltip.vue';
 export * from '../../vue/components/Tooltip.vue';
+export { default as Toto } from '../../vue/components/Toto.internal.vue';
+export * from '../../vue/components/Toto.internal.vue';
 export { default as Link } from './Link.vue';
 export * from './Link.vue';
 export { default as RuntimeScope } from './RuntimeScope.vue';

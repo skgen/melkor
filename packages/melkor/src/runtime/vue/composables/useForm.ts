@@ -1,4 +1,4 @@
-import type { InputProps } from '#melkor/features';
+import type { InputProps } from '../features';
 
 import { computed, readonly, ref } from 'vue';
 

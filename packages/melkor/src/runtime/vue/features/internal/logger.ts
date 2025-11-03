@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { useGlobalConfig } from '#melkor/composables';
+import { useGlobalConfig } from '../../composables';
 
 export function log(...props: any): void {
   const globalConfig = useGlobalConfig();

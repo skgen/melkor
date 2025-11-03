@@ -1,5 +1,7 @@
+import type { Slot, VNode } from 'vue';
+
 import { isArray, isBoolean, isFunction, isNumber, isString } from 'lodash-es';
-import { createTextVNode, type Slot, type VNode } from 'vue';
+import { createTextVNode } from 'vue';
 
 export type MaybeSlot = Slot | VNode | VNode[] | string | number | boolean | null | undefined;
 

@@ -1,6 +1,6 @@
-import type { Themes } from '#melkor/features';
+import type { Themes } from '../features';
 
-import { useGlobalConfig } from '#melkor/composables';
+import { useGlobalConfig } from '../composables';
 
 export function useThemes(): Themes {
   const globalConfig = useGlobalConfig();

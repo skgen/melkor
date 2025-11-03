@@ -64,7 +64,7 @@
 <script lang="ts">
 import type { Slot } from 'vue';
 
-import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
 
 export type InputColorValue = string | null;
 
@@ -87,9 +87,9 @@ export type InputColorExpose = InputExpose;
 import { isValue } from '@skgn/kit';
 import { computed, useTemplateRef } from 'vue';
 
-import { FieldError, FieldHint, FieldLabel, FieldTextableCancel } from '#melkor/components';
-import { useInput, useInputErrors, useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { FieldError, FieldHint, FieldLabel, FieldTextableCancel } from '../../components';
+import { useInput, useInputErrors, useTheme } from '../../composables';
+import { bindInteractionStateProps } from '../../features';
 
 const props = withDefaults(
   defineProps<InputColorProps>(),

@@ -20,6 +20,10 @@
       "types": "./dist/runtime/vue/plugin.d.ts",
       "import": "./dist/runtime/vue/plugin.js"
     },
+    "./meta": {
+      "types": "./dist/meta.d.ts",
+      "import": "./dist/meta.json"
+    },
     "./styles/css": "./dist/runtime/vue/styles/index.css",
     "./styles/scss": "./dist/runtime/vue/styles/index.scss",
     "./styles/mixins": "./dist/runtime/vue/styles/mixins.scss",
@@ -54,7 +58,7 @@
   "scripts": {
     "prepare": "pnpm build",
     "generate": "tsx scripts/generate",
-    "prebuild": "pnpm generate && nuxt-module-build prepare && tsx scripts/prebuild",
+    "prebuild": "nuxt-module-build prepare && tsx scripts/prebuild",
     "build": "nuxt-module-build build",
     "postbuild": "tsx scripts/postbuild",
     "test": "echo \"No test yet\"",
@@ -76,6 +80,7 @@
     "@nuxt/kit": "catalog:build",
     "@skgn/kit": "catalog:runtime",
     "@skgn/melkor-kit": "workspace:*",
+    "@skgn/melkor-meta": "workspace:*",
     "@vueuse/core": "catalog:runtime",
     "defu": "catalog:runtime",
     "fs-extra": "catalog:build",
@@ -91,7 +96,6 @@
   "devDependencies": {
     "@nuxt/module-builder": "catalog:build",
     "@nuxt/schema": "catalog:build",
-    "@skgn/melkor-meta": "workspace:*",
     "@tsconfig/node22": "catalog:build",
     "@types/fs-extra": "catalog:types",
     "@types/jsdom": "catalog:types",

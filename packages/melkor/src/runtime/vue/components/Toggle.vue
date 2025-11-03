@@ -10,14 +10,14 @@
 </template>
 
 <script lang="ts">
-import type { CheckableProps } from '#melkor/features';
+import type { CheckableProps } from '../features';
 
 export type ToggleProps = CheckableProps;
 </script>
 
 <script lang="ts" setup>
-import { useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { useTheme } from '../composables';
+import { bindInteractionStateProps } from '../features';
 
 const props = defineProps<ToggleProps>();
 

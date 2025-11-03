@@ -8,7 +8,7 @@ import {
   type SurfaceElevation,
   type SurfaceElevationDirection,
   surfaceElevationOrder,
-} from '#melkor/features';
+} from '../features';
 
 export interface UseSurfaceOptions {
   override?: {

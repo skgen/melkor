@@ -27,6 +27,8 @@
           :on-change="handleChange"
           :on-focus="onFocus"
           :on-blur="onBlur"
+          :on-key-up="(event) => emit('keyup', event)"
+          :on-key-down="(event) => emit('keydown', event)"
         />
       </div>
 
@@ -60,7 +62,7 @@
 <script lang="ts">
 import type { Slot, VNodeRef } from 'vue';
 
-import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
 
 export type InputTextableProps<TValue> = InputProps<TValue> & {
   placeholder?: string;
@@ -68,7 +70,10 @@ export type InputTextableProps<TValue> = InputProps<TValue> & {
   secure?: boolean;
 };
 
-export type InputTextableEmits<TValue> = InputEmits<TValue>;
+export type InputTextableEmits<TValue> = InputEmits<TValue> & {
+  keydown: [event: KeyboardEvent];
+  keyup: [event: KeyboardEvent];
+};
 
 export type InputTextableSlots<TValue> = InputSlots & {
   'default'?: Slot<{
@@ -79,8 +84,10 @@ export type InputTextableSlots<TValue> = InputSlots & {
     value: InputTextableProps<TValue>['value'];
     type: 'password' | null;
     onChange: (event: Event, newValue: TValue) => void;
-    onFocus: () => void;
-    onBlur: () => void;
+    onFocus: (event: FocusEvent) => void;
+    onBlur: (event: FocusEvent) => void;
+    onKeyDown: (event: KeyboardEvent) => void;
+    onKeyUp: (event: KeyboardEvent) => void;
   }>;
   'leading-icon'?: Slot;
   'trailing-icon'?: Slot;
@@ -94,9 +101,9 @@ export type InputTextableExpose = InputExpose;
 import { isValue } from '@skgn/kit';
 import { computed, ref, useTemplateRef } from 'vue';
 
-import { FieldError, FieldHint, FieldLabel, FieldTextableCancel, Icon } from '#melkor/components';
-import { useGlobalConfig, useInput, useInputErrors, useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { FieldError, FieldHint, FieldLabel, FieldTextableCancel, Icon } from '../../components';
+import { useGlobalConfig, useInput, useInputErrors, useTheme } from '../../composables';
+import { bindInteractionStateProps } from '../../features';
 
 const props = withDefaults(
   defineProps<InputTextableProps<TValue>>(),

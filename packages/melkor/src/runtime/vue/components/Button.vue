@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import type { ActiveProps, DisabledProps } from '#melkor/features';
+import type { ActiveProps, DisabledProps } from '../features';
 
 export type ButtonProps = {
   variant?: 'plain' | 'outline';
@@ -27,8 +27,8 @@ export type ButtonProps = {
 </script>
 
 <script lang="ts" setup>
-import { useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { useTheme } from '../composables';
+import { bindInteractionStateProps } from '../features';
 
 const props = withDefaults(
   defineProps<ButtonProps>(),

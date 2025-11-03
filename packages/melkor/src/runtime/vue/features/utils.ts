@@ -38,6 +38,14 @@ export type KeysAs<T, V> = {
   [K in keyof T]: NonNullable<T[K]> extends infer _R ? V | undefined : V;
 };
 
+export type Tail<T extends any[]> = T extends [any, ...infer Rest] ? Rest : [];
+
+export type ExtractEmitsAsFunctions<Emits extends { [K in keyof Emits]: any[] }> = {
+  [K in keyof Emits]: (...args: Emits[K]) => void;
+};
+
+// Vue internal types reexported
+
 export type InferDefaults<T> = {
   [K in keyof T]?: InferDefault<T, T[K]>;
 };

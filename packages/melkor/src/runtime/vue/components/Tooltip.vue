@@ -42,8 +42,8 @@ import { reactivePick } from '@vueuse/core';
 import { TooltipContent, TooltipPortal, TooltipRoot, TooltipTrigger, useForwardPropsEmits } from 'reka-ui';
 import { computed } from 'vue';
 
-import { useGlobalConfig, useTheme } from '#melkor/composables';
-import { floatingLayerId } from '#melkor/features';
+import { useGlobalConfig, useTheme } from '../composables';
+import { floatingLayerId } from '../features';
 
 const props = defineProps<TooltipProps>();
 

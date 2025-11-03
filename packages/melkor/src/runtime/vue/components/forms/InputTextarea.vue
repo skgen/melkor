@@ -7,8 +7,10 @@
     @update:valid="(valid) => emit('update:valid', valid)"
     @update:touched="(touched) => emit('update:touched', touched)"
     @update:errors="(errors) => emit('update:errors', errors)"
-    @focus="() => emit('focus')"
-    @blur="() => emit('blur')"
+    @focus="(event) => emit('focus', event)"
+    @blur="(event) => emit('blur', event)"
+    @keydown="(event) => emit('keydown', event)"
+    @keyup="(event) => emit('keyup', event)"
   >
     <template v-if="slots.label" #label>
       <slot name="label" />
@@ -25,7 +27,7 @@
     <template v-if="slots['trailing-icon']" #trailing-icon>
       <slot name="trailing-icon" />
     </template>
-    <template #default="{ placeholder, disabled, onChange, value, onFocus, onBlur, ref: inputRef, inputName }">
+    <template #default="{ placeholder, disabled, value, ref: inputRef, inputName, onChange, onFocus, onBlur, onKeyDown, onKeyUp }">
       <textarea
         :ref="inputRef"
         :name="inputName"
@@ -48,13 +50,15 @@
         }"
         @focus="onFocus"
         @blur="onBlur"
+        @keydown="onKeyDown"
+        @keyup="onKeyUp"
       />
     </template>
   </InputTextable>
 </template>
 
 <script lang="ts">
-import type { InputTextableEmits, InputTextableExpose, InputTextableProps, InputTextableSlots } from '#melkor/components';
+import type { InputTextableEmits, InputTextableExpose, InputTextableProps, InputTextableSlots } from '../../components';
 
 export type InputTextareaValue = string | null;
 
@@ -72,7 +76,7 @@ export type InputTextareaExpose = InputTextableExpose;
 <script lang="ts" setup>
 import { useTemplateRef } from 'vue';
 
-import { InputTextable } from '#melkor/components';
+import { InputTextable } from '../../components';
 
 const props = withDefaults(
   defineProps<InputTextareaProps>(),

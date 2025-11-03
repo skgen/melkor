@@ -1,5 +1,5 @@
 // Used to verify auto imports consistency
-import { getRuntimeScope } from '#melkor/features';
+import { getRuntimeScope } from '../features';
 
 export function useRuntimeScope() {
   return {

@@ -1,13 +1,9 @@
-import type { ExportedComponents } from '../resolvers/components';
-import type { ExportedComposables } from '../resolvers/composables';
-import type { ExportedFeatures } from '../resolvers/features';
-import type { RuntimeResolver, WriteableFile } from '../utils';
+import type { KitModule, ScopedModules } from '../resolvers';
+import type { WriteableFile } from '../utils';
 
 import path from 'pathe';
 
-import { resolveNuxtComponents, resolveVueComponents } from '../resolvers/components';
-import { resolveNuxtComposables, resolveVueComposables } from '../resolvers/composables';
-import { resolveNuxtFeatures, resolveVueFeatures } from '../resolvers/features';
+import { namespaces, resolveNuxtModules, resolveVueModules } from '../resolvers';
 import { createRuntimeResolver, relativePath } from '../utils';
 
 const generatedFileHeader = `/**
@@ -15,116 +11,49 @@ const generatedFileHeader = `/**
    * Don't edit it manually or changes will be overriden on next generation
    */\n\n`;
 
-function generateComponentsIndexFile(components: ExportedComponents, destDir: string) {
+function generateIndexFile(modules: KitModule[], filePath: string): WriteableFile {
+  const dir = path.dirname(filePath);
   let fileContent = generatedFileHeader;
-  for (const [_, component] of components) {
-    fileContent += `export { default as ${component.__name} } from '${
-      relativePath(path.join(destDir, 'components'), component.filepath)
-    }';\n`;
-    fileContent += `export * from '${
-      relativePath(path.join(destDir, 'components'), component.filepath)
-    }';\n`;
+  for (const module of modules) {
+    if (module.id === 'index') {
+      continue;
+    }
+    const rPath = relativePath(dir, module.filePath);
+    if (module.type === 'sfc') {
+      fileContent += `export { default as ${module.name} } from '${rPath}';\n`;
+    }
+    fileContent += `export * from '${module.type === 'sfc' ? rPath : rPath.replace('.ts', '')}';\n`;
   }
-  return fileContent;
+  return {
+    content: fileContent,
+    filePath,
+  };
 }
 
-function generateComposablesIndexFile(composables: ExportedComposables, destDir: string) {
-  let fileContent = generatedFileHeader;
-  for (const [_, composable] of composables) {
-    fileContent += `export * from '${
-      relativePath(path.join(destDir, 'composables'), composable.filepath).split('.ts')[0]
-    }';\n`;
-  }
-  return fileContent;
-}
+async function _generateIndexFiles(scopedModules: ScopedModules, scopedPath: string) {
+  const files = await Promise.all(
+    namespaces.map(namespace => generateIndexFile(
+      scopedModules[namespace],
+      path.resolve(scopedPath, `${namespace}/index.ts`),
+    )),
+  );
 
-function generateFeaturesIndexFile(features: ExportedFeatures, destDir: string) {
-  let fileContent = generatedFileHeader;
-  for (const [_, feature] of features) {
-    fileContent += `export * from '${
-      relativePath(path.join(destDir, 'features'), feature.filepath).split('.ts')[0]
-    }';\n`;
-  }
-  return fileContent;
-}
-
-// Vue
-
-export async function generateVueIndexFiles(cwd: string): Promise<WriteableFile[]> {
-  const srcDir = path.resolve(cwd, 'src');
-  const runtimeResolver = createRuntimeResolver(srcDir);
-  const files = await Promise.all([
-    generateVueComponentsIndexFile(runtimeResolver),
-    generateVueComposablesIndexFile(runtimeResolver),
-    generateVueFeaturesIndexFile(runtimeResolver),
-  ]);
   return files;
-}
-
-async function generateVueComponentsIndexFile(resolver: RuntimeResolver): Promise<WriteableFile> {
-  const components = await resolveVueComponents({ resolver });
-  const fileContent = generateComponentsIndexFile(components, resolver.vueDir);
-  return {
-    filePath: path.resolve(resolver.vueDir, 'components/index.ts'),
-    content: fileContent,
-  };
-}
-
-async function generateVueComposablesIndexFile(resolver: RuntimeResolver): Promise<WriteableFile> {
-  const composables = await resolveVueComposables({ resolver });
-  const fileContent = generateComposablesIndexFile(composables, resolver.vueDir);
-  return {
-    filePath: path.resolve(resolver.vueDir, 'composables/index.ts'),
-    content: fileContent,
-  };
-}
-
-async function generateVueFeaturesIndexFile(resolver: RuntimeResolver): Promise<WriteableFile> {
-  const features = await resolveVueFeatures({ resolver });
-  const fileContent = generateFeaturesIndexFile(features, resolver.vueDir);
-  return {
-    filePath: path.resolve(resolver.vueDir, 'features/index.ts'),
-    content: fileContent,
-  };
-}
-
-// Nuxt
-
-export async function generateNuxtComponentsIndexFile(resolver: RuntimeResolver): Promise<WriteableFile> {
-  const components = await resolveNuxtComponents({ resolver });
-  const fileContent = generateComponentsIndexFile(components, resolver.nuxtDir);
-  return {
-    filePath: path.resolve(resolver.nuxtDir, 'components/index.ts'),
-    content: fileContent,
-  };
-}
-
-async function generateNuxtComposablesIndexFile(resolver: RuntimeResolver): Promise<WriteableFile> {
-  const composables = await resolveNuxtComposables({ resolver });
-  const fileContent = generateComposablesIndexFile(composables, resolver.nuxtDir);
-  return {
-    filePath: path.resolve(resolver.nuxtDir, 'composables/index.ts'),
-    content: fileContent,
-  };
-}
-
-async function generateNuxtFeaturesIndexFile(resolver: RuntimeResolver): Promise<WriteableFile> {
-  const features = await resolveNuxtFeatures({ resolver });
-  const fileContent = generateFeaturesIndexFile(features, resolver.nuxtDir);
-  return {
-    filePath: path.resolve(resolver.nuxtDir, 'features/index.ts'),
-    content: fileContent,
-  };
 }
 
 export async function generateNuxtIndexFiles(cwd: string): Promise<WriteableFile[]> {
   const srcDir = path.resolve(cwd, 'src');
   const runtimeResolver = createRuntimeResolver(srcDir);
-  const files = await Promise.all([
-    generateNuxtComponentsIndexFile(runtimeResolver),
-    generateNuxtComposablesIndexFile(runtimeResolver),
-    generateNuxtFeaturesIndexFile(runtimeResolver),
-  ]);
+  const modules = await resolveNuxtModules(runtimeResolver);
+  const files = await _generateIndexFiles(modules, runtimeResolver.nuxtDir);
+  return files;
+}
+
+export async function generateVueIndexFiles(cwd: string): Promise<WriteableFile[]> {
+  const srcDir = path.resolve(cwd, 'src');
+  const runtimeResolver = createRuntimeResolver(srcDir);
+  const modules = await resolveVueModules(runtimeResolver);
+  const files = await _generateIndexFiles(modules, runtimeResolver.vueDir);
   return files;
 }
 

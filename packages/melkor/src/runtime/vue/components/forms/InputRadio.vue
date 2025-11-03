@@ -34,7 +34,7 @@
               if (target?.matches(':focus-visible') || syntheticFocus) {
                 focusedIndex = index;
                 syntheticFocus = false;
-                onFocus();
+                onFocus(event);
               }
             }"
             @blur="onBlur"
@@ -70,7 +70,7 @@
 import type { Flatten } from '@skgn/kit';
 import type { Slot } from 'vue';
 
-import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
 
 export type InputRadioProps<TValue = boolean> = InputProps<TValue> & {
   direction?: 'horizontal' | 'vertical';
@@ -98,9 +98,9 @@ import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { ref, useTemplateRef } from 'vue';
 
-import { FieldError, FieldHint, FieldLabel, Radio } from '#melkor/components';
-import { useInput, useInputErrors, useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { FieldError, FieldHint, FieldLabel, Radio } from '../../components';
+import { useInput, useInputErrors, useTheme } from '../../composables';
+import { bindInteractionStateProps } from '../../features';
 
 const props = withDefaults(
   defineProps<InputRadioProps<TValue>>(),

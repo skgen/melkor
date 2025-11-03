@@ -49,7 +49,7 @@
 import type { Flatten } from '@skgn/kit';
 import type { Slot } from 'vue';
 
-import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
 
 export type InputSelectNativeProps<TValue> = InputProps<TValue> & {
   options: {
@@ -74,9 +74,9 @@ export type InputSelectNativeExpose = InputExpose;
 import { isEqual } from 'lodash-es';
 import { useTemplateRef } from 'vue';
 
-import { FieldError, FieldHint, FieldLabel, Icon } from '#melkor/components';
-import { useGlobalConfig, useInput, useInputErrors, useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { FieldError, FieldHint, FieldLabel, Icon } from '../../components';
+import { useGlobalConfig, useInput, useInputErrors, useTheme } from '../../composables';
+import { bindInteractionStateProps } from '../../features';
 
 const props = withDefaults(
   defineProps<InputSelectNativeProps<TValue>>(),

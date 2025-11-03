@@ -16,7 +16,7 @@ export type FieldHintSlots = {
 </script>
 
 <script lang="ts" setup>
-import { useTheme } from '#melkor/composables';
+import { useTheme } from '../../composables';
 
 defineSlots<FieldHintSlots>();
 

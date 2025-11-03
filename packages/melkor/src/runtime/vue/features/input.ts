@@ -1,12 +1,12 @@
 import type { Slot } from 'vue';
 import type { ZodError, ZodType } from 'zod';
 
-import type { DisabledProps, HoveredProps, InferDefaults } from '#melkor/features';
+import type { DisabledProps, HoveredProps } from '../features';
 
 import { isValue } from '@skgn/kit';
 import { isArray, isString } from 'lodash-es';
 
-import { isZodError, isZodType } from '#melkor/features';
+import { isZodError, isZodType } from '../features';
 
 export type InputProps<TValue> = {
   value: TValue;
@@ -24,8 +24,8 @@ export type InputEmits<TValue> = {
   'update:valid': [valid: InputProps<TValue>['valid']];
   'update:touched': [touched: InputProps<TValue>['touched']];
   'update:errors': [errors: InputProps<TValue>['errors']];
-  'focus': [];
-  'blur': [];
+  'focus': [event: FocusEvent];
+  'blur': [event: FocusEvent];
 };
 
 export type InputSlots = {

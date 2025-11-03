@@ -3,7 +3,12 @@ import type { ComputedRef, InjectionKey, Ref } from 'vue';
 import { isValue } from '@skgn/kit';
 import { isClient } from '@vueuse/core';
 
-import { STORAGE_THEME_KEY, Theme, type ThemeInstance } from '#melkor/features';
+import { STORAGE_THEME_KEY, Theme } from '../features';
+
+export interface ThemeInstance {
+  preference: string;
+  value: string;
+}
 
 export type Themes = string[];
 

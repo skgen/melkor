@@ -26,7 +26,5 @@
     // "vitest.config.*",
     // "nuxt.config.ts",
     "scripts"
-    // Used to overrides default metas
-    // "src"
   ]
 }

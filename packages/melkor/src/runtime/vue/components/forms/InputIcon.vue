@@ -102,7 +102,7 @@
 <script lang="ts">
 import type { Slot } from 'vue';
 
-import type { IconCollectionName, InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
+import type { IconCollectionName, InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
 
 export type InputIconValue = string | null;
 
@@ -127,16 +127,16 @@ export type InputIconExpose = InputExpose;
 // @todo translations in template
 import type { Flatten } from '@skgn/kit';
 
-import type { IconCollection } from '#melkor/features';
+import type { IconCollection } from '../../features';
 
 import { useInfiniteScroll } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
 
-import { FieldError, FieldHint, FieldLabel, Icon } from '#melkor/components';
-import { useIconCollection, useInput, useInputErrors, useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { FieldError, FieldHint, FieldLabel, Icon } from '../../components';
+import { useIconCollection, useInput, useInputErrors, useTheme } from '../../composables';
+import { bindInteractionStateProps } from '../../features';
 
 const props = withDefaults(
   defineProps<InputIconProps>(),
@@ -255,11 +255,11 @@ function handleKeyDown(event: KeyboardEvent) {
 watch(open, (newOpen) => {
   nextTick(() => {
     if (newOpen) {
-      onFocus();
+      onFocus(new FocusEvent('focus'));
     }
     else {
       handleResetPage();
-      onBlur();
+      onBlur(new FocusEvent('blur'));
     }
   });
 });

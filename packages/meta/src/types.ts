@@ -1,4 +1,4 @@
-import type { PropertyMeta } from 'vue-component-meta';
+import type { ComponentMeta, PropertyMeta } from 'vue-component-meta';
 
 export type Meta = {
   vue: ContextMeta;
@@ -15,9 +15,7 @@ export type SFCMeta = {
   css: SFCCssMeta;
 };
 
-export type SFCComponentMeta = {
-  props: Omit<PropertyMeta, 'declarations'>[];
-};
+export type SFCComponentMeta = Pick<ComponentMeta, 'props'>;
 
 export type SFCCssMeta = {
   variables: { key: string; value: string }[];

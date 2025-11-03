@@ -18,8 +18,8 @@ export type FieldTextableCancelSlots = {
 </script>
 
 <script lang="ts" setup>
-import { Icon } from '#melkor/components';
-import { useGlobalConfig, useTheme } from '#melkor/composables';
+import { Icon } from '../../components';
+import { useGlobalConfig, useTheme } from '../../composables';
 
 defineSlots<FieldTextableCancelSlots>();
 

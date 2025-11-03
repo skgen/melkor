@@ -7,7 +7,7 @@
 <script lang="ts">
 import type { NuxtLinkProps } from '#app';
 
-import type { ActiveProps, DisabledProps } from '#melkor/features';
+import type { ActiveProps, DisabledProps } from '../features';
 
 export type LinkProps = NuxtLinkProps & {
   // /**

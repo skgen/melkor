@@ -1,4 +1,4 @@
-import type { MelkorOptions } from '#melkor/features';
+import type { MelkorOptions } from './features';
 
 import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app';
 

@@ -1,4 +1,7 @@
 import type { DeepPartial } from '@skgn/kit';
+import type {
+  KitModule,
+} from '@skgn/melkor-kit';
 import type { NuxtModule } from 'nuxt/schema';
 
 import fs from 'node:fs';
@@ -7,7 +10,8 @@ import path from 'node:path';
 import { addComponent, addImportsDir, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import {
   createRuntimeResolver,
-  resolveNuxtComponents,
+  namespaces,
+  resolveNuxtModules,
   vNamespace,
 } from '@skgn/melkor-kit';
 
@@ -77,40 +81,34 @@ export default defineNuxtModule<ModuleOptions>({
     // Inject config
     nuxt.options.runtimeConfig.public.melkor = options;
 
+    const scopedModules = await resolveNuxtModules(runtimeResolver);
+
     // await loadMeta(ctx);
 
     /* STUBS */
 
+    // @todo check to remove
     nuxt.options.alias[`${vNamespace}/stubs`] = resolver.resolve(runtimeResolver.vueDir, `stubs`);
 
     /* STYLES */
 
+    // @todo check if needed to remove
     nuxt.options.alias[`${vNamespace}/styles/scss`] = resolver.resolve(runtimeResolver.vueDir, `styles/index.scss`);
+    // @todo check if needed to remove
     nuxt.options.alias[`${vNamespace}/styles/mixins`] = resolver.resolve(runtimeResolver.vueDir, `styles/mixins.scss`);
 
     /* COMPONENTS */
 
-    const components = await resolveNuxtComponents({
-      resolver: runtimeResolver,
-      prefix: options.prefix?.components,
+    scopedModules.components.forEach((component) => {
+      if (component.type === 'sfc') {
+        addComponent({
+          name: `${options.prefix?.components}${component.name}`,
+          filePath: component.filePath,
+        });
+      }
     });
-
-    // Single components alias
-    components.forEach((component) => {
-      addComponent({
-        name: component.name,
-        filePath: component.filepath,
-      });
-
-      // nuxt.options.alias[component.alias] = `${component.filepath}`;
-    });
-
-    // Global components alias
-    nuxt.options.alias[`${vNamespace}/components`] = resolver.resolve(runtimeResolver.nuxtDir, `components/index`);
 
     /* COMPOSABLES */
-
-    nuxt.options.alias[`${vNamespace}/composables`] = resolver.resolve(runtimeResolver.nuxtDir, `composables/index`);
 
     // @todo need to allow prefixing
     // if (!options.prefix?.composables) {
@@ -153,13 +151,47 @@ export default defineNuxtModule<ModuleOptions>({
 
     /* FEATURES */
 
-    nuxt.options.alias[`${vNamespace}/features`] = resolver.resolve(runtimeResolver.nuxtDir, `features/index`);
+    // nuxt.options.alias[`${vNamespace}/features`] = resolver.resolve(runtimeResolver.nuxtDir, `features/index`);
 
     addImportsDir(resolver.resolve(runtimeResolver.nuxtDir, 'features'));
 
     /* PLUGIN */
     addPlugin({
       src: resolver.resolve(runtimeResolver.nuxtDir, 'plugin'),
+    });
+
+    nuxt.hooks.hook('vite:extend', ({ config }) => {
+      if (!config.plugins) {
+        config.plugins = [];
+      }
+
+      config.plugins.push({
+        name: 'melkor:resolve-internal',
+        enforce: 'pre',
+        async resolveId(id, importer) {
+          // Passes if import comes from melkor
+          if (!importer || !path.normalize(importer).includes(runtimeResolver.dir)) {
+            return;
+          }
+
+          // Passes if import is relative
+          if (!/^\.{1,2}\//.test(id)) {
+            return;
+          }
+
+          const splitted = id.split(path.sep);
+          const maybeNamespace = splitted[splitted.length - 1];
+
+          let module: KitModule | null = null;
+          if ((namespaces as Readonly<string[]>).includes(maybeNamespace)) {
+            const namespace = maybeNamespace as typeof namespaces[number];
+            module = scopedModules[namespace].find(m => m.id === 'index') ?? null;
+          }
+          if (module) {
+            return module.filePath;
+          }
+        },
+      });
     });
 
     /* SSR theme */

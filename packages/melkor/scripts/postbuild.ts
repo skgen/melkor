@@ -1,9 +1,8 @@
-import { log, vNamespace, write } from '@skgn/melkor-kit';
+import { log, write } from '@skgn/melkor-kit';
 import { extractMeta } from '@skgn/melkor-meta';
-import { cyan, dim, green } from 'colorette';
+import { cyan, green } from 'colorette';
 import fs from 'fs-extra';
 import { glob, globSync } from 'glob';
-import MagicString from 'magic-string';
 import path from 'pathe';
 
 import { rootPath } from './utils';
@@ -95,9 +94,24 @@ async function generateMetaTask(rootPath: string) {
     cwd: path.resolve(rootPath),
   });
 
+  const metaTypes = `import type { Meta } from '@skgn/melkor-meta';
+
+declare module '@skgn/melkor/meta' {
+  const value: Meta;
+  export default value;
+}
+
+export type { Meta };
+`;
+
   await write(
     path.resolve(distDir, 'meta.json'),
     `${JSON.stringify(meta, null, 2)}\n`,
+  );
+
+  await write(
+    path.resolve(distDir, 'meta.d.ts'),
+    `${metaTypes}\n`,
   );
 }
 

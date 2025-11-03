@@ -1,4 +1,4 @@
-import type { InferDefaults } from '#melkor/features';
+import type { InferDefaults } from './features';
 
 export function _mergeDefaults(definition: Record<string, any>, defaults: InferDefaults<any>) {
   const props = definition;

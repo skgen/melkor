@@ -1,6 +1,6 @@
 import type { EmitsToProps, Ref, ShortEmitsToObject } from 'vue';
 
-import type { InputEmits, InputProps } from '#melkor/features';
+import type { InputEmits, InputProps } from '../features';
 
 import { ref } from 'vue';
 

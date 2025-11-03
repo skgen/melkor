@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ThemeContext, TheToastProvider, TheTooltipProvider } from '#melkor/components';
-import { useProvideGlobalTheme, useProvideIcons } from '#melkor/composables';
-import { floatingLayerId } from '#melkor/features';
+import { RuntimeScope, ThemeContext, TheToastProvider, TheTooltipProvider } from '../components';
+import { useProvideGlobalTheme, useProvideIcons } from '../composables';
+import { floatingLayerId } from '../features';
 
 const { theme } = useProvideGlobalTheme();
 useProvideIcons();

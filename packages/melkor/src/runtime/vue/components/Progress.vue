@@ -82,7 +82,7 @@ import { isArray, round } from 'lodash-es';
 import { ProgressIndicator, ProgressRoot } from 'reka-ui';
 import { computed } from 'vue';
 
-import { useTheme } from '#melkor/composables';
+import { useTheme } from '../composables';
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   max: 100,

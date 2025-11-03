@@ -2,7 +2,7 @@ import type { DirectiveBinding } from 'vue';
 
 import { isString } from 'lodash-es';
 
-import { setElementTheme } from '#melkor/features';
+import { setElementTheme } from '../features';
 
 function directive(el: HTMLElement, binding: DirectiveBinding): void {
   const { value } = binding.value;

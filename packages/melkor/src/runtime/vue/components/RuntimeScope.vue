@@ -28,7 +28,7 @@ export type RuntimeScopeSlots = {
 <script lang="ts" setup>
 import type { Slot } from 'vue';
 
-import { useRuntimeScope, useTheme } from '#melkor/composables';
+import { useRuntimeScope, useTheme } from '../composables';
 
 const props = withDefaults(
   defineProps<RuntimeScopeProps>(),

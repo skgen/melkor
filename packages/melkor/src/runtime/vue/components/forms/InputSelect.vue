@@ -78,7 +78,7 @@
 import type { Flatten } from '@skgn/kit';
 import type { Slot } from 'vue';
 
-import type { InputEmits, InputExpose, InputProps, InputSlots } from '#melkor/features';
+import type { InputEmits, InputExpose, InputProps, InputSlots } from '../../features';
 
 export type InputSelectProps<TValue> = InputProps<TValue> & {
   fill?: boolean;
@@ -110,9 +110,9 @@ import { isArray, isEqual } from 'lodash-es';
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui';
 import { computed, nextTick, ref, watch } from 'vue';
 
-import { FieldError, FieldHint, FieldLabel, Icon } from '#melkor/components';
-import { useGlobalConfig, useInput, useInputErrors, useTheme } from '#melkor/composables';
-import { bindInteractionStateProps } from '#melkor/features';
+import { FieldError, FieldHint, FieldLabel, Icon } from '../../components';
+import { useGlobalConfig, useInput, useInputErrors, useTheme } from '../../composables';
+import { bindInteractionStateProps } from '../../features';
 
 const props = withDefaults(
   defineProps<InputSelectProps<TValue>>(),
@@ -191,10 +191,10 @@ function handleKeyDown(event: KeyboardEvent) {
 watch(open, (newOpen) => {
   nextTick(() => {
     if (newOpen) {
-      onFocus();
+      onFocus(new FocusEvent('focus'));
     }
     else {
-      onBlur();
+      onBlur(new FocusEvent('blur'));
     }
   });
 });

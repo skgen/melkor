@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from '#melkor/components';
+import type { InputCheckableEmits, InputCheckableExpose, InputCheckableProps, InputCheckableSlots } from '../../components';
 
 export type InputToggleProps<TValue = boolean> = InputCheckableProps<TValue>;
 
@@ -60,7 +60,7 @@ export type InputToggleExpose = InputCheckableExpose;
 <script lang="ts" setup generic="TValue">
 import { ref, useTemplateRef } from 'vue';
 
-import { InputCheckable, Toggle } from '#melkor/components';
+import { InputCheckable, Toggle } from '../../components';
 
 const props = withDefaults(
   defineProps<InputToggleProps<TValue>>(),

@@ -1,9 +1,9 @@
-import type { Meta } from './meta';
+import type { Meta } from './types';
 
-import { createGeneratedResolver, createRuntimeResolver } from '@skgn/melkor-kit';
+import { createGeneratedResolver, createRuntimeResolver, resolveNuxtModules, resolveVueModules } from '@skgn/melkor-kit';
 import path from 'pathe';
 
-import { extractNuxtSFCMeta, extractVueSFCMeta } from './components';
+import { extractSFCsMeta } from './sfc-meta';
 
 type ExtractMetaOptions = {
   cwd: string;
@@ -16,16 +16,20 @@ export async function extractMeta(options: ExtractMetaOptions): Promise<Meta> {
 
   return {
     vue: {
-      components: await extractVueSFCMeta({
+      components: await extractSFCsMeta({
         runtimeResolver,
-        generatedResolver,
+        tsConfigPath: generatedResolver.vueTsConfigPath,
+        modulesResolverFunction: resolveVueModules,
       }),
     },
     nuxt: {
-      components: await extractNuxtSFCMeta({
+      components: await extractSFCsMeta({
         runtimeResolver,
-        generatedResolver,
+        tsConfigPath: generatedResolver.nuxtTsConfigPath,
+        modulesResolverFunction: resolveNuxtModules,
       }),
     },
   };
 }
+
+export * from './types';
