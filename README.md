@@ -5,9 +5,9 @@
 
 </div>
 
-🚧 Beta Software
+🚧 Alpha Software
 
-Melkor is currently in beta status. While it can already handle most production use cases, there may still be bugs and rough edges.
+Melkor v2 is currently in Alpha status. While it can already handle most production use cases, there may still be bugs and rough edges.
 
 # Melkor
 
