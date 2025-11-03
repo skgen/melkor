@@ -71,8 +71,8 @@ export type InputCheckableSlots<TValue = boolean> = InputSlots & {
     checked: boolean;
     focused: boolean;
     onChange: (event: Event) => void;
-    onFocus: () => void;
-    onBlur: () => void;
+    onFocus: (event: FocusEvent) => void;
+    onBlur: (event: FocusEvent) => void;
   }>;
   'checked-label'?: Slot;
   'unchecked-label'?: Slot;

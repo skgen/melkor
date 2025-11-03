@@ -7,8 +7,8 @@
     @update:valid="(valid) => emit('update:valid', valid)"
     @update:touched="(touched) => emit('update:touched', touched)"
     @update:errors="(errors) => emit('update:errors', errors)"
-    @focus="() => emit('focus')"
-    @blur="() => emit('blur')"
+    @focus="(event) => emit('focus', event)"
+    @blur="(event) => emit('blur', event)"
   >
     <template v-if="slots.label" #label>
       <slot name="label" />
@@ -42,11 +42,11 @@
         :checked="checked"
         :disabled="disabled"
         @input="onChange"
-        @focus="(event: Event) => {
+        @focus="(event: FocusEvent) => {
           const target = event.target as HTMLInputElement | null;
           if (target?.matches(':focus-visible') || syntheticFocus) {
             syntheticFocus = false;
-            onFocus();
+            onFocus(event);
           }
         }"
         @blur="onBlur"
