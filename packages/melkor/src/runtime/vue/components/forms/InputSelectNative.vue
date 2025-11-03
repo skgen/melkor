@@ -72,7 +72,7 @@ export type InputSelectNativeExpose = InputExpose;
 
 <script lang="ts" setup generic="TValue">
 import { isEqual } from 'lodash-es';
-import { useTemplateRef } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 
 import { FieldError, FieldHint, FieldLabel, Icon } from '../../components';
 import { useGlobalConfig, useInput, useInputErrors, useTheme } from '../../composables';

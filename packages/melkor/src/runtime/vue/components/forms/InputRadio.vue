@@ -96,7 +96,7 @@ export type InputRadioExpose = InputExpose;
 <script lang="ts" setup generic="TValue = boolean">
 import { useElementHover } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
-import { ref, useTemplateRef } from 'vue';
+import { computed, ref, useTemplateRef } from 'vue';
 
 import { FieldError, FieldHint, FieldLabel, Radio } from '../../components';
 import { useInput, useInputErrors, useTheme } from '../../composables';
