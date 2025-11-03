@@ -665,6 +665,9 @@ importers:
       vue-component-meta:
         specifier: catalog:build
         version: 3.1.1(typescript@5.9.3)
+      zod:
+        specifier: catalog:runtime
+        version: 4.1.12
     devDependencies:
       '@types/lodash-es':
         specifier: catalog:types
