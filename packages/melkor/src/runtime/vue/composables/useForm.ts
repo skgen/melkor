@@ -18,17 +18,13 @@ type FormFields = {
 };
 
 export function useForm<TFields extends FormFields>(options: UseFormOptions<TFields>) {
-  const valid = ref(true);
+  const valid = computed(() => Object.entries(options.fields).reduce((acc, [_, v]) => !v.valid ? acc + 1 : acc, 0) === 0);
 
   const data = computed(() => {
-    let newValid = true;
-    const reflect = Object.entries(options.fields).reduce((acc, [key, entry]) => {
-      newValid = newValid && (entry.valid ?? true);
+    return Object.entries(options.fields).reduce((acc, [key, entry]) => {
       acc[key as keyof TFields] = entry.value;
       return acc;
     }, {} as ExtractValues<TFields>);
-    valid.value = newValid;
-    return reflect;
   });
 
   return {
