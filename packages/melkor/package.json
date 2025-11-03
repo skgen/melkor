@@ -1,8 +1,13 @@
 {
   "name": "@skgn/melkor",
   "type": "module",
-  "version": "1.8.0",
+  "version": "2.0.0-alpha.1",
   "description": "Melkor UI",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skgen/melkor.git",
+    "directory": "packages/nuxt"
+  },
   "exports": {
     "./nuxt": {
       "types": "./dist/types.d.mts",
@@ -69,7 +74,7 @@
     "review:eslint": "eslint . --fix",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
     "changelog": "changelogen --release --no-commit --no-tag",
-    "release": "pnpm run review && pnpm run test && pnpm run build && pnpm run changelog"
+    "release": "pnpm run review && pnpm run test && pnpm run build"
   },
   "peerDependencies": {
     "vue": "catalog:runtime",
