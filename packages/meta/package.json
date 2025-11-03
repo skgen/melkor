@@ -18,7 +18,7 @@
     "review": "pnpm review:typecheck && pnpm review:eslint",
     "review:typecheck": "tsc --noEmit -p tsconfig.json",
     "review:eslint": "eslint . --fix",
-    "release": "pnpm run review && pnpm run build"
+    "prepublishOnly": "pnpm run review"
   },
   "dependencies": {
     "@skgn/kit": "catalog:runtime",

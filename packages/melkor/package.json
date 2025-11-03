@@ -74,7 +74,7 @@
     "review:eslint": "eslint . --fix",
     "review:stylelint": "stylelint 'src/**/*.{css,scss,vue}' --color --fix",
     "changelog": "changelogen --release --no-commit --no-tag",
-    "release": "pnpm run review && pnpm run test && pnpm run build"
+    "prepublishOnly": "pnpm run review && pnpm run test"
   },
   "peerDependencies": {
     "vue": "catalog:runtime",

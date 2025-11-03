@@ -1,12 +1,14 @@
 import './env';
 
 import type { ShellString } from 'shelljs';
+import type { PackageJson } from 'type-fest';
 
 import path from 'node:path';
 import process from 'node:process';
 
 import { cyan, green, red } from 'colorette';
 import Enquirer from 'enquirer';
+import fs from 'fs-extra';
 import sh from 'shelljs';
 
 function handleError(options: { res: ShellString; message: string }) {
@@ -23,12 +25,17 @@ const e = new Enquirer();
 
 const root = path.resolve(import.meta.filename, '../..');
 
+const DRY_RUN = false;
+
 const packages = {
-  'melkor': {
+  melkor: {
     path: 'packages/melkor',
   },
-  'melkor-nuxt': {
-    path: 'packages/nuxt',
+  kit: {
+    path: 'packages/kit',
+  },
+  meta: {
+    path: 'packages/meta',
   },
 } as const;
 
@@ -37,17 +44,21 @@ const packagePrompt = await e.prompt([
     name: 'package',
     type: 'select',
     message: 'What do you want to release ?',
-    choices: [{
-      name: 'melkor',
-      value: 'melkor',
-      message: 'Melkor',
-    }, {
-      name: 'melkor-nuxt',
-      value: 'melkor-nuxt',
-      message: 'Melkor Nuxt',
-    }] satisfies ({
+    choices: [
+      {
+        name: 'melkor',
+        message: 'Melkor',
+      },
+      {
+        name: 'kit',
+        message: 'Melkor - Kit',
+      },
+      {
+        name: 'meta',
+        message: 'Melkor - Meta',
+      },
+    ] satisfies ({
       name: keyof typeof packages;
-      value: keyof typeof packages;
       message: string;
     })[],
   },
@@ -55,20 +66,9 @@ const packagePrompt = await e.prompt([
 
 const releasePackage = packages[packagePrompt.package];
 
-const packageJson = await import(path.resolve(path.resolve(root, releasePackage.path), 'package.json'));
+const packageJson: PackageJson = JSON.parse(fs.readFileSync(path.resolve(root, releasePackage.path, 'package.json'), { encoding: 'utf-8' }));
 
 let res: ShellString | null = null;
-
-// Building & releasing
-
-res = sh.exec(`pnpm -r --filter=./${releasePackage.path} run release`, { silent: true });
-
-handleError({
-  res,
-  message: red(`Failed to release ${cyan(`${packageJson.name}@${packageJson.version}`)}`),
-});
-
-// Check if exists before publishing
 
 const exists = await fetch(`https://registry.npmjs.org/${packageJson.name}/${packageJson.version}`);
 
@@ -110,10 +110,20 @@ handleError({
 
 const totp = res.toString();
 
+let tag: string | null = null;
+
+if (packageJson.version?.includes('alpha')) {
+  tag = 'alpha';
+}
+else if (packageJson.version?.includes('beta')) {
+  tag = 'alpha';
+}
+
 const publishArgs = [
-  '--dry-run',
+  DRY_RUN ? '--dry-run' : null,
   `--otp ${totp}`,
-];
+  tag ? `--tag ${tag}` : null,
+].filter(v => v !== null);
 
 res = sh.exec(`pnpm publish ${releasePackage.path} --access public ${publishArgs.join(' ')}`, { silent: true });
 
