@@ -215,25 +215,10 @@ catalogs:
 importers:
 
   .:
-    devDependencies:
-      '@antfu/eslint-config':
-        specifier: catalog:lint
-        version: 3.16.0(@typescript-eslint/utils@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.22)(eslint-plugin-format@1.0.2(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
+    dependencies:
       '@bitwarden/cli':
         specifier: catalog:build
         version: 2025.10.0
-      '@tsconfig/node22':
-        specifier: catalog:build
-        version: 22.0.2
-      '@types/dotenv-parse-variables':
-        specifier: catalog:types
-        version: 2.0.3
-      '@types/node':
-        specifier: catalog:types
-        version: 22.18.12
-      '@types/shelljs':
-        specifier: catalog:types
-        version: 0.8.17
       colorette:
         specifier: catalog:build
         version: 2.0.20
@@ -246,18 +231,43 @@ importers:
       enquirer:
         specifier: 'catalog:'
         version: 2.4.1
+      fs-extra:
+        specifier: catalog:build
+        version: 11.3.2
+      shelljs:
+        specifier: catalog:build
+        version: 0.8.5
+    devDependencies:
+      '@antfu/eslint-config':
+        specifier: catalog:lint
+        version: 3.16.0(@typescript-eslint/utils@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.22)(eslint-plugin-format@1.0.2(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
+      '@tsconfig/node22':
+        specifier: catalog:build
+        version: 22.0.2
+      '@types/dotenv-parse-variables':
+        specifier: catalog:types
+        version: 2.0.3
+      '@types/fs-extra':
+        specifier: catalog:types
+        version: 11.0.4
+      '@types/node':
+        specifier: catalog:types
+        version: 22.18.12
+      '@types/shelljs':
+        specifier: catalog:types
+        version: 0.8.17
       eslint:
         specifier: catalog:lint
         version: 9.38.0(jiti@2.6.1)
       eslint-plugin-format:
         specifier: catalog:lint
         version: 1.0.2(eslint@9.38.0(jiti@2.6.1))
-      shelljs:
-        specifier: catalog:build
-        version: 0.8.5
       tsx:
         specifier: catalog:build
         version: 4.20.6
+      type-fest:
+        specifier: catalog:types
+        version: 5.1.0
 
   packages/docs:
     dependencies:
