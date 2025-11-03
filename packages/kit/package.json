@@ -1,7 +1,7 @@
 {
   "name": "@skgn/melkor-kit",
   "type": "module",
-  "private": true,
+  "version": "1.0.0",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -17,7 +17,8 @@
     "build": "unbuild",
     "review": "pnpm review:typecheck && pnpm review:eslint",
     "review:typecheck": "tsc --noEmit -p tsconfig.json",
-    "review:eslint": "eslint . --fix"
+    "review:eslint": "eslint . --fix",
+    "release": "pnpm run review && pnpm run build"
   },
   "dependencies": {
     "@skgn/kit": "catalog:runtime",
