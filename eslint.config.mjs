@@ -36,6 +36,14 @@ export default antfu(
         ],
         'ts/explicit-function-return-type': ['off'],
         'ts/consistent-type-definitions': ['off'],
+        'ts/consistent-type-imports': [
+          'error',
+          {
+            disallowTypeAnnotations: false,
+            fixStyle: 'separate-type-imports',
+            prefer: 'type-imports',
+          },
+        ],
       },
     },
     vue: true,
