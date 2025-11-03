@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { RuntimeScope, ThemeContext, TheToastProvider, TheTooltipProvider } from '../components';
+import { ThemeContext, TheToastProvider, TheTooltipProvider } from '../components';
 import { useProvideGlobalTheme, useProvideIcons } from '../composables';
 import { floatingLayerId } from '../features';
 

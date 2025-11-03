@@ -1,4 +1,4 @@
-import type { ComponentMeta, PropertyMeta } from 'vue-component-meta';
+import type { ComponentMeta } from 'vue-component-meta';
 
 export type Meta = {
   vue: ContextMeta;
