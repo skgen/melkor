@@ -1,25 +1,29 @@
 {
   "name": "@skgn/melkor-monorepo",
   "type": "module",
-  "version": "1.0.0",
   "packageManager": "pnpm@10.18.1",
   "scripts": {
     "release": "tsx scripts/release.ts"
   },
-  "devDependencies": {
-    "@antfu/eslint-config": "catalog:lint",
+  "dependencies": {
     "@bitwarden/cli": "catalog:build",
-    "@tsconfig/node22": "catalog:build",
-    "@types/dotenv-parse-variables": "catalog:types",
-    "@types/node": "catalog:types",
-    "@types/shelljs": "catalog:types",
     "colorette": "catalog:build",
     "dotenv-flow": "catalog:",
     "dotenv-parse-variables": "catalog:",
     "enquirer": "catalog:",
+    "fs-extra": "catalog:build",
+    "shelljs": "catalog:build"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:lint",
+    "@tsconfig/node22": "catalog:build",
+    "@types/dotenv-parse-variables": "catalog:types",
+    "@types/fs-extra": "catalog:types",
+    "@types/node": "catalog:types",
+    "@types/shelljs": "catalog:types",
     "eslint": "catalog:lint",
     "eslint-plugin-format": "catalog:lint",
-    "shelljs": "catalog:build",
-    "tsx": "catalog:build"
+    "tsx": "catalog:build",
+    "type-fest": "catalog:types"
   }
 }
