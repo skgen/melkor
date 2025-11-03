@@ -1,8 +1,11 @@
+import type { UnwrapNestedRefs } from 'vue';
+
 import type { InputProps } from '../features';
+import type { InputBinding } from './useInputBinding';
 
 import { computed, readonly, ref } from 'vue';
 
-export type UseFormOptions<TFields extends Record<string, InputProps<any>>> = {
+export type UseFormOptions<TFields extends FormFields> = {
   fields: TFields;
 };
 
@@ -10,7 +13,11 @@ type ExtractValues<F> = {
   [K in keyof F]: F[K] extends InputProps<infer U> ? U : never;
 };
 
-export function useForm<TFields extends Record<string, InputProps<any>>>(options: UseFormOptions<TFields>) {
+type FormFields = {
+  [key: string]: InputProps<any> | UnwrapNestedRefs<InputBinding<any>>;
+};
+
+export function useForm<TFields extends FormFields>(options: UseFormOptions<TFields>) {
   const valid = ref(true);
 
   const data = computed(() => {

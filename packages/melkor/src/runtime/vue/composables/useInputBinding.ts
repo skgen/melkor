@@ -4,19 +4,27 @@ import type { InputEmits, InputProps } from '../features';
 
 import { ref } from 'vue';
 
-export function useInputBinding<TProps extends InputProps<any>>(model: TProps): {
+export type InputBinding<TProps extends InputProps<any>> = {
   value: Ref<TProps['value']>;
   valid: Ref<TProps['valid']>;
   touched: Ref<TProps['touched']>;
   errors: Ref<TProps['errors']>;
 } & Omit<TProps, 'value' | 'valid' | 'touched' | 'errors'>
-& Required<Pick<
-  EmitsToProps<ShortEmitsToObject<InputEmits<TProps['value']>>>,
-  'onUpdate:value' |
-  'onUpdate:valid' |
-  'onUpdate:touched' |
-  'onUpdate:errors'
->> {
+& Required<
+  Pick<
+    EmitsToProps<
+      ShortEmitsToObject<
+        InputEmits<TProps['value']>
+      >
+    >,
+    'onUpdate:value' |
+    'onUpdate:valid' |
+    'onUpdate:touched' |
+    'onUpdate:errors'
+  >
+>;
+
+export function useInputBinding<TProps extends InputProps<any>>(model: TProps): InputBinding<TProps> {
   const { value: _value, valid: _valid, touched: _touched, errors: _errors, ...otherProps } = model;
   const value = ref(_value) as Ref<TProps['value']>;
   const valid: Ref<TProps['valid']> = ref(_valid ?? true);
