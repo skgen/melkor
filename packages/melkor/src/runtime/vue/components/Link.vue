@@ -1,17 +1,18 @@
 <template>
+  <slot />
   <!-- <NuxtLink> -->
-  <RouterLink>
+  <!-- <RouterLink>
     <a href="">
       <slot />
     </a>
-  </RouterLink>
+  </RouterLink> -->
   <!-- </NuxtLink> -->
 </template>
 
 <script lang="ts">
-import type { ActiveProps, DisabledProps } from '../features';
+import type { RouteLocationRaw, RouterLinkProps } from 'vue-router';
 
-import { type RouteLocationRaw, RouterLink, type RouterLinkProps } from 'vue-router';
+import type { ActiveProps, DisabledProps } from '../features';
 
 export type LinkProps = Omit<RouterLinkProps, 'to'> & {
   /**
