@@ -156,7 +156,7 @@ const slots = defineSlots<InputIconSlots>();
 
 const theme = useTheme();
 
-const errors = useInputErrors(props.errors);
+const errors = useInputErrors(computed(() => props.errors));
 
 const { collection } = useIconCollection({ collectionName: props.collection });
 

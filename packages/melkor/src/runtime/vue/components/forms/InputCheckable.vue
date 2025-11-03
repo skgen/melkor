@@ -112,7 +112,7 @@ const hovered = useElementHover(rootElement);
 
 const theme = useTheme();
 
-const errors = useInputErrors(props.errors);
+const errors = useInputErrors(computed(() => props.errors));
 
 const {
   onChange,

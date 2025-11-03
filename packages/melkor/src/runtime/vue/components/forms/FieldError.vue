@@ -29,7 +29,6 @@ const theme = useTheme();
   --mk-field-error-text-size: 0.75rem;
 
   display: inline-flex;
-  flex-direction: column;
   gap: var(--mk-size-1);
   align-items: center;
   font-size: var(--mk-field-error-text-size);

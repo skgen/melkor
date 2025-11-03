@@ -108,7 +108,7 @@ const inputElement = useTemplateRef('inputElement');
 
 const theme = useTheme();
 
-const errors = useInputErrors(props.errors);
+const errors = useInputErrors(computed(() => props.errors));
 
 const {
   onChange,

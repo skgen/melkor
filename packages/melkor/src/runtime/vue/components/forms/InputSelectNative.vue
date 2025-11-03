@@ -97,7 +97,7 @@ const theme = useTheme();
 
 const globalConfig = useGlobalConfig();
 
-const errors = useInputErrors(props.errors);
+const errors = useInputErrors(computed(() => props.errors));
 
 const {
   onChange,
