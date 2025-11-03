@@ -183,7 +183,7 @@ export default defineNuxtModule<ModuleOptions>({
           const maybeNamespace = splitted[splitted.length - 1];
 
           let module: KitModule | null = null;
-          if ((namespaces as Readonly<string[]>).includes(maybeNamespace)) {
+          if (maybeNamespace && (namespaces as Readonly<string[]>).includes(maybeNamespace)) {
             const namespace = maybeNamespace as typeof namespaces[number];
             module = scopedModules[namespace].find(m => m.id === 'index') ?? null;
           }
