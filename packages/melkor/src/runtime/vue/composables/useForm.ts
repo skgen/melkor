@@ -3,7 +3,7 @@ import type { UnwrapNestedRefs } from 'vue';
 import type { InputProps } from '../features';
 import type { InputBinding } from './useInputBinding';
 
-import { computed, readonly, ref } from 'vue';
+import { computed, readonly } from 'vue';
 
 export type UseFormOptions<TFields extends FormFields> = {
   fields: TFields;
