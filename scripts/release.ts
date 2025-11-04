@@ -13,7 +13,7 @@ import sh from 'shelljs';
 
 function handleError(options: { res: ShellString; message: string }) {
   const { res, message } = options;
-  
+
   if (res.code !== 0) {
     console.error(message);
     console.error(res.stderr);
