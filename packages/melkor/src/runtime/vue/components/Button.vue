@@ -7,6 +7,7 @@
     :data-intent="props.intent"
     :data-icon="props.icon || undefined"
     v-bind="bindInteractionStateProps(props)"
+    :type="props.type || undefined"
   >
     <span>
       <slot />
@@ -17,6 +18,7 @@
 <script lang="ts">
 import type { ActiveProps, DisabledProps } from '../features';
 
+// @todo forward ButtonHTMLAttributes and base props on it
 export type ButtonProps = {
   variant?: 'plain' | 'outline';
   size?: 'wide' | 'medium' | 'tight' | 'compact';
