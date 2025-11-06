@@ -196,6 +196,7 @@ const theme = useTheme();
 
     --computed-background-color: var(--mk-shade-4-15);
     --computed-border-color: var(--mk-shade-5);
+    --computed-text-color: var(--computed-intent-color);
     --computed-border-color-focused: var(--computed-intent-color);
     --computed-border-color-active: var(--computed-intent-color);
 
