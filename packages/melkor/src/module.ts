@@ -16,17 +16,17 @@ import {
 } from '@skgn/melkor-kit';
 
 import { createMelkorOptions, type MelkorOptions, mergeConfig, STORAGE_THEME_KEY, Theme } from './runtime/vue/features/config';
-// Melkor
-// import { loadMeta } from './namespaces/load-meta';
-// import {  } from './runtime/vue/features';
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname, '../package.json'), { encoding: 'utf-8' }));
 
-declare module 'nuxt/schema' {
-  interface PublicRuntimeConfig {
-    melkor: MelkorOptions;
-  }
-}
+// declare module 'nuxt/schema' {
+// interface PublicRuntimeConfig {
+//   melkor: ModuleOptions;
+// }
+// interface RuntimeConfig {
+//   melkor: ModuleOptions;
+// }
+// }
 
 export interface ModuleOptions extends MelkorOptions {
   prefix?: {
@@ -42,9 +42,6 @@ export interface ModuleRuntimeHooks {
 }
 
 export interface ModuleRuntimeConfig {
-  public: {
-    melkor: ModuleOptions;
-  };
 }
 
 export interface ModulePublicRuntimeConfig {
@@ -61,7 +58,7 @@ function createModuleOptions(moduleOptions?: DeepPartial<ModuleOptions>): Module
   return mergeConfig({}, moduleOptions, defaultModuleOptions);
 }
 
-export default defineNuxtModule<ModuleOptions>({
+export default defineNuxtModule<DeepPartial<ModuleOptions>>({
   meta: {
     name: pkg.name,
     version: pkg.version,
@@ -70,25 +67,18 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt: '>=4.0.0',
     },
   },
-  defaults: defaultModuleOptions,
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.dirname);
     const runtimeResolver = createRuntimeResolver(import.meta.dirname);
 
-    const runtimeConfigOptions = nuxt.options.runtimeConfig.public.melkor ?? {};
-    const options = createModuleOptions(mergeConfig({}, runtimeConfigOptions, _options));
-
-    // Inject config
-    nuxt.options.runtimeConfig.public.melkor = options;
+    const options = createModuleOptions(_options);
 
     const scopedModules = await resolveNuxtModules(runtimeResolver);
-
-    // await loadMeta(ctx);
 
     /* STUBS */
 
     // @todo check to remove
-    nuxt.options.alias[`${vNamespace}/stubs`] = resolver.resolve(runtimeResolver.vueDir, `stubs`);
+    // nuxt.options.alias[`${vNamespace}/stubs`] = resolver.resolve(runtimeResolver.vueDir, `stubs`);
 
     /* STYLES */
 
@@ -218,4 +208,4 @@ export default defineNuxtModule<ModuleOptions>({
       });
     }
   },
-}) as NuxtModule<ModuleOptions>;
+}) as NuxtModule<DeepPartial<ModuleOptions>>;
