@@ -19,14 +19,11 @@ import { createMelkorOptions, type MelkorOptions, mergeConfig, STORAGE_THEME_KEY
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname, '../package.json'), { encoding: 'utf-8' }));
 
-// declare module 'nuxt/schema' {
-// interface PublicRuntimeConfig {
-//   melkor: ModuleOptions;
-// }
-// interface RuntimeConfig {
-//   melkor: ModuleOptions;
-// }
-// }
+declare module 'nuxt/schema' {
+  interface PublicRuntimeConfig {
+    melkor: ModuleOptions;
+  }
+}
 
 export interface ModuleOptions extends MelkorOptions {
   prefix?: {
@@ -42,6 +39,7 @@ export interface ModuleRuntimeHooks {
 }
 
 export interface ModuleRuntimeConfig {
+  melkor: ModuleOptions;
 }
 
 export interface ModulePublicRuntimeConfig {
@@ -72,6 +70,9 @@ export default defineNuxtModule<DeepPartial<ModuleOptions>>({
     const runtimeResolver = createRuntimeResolver(import.meta.dirname);
 
     const options = createModuleOptions(_options);
+
+    // Needed to pass down to the plugin
+    nuxt.options.runtimeConfig.public.melkor = options;
 
     const scopedModules = await resolveNuxtModules(runtimeResolver);
 
