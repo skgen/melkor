@@ -90,6 +90,7 @@ const props = withDefaults(
     valid: true,
     touched: false,
     errors: () => [] as string[],
+    validateOn: () => ['dirty'],
   },
 );
 

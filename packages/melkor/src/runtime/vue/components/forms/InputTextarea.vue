@@ -85,6 +85,7 @@ const props = withDefaults(
     touched: false,
     errors: () => [] as string[],
     rows: 2,
+    validateOn: () => ['dirty'],
   },
 );
 

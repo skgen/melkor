@@ -11,10 +11,22 @@ import { isZodError, isZodType } from '../features';
 export type InputProps<TValue> = {
   value: TValue;
   valid?: boolean;
+  /**
+   * @description True if the value has changed at least once, reassigning same value doesn't trigger touched
+   */
   touched?: boolean;
   name?: string;
   errors?: string[] | ZodError;
   validate?: ValidateInputValue<TValue>;
+  /**
+   * @description
+   * - `change` = everytime value changes
+   * - `dirty` = everytime value changes, if input is considered dirty (blured once + touched)
+   * - `mounted` = once on mounted
+   *
+   * Setting `change` & `dirty` results in ignoring `dirty` as `change` is a superset of `dirty`
+   */
+  validateOn?: ('change' | 'dirty' | 'mounted')[];
 }
 & DisabledProps
 & HoveredProps;
@@ -40,31 +52,29 @@ export type InputExpose = {
 
 export type ValidateInputValue<TValue> = ((value: TValue) => string[] | string | void) | ZodType;
 
-export type ValidateInputValueReturn<TValue> = Pick<InputProps<TValue>, 'value' | 'valid' | 'touched' | 'errors'>;
-
-export function validateInputValue<TValue>(newValue: TValue, validate?: ValidateInputValue<TValue>): ValidateInputValueReturn<TValue> {
-  const newModel: ValidateInputValueReturn<TValue> = {
-    value: newValue,
-    touched: true,
-    errors: [],
-    valid: true,
-  };
+export function validateInputValue<TValue>(newValue: TValue, validate: ValidateInputValue<TValue>) {
+  let errors: InputProps<TValue>['errors'] = [];
+  let valid: InputProps<TValue>['valid'] = true;
 
   if (isValue(validate)) {
     if (isZodType(validate)) {
       const result = validate.safeParse(newValue);
-      newModel.errors = result.success ? [] : result.error;
-      newModel.valid = result.success;
+      errors = result.success ? [] : result.error;
+      valid = result.success;
     }
     else {
-      const _errors = validate(newModel.value) ?? [];
+      const _errors = validate(newValue) ?? [];
       if (isString(_errors)) {
-        newModel.errors = [_errors];
+        errors = [_errors];
       }
-      newModel.valid = isArray(newModel.errors) && newModel.errors.length === 0;
+      valid = isArray(errors) && errors.length === 0;
     }
   }
-  return newModel;
+
+  return {
+    valid,
+    errors,
+  };
 }
 
 export function hasErrors<T>(maybeErrors: InputProps<T>['errors']) {

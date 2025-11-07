@@ -109,6 +109,7 @@ const props = withDefaults(
     touched: false,
     errors: () => [] as string[],
     direction: 'vertical',
+    validateOn: () => ['dirty'],
   },
 );
 
