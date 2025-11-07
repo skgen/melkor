@@ -1,11 +1,11 @@
 import type { DeepPartial } from '@skgn/kit';
-import type { ComputedRef, DeepReadonly, Reactive, Ref, UnwrapNestedRefs, UnwrapRef } from 'vue';
+import type { UnwrapNestedRefs } from 'vue';
 
 import type { InputProps } from '../features';
 import type { InputBinding } from './useInputBinding';
 
 import defu from 'defu';
-import { computed, isRef, reactive, readonly } from 'vue';
+import { computed, reactive, readonly } from 'vue';
 
 export type UseFormOptions<TFields extends FormFields> = {
   fields: TFields;
