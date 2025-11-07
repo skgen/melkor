@@ -16,7 +16,7 @@ type ExtractValues<F> = {
 };
 
 type FormFields = {
-  [key: string]: InputProps<any> | InputBinding<any>;
+  [key: string]: InputProps<any> | InputBinding<InputProps<any>>;
 };
 
 const defaultOptions: DeepPartial<UseFormOptions<any>> = {
@@ -24,9 +24,10 @@ const defaultOptions: DeepPartial<UseFormOptions<any>> = {
 
 export function useForm<TFields extends FormFields>(_options: UseFormOptions<TFields>) {
   const options = defu(_options, defaultOptions);
-  const valid = computed(() => Object.entries(options.fields).reduce((acc, [_, v]) => !v.valid ? acc + 1 : acc, 0) === 0);
 
   const fields = reactive(options.fields);
+
+  const valid = computed(() => Object.entries(fields).reduce((acc, [_, v]) => !v.valid ? acc + 1 : acc, 0) === 0);
 
   const data = computed(() => {
     return Object.entries(fields).reduce((acc, [key, input]) => {
