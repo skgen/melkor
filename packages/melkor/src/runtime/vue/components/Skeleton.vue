@@ -78,7 +78,7 @@ const width = computed(() => {
   position: relative;
   width: var(--computed-width);
   height: var(--computed-height);
-
+  overflow: hidden;
 
   &[data-shape='circle'] {
     border-radius: 50%;
@@ -89,7 +89,6 @@ const width = computed(() => {
   }
 
   &[data-type='loading'] {
-  overflow: hidden;
     background-color: var(--mk-skeleton-loading-background-color);
 
     &::before {
@@ -105,7 +104,7 @@ const width = computed(() => {
         oklch(from var(--mk-skeleton-loading-animation-background-color) l c h / 40%),
         oklch(from var(--mk-skeleton-loading-animation-background-color) l c h / 60%),
         oklch(from var(--mk-skeleton-loading-animation-background-color) l c h / 40%),
-        transparent,
+        transparent
       );
       transform: translate(-100%, 0);
       animation-name: loading-animation;
@@ -120,21 +119,20 @@ const width = computed(() => {
     // 1/3 = animation, 2/3 = pause
     @keyframes loading-animation {
       0% {
-        transform: translate(-100%, 0)
+        transform: translate(-100%, 0);
       }
 
       33% {
-        transform: translate(25%, 0)
+        transform: translate(25%, 0);
       }
-      
+
       100% {
-        transform: translate(25%, 0)
+        transform: translate(25%, 0);
       }
     }
   }
 
   &[data-type='placeholder'] {
-    overflow: hidden;
     border: var(--mk-skeleton-placeholder-line-size) solid var(--mk-skeleton-placeholder-line-color);
 
     &[data-density='high'] {
