@@ -190,9 +190,4 @@ export function createGlobalConfig(melkorOptions = createMelkorOptions()): Globa
   };
 }
 
-export enum Shape {
-  circle = 'circle',
-  rectangle = 'rectangle',
-}
-
 export const floatingLayerId = 'floating-layer';
