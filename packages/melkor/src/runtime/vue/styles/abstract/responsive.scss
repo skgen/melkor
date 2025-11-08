@@ -1,20 +1,20 @@
 @use 'sass:map';
 @use '../partials/variables' as variables;
 
-@mixin screen-to($breakpoint) {
-  @media screen and (max-width: map.get(variables.$mk-media-queries, $breakpoint)) {
+@mixin screen-to($size) {
+  @media screen and (max-width: map.get(variables.$mk-screen-sizes, $size)) {
     @content;
   }
 }
 
-@mixin screen-from($breakpoint) {
-  @media screen and (min-width: map.get(variables.$mk-media-queries, $breakpoint) + 0.01rem) {
+@mixin screen-from($size) {
+  @media screen and (min-width: map.get(variables.$mk-screen-sizes, $size) + 0.01rem) {
     @content;
   }
 }
 
-@mixin screen-from-to($breakpointMin, $breakpointMax) {
-  @media screen and (min-width: $breakpointMin + 1) and (max-width: $breakpointMax) {
+@mixin screen-from-to($from-size, $to-size) {
+  @media screen and (min-width: $from-size + 1) and (max-width: $to-size) {
     @content;
   }
 }

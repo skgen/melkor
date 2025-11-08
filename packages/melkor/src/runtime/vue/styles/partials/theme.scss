@@ -26,8 +26,14 @@
 
   // Layout
 
+  // Sizes
   @for $i from 1 through 24 {
     --mk-size-#{$i}: #{variables.$mk-size-base * $i};
+  }
+
+  // Screen sizes
+  @each $key, $value in variables.$mk-screen-sizes {
+    --mk-screen-#{$key}-size: #{$value};
   }
 
   // Shapes 1px, 1.4px, 2px
@@ -147,9 +153,6 @@
 
   @include theme.dark {
     color-scheme: dark;
-
-    // $mk-shade-hue: 268deg;
-    // $mk-shade-chroma: 0.025;
 
     @for $i from 0 through 10 {
       @include common.generate-lch-color(
