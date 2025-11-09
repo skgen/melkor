@@ -38,6 +38,7 @@ const props = withDefaults(
     variant: 'plain',
     size: 'medium',
     intent: 'primary',
+    type: 'button',
   },
 );
 
