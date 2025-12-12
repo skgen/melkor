@@ -238,7 +238,7 @@ defineExpose<InputTextableExpose>({
   }
 
   textarea {
-    resize: none;
+    resize: vertical;
   }
 
   &-input {
