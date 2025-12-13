@@ -26,6 +26,6 @@
     "stylelint-config-standard-vue": "catalog:lint",
     "typescript": "catalog:build",
     "vite": "catalog:build",
-    "vue-tsc": "catalog:"
+    "vue-tsc": "catalog:build"
   }
 }

@@ -2,6 +2,18 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "#melkor/components": [
+        "./node_modules/@skgn/melkor/dist/runtime/vue/components/index"
+      ],
+      "#melkor/composables": [
+        "./node_modules/@skgn/melkor/dist/runtime/vue/composables/index"
+      ],
+      "#melkor/features": [
+        "./node_modules/@skgn/melkor/dist/runtime/vue/features/index"
+      ]
+    },
     "types": ["vite/client"],
 
     /* Linting */
