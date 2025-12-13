@@ -14,6 +14,7 @@ export type KitModule = {
   name: string;
   fileName: string;
   filePath: string;
+  absoluteFilePath: string;
   private: boolean;
   type: 'sfc' | 'module';
 };
@@ -22,8 +23,9 @@ export type ScopedModules = {
   [K in typeof namespaces[number]]: KitModule[];
 };
 
-function resolveKitModule(filePath: string, namespace: string): KitModule {
+function resolveKitModule(baseDir: string, filePath: string, namespace: string): KitModule {
   const _np = filePath.split(`${namespace}/`);
+  const absoluteFilePath = path.resolve(baseDir, filePath);
   const namespacedPath = _np[_np.length - 1];
 
   const fileName = filePath.split(path.sep).pop()!;
@@ -44,20 +46,31 @@ function resolveKitModule(filePath: string, namespace: string): KitModule {
     name,
     fileName,
     filePath,
+    absoluteFilePath,
     private: _private,
     type: ext === 'vue' ? 'sfc' : 'module',
   };
 }
 
 async function resolveModules(baseDir: string, namespace: string): Promise<KitModule[]> {
-  const sfcPattern = '**/*.vue';
-  const modulesPattern = '**/*.{ts,js}';
+  const ignore = ['**/*.d.ts', '**/*.vue.d.ts', '**/*.d.vue.ts'];
+
   const modules = (await Promise.all([
-    glob(path.resolve(baseDir, modulesPattern)),
-    glob(path.resolve(baseDir, sfcPattern)),
+    glob('**/*.{ts,js}', {
+      cwd: baseDir,
+      ignore,
+    }),
+    glob('**/*.vue', {
+      cwd: baseDir,
+      ignore,
+    }),
   ]))
     .flat(1)
-    .map(filePaths => resolveKitModule(filePaths, namespace));
+    .map(filePath => resolveKitModule(
+      baseDir,
+      filePath,
+      namespace,
+    ));
 
   return modules;
 }
