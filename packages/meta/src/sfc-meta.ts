@@ -103,7 +103,7 @@ export async function extractSFCsMeta(options: {
     .map(component => ({
       name: component.name,
       ...extractSFCMeta({
-        filePath: component.filePath,
+        filePath: component.absoluteFilePath,
         checker,
       }),
     }));
