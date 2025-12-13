@@ -59,8 +59,6 @@ export default antfu(
     formatters: {
       css: true,
     },
-  },
-  {
     rules: {
       'vue/block-order': ['error', {
         order: ['template', 'script', 'style'],
