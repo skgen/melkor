@@ -11,15 +11,22 @@
   },
   "dependencies": {
     "@skgn/melkor": "workspace:*",
-    "nuxt": "catalog:build"
+    "lodash-es": "catalog:runtime",
+    "nuxt": "catalog:build",
+    "scule": "catalog:runtime",
+    "vue": "catalog:runtime",
+    "vue-component-meta": "catalog:build",
+    "zod": "catalog:runtime"
   },
   "devDependencies": {
+    "@types/lodash-es": "catalog:types",
     "sass-embedded": "catalog:build",
     "stylelint": "catalog:lint",
     "stylelint-config-recess-order": "catalog:lint",
     "stylelint-config-standard": "catalog:lint",
     "stylelint-config-standard-scss": "catalog:lint",
     "stylelint-config-standard-vue": "catalog:lint",
-    "typescript": "catalog:build"
+    "typescript": "catalog:build",
+    "vue-tsc": "catalog:build"
   }
 }

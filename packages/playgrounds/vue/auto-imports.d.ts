@@ -80,7 +80,7 @@ declare global {
   export type { CheckableProps } from '../../melkor/dist/runtime/vue/features/checkable.d'
   import('../../melkor/dist/runtime/vue/features/checkable.d')
   // @ts-ignore
-  export type { Theme, MelkorOptions, GlobalConfig, Shape } from '../../melkor/dist/runtime/vue/features/config.d'
+  export type { ToastPosition, ThemeInstance, Theme, MelkorOptions, GlobalConfig, Shape } from '../../melkor/dist/runtime/vue/features/config.d'
   import('../../melkor/dist/runtime/vue/features/config.d')
   // @ts-ignore
   export type { IconCollection, IconCollectionName } from '../../melkor/dist/runtime/vue/features/icons.d'
@@ -98,10 +98,10 @@ declare global {
   export type { SurfaceElevation, SurfaceElevationDirection, SurfaceContextInjection } from '../../melkor/dist/runtime/vue/features/surface.d'
   import('../../melkor/dist/runtime/vue/features/surface.d')
   // @ts-ignore
-  export type { Themes, SystemTheme, ThemeInstance } from '../../melkor/dist/runtime/vue/features/theme.d'
+  export type { Themes, SystemTheme } from '../../melkor/dist/runtime/vue/features/theme.d'
   import('../../melkor/dist/runtime/vue/features/theme.d')
   // @ts-ignore
-  export type { ToastPosition, ToastSwipeDirection, ToastContext } from '../../melkor/dist/runtime/vue/features/toast.d'
+  export type { ToastSwipeDirection, ToastContext } from '../../melkor/dist/runtime/vue/features/toast.d'
   import('../../melkor/dist/runtime/vue/features/toast.d')
   // @ts-ignore
   export type { KeysAs, InferDefaults } from '../../melkor/dist/runtime/vue/features/utils.d'
