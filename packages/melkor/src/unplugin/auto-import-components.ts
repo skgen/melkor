@@ -1,25 +1,24 @@
-import type { ExportedComponents } from '@skgn/melkor-kit';
+import type { KitModule } from '@skgn/melkor-kit';
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types';
 
 import type { MelkorUnpluginOptions } from '../unplugin';
 
-import { resolveVueComponents, type RuntimeResolver } from '@skgn/melkor-kit';
+import { resolveVueModules, type RuntimeResolver } from '@skgn/melkor-kit';
 import { defu } from 'defu';
 import AutoImportComponents from 'unplugin-vue-components';
 
 export function autoImportComponentsPlugin(options: MelkorUnpluginOptions, resolver: RuntimeResolver, meta: UnpluginContextMeta): UnpluginOptions | UnpluginOptions[] {
-  let vueComponents: ExportedComponents = new Map();
+  let vueComponents: KitModule[] = [];
 
-  resolveVueComponents({
-    resolver,
-    prefix: options.prefix?.components,
-  }).then((components) => {
-    vueComponents = components;
-  }).catch((e) => {
-    console.error('Failed to load components.');
-    console.error(e);
-  });
+  resolveVueModules(resolver)
+    .then((modules) => {
+      vueComponents = modules.components;
+    })
+    .catch((e) => {
+      console.error('Failed to load components.');
+      console.error(e);
+    });
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
@@ -29,11 +28,16 @@ export function autoImportComponentsPlugin(options: MelkorUnpluginOptions, resol
       /[\\/]\.nuxt[\\/]/,
     ],
     resolvers: [
-      (_componentName) => {
-        const componentName = _componentName.replace(options.prefix?.components ?? '', '');
-        if (vueComponents.has(componentName)) {
-          return { name: 'default', from: vueComponents.get(componentName)!.filepath };
-        }
+      {
+        type: 'component',
+        resolve: (_componentName) => {
+          const componentName = _componentName.replace(options.prefix?.components ?? '', '');
+          const component = vueComponents.find(component => component.name === componentName);
+
+          if (component) {
+            return { name: 'default', from: component.absoluteFilePath };
+          }
+        },
       },
     ],
   });
