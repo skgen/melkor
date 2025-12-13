@@ -7,7 +7,6 @@
 export {}
 declare global {
   const STORAGE_THEME_KEY: typeof import('../../melkor/dist/runtime/vue/features/config.js').STORAGE_THEME_KEY
-  const Shape: typeof import('../../melkor/dist/runtime/vue/features/config.js').Shape
   const Theme: typeof import('../../melkor/dist/runtime/vue/features/config.js').Theme
   const bindInteractionStateProps: typeof import('../../melkor/dist/runtime/vue/features/interactions.js').bindInteractionStateProps
   const createGlobalConfig: typeof import('../../melkor/dist/runtime/vue/features/config.js').createGlobalConfig
@@ -16,7 +15,6 @@ declare global {
   const floatingLayerId: typeof import('../../melkor/dist/runtime/vue/features/config.js').floatingLayerId
   const formatErrors: typeof import('../../melkor/dist/runtime/vue/features/utils.js').formatErrors
   const forwardDataAttributes: typeof import('../../melkor/dist/runtime/vue/features/utils.js').forwardDataAttributes
-  const getFramework: typeof import('../../melkor/dist/runtime/vue/features/framework.js')['getFramework']
   const getPersistedThemePreference: typeof import('../../melkor/dist/runtime/vue/features/theme.js').getPersistedThemePreference
   const getRuntimeScope: typeof import('../../melkor/dist/runtime/vue/features/runtime-scope.js').getRuntimeScope
   const getSystemColorScheme: typeof import('../../melkor/dist/runtime/vue/features/theme.js').getSystemColorScheme
@@ -26,7 +24,6 @@ declare global {
   const globalThemeContextKey: typeof import('../../melkor/dist/runtime/vue/features/theme.js').globalThemeContextKey
   const globalToastContextKey: typeof import('../../melkor/dist/runtime/vue/features/toast.js').globalToastContextKey
   const hasErrors: typeof import('../../melkor/dist/runtime/vue/features/input.js').hasErrors
-  const inputDefaultProps: typeof import('../../melkor/dist/runtime/vue/features/input.js').inputDefaultProps
   const isZodError: typeof import('../../melkor/dist/runtime/vue/features/utils.js').isZodError
   const isZodType: typeof import('../../melkor/dist/runtime/vue/features/utils.js').isZodType
   const log: typeof import('../../melkor/dist/runtime/vue/features/internal/logger.js').log
@@ -39,7 +36,6 @@ declare global {
   const surfaceElevationOrder: typeof import('../../melkor/dist/runtime/vue/features/surface.js').surfaceElevationOrder
   const themeContextKey: typeof import('../../melkor/dist/runtime/vue/features/theme.js').themeContextKey
   const useForm: typeof import('../../melkor/dist/runtime/vue/composables/useForm.js').useForm
-  const useFramework: typeof import('../../melkor/dist/runtime/vue/composables/useFramework.js')['useFramework']
   const useGlobalConfig: typeof import('../../melkor/dist/runtime/vue/composables/useGlobalConfig.js').useGlobalConfig
   const useGlobalTheme: typeof import('../../melkor/dist/runtime/vue/composables/useGlobalTheme.js').useGlobalTheme
   const useIconCollection: typeof import('../../melkor/dist/runtime/vue/composables/useIconCollection.js').useIconCollection
@@ -71,6 +67,9 @@ declare global {
   export type { UseInputOptions } from '../../melkor/dist/runtime/vue/composables/useInput.d'
   import('../../melkor/dist/runtime/vue/composables/useInput.d')
   // @ts-ignore
+  export type { InputBinding } from '../../melkor/dist/runtime/vue/composables/useInputBinding.d'
+  import('../../melkor/dist/runtime/vue/composables/useInputBinding.d')
+  // @ts-ignore
   export type { UsePaginationOptions } from '../../melkor/dist/runtime/vue/composables/usePagination.d'
   import('../../melkor/dist/runtime/vue/composables/usePagination.d')
   // @ts-ignore
@@ -80,13 +79,13 @@ declare global {
   export type { CheckableProps } from '../../melkor/dist/runtime/vue/features/checkable.d'
   import('../../melkor/dist/runtime/vue/features/checkable.d')
   // @ts-ignore
-  export type { Theme, MelkorOptions, GlobalConfig, Shape } from '../../melkor/dist/runtime/vue/features/config.d'
+  export type { Theme, MelkorOptions, GlobalConfig } from '../../melkor/dist/runtime/vue/features/config.d'
   import('../../melkor/dist/runtime/vue/features/config.d')
   // @ts-ignore
   export type { IconCollection, IconCollectionName } from '../../melkor/dist/runtime/vue/features/icons.d'
   import('../../melkor/dist/runtime/vue/features/icons.d')
   // @ts-ignore
-  export type { InputProps, InputEmits, InputSlots, InputExpose, ValidateInputValue, ValidateInputValueReturn } from '../../melkor/dist/runtime/vue/features/input.d'
+  export type { InputProps, InputEmits, InputSlots, InputExpose, ValidateInputValue } from '../../melkor/dist/runtime/vue/features/input.d'
   import('../../melkor/dist/runtime/vue/features/input.d')
   // @ts-ignore
   export type { InteractionStateProps, ActiveProps, HoveredProps, DisabledProps, FocusedProps } from '../../melkor/dist/runtime/vue/features/interactions.d'
@@ -98,12 +97,12 @@ declare global {
   export type { SurfaceElevation, SurfaceElevationDirection, SurfaceContextInjection } from '../../melkor/dist/runtime/vue/features/surface.d'
   import('../../melkor/dist/runtime/vue/features/surface.d')
   // @ts-ignore
-  export type { Themes, SystemTheme, ThemeInstance } from '../../melkor/dist/runtime/vue/features/theme.d'
+  export type { ThemeInstance, Themes, SystemTheme } from '../../melkor/dist/runtime/vue/features/theme.d'
   import('../../melkor/dist/runtime/vue/features/theme.d')
   // @ts-ignore
   export type { ToastPosition, ToastSwipeDirection, ToastContext } from '../../melkor/dist/runtime/vue/features/toast.d'
   import('../../melkor/dist/runtime/vue/features/toast.d')
   // @ts-ignore
-  export type { KeysAs, InferDefaults } from '../../melkor/dist/runtime/vue/features/utils.d'
+  export type { KeysAs, Tail, ExtractEmitsAsFunctions, InferDefaults } from '../../melkor/dist/runtime/vue/features/utils.d'
   import('../../melkor/dist/runtime/vue/features/utils.d')
 }
